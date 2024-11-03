@@ -1,0 +1,891 @@
+@extends('layout.app')
+
+@section('title', __('DataTables'))
+
+@section('content')
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">{{ __('DataTables') }}</h1>
+
+    <div class="card p-2">
+        <div class="container mt-5">
+            <div class="row ms-1 mb-2">
+                <input type="text" class="form-control my-w-fit-content m-1" id="dataTables_my_filter" name="search">
+
+                <select class="form-select my-w-fit-content m-1" id="selectType" name="type">
+                    <option value="all">{{ __('All') }}</option>
+                    <option value="active">{{ __('Active') }}</option>
+                    <option value="expired">{{ __('Expired') }}</option>
+                </select>
+
+                <select class="form-select my-w-fit-content m-1" id="dataTables_my_length" name="length">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+
+                <button class="btn btn-icon btn-outline-primary m-1" id="" data-bs-toggle="modal" data-bs-target="#createCouponModal"><span class="mdi mdi-plus-outline"></span></button>
+                <button class="btn btn-icon btn-outline-primary m-1" id="" data-bs-toggle="modal" data-bs-target="#uploadCouponModal"><span class="mdi mdi-upload"></span></button>
+                <button class="btn btn-icon btn-outline-primary m-1" id=""><span class="mdi mdi-download"></span></button>
+
+                <div class="dropdown">
+                    <button class="btn btn-icon btn-outline-primary m-1" type="button" data-bs-toggle="dropdown"></button>
+                        <span class="mdi mdi-filter-outline"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="columns_filter_dropdown">
+                    </ul>
+                </div>
+            </div>
+            <div class="table-responsive rounded-4 border mb-3">
+                <table id="table" class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{__("Code")}}</th>
+                            <th>{{ __('Discount') }}</th>
+                            <th>{{ __('Max') }}</th>
+                            <th>{{ __('Status') }}</th>
+                            <th>{{ __('Expired At') }}</th>
+                            <th>{{ __('Created At') }}</th>
+                            <th>{{ __('Actions') }}</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="row align-items-baseline justify-content-end">
+                <div class="my-w-fit-content" id="dataTables_my_info"></div>
+                <nav class="my-w-fit-content" aria-label="Table navigation"><ul class="pagination" id="dataTables_my_paginate"></ul></nav>
+            </div>
+        </div>
+    </div>
+
+
+<!-- Edit Coupon Modal -->
+<div class="modal fade" id="editCouponModal" tabindex="-1" aria-labelledby="editCouponLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="validate" id="editCouponForm" action="{{route('coupon.update')}}" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCouponLabel">{{ __('Edit Coupon') }}</h5>
+                    <button type="button" class="btn btn-light btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @csrf
+                    <input type="hidden" id="pid" name="pid" required>
+                    <div class="mb-3">
+                        <label for="pcode" class="form-label">{{ __('Code') }}</label>
+                        <input type="text" class="form-control" id="pcode" name="pcode" data-v="required" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="puses" class="form-label">{{ __('Max') }}</label>
+                        <input type="text" class="form-control" id="puses" name="puses" data-v="required" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pdiscount" class="form-label">{{ __('Discount') }}</label>
+                        <input type="text" class="form-control" id="pdiscount" name="pdiscount" data-v="required" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pexpired_date" class="form-label">{{ __('Expired At') }}</label>
+                        <input type="datetime-local" class="form-control" id="pexpired_date" name="pexpired_date" data-v="required" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pstatus" class="form-label">{{ __('Status') }}</label>
+                        <select class="form-select" id="pstatus" name="pstatus" data-v="required" required>
+                            <option value="1">{{ __('Active') }}</option>
+                            <option value="0">{{ __('Inactive') }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">{{ __('Save') }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Create Coupon Modal -->
+<div class="modal fade" id="createCouponModal" tabindex="-1" aria-labelledby="createCouponLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="validate" id="createCouponForm" action="{{route('coupon.create')}}" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createCouponLabel">{{ __('Create Coupon') }}</h5>
+                    <button type="button" class="btn btn-light btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @csrf
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="code" name="code" data-v="required">
+                        <label for="code">{{ __('Code') }}</label>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span for="max" class="input-group-text">{{ __('Max') }}</span>
+                        <input type="number" class="form-control" name="max" data-v="required" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span for="discount" class="input-group-text">{{ __('Discount') }}</span>
+                        <input type="number" class="form-control" name="discount" data-v="required" required>
+                        <span class="input-group-text">%</span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="expired_date" class="form-label">{{ __('Expired At') }}</label>
+                        <input type="datetime-local" class="form-control" name="expired_date" data-v="required" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="status">{{ __('Status') }}</label>
+                        <select class="form-select" name="status" data-v="required" required>
+                            <option selected="0">{{ __('Choose...') }}</option>
+                            <option value="active">{{ __('Active') }}</option>
+                            <option value="inactive">{{ __('Inactive') }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Print Coupon Modal -->
+<div class="modal fade" id="printCouponModal" tabindex="-1" aria-labelledby="printCouponLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="printCouponLabel">{{ __('Print Coupon') }}</h5>
+                <button type="button" class="btn btn-light btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 col-lg-12">
+                        <div class="printimage-container" id="printedImage">
+                            <img src="{{ asset('assets/img/my/defaults/print.png') }}" width="400px" alt="print">
+                            <div class="text-overlay identifier"></div> <!-- المعرف -->
+                            <div class="text-overlay code"></div> <!-- الكود -->
+                            <div class="text-overlay usage"></div> <!-- الإستعمالات -->
+                            <div class="text-overlay validity"></div> <!-- الصلاحية -->
+                            <div class="text-overlay discount"></div> <!-- الخصم -->
+                            <div class="text-overlay status"></div> <!-- الحالة -->
+                            <div class="text-overlay limit"></div> <!-- الحد الأقصى -->
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-12">
+                        <div class="mb-3">
+                            <label for="pcode" class="form-label">{{ __('Code') }}</label>
+                            <input type="text" class="form-control" id="pcode" name="pcode" data-v="required" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="puses" class="form-label">{{ __('Max') }}</label>
+                            <input type="text" class="form-control" id="puses" name="puses" data-v="required" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pdiscount" class="form-label">{{ __('Discount') }}</label>
+                            <input type="text" class="form-control" id="pdiscount" name="pdiscount" data-v="required" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pexpired_date" class="form-label">{{ __('Expired At') }}</label>
+                            <input type="datetime-local" class="form-control" id="pexpired_date" name="pexpired_date" data-v="required" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pstatus" class="form-label">{{ __('Status') }}</label>
+                            <select class="form-select" id="pstatus" name="pstatus" data-v="required" required>
+                                <option value="1">{{ __('Active') }}</option>
+                                <option value="0">{{ __('Inactive') }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">{{ __('Print') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upload Coupon Modal -->
+<div class="modal fade" id="uploadCouponModal" tabindex="-1" aria-labelledby="uploadCouponLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form id="printCouponForm"  method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="printCouponLabel">{{ __('Upload Coupon') }}</h5>
+                    <button type="button" class="btn btn-light btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="dropzone" class="dropzone"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">{{ __('Upload') }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+        var table;
+        // Start of checkboxes
+        var selectedIds = [];
+        var ids = [];
+        let isCheckAllTrigger = false;
+        // End of checkboxes
+
+
+        Pusher.logToConsole = true;
+        var pusher = new Pusher('f513c6dba43174cbee4d', {
+            cluster: 'eu'
+        });
+
+        function updateOverlay() {
+            document.querySelector('.text-overlay.identifier').innerText = document.getElementById('pid').value || '';
+            document.querySelector('.text-overlay.code').innerText = document.getElementById('pcode').value || '';
+            document.querySelector('.text-overlay.usage').innerText = document.getElementById('puses').value || '';
+            document.querySelector('.text-overlay.discount').innerText = document.getElementById('pdiscount').value + '%' || '';
+            const datetimeValue = document.getElementById('pexpired_date').value;
+            const dateValue = datetimeValue ? datetimeValue.split('T')[0] : '';
+            document.querySelector('.text-overlay.validity').innerText = dateValue || '';
+            document.querySelector('.text-overlay.status').innerText = document.getElementById('pstatus').value || '';
+            document.querySelector('.text-overlay.limit').innerText = document.getElementById('puses').value || '';
+        }
+
+        document.getElementById('pid').addEventListener('input', updateOverlay);
+        document.getElementById('pcode').addEventListener('input', updateOverlay);
+        document.getElementById('puses').addEventListener('input', updateOverlay);
+        document.getElementById('pdiscount').addEventListener('input', updateOverlay);
+        document.getElementById('pexpired_date').addEventListener('input', updateOverlay);
+        document.getElementById('pstatus').addEventListener('change', updateOverlay);
+
+
+        function printImage() {
+            const printedImageElement = document.querySelector(".printimage-container");
+
+            html2canvas(printedImageElement, {
+              // allowTaint: true,
+                useCORS: true
+            }).then(function(canvas) {
+                const imgData = canvas.toDataURL('image/png');
+                const newWindow = window.open('', '_blank');
+                newWindow.document.write(`<img src="${imgData}" onload="window.print();">`);
+                newWindow.document.close();  // Ensure the window is fully loaded before printing
+                newWindow.focus();  // Bring the new window to the front
+            });
+        }
+
+        function printCoupon(id) {
+            $('#loading').show();
+
+            $.ajax({
+                url: '/coupon/' + id,
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(data) {
+                coupon = data.coupon;
+                $('#pid').val(coupon.id);
+                $('#pcode').val(coupon.code);
+                $('#puses').val(coupon.max);
+                $('#pdiscount').val(coupon.discount);
+                $('#pexpired_date').val(coupon.expired_date.replace(' ', 'T'));
+                $('#pstatus').val(coupon.status);
+                updateOverlay();
+                var myModal = new bootstrap.Modal(document.getElementById('printCoupon'));
+                $('#loading').hide();
+                myModal.show();
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    const response = JSON.parse(xhr.responseText);
+                    $('#loading').hide();
+                    Swal.fire({
+                        icon: response.icon,
+                        title: response.state,
+                        text: response.message,
+                        confirmButtonText: __("Ok",lang)
+                    });
+                }
+            });
+        }
+
+        function editCoupon(id) {
+            $('#loading').show();
+
+            $.ajax({
+                url: '/coupon/' + id,
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(data) {
+                coupon = data.coupon;
+                $('#id').val(coupon.id);
+                $('#code').val(coupon.code);
+                $('#uses').val(coupon.max);
+                $('#discount').val(coupon.discount);
+                $('#expired_date').val(coupon.expired_date.replace(' ', 'T'));
+                $('#status').val(coupon.status);
+                var myModal = new bootstrap.Modal(document.getElementById('editCoupon'));
+                $('#loading').hide();
+                myModal.show();
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    const response = JSON.parse(xhr.responseText);
+                    $('#loading').hide();
+                    Swal.fire({
+                        icon: response.icon,
+                        title: response.state,
+                        text: response.message,
+                        confirmButtonText: __("Ok",lang)
+                    });
+                }
+            });
+
+        }
+
+        function deleteCoupon(id) {
+            Swal.fire({
+                title: __("Do you really want to delete this Coupon?",lang),
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: __("Submit",lang),
+                cancelButtonText: __("Cancel",lang),
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/coupon/' + id,
+                        type: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                icon: response.icon,
+                                title: response.state,
+                                text: response.message,
+                                confirmButtonText: __("Ok",lang)
+                            });
+                            table.ajax.reload();
+                        },
+                        error: function(xhr, textStatus, errorThrown) {
+                            const response = JSON.parse(xhr.responseText);
+                            Swal.fire({
+                                icon: response.icon,
+                                title: response.state,
+                                text: response.message,
+                                confirmButtonText: __("Ok",lang)
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        // function demoProduct(id) {
+        //     window.open("{{ url('view/product') }}/" + id, "_blank");
+        // }
+
+        // function editCoupon(id) {
+        //     window.open("{{ url('view/product') }}/" + id);
+        // }
+
+        function showContextMenu(id, x, y) {
+
+            var contextMenu = $('<ul class="context-menu" dir="{{ app()->isLocale("ar") ? "rtl" : "" }}"></ul>')
+                .append('<li><a onclick="editCoupon(' + id + ')"><i class="tf-icons mdi mdi-pencil-outline {{ app()->isLocale("ar") ? "ms-1" : "me-1" }}"></i>{{ __("Edit") }}</a></li>')
+                .append('<li class="px-0 pe-none"><div class="divider border-top my-0"></div></li>')
+                .append('<li><a onclick="deleteCoupon(' + id + ')"><i class="tf-icons mdi mdi-trash-can-outline {{ app()->isLocale("ar") ? "ms-1" : "me-1" }}"></i>{{ __("Delete") }}</a></li>');
+
+
+            contextMenu.css({
+                top: y,
+                left: x
+            });
+
+
+            $('body').append(contextMenu);
+
+
+                $(document).on('click', function() {
+                $('.context-menu').remove();
+                });
+        }
+
+        Dropzone.autoDiscover = false;
+        var myDropzone = new Dropzone("#dropzone", {
+            url: "{{ route('coupons.import') }}",
+            autoProcessQueue: false,
+            acceptedFiles: '.xlsx,.xls',
+            maxFilesize: 150, // Max file size in MB
+            maxFiles: 1, // Allow only one file
+            addRemoveLinks: true,
+            parallelUploads: 1, // Only one upload at a time
+            dictDefaultMessage: "{{ __('Drag and drop Excel files here or click to upload') }}",
+            dictMaxFilesExceeded: "{{ __('You can only upload one file.') }}", // Error message when max files exceeded
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            }
+        });
+
+        // Optional: remove the previous file when a new one is added
+        myDropzone.on("addedfile", function() {
+            if (this.files.length > 1) {
+                this.removeFile(this.files[0]); // Remove the first file to keep only the latest one
+            }
+        });
+
+        myDropzone.on("success", function(file, response) {
+        table.ajax.reload();
+        });
+
+        myDropzone.on("error", function(file, errorMessage) {
+            console.error('Error uploading file:', errorMessage);
+        });
+
+        function checkAndLoadLottie(table) {
+            // Check if there are no matching records displayed
+            if (table.page.info().recordsDisplay === 0) {
+                loademptyTableLottieAnimation(); // Load Lottie animation if no records
+            } else {
+                lottie.stop(); // Stop Lottie animation if records are displayed
+            }
+        }
+
+    $(document).ready(function() {
+        // $.noConflict();
+            table = $('#table').DataTable({
+                serverSide: true,
+                pageLength: 100,
+                language: {
+                    "emptyTable": "<div id='no-data-animation' style='width: 100%; height: 200px;'></div>",
+                    "zeroRecords": "<div id='no-data-animation' style='width: 100%; height: 200px;'></div>"
+                },
+                initComplete: function() {
+                    checkAndLoadLottie(this.api());
+                },
+                ajax: {
+                    url: "{{ route('datatabels') }}",
+                    type: "GET"
+
+                  // data: function(d) {
+                  //     d.type = $('#selectType').val();
+                  // }
+                  // Start of checkboxes
+                // dataSrc: function(response) {
+                //     ids = (response.ids || []).map(id => parseInt(id, 10)); // Ensure all IDs are integers
+                //     selectedIds = [];
+                //     return response.data;
+                // }
+                // End of checkboxes
+                },
+                columns: [
+                    // Start of checkboxes
+                    {
+                        data: 'id',
+                        name: '#',
+                        orderable: false,
+                        searchable: false,
+                        render: function(data, type, full, meta) {
+                            return '<input type="checkbox" class="form-check-input rounded-2 check-item" value="' + data + '">';
+                        }
+                    },
+                    // End  of checkboxes
+                    {data: 'code', name: '{{__("Code")}}',},
+                    {data: 'discount', name: '{{__("Discount")}}',},
+                    {data: 'max', name: '{{__("Max")}}',},
+                    {data: 'status', name: '{{__("Status")}}',},
+                    {data: 'expired_date', name: '{{__("Expired At")}}',},
+                    {data: 'created_at', name: '{{__("Created At")}}',},
+                    {data: 'actions', name: '{{__("Actions")}}', orderable: false, searchable: false,}
+                ],
+                order: [[6, 'desc']], // Default order by created_at column
+
+                // Start of checkboxes
+
+                // End of checkboxes
+                rowCallback: function(row, data) {
+                    $(row).attr('id', 'coupon_' + data.id);
+
+                    // $(row).on('dblclick', function() {
+                    //     window.location.href = "{{ url('coupon') }}/" + data.id;
+                    // });
+
+                    $(row).on('contextmenu', function(e) {
+                        e.preventDefault();
+                        showContextMenu(data.id, e.pageX, e.pageY);
+                    });
+
+                    // Start of checkboxes
+                    var $checkbox = $(row).find('.check-item');
+                    var couponId = parseInt($checkbox.val());
+
+                    if (selectedIds.includes(couponId)) {
+                        $checkbox.prop('checked', true);
+                    } else {
+                        $checkbox.prop('checked', false);
+                    }
+                    // End of checkboxes
+
+                    $(row).find('td').eq(1).on('dblclick', function() {
+                        var cell = $(this);
+
+                        if (cell.find('input').length > 0) {
+                            return; // Exit if already in edit mode
+                        }
+
+                        var originalValue = cell.text();
+                        var input = $('<input>', {
+                            type: 'text',
+                            value: originalValue,
+                            class: 'form-control',
+                            'data-id': data.id
+                        }).css('width', '100%');
+
+                        cell.html(input);
+
+                        input.focus();
+
+                        // Handle Enter key or focus loss
+                        input.on('keypress blur', function(e) {
+                            if (e.type === 'keypress' && e.which !== 13) {
+                                return;
+                            }
+
+                            var newValue = $(this).val();
+
+                            // Only proceed if the value has changed
+                            if (newValue !== originalValue) {
+                                $.ajax({
+                                    url: '/coupon/' + data.id + '/update/code',  // Update with your actual route
+                                    type: 'POST',
+                                    headers: {
+                                        'X-CSRF-TOKEN': csrfToken
+                                    },
+                                    data: { code: newValue },
+                                    success: function(response) {
+                                        cell.text(newValue);
+                                        // show badge success message
+                                        // Swal.fire({
+                                        //     icon: response.icon,
+                                        //     title: response.state,
+                                        //     text: response.message,
+                                        //     confirmButtonText: __("Ok", lang),
+                                        // });
+                                    },
+                                    error: function(xhr) {
+                                        // show badge error message
+                                        const response = JSON.parse(xhr.responseText);
+                                        // Swal.fire({
+                                        //     icon: response.icon,
+                                        //     title: response.state,
+                                        //     text: response.message,
+                                        //     confirmButtonText: __("Ok", lang),
+                                        // });
+                                        cell.text(originalValue); // revert back on error
+                                    }
+                                });
+                            } else {
+                                cell.text(originalValue);
+                            }
+                        });
+                    });
+
+                    $(row).find('td').eq(4).on('dblclick', function() {
+                        var cell = $(this);
+
+                        if (cell.find('select').length > 0) {
+                            return; // Exit if already in edit mode
+                        }
+
+                        var originalValue = cell.text();
+                        // Create a select element and add options
+                        var select = $('<select>', {
+                            class: 'form-control',
+                            'data-id': data.id
+                        }).css('width', '100%');
+
+                        // Add options to the select dropdown
+                        var options = [
+                            { value: 'active', text: 'Active' },
+                            { value: 'inactive', text: 'InActive' }
+                        ];
+
+                        // Append each option to the select element
+                        options.forEach(function(option) {
+                            select.append($('<option>', {
+                                value: option.value,
+                                text: option.text,
+                                selected: option.text === originalValue // Select the option if it matches the original value
+                            }));
+                        });
+
+                        cell.html(select);
+                        select.focus();
+
+                        // Handle the select change or blur event
+                        select.on('change blur', function(e) {
+                            var newValue = $(this).val();
+                            var newText = $(this).find('option:selected').text();
+
+                            // Only proceed if the value has changed
+                            if (newText !== originalValue) {
+                                $.ajax({
+                                    url: '/coupon/' + data.id + '/update/status',  // Update with your actual route
+                                    type: 'POST',
+                                    headers: {
+                                        'X-CSRF-TOKEN': csrfToken
+                                    },
+                                    data: { status: newValue },
+                                    success: function(response) {
+                                        cell.text(newValue);
+                                        // show badge success message
+                                        // Swal.fire({
+                                        //     icon: response.icon,
+                                        //     title: response.state,
+                                        //     text: response.message,
+                                        //     confirmButtonText: __("Ok", lang),
+                                        // });
+                                    },
+                                    error: function(xhr) {
+                                        // show badge error message
+                                        const response = JSON.parse(xhr.responseText);
+                                        // Swal.fire({
+                                        //     icon: response.icon,
+                                        //     title: response.state,
+                                        //     text: response.message,
+                                        //     confirmButtonText: __("Ok", lang),
+                                        // });
+                                        cell.text(originalValue); // revert back on error
+                                    }
+                                });
+                            } else {
+                                cell.text(originalValue);
+                            }
+                        });
+                    });
+                },
+                drawCallback: function() {
+                  // Start of checkboxes
+                    $('#check-all').off('click').on('click', function() { // Unbind previous event and bind a new one
+                        $('.check-item').prop('checked', this.checked);
+                        var totalCheckboxes = ids.length;
+                        var checkedCheckboxes = selectedIds.length;
+
+                        if (checkedCheckboxes === 0 || checkedCheckboxes < totalCheckboxes) { // if new all checked or some checked
+                            selectedIds = [];
+                            selectedIds = ids.slice();
+                        } else {
+                            selectedIds = [];
+                        }
+                    });
+
+                    $('.check-item').on('change', function() {
+                        var itemId = parseInt($(this).val());
+
+                        if (this.checked) { // if new checked add to selected
+                            selectedIds.push(itemId);
+                        } else { // if remove checked remove from selected
+                            selectedIds = selectedIds.filter(id => id !== itemId);
+                        }
+
+                        var totalCheckboxes = ids.length;
+                        var checkedCheckboxes = selectedIds.length;
+                        if (checkedCheckboxes === totalCheckboxes) { // all checkboxes checked
+                            $('#check-all').prop('checked', true).prop('indeterminate', false);
+                            selectedIds = ids.slice();
+                        } else if (checkedCheckboxes > 0) { // not all checkboxes are checked
+                            $('#check-all').prop('checked', false).prop('indeterminate', true);
+                        } else {  // all checkboxes are not checked
+                            $('#check-all').prop('checked', false).prop('indeterminate', false);
+                            selectedIds = [];
+                        }
+                    });
+                  // End of checkboxes
+                }
+
+            });
+
+            $('#dataTables_my_length').change(function() {
+                var selectedValue = $(this).val();
+                table.page.len(selectedValue).draw();
+            });
+
+            $('#dataTables_my_filter').on('input', function () {
+                var query = $(this).val();
+                table.search(query).draw();
+            });
+
+            $('#selectType').change(function() {
+                table.ajax.reload();
+            });
+
+            table.on('draw', function () {
+                checkAndLoadLottie(table);
+                var info = table.page.info();
+                var pagination = $('#dataTables_my_paginate');
+
+                pagination.empty();
+
+
+                var prevButton = $('<li>').addClass('page-item').append($('<a>').addClass('page-link btn btn-icon mx-1').attr('href', 'javascript:void(0);').html('&lsaquo;'));
+                if (info.page > 0) {
+                    prevButton.find('a').click(function () {
+                    table.page('previous').draw('page');
+                    });
+                } else {
+                    prevButton.addClass('disabled');
+                }
+                pagination.append(prevButton);
+
+
+                for (var i = 0; i < info.pages; i++) {
+                    var page = i + 1;
+                    var liClass = (page === info.page + 1) ? 'active' : 'd-none';
+                    var link = $('<a>').addClass('page-link btn btn-icon rounded btn-outline-primary').attr('href', 'javascript:void(0);').text(page);
+                    var listItem = $('<li>').addClass('page-item').addClass(liClass).append(link);
+                    listItem.click((function (pageNumber) {
+                        return function () {
+                            table.page(pageNumber).draw('page');
+                        };
+                    })(i));
+                    pagination.append(listItem);
+                }
+
+
+                var nextButton = $('<li>').addClass('page-item').append($('<a>').addClass('page-link btn btn-icon mx-1').attr('href', 'javascript:void(0);').html('&rsaquo;'));
+                if (info.page < info.pages - 1) {
+                    nextButton.find('a').click(function () {
+                    table.page('next').draw('page');
+                    });
+                } else {
+                    nextButton.addClass('disabled');
+                }
+                pagination.append(nextButton);
+
+
+                var startRange = info.start + 1;
+                var endRange = info.start + info.length;
+                var pageInfo = startRange + ' ' + __("to",lang) + ' ' + endRange + ' ' + __("from",lang) + ' ' + info.recordsTotal;
+                $('#dataTables_my_info').text(pageInfo);
+
+            });
+
+            table.columns().every(function() {
+                var column = this;
+                var columnName = $(column.header()).text(); // Get the column name from the header
+                var columnIndex = column.index(); // Get the column index
+
+                // Append the checkbox to the dropdown
+                $('#columns_filter_dropdown').append(
+                    '<li><label><input type="checkbox" class="form-check-input column-toggle" data-column="' + columnIndex + '" checked> ' + columnName + '</label></li>'
+                );
+            });
+
+            $('#columns_filter_dropdown').on('change', '.column-toggle', function() {
+                var column = table.column($(this).data('column'));
+                var isChecked = $(this).is(':checked');
+
+                // Toggle the visibility of the column
+                column.visible(isChecked);
+            });
+
+            $('#createCouponForm').submit(function(event) {
+                event.preventDefault();
+
+                if (!$(this).valid()) {
+                    return;
+                }
+
+                var formData = $(this).serialize();
+
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: formData,
+                    dataType: 'json',
+                    success: function(response) {
+                    Swal.fire({
+                        icon: response.icon,
+                        title: response.state,
+                        text: response.message,
+                        confirmButtonText: __("Ok",lang)
+                    });
+                    table.ajax.reload();
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                    const response = JSON.parse(xhr.responseText);
+                    Swal.fire({
+                        icon: response.icon,
+                        title: response.state,
+                        text: response.message,
+                        confirmButtonText: __("Ok",lang)
+                    });
+                    }
+                });
+            });
+
+            $('#editCouponForm').submit(function(event) {
+                event.preventDefault();
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: formData,
+                    dataType: 'json',
+                    success: function(response) {
+                    Swal.fire({
+                        icon: response.icon,
+                        title: response.state,
+                        text: response.message,
+                        confirmButtonText: __("Ok",lang)
+                    });
+                    table.ajax.reload();
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                    const response = JSON.parse(xhr.responseText);
+                    Swal.fire({
+                        icon: response.icon,
+                        title: response.state,
+                        text: response.message,
+                        confirmButtonText: __("Ok",lang)
+                    });
+                    }
+                });
+            });
+
+            $('#uploadCouponForm').click(function(event) {
+                if (myDropzone.getQueuedFiles().length > 0) {
+                    myDropzone.processQueue();
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: __("Error",lang),
+                        text: __("No files to upload",lang),
+                        confirmButtonText: __("Ok",lang)
+                    });
+                }
+            });
+
+
+            var channel = pusher.subscribe('coupons');
+            channel.bind('couponsEdited', function(data) {
+                table.ajax.reload();
+            });
+    });
+
+</script>
+
+@endsection

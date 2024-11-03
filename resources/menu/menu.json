@@ -1,0 +1,290 @@
+{
+    "sections": [
+        {
+            "title": "Dashboard",
+            "icon": "mdi mdi-view-dashboard-outline",
+            "name": "dashboard",
+            "link": "/dashboard"
+        },
+        {
+            "title": "Components",
+            "icon": "fas fa-fw fa-cog",
+            "name": "components",
+            "link": "/components",
+            "submenu": [
+                {
+                    "title": "Buttons",
+                    "name": "buttons",
+                    "link": "/buttons"
+                },
+                {
+                    "title": "Cards",
+                    "name": "cards",
+                    "link": "/cards"
+                },
+                {
+                    "title": "Tables",
+                    "name": "tables",
+                    "link": "/tables"
+                },
+                {
+                    "title": "Forms",
+                    "name": "forms",
+                    "link": "/forms"
+                },
+                {
+                    "title": "Alerts",
+                    "name": "alerts",
+                    "link": "/alerts"
+                },
+                {
+                    "title": "Modals",
+                    "name": "modals",
+                    "link": "/modals"
+                },
+                {
+                    "title": "Navbars",
+                    "name": "navbars",
+                    "link": "/navbars"
+                },
+                {
+                    "title": "Paginations",
+                    "name": "paginations",
+                    "link": "/paginations"
+                },
+                {
+                    "title": "Progress Bars",
+                    "name": "progress-bars",
+                    "link": "/progress-bars"
+                },
+                {
+                    "title": "Tooltips",
+                    "name": "tooltips",
+                    "link": "/tooltips"
+                },
+                {
+                    "title": "Accordion",
+                    "name": "accordion",
+                    "link": "/accordion"
+                },
+                {
+                    "title": "Badges",
+                    "name": "badges",
+                    "link": "/badges"
+                },
+                {
+                    "title": "Breadcrumbs",
+                    "name": "breadcrumbs",
+                    "link": "/breadcrumbs"
+                },
+                {
+                    "title": "List Group",
+                    "name": "list-group",
+                    "link": "/list-group"
+                },
+                {
+                    "title": "Tabs",
+                    "name": "tabs",
+                    "link": "/tabs"
+                },
+                {
+                    "title": "Pills",
+                    "name": "pills",
+                    "link": "/pills"
+                },
+                {
+                    "title": "Toasts",
+                    "name": "toasts",
+                    "link": "/toasts"
+                },
+                {
+                    "title": "Popovers",
+                    "name": "popovers",
+                    "link": "/popovers"
+                },
+                {
+                    "title": "Carousel",
+                    "name": "carousel",
+                    "link": "/carousel"
+                },
+                {
+                    "title": "Spinners",
+                    "name": "spinners",
+                    "link": "/spinners"
+                },
+                {
+                    "title": "Placeholders",
+                    "name": "placeholders",
+                    "link": "/placeholders"
+                },
+                {
+                    "title": "Avatars",
+                    "name": "avatars",
+                    "link": "/avatars"
+                }
+            ]
+        },
+        {
+            "title": "Pages",
+            "icon": "mdi mdi-folder-outline",
+            "name": "auth.basic.login",
+            "link": "/auth/login-basic",
+            "submenu": [
+                {
+                    "title": "Auth",
+                    "name": "auth.basic.login",
+                    "link": "/auth/login-basic",
+                    "submenu": [
+                        {
+                            "title": "Login",
+                            "name": "auth.basic.login",
+                            "link": "/auth/login-basic"
+                        },
+                        {
+                            "title": "Register",
+                            "name": "auth.basic.register",
+                            "link": "/auth/register-basic"
+                        },
+                        {
+                            "title": "Forgot Password",
+                            "name": "auth.basic.forgot-password",
+                            "link": "/auth/forgot-password-basic"
+                        }
+                    ]
+                },
+                {
+                    "title": "Erorrs",
+                    "name": "P404",
+                    "link": "/404",
+                    "submenu": [
+                        {
+                            "title": "404",
+                            "name": "P404",
+                            "link": "/404"
+                        }
+                    ]
+                },
+                {
+                    "title": "Layout",
+                    "name": "blank",
+                    "link": "/blank",
+                    "submenu": [
+                        {
+                            "title": "Blank",
+                            "name": "blank",
+                            "link": "/blank"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Charts",
+            "icon": "mdi mdi-chart-box-multiple-outline",
+            "name": "charts",
+            "link": "/charts"
+        },
+        {
+            "title": "DataTabels",
+            "icon": "mdi mdi-table",
+            "name": "datatabels",
+            "link": "/datatabels"
+        },
+        {
+            "title": "Map",
+            "icon": "mdi mdi-map-outline",
+            "name": "map",
+            "link": "/map"
+        },
+        {
+            "title": "Chat",
+            "icon": "mdi mdi-message-outline",
+            "name": "chat",
+            "link": "/chat",
+            "badge" : {
+                "value" : "08",
+                "class" : "badge bg-primary-subtle border border-primary-subtle text-primary rounded-pill"
+            }
+        },
+        {
+            "title": "Email",
+            "icon": "mdi mdi-email-outline",
+            "name": "email",
+            "link": "/email"
+        },
+        {
+            "title": "FullCalendar",
+            "icon": "mdi mdi-calendar-month-outline",
+            "name": "fullcalendar",
+            "link": "/fullcalendar"
+        },
+        {
+            "title": "Pricing",
+            "icon": "mdi mdi-all-inclusive",
+            "name": "pages.pricing",
+            "link": "/pricing"
+        },
+        {
+            "title": "Form Inputs",
+            "icon": "mdi mdi-clipboard-outline",
+            "name": "form-inputs.basic-inputs",
+            "link": "/form-inputs",
+            "submenu": [
+                {
+                    "title": "Form Basic Inputs",
+                    "name": "form-inputs.basic-inputs",
+                    "link": "/form-basic-inputs"
+                },
+                {
+                    "title": "Form Group Inputs",
+                    "name": "form-inputs.group-inputs",
+                    "link": "/form-group-inputs"
+                }
+            ]
+        },
+        {
+            "title": "Icons",
+            "icon": "mdi mdi-code-block-tags",
+            "name": "pages.icons",
+            "link": "/pages/icons"
+        },
+        {
+            "title": "E-Learning",
+            "icon": "mdi mdi-code-block-tags",
+            "name": "pages.elearnings",
+            "link": "/pages/elearnings"
+        },
+        {
+            "title": "Kanban",
+            "icon": "mdi mdi-format-list-bulleted",
+            "name": "pages.kanban",
+            "link": "/pages/kanban"
+        },
+        {
+            "title": "Settings",
+            "icon": "mdi mdi-cog-outline",
+            "name": "settings.account.get",
+            "link": "/settings/account",
+            "submenu": [
+                {
+                    "title": "Account",
+                    "name": "settings.account.get",
+                    "link": "/settings/account"
+                },
+                {
+                    "title": "Application",
+                    "name": "settings.application.get",
+                    "link": "/settings/application"
+                },{
+                    "title" : "Website",
+                    "name" : "settings.website.get",
+                    "link" : "/settings/website"
+                }
+            ]
+        }
+
+
+
+    ]
+}
+
