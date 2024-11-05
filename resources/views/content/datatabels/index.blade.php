@@ -5,16 +5,17 @@
 @section('content')
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('DataTables') }}</h1>
+    <h1 class="h3 mb-4 text-gray-800" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">{{ __('DataTables') }}</h1>
 
-    <div class="card p-2">
+    <div class="card p-2" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">
         <div class="container mt-5">
             <div class="row ms-1 mb-2">
-                <input type="text" class="form-control my-w-fit-content m-1" id="dataTables_my_filter" name="search">
+                <input type="text" class="form-control my-w-fit-content m-1" id="dataTables_my_filter" placeholder="{{ __('Search ...') }}" name="search">
 
                 <select class="form-select my-w-fit-content m-1" id="selectType" name="type">
                     <option value="all">{{ __('All') }}</option>
                     <option value="active">{{ __('Active') }}</option>
+                    <option value="inactive">{{ __('InActive') }}</option>
                     <option value="expired">{{ __('Expired') }}</option>
                 </select>
 
@@ -29,11 +30,11 @@
                 <button class="btn btn-icon btn-outline-primary m-1" id="" data-bs-toggle="modal" data-bs-target="#uploadCouponModal"><span class="mdi mdi-upload"></span></button>
                 <button class="btn btn-icon btn-outline-primary m-1" id=""><span class="mdi mdi-download"></span></button>
 
-                <div class="dropdown">
-                    <button class="btn btn-icon btn-outline-primary m-1" type="button" data-bs-toggle="dropdown"></button>
+                <div class="dropdown my-w-fit-content px-0">
+                    <button class="btn btn-icon btn-outline-primary m-1" type="button" data-bs-toggle="dropdown">
                         <span class="mdi mdi-filter-outline"></span>
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="columns_filter_dropdown">
+                    <ul class="dropdown-menu p-1 {{ app()->getLocale() == "ar" ? "text-end dropdown-menu-end" : "dropdown-menu-start" }}" aria-labelledby="dropdownMenuButton1" id="columns_filter_dropdown">
                     </ul>
                 </div>
             </div>
@@ -106,7 +107,6 @@
     </div>
 </div>
 
-
 <!-- Create Coupon Modal -->
 <div class="modal fade" id="createCouponModal" tabindex="-1" aria-labelledby="createCouponLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -138,7 +138,7 @@
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="status">{{ __('Status') }}</label>
                         <select class="form-select" name="status" data-v="required" required>
-                            <option selected="0">{{ __('Choose...') }}</option>
+                            <option selected="0">{{ __('Select Status') }}</option>
                             <option value="active">{{ __('Active') }}</option>
                             <option value="inactive">{{ __('Inactive') }}</option>
                         </select>
@@ -153,10 +153,10 @@
     </div>
 </div>
 
-
 <!-- Print Coupon Modal -->
 <div class="modal fade" id="printCouponModal" tabindex="-1" aria-labelledby="printCouponLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl">
+    {{-- <div class="modal-dialog"> --}}
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="printCouponLabel">{{ __('Print Coupon') }}</h5>
@@ -164,9 +164,9 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-6 col-lg-12">
+                    <div class="col-md-12 col-lg-6 d-flex justify-content-center mb-4">
                         <div class="printimage-container" id="printedImage">
-                            <img src="{{ asset('assets/img/my/defaults/print.png') }}" width="400px" alt="print">
+                            <img src="{{ asset('assets/img/my/defaults/print.png') }}" width="800px" alt="print">
                             <div class="text-overlay identifier"></div> <!-- المعرف -->
                             <div class="text-overlay code"></div> <!-- الكود -->
                             <div class="text-overlay usage"></div> <!-- الإستعمالات -->
@@ -176,7 +176,7 @@
                             <div class="text-overlay limit"></div> <!-- الحد الأقصى -->
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-12">
+                    <div class="col-md-12 col-lg-6">
                         <div class="mb-3">
                             <label for="pcode" class="form-label">{{ __('Code') }}</label>
                             <input type="text" class="form-control" id="pcode" name="pcode" data-v="required" required>
@@ -300,9 +300,9 @@
                 $('#pexpired_date').val(coupon.expired_date.replace(' ', 'T'));
                 $('#pstatus').val(coupon.status);
                 updateOverlay();
-                var myModal = new bootstrap.Modal(document.getElementById('printCoupon'));
+
                 $('#loading').hide();
-                myModal.show();
+                $('#printCouponModal').modal('show');
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     const response = JSON.parse(xhr.responseText);
@@ -334,9 +334,9 @@
                 $('#discount').val(coupon.discount);
                 $('#expired_date').val(coupon.expired_date.replace(' ', 'T'));
                 $('#status').val(coupon.status);
-                var myModal = new bootstrap.Modal(document.getElementById('editCoupon'));
+
                 $('#loading').hide();
-                myModal.show();
+                $('#editCouponModal').modal('show');
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     const response = JSON.parse(xhr.responseText);
@@ -453,12 +453,7 @@
         });
 
         function checkAndLoadLottie(table) {
-            // Check if there are no matching records displayed
-            if (table.page.info().recordsDisplay === 0) {
-                loademptyTableLottieAnimation(); // Load Lottie animation if no records
-            } else {
-                lottie.stop(); // Stop Lottie animation if records are displayed
-            }
+            loademptyTableLottieAnimation(); // Load Lottie animation if no records
         }
 
     $(document).ready(function() {
@@ -475,11 +470,9 @@
                 },
                 ajax: {
                     url: "{{ route('datatabels') }}",
-                    type: "GET"
-
-                  // data: function(d) {
-                  //     d.type = $('#selectType').val();
-                  // }
+                    data: function(d) {
+                        d.type = $('#selectType').val();
+                    }
                   // Start of checkboxes
                 // dataSrc: function(response) {
                 //     ids = (response.ids || []).map(id => parseInt(id, 10)); // Ensure all IDs are integers

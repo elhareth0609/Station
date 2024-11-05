@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Coupon;
+use App\Models\Log;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -43,7 +44,7 @@ class DataTabelController extends Controller {
             if ($request->type == 'expired') {
                 $query->where('expired_date', '<', now());
             } elseif ($request->type == 'active') {
-                $query->where('status', 'active');
+                $query->where('status', 'active')->where('expired_date', '>=', now());
             } elseif ($request->type == 'inactive') {
                 $query->where('status', 'inactive');
             }
@@ -101,5 +102,51 @@ class DataTabelController extends Controller {
             // return response()->json($datatable);
         }
         return view('content.datatabels.index');
+    }
+
+
+    public function logs(Request $request) {
+        $query = Log::query();
+
+        if ($request->has('type') && $request->type != 'all') {
+            if ($request->type == 'expired') {
+                $query->where('expired_date', '<', now());
+            } elseif ($request->type == 'active') {
+                $query->where('status', 'active')->where('expired_date', '>=', now());
+            } elseif ($request->type == 'inactive') {
+                $query->where('status', 'inactive');
+            }
+        }
+
+        $logs = $query->get();
+
+        if($request->ajax()) {
+            return DataTables::of($logs)
+            ->editColumn('id', function ($log) {
+                return (string) $log->id;
+            })
+            ->editColumn('code', function ($log) {
+                return $log->code;
+            })
+            ->editColumn('status', function ($log) {
+                if ($log->status == 'active') {
+                    return '<span class="badge bg-success-subtle border border-success-subtle text-success-emphasis rounded-pill">'. __('Active') .'</span>';
+                } else {
+                    return '<span class="badge bg-secondary-subtle border border-secondary-subtle text-secondary-emphasis rounded-pill">'. __('In Active') .'</span>';
+                }
+            })
+            ->editColumn('created_at', function ($log) {
+                return $log->created_at->format('Y-m-d');
+            })
+            ->addColumn('actions', function ($log) {
+                return '
+                    <a href="'. route('log',$log->id) .'" class="btn btn-icon btn-outline-primary"><i class="mdi mdi-pencil"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteLog(' . $log->id . ')"><i class="mdi mdi-trash-can"></i></a>
+                ';
+            })
+            ->rawColumns(['status','actions'])
+            ->make(true);
+        }
+        return view('content.logs.list');
     }
 }

@@ -8,7 +8,7 @@
         },
         {
             "title": "Components",
-            "icon": "fas fa-fw fa-cog",
+            "icon": "mdi mdi-layers-outline",
             "name": "components",
             "link": "/components",
             "submenu": [
@@ -223,6 +223,12 @@
             "icon": "mdi mdi-all-inclusive",
             "name": "pages.pricing",
             "link": "/pricing"
+        },
+        {
+            "title": "Logs",
+            "icon": "mdi mdi-all-inclusive",
+            "name": "logs",
+            "link": "/logs"
         },
         {
             "title": "Form Inputs",

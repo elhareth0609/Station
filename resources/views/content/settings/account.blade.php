@@ -19,21 +19,20 @@
         }
 
         /* Center crop container and set circular shape */
-.crop-container {
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-    margin: auto;
-}
+        .crop-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+        }
 
-.cropper-view-box,
-.cropper-face {
-    border-radius: 50%; /* Round the crop box */
-}
+        .cropper-view-box,
+        .cropper-face {
+            border-radius: 50%; /* Round the crop box */
+        }
 
     </style>
 
-    <div class="container mt-5">
         <div class="card p-4">
             <ul class="nav nav-tabs mb-4">
                 <li class="nav-item">
@@ -112,9 +111,6 @@
                 </div>
             </form>
         </div>
-    </div>
-
-
 
 <!-- Upload Image Modal -->
 <div class="modal fade" id="uploadImageModal" tabindex="-1" aria-labelledby="uploadImageLabel" aria-hidden="true">

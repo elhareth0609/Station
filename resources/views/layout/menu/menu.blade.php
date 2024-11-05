@@ -1,4 +1,4 @@
-<ul class="navbar-nav bg-white shadow sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-white shadow sidebar sidebar-dark accordion position-fixed top-0  {{ app()->getLocale() == 'ar' ? 'end-0 sidebar-rtl' : 'start-0' }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : '' }}" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <div class="sidebar-brand d-flex align-items-center justify-content-between" >
@@ -43,39 +43,16 @@
             <li class="nav-item my-1 {{ $isActiveSection || $isActiveSubmenu ? 'active' : '' }}">
                 <a class="nav-link d-flex align-items-center rounded {{ isset($section['submenu']) ? (($isActiveSection || $isActiveSubmenu) ? '' : 'collapsed') : '' }} mx-1"
                 href="{{ route($section['name']) }}"
-
                 @if(isset($section['submenu'])) data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->index }}" aria-expanded="{{ $isActiveSection || $isActiveSubmenu ? 'true' : 'false' }}" aria-controls="collapse{{ $loop->index }}" @endif>
                     <i class="{{ $section['icon'] }}"></i>
-                    <span>{{ $section['title'] }}</span>
+                    <span>{{ __($section['title']) }}</span>
                     @isset($section['badge'])
-                        <span class="{{ $section['badge']['class'] }} ms-auto my-fs-7">{{ $section['badge']['value'] }}</span>
+                        <span class="{{ $section['badge']['class'] }} {{ app()->getLocale() == 'ar' ? 'me-auto' : 'ms-auto' }} my-fs-7">{{ $section['badge']['value'] }}</span>
                     @endisset
                 </a>
 
-                @if(isset($section['submenu']))
-                    <div id="collapse{{ $loop->index }}" class="collapse {{ $isActiveSection || $isActiveSubmenu ? 'show' : '' }}" aria-labelledby="heading{{ $loop->index }}" data-parent="#accordionSidebar">
-                        <div class="bg-white p-2 collapse-inner">
-                            @foreach($section['submenu'] as $submenu)
-                                <a class="nav-link d-flex align-items-center nav-link-1 collapse-item rounded {{ Route::currentRouteName() == $submenu['name'] ? 'active' : '' }} {{ isset($section['submenu']) ? (($isActiveSection || $isActiveSubmenu) ? '' : 'collapsed') : '' }}"
-                                href="{{ isset($submenu['link']) ? route($submenu['name']) : '#' }}"
-                                @if(isset($submenu['submenu'])) data-bs-toggle="collapse" data-bs-target="#subcollapse{{ $loop->parent->index }}-{{ $loop->index }}" aria-expanded="{{ $isActiveSection || $isActiveSubmenu ? 'true' : 'false' }}" aria-controls="subcollapse{{ $loop->parent->index }}-{{ $loop->index }}" @endif>
-                                    {{ $submenu['title'] }}
-                                </a>
-
-                                    @if(isset($submenu['submenu']))
-                                        <!-- Subsubmenu -->
-                                        <div id="subcollapse{{ $loop->parent->index }}-{{ $loop->index }}" class="collapse {{ $isActiveSection || $isActiveSubmenu ? 'show' : '' }}" aria-labelledby="subheading{{ $loop->parent->index }}-{{ $loop->index }}">
-                                            <div class="bg-white py-2 collapse-inner">
-                                                @foreach($submenu['submenu'] as $subsubmenu)
-                                                    <a class="nav-link nav-link-1 d-flex align-items-center collapse-item rounded {{ Route::currentRouteName() == $subsubmenu['name'] ? 'active' : '' }}"
-                                                        href="{{ route($subsubmenu['name']) }}">{{ $subsubmenu['title'] }}</a>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    @endif
-                            @endforeach
-                        </div>
-                    </div>
+                @if (isset($section['submenu']) && is_array($section['submenu']))
+                    @include('layout.menu.submenu', ['submenu' => $section['submenu']])
                 @endif
             </li>
             {{-- <hr class="sidebar-divider"> --}}

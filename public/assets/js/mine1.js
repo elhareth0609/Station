@@ -125,7 +125,7 @@ $('#overlay').on('click', function() {
 $('.input-group-text .mdi-lock-outline').on('click', function() {
     // Toggle password input type
     var passwordInput = $(this).closest('.input-group').find('input[type="password"], input[type="text"]');
-    
+
     if (passwordInput.attr('type') === 'password') {
         passwordInput.attr('type', 'text');
         $(this).removeClass('mdi-lock-outline').addClass('mdi-lock-open-outline');

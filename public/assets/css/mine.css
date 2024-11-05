@@ -274,13 +274,15 @@ a:hover {
 
 /* sidebar */
 .sidebar {
-    position: fixed;
     height: 100vh;
     width: 15rem !important;
-    top: 0;
-    left: 0;
     z-index: 10;
 }
+
+.sidebar-rtl {
+    padding-inline-start: 0px!important;
+}
+
 .scrollable-content {
     overflow-y: scroll;
     overflow-x: hidden;
@@ -294,6 +296,12 @@ a:hover {
     scrollbar-width: thin;
 }
 
+.sidebar.sidebar-rtl + #content-wrapper {
+    padding-right: 15rem;
+    padding-left: 0;
+    scrollbar-width: thin;
+}
+
 body {
     overflow-y: hidden;
     scrollbar-color: #d5d5d5 transparent;
@@ -303,6 +311,11 @@ body {
 /* sidebar myToggled */
 .sidebar.myToggled + #content-wrapper {
     padding-left: 4rem;
+}
+
+.sidebar.sidebar-rtl.myToggled + #content-wrapper {
+    padding-right: 4rem;
+    padding-left: 0;
 }
 
 .sidebar.myToggled {
@@ -385,6 +398,7 @@ body {
     #content-wrapper {
         width: 100% !important;
         padding-left: 0rem !important;
+        padding-right: 0rem !important;
     }
 }
 

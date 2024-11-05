@@ -234,7 +234,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-3 col-md-6 col-sm-6 mb-3">
                 <div class="card text-center p-3">
-                    <img src="https://via.placeholder.com/80" alt="Angela Moss" class="avatar mx-auto rounded-4">
+                    <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Angela Moss" class="avatar mx-auto rounded-4">
                     <h5 class="mt-3">Angela Moss</h5>
                     <p class="text-muted">Marketing Manager at <a href="#" class="text-primary">Highspeed Studios</a></p>
                     <div class="d-flex align-items-center">
@@ -249,7 +249,7 @@
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 mb-3">
                 <div class="card text-center p-3">
-                    <img src="https://via.placeholder.com/80" alt="Angela Moss" class="avatar mx-auto rounded-4">
+                    <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Angela Moss" class="avatar mx-auto rounded-4">
                     <h5 class="mt-3">Angela Moss</h5>
                     <p class="text-muted">Marketing Manager at <a href="#" class="text-primary">Highspeed Studios</a></p>
                     <div class="d-flex align-items-center">
@@ -264,7 +264,7 @@
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 mb-3">
                 <div class="card text-center p-3">
-                    <img src="https://via.placeholder.com/80" alt="Angela Moss" class="avatar mx-auto rounded-4">
+                    <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Angela Moss" class="avatar mx-auto rounded-4">
                     <h5 class="mt-3">Angela Moss</h5>
                     <p class="text-muted">Marketing Manager at <a href="#" class="text-primary">Highspeed Studios</a></p>
                     <div class="d-flex align-items-center">
@@ -279,7 +279,7 @@
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 mb-3">
                 <div class="card text-center p-3">
-                    <img src="https://via.placeholder.com/80" alt="Angela Moss" class="avatar mx-auto rounded-4">
+                    <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Angela Moss" class="avatar mx-auto rounded-4">
                     <h5 class="mt-3">Angela Moss</h5>
                     <p class="text-muted">Marketing Manager at <a href="#" class="text-primary">Highspeed Studios</a></p>
                     <div class="d-flex align-items-center">

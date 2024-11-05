@@ -8,6 +8,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FullCalendarController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\SettingController;
@@ -26,6 +27,8 @@ use Illuminate\Support\Facades\Route;
     Route::get('users', [DataTabelController::class, 'users'])->name('users');
     Route::get('datatabels', [DataTabelController::class, 'datatabels'])->name('datatabels');
     Route::post('datatabels', [DataTabelController::class, 'datatabels'])->name('datatabels.table');
+    Route::get('logs', [DataTabelController::class, 'logs'])->name('logs');
+
     Route::get('map', [MapController::class, 'index'])->name('map');
     Route::get('chat', [ChatController::class, 'index'])->name('chat');
     Route::get('email', [EmailController::class, 'index'])->name('email');
@@ -49,13 +52,14 @@ use Illuminate\Support\Facades\Route;
     Route::delete('/coupon/{id}', [CouponController::class, 'delete'])->name('coupon.delete');
     Route::get('/coupon/update', [CouponController::class, 'update'])->name('coupon.update');
     Route::post('/coupon/check', [CouponController::class, 'check'])->name('coupon.check');
-
     Route::post('/coupon/{id}/update/code', [CouponController::class, 'updateCode'])->name('coupon.update.code');
-
     Route::get('/coupons/export', [CouponController::class, 'export'])->name('coupons.export');
     Route::post('/coupons/import', [CouponController::class, 'import'])->name('coupons.import');
 
-
+    // Logs
+    // Dashboard
+    Route::get('/log/{id}', [LogController::class, 'get'])->name('log');
+    Route::delete('/log/{id}', [LogController::class, 'delete'])->name('log.delete');
 
     Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 

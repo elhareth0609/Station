@@ -31,6 +31,7 @@
 
 
 <link rel="stylesheet" href="{{ asset('assets/vendor/materialdesignicons/css/materialdesignicons.min.css') }}?v={{ time() }}" />
+
 <link rel="stylesheet" href="{{ asset('assets/css/dropzone.css') }}?v={{ time() }}" />
 <link rel="stylesheet" href="{{ asset('assets/css/tagify.css') }}?v={{ time() }}" />
 

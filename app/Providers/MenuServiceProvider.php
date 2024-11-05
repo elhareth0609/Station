@@ -13,8 +13,7 @@ class MenuServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
+    public function boot() {
         // Load and share the menu data
         $menuJson = File::get(resource_path('menu/menu.json'));
         $menu = json_decode($menuJson, true);

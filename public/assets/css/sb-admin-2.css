@@ -9597,13 +9597,13 @@ a:focus {
   vertical-align: 0;
   border: 0;
   font-weight: 900;
-  content: '\f105';
-  font-family: 'Font Awesome 5 Free';
+  content: '\F0142';
+  font-family: 'Material Design Icons';
 }
 
 .sidebar .nav-item.dropdown.show .dropdown-toggle::after,
 .topbar .nav-item.dropdown.show .dropdown-toggle::after {
-  content: '\f107';
+  content: '\F0140';
 }
 
 .topbar .nav-item .nav-link {
@@ -9679,7 +9679,7 @@ a:focus {
 
 .topbar .dropdown .dropdown-menu {
   /* width: calc(100% - 1.5rem); */
-  right: 0.75rem;
+  /* right: 0.75rem; */
 }
 
 .topbar .dropdown-list {
@@ -9741,10 +9741,10 @@ a:focus {
   .topbar .dropdown {
     position: relative;
   }
-  .topbar .dropdown .dropdown-menu {
+  /* .topbar .dropdown .dropdown-menu {
     width: auto;
     right: 0;
-  }
+  } */
   .topbar .dropdown-list {
     width: 20rem !important;
   }
@@ -9837,6 +9837,12 @@ a:focus {
     border: 1px solid #3a3b45;
 }
 
+.sidebar.sidebar-rtl .nav-item .nav-link-1::before {
+    margin-left: 8px;
+    margin-right: 0;
+
+}
+
 .sidebar .nav-item .nav-link-1.active::before {
     border-color: #0d6efd;
     background-color: #0d6efd;
@@ -9926,8 +9932,8 @@ a:focus {
 
 .sidebar #sidebarToggle::after {
   font-weight: 900;
-  content: '\f104';
-  font-family: 'Font Awesome 5 Free';
+  content: '\F0141';
+  font-family: 'Material Design Icons';
   margin-right: 0.1rem;
 }
 
@@ -9945,8 +9951,8 @@ a:focus {
 } */
 
 .sidebar.toggled #sidebarToggle::after {
-  content: '\f105';
-  font-family: 'Font Awesome 5 Free';
+  content: '\F0142';
+  font-family: 'Material Design Icons';
   margin-left: 0.25rem;
 }
 
@@ -10055,12 +10061,18 @@ a:focus {
     vertical-align: 0;
     border: 0;
     font-weight: 900;
-    content: '\f107';
-    font-family: 'Font Awesome 5 Free';
+    content: '\F0140';
+    font-family: 'Material Design Icons';
 }
+
 .sidebar .nav-item .nav-link[data-bs-toggle="collapse"].collapsed::after {
-    content: '\f105';
+    content: '\F0142';
 }
+
+.sidebar.sidebar-rtl .nav-item .nav-link[data-bs-toggle="collapse"].collapsed::after {
+    content: '\F0141';
+}
+
 
 .sidebar .nav-item .collapse .collapse-inner {
     border-radius: 0;
@@ -10094,6 +10106,10 @@ a:focus {
     .sidebar .nav-item .nav-link i {
         font-size: 0.85rem;
         margin-right: 0.25rem;
+    }
+    .sidebar.sidebar-rtl .nav-item .nav-link i {
+        margin-left: 0.25rem;
+        margin-right: 0;
     }
     .sidebar .sidebar-brand .sidebar-brand-icon i {
         font-size: 2rem;
@@ -10249,6 +10265,11 @@ a:focus {
   margin-left: auto;
 }
 
+.sidebar-dark.sidebar-rtl .nav-item .nav-link[data-bs-toggle="collapse"]::after {
+    margin-right: auto;
+    margin-left: 0;
+}
+
 .scrollable-content > .nav-item.active > .nav-link:not([data-bs-toggle="collapse"]),
 .scrollable-content > .nav-item.active > .nav-link:not([data-bs-toggle="collapse"]) i {
     background: #eaecf4;
@@ -10362,8 +10383,8 @@ a:focus {
   padding-right: 1.725rem;
   line-height: 51px;
   font-weight: 900;
-  content: '\f107';
-  font-family: 'Font Awesome 5 Free';
+  content: '\F0140';
+  font-family: 'Material Design Icons';
   color: #d1d3e2;
 }
 
@@ -10372,7 +10393,7 @@ a:focus {
 }
 
 .card .card-header[data-bs-toggle="collapse"].collapsed::after {
-  content: '\f105';
+  content: '\F0142';
 }
 
 .chart-area {
