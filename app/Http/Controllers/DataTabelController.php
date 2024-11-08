@@ -40,6 +40,10 @@ class DataTabelController extends Controller {
     public function datatabels(Request $request) {
         $query = Coupon::query();
 
+        if ($request->has('trashed') && $request->trashed == 1) {
+            $query->onlyTrashed();
+        }
+
         if ($request->has('type') && $request->type != 'all') {
             if ($request->type == 'expired') {
                 $query->where('expired_date', '<', now());
@@ -80,13 +84,20 @@ class DataTabelController extends Controller {
             ->editColumn('created_at', function ($coupon) {
                 return $coupon->created_at->format('Y-m-d');
             })
-            ->addColumn('actions', function ($coupon) {
-                return '
-                    <a href="'. route('coupon',$coupon->id) .'" class="btn btn-icon btn-outline-primary"><i class="mdi mdi-pencil"></i></a>
-                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editCoupon(' . $coupon->id . ')"><i class="mdi mdi-pencil"></i></a>
-                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-success" onclick="printCoupon(' . $coupon->id . ')"><i class="mdi mdi-printer"></i></a>
-                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteCoupon(' . $coupon->id . ')"><i class="mdi mdi-trash-can"></i></a>
-                ';
+            ->addColumn('actions', function ($coupon) use ($request) {
+                if ($request->has('trashed') && $request->trashed == 1) {
+                    return '
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-warning" onclick="restoreCoupon(' . $coupon->id . ')"><i class="mdi mdi-backup-restore"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteCoupon(' . $coupon->id . ')"><i class="mdi mdi-delete-forever-outline"></i></a>
+                    ';
+                } else {
+                    return '
+                        <a href="'. route('coupon',$coupon->id) .'" class="btn btn-icon btn-outline-primary"><i class="mdi mdi-pencil"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editCoupon(' . $coupon->id . ')"><i class="mdi mdi-pencil"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-success" onclick="printCoupon(' . $coupon->id . ')"><i class="mdi mdi-printer"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteCoupon(' . $coupon->id . ')"><i class="mdi mdi-trash-can"></i></a>
+                    ';
+                }
             })
             ->rawColumns(['status','actions'])
             ->with('ids', $ids)
@@ -103,7 +114,6 @@ class DataTabelController extends Controller {
         }
         return view('content.datatabels.index');
     }
-
 
     public function logs(Request $request) {
         $query = Log::query();

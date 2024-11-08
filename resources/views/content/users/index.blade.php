@@ -46,7 +46,7 @@
         }
     </style>
 
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <div class="card p-4">
             <ul class="nav nav-tabs mb-4">
                 <li class="nav-item">

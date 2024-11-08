@@ -8,8 +8,8 @@
     <h1 class="h3 mb-4 text-gray-800" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">{{ __('DataTables') }}</h1>
 
     <div class="card p-2" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">
-        <div class="container mt-5">
-            <div class="row ms-1 mb-2">
+        <div class="container-fluid mt-5">
+            <div class="row {{ app()->getLocale() == "ar" ? "me-1" : "ms-1" }} mb-2">
                 <input type="text" class="form-control my-w-fit-content m-1" id="dataTables_my_filter" placeholder="{{ __('Search ...') }}" name="search">
 
                 <select class="form-select my-w-fit-content m-1" id="selectType" name="type">
@@ -29,6 +29,7 @@
                 <button class="btn btn-icon btn-outline-primary m-1" id="" data-bs-toggle="modal" data-bs-target="#createCouponModal"><span class="mdi mdi-plus-outline"></span></button>
                 <button class="btn btn-icon btn-outline-primary m-1" id="" data-bs-toggle="modal" data-bs-target="#uploadCouponModal"><span class="mdi mdi-upload"></span></button>
                 <button class="btn btn-icon btn-outline-primary m-1" id=""><span class="mdi mdi-download"></span></button>
+                <button class="btn btn-icon btn-outline-danger m-1" id="trash-button" data-trashed="0"><span class="mdi mdi-trash-can-outline"></span></button>
 
                 <div class="dropdown my-w-fit-content px-0">
                     <button class="btn btn-icon btn-outline-primary m-1" type="button" data-bs-toggle="dropdown">
@@ -42,7 +43,7 @@
                 <table id="table" class="table table-hover mb-0">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th><input class="form-check-input" type="checkbox" id="check-all"></th>
                             <th>{{__("Code")}}</th>
                             <th>{{ __('Discount') }}</th>
                             <th>{{ __('Max') }}</th>
@@ -156,7 +157,6 @@
 <!-- Print Coupon Modal -->
 <div class="modal fade" id="printCouponModal" tabindex="-1" aria-labelledby="printCouponLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-    {{-- <div class="modal-dialog"> --}}
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="printCouponLabel">{{ __('Print Coupon') }}</h5>
@@ -391,6 +391,45 @@
             });
         }
 
+        function restoreCoupon(id) {
+            Swal.fire({
+                title: __("Do you really want to restore this Coupon?",lang),
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: __("Restore",lang),
+                cancelButtonText: __("Cancel",lang),
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/coupon/restore/' + id,
+                        type: 'GET',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                icon: response.icon,
+                                title: response.state,
+                                text: response.message,
+                                confirmButtonText: __("Ok",lang)
+                            });
+                            table.ajax.reload();
+                        },
+                        error: function(xhr, textStatus, errorThrown) {
+                            const response = JSON.parse(xhr.responseText);
+                            Swal.fire({
+                                icon: response.icon,
+                                title: response.state,
+                                text: response.message,
+                                confirmButtonText: __("Ok",lang)
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
         // function demoProduct(id) {
         //     window.open("{{ url('view/product') }}/" + id, "_blank");
         // }
@@ -414,7 +453,6 @@
 
 
             $('body').append(contextMenu);
-
 
                 $(document).on('click', function() {
                 $('.context-menu').remove();
@@ -460,7 +498,12 @@
         // $.noConflict();
             table = $('#table').DataTable({
                 serverSide: true,
+                reponsive: true,
+                processing: true,
                 pageLength: 100,
+                ordering: true,
+                searching: true,
+
                 language: {
                     "emptyTable": "<div id='no-data-animation' style='width: 100%; height: 200px;'></div>",
                     "zeroRecords": "<div id='no-data-animation' style='width: 100%; height: 200px;'></div>"
@@ -472,13 +515,14 @@
                     url: "{{ route('datatabels') }}",
                     data: function(d) {
                         d.type = $('#selectType').val();
+                        d.trashed = $('#trash-button').data('trashed');
+                    },
+                    // Start of checkboxes
+                    dataSrc: function(response) {
+                        ids = (response.ids || []).map(id => parseInt(id, 10)); // Ensure all IDs are integers
+                        selectedIds = [];
+                        return response.data;
                     }
-                  // Start of checkboxes
-                // dataSrc: function(response) {
-                //     ids = (response.ids || []).map(id => parseInt(id, 10)); // Ensure all IDs are integers
-                //     selectedIds = [];
-                //     return response.data;
-                // }
                 // End of checkboxes
                 },
                 columns: [
@@ -719,6 +763,22 @@
             });
 
             $('#selectType').change(function() {
+                table.ajax.reload();
+            });
+
+            $('#trash-button').on('click', function () {
+                const isTrashed = $(this).data('trashed') === 1;
+
+                $(this).data('trashed', isTrashed ? 0 : 1);
+
+                if (isTrashed) {
+                    $(this).toggleClass('btn-danger');
+                    $(this).addClass('btn-outline-danger');
+                } else {
+                    $(this).toggleClass('btn-outline-danger');
+                    $(this).addClass('btn-danger');
+                }
+
                 table.ajax.reload();
             });
 

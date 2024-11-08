@@ -155,7 +155,7 @@
                         {{-- <select onchange="window.location.href = this.value;"> --}}
                             @foreach (config('language') as $locale => $language)
                             <a class="dropdown-item rounded my-1 {{ app()->isLocale($locale) ? 'active' : '' }}" href="{{ route("change.language", $locale) }}">
-                                <span class="{{ app()->isLocale("ar") ? "ms-2" : "me-2" }} px-1 text-uppercase text-secondary rounded border border-secondary">{{ $locale }}</span>
+                                <span class="{{ app()->isLocale("ar") ? "ms-2" : "me-2" }} px-1 text-uppercase rounded border">{{ $locale }}</span>
                                 {{ __($language) }}
                             </a>
                             @endforeach

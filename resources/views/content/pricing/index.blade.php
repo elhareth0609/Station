@@ -6,7 +6,7 @@
 
     <h1 class="h3 mb-4 text-gray-800">{{ __('Pricing') }}</h1>
 
-    <div class="container mt-5">
+    <div class="container-fluid  mt-5">
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="card pricing-card h-100 border rounded-3">

@@ -8,7 +8,7 @@
     <h1 class="h3 mb-4 text-gray-800" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">{{ __('Logs') }}</h1>
 
     <div class="card p-2" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">
-        <div class="container mt-5">
+        <div class="container-fluid mt-5">
             <div class="row ms-1 mb-2">
                 <input type="text" class="form-control my-w-fit-content m-1" id="dataTables_my_filter" placeholder="{{ __('Search ...') }}" name="search">
 

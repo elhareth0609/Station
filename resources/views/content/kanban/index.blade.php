@@ -21,9 +21,9 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <div class="d-flex justify-content-between align-items-center">
                             <div class="avatar-group">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 1" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 2" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 3" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 1" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 2" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 3" class="avatar avatar-md">
                                 <div class="avatar avatar-md avatar-count">+3</div>
                             </div>
                             <div>
@@ -38,9 +38,9 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <div class="d-flex justify-content-between align-items-center">
                             <div class="avatar-group">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 1" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 2" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 3" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 1" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 2" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 3" class="avatar avatar-md">
                             </div>
                             <div>
                                 <i class="mdi mdi-message-processing text-secondary"></i> <span>11</span>
@@ -66,9 +66,9 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <div class="d-flex justify-content-between align-items-center">
                             <div class="avatar-group">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 1" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 2" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 3" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 1" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 2" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 3" class="avatar avatar-md">
                                 <div class="avatar avatar-md avatar-count">+3</div>
                             </div>
                             <div>
@@ -95,9 +95,9 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <div class="d-flex justify-content-between align-items-center">
                             <div class="avatar-group">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 1" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 2" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 3" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 1" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 2" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 3" class="avatar avatar-md">
                             </div>
                             <div>
                                 <i class="mdi mdi-message-processing text-secondary"></i> <span>11</span>
@@ -177,9 +177,9 @@ span.success-point::after {
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                             <div class="avatar-group">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 1" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 2" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 3" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 1" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 2" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 3" class="avatar avatar-md">
                                 <div class="avatar avatar-md avatar-count">+3</div>
                             </div>
                             <div>
@@ -194,8 +194,8 @@ span.success-point::after {
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <div class="d-flex justify-content-between align-items-center">
                             <div class="avatar-group">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 1" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 2" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 1" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 2" class="avatar avatar-md">
                             </div>
                             <div>
                                 <i class="mdi mdi-message-processing text-secondary"></i> <span>11</span>
@@ -226,7 +226,7 @@ span.success-point::after {
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                             <div class="avatar-group">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 1" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 1" class="avatar avatar-md">
                             </div>
                             <div>
                                 <i class="mdi mdi-message-processing text-secondary"></i> <span>11</span>
@@ -240,9 +240,9 @@ span.success-point::after {
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <div class="d-flex justify-content-between align-items-center">
                             <div class="avatar-group">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 1" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 2" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 3" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 1" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 2" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 3" class="avatar avatar-md">
                                 <div class="avatar avatar-md avatar-count">+3</div>
                             </div>
                             <div>
@@ -275,9 +275,9 @@ span.success-point::after {
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                             <div class="avatar-group">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 1" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 2" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 3" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 1" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 2" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 3" class="avatar avatar-md">
                                 <div class="avatar avatar-md avatar-count">+3</div>
                             </div>
                             <div>
@@ -292,9 +292,9 @@ span.success-point::after {
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <div class="d-flex justify-content-between align-items-center">
                             <div class="avatar-group">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 1" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 2" class="avatar avatar-md">
-                                <img src="https://via.placeholder.com/48" alt="Avatar 3" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 1" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 2" class="avatar avatar-md">
+                                <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Avatar 3" class="avatar avatar-md">
                             </div>
                             <div>
                                 <i class="mdi mdi-message-processing text-secondary"></i> <span>11</span>

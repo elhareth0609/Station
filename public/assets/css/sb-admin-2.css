@@ -394,11 +394,11 @@ h6, .h6 {
   font-size: 1rem;
 } */
 
-.lead {
+/* .lead {
   font-size: 1.25rem;
   font-weight: 300;
-}
-
+} */
+/* 
 .display-1 {
   font-size: 6rem;
   font-weight: 300;
@@ -421,9 +421,9 @@ h6, .h6 {
   font-size: 3.5rem;
   font-weight: 300;
   line-height: 1.2;
-}
+} */
 
-hr {
+/* hr {
   margin-top: 1rem;
   margin-bottom: 1rem;
   border: 0;
@@ -547,7 +547,7 @@ pre code {
 .pre-scrollable {
   max-height: 340px;
   overflow-y: scroll;
-}
+} */
 
 /* .container,
 .container-fluid,
@@ -10540,7 +10540,7 @@ form.user .btn-user {
   box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
 }
 
-
+/* 
 @-webkit-keyframes noise-anim {
   0% {
     clip: rect(49px, 9999px, 40px, 0);
@@ -10803,7 +10803,7 @@ form.user .btn-user {
   100% {
     clip: rect(67px, 9999px, 68px, 0);
   }
-}
+} */
 
 footer.sticky-footer {
   padding: 2rem 0;

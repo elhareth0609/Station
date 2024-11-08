@@ -9,7 +9,7 @@
 </div>
 
 <div class="card p-2">
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
 
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
