@@ -39,8 +39,9 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>{{ __('Type') }}</th>
+                            <th>{{ __('Content') }}</th>
                             <th>{{ __('Created At') }}</th>
-                            <th>{{ __('Actions') }}</th>
                         </tr>
                     </thead>
                 </table>
@@ -132,8 +133,34 @@
         }
 
         function checkAndLoadLottie(table) {
-            loademptyTableLottieAnimation(); // Load Lottie animation if no records
-        }
+    const recordsTotal = table.page.info().recordsTotal;
+
+    // If the table is empty and the loading animation doesn't exist, show it
+    if (recordsTotal === 0 && !$('#lottie-animation').length) {
+        // Only append the Lottie animation once
+        $('body').append(`
+            <div id="loading" style="display: none; background: #00000069; z-index: 10000;" class="position-fixed h-100 w-100 top-0 start-0">
+                <div id="lottie-animation" class="bg-white rounded-3 border border-primary border-5 position-fixed start-50 top-50" style="width: 100px; height: 100px; transform: translate(-50%, -50%);">
+                </div>
+            </div>
+        `);
+
+        // Initialize the Lottie animation
+        var animation1 = lottie.loadAnimation({
+            container: document.getElementById('lottie-animation'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'assets/img/my/defaults/load-svg.json' // Lottie animation URL
+        });
+
+        // Display the loading animation
+        $('#loading').show();
+    } else if (recordsTotal > 0 && $('#lottie-animation').length) {
+        // If the table is not empty and Lottie animation exists, remove it
+        $('#loading').remove();
+    }
+}
 
     $(document).ready(function() {
         // $.noConflict();
@@ -172,10 +199,11 @@
                         }
                     },
                     // End  of checkboxes
+                    {data: 'type', name: '{{__("Type")}}',},
+                    {data: 'content', name: '{{__("Content")}}',},
                     {data: 'created_at', name: '{{__("Created At")}}',},
-                    {data: 'actions', name: '{{__("Actions")}}', orderable: false, searchable: false,}
                 ],
-                order: [[6, 'desc']], // Default order by created_at column
+                order: [[3, 'desc']], // Default order by created_at column
 
                 // Start of checkboxes
 

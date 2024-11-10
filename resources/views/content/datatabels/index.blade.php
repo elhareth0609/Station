@@ -491,7 +491,7 @@
         });
 
         function checkAndLoadLottie(table) {
-            loademptyTableLottieAnimation(); // Load Lottie animation if no records
+            loademptyTableLottieAnimation();
         }
 
     $(document).ready(function() {
@@ -507,9 +507,6 @@
                 language: {
                     "emptyTable": "<div id='no-data-animation' style='width: 100%; height: 200px;'></div>",
                     "zeroRecords": "<div id='no-data-animation' style='width: 100%; height: 200px;'></div>"
-                },
-                initComplete: function() {
-                    checkAndLoadLottie(this.api());
                 },
                 ajax: {
                     url: "{{ route('datatabels') }}",
@@ -854,7 +851,8 @@
 
             $('#createCouponForm').submit(function(event) {
                 event.preventDefault();
-
+                $('#createCouponModal').modal('hide');
+                
                 if (!$(this).valid()) {
                     return;
                 }
