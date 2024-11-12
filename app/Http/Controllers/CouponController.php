@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
+use setasign\Fpdi\Fpdi;
 
 class CouponController extends Controller {
     public function get($id) {
@@ -204,6 +205,53 @@ class CouponController extends Controller {
             'state' => 'Restored',
             'message' => 'Coupon restored successfully.'
         ]);
+    }
+
+    public function pdf($id) {
+        $coupon = Coupon::find($id);
+        // Create new Landscape PDF
+        $pdf = new FPDI('L');
+
+        // Set the path to the existing PDF template
+        $pdfPath = public_path('assets/img/my/defaults/certificate.pdf');
+
+        // Load the existing PDF
+        $pagecount = $pdf->setSourceFile($pdfPath);
+
+        // Import the first page from the template
+        $tpl = $pdf->importPage(1);
+        $pdf->AddPage();
+
+        // Use the imported page as the template
+        $pdf->useTemplate($tpl);
+
+        // Set font and add text
+        $pdf->SetFont('Helvetica');
+
+        // User's name
+        $pdf->SetFontSize(30);
+        $pdf->SetXY(10, 89);
+        $pdf->Cell(0, 10, $coupon->code, 0, 0, 'C');
+
+        // Reason for certificate
+        $pdf->SetFontSize(20);
+        $pdf->SetXY(80, 105);
+        $pdf->Cell(150, 10, $coupon->expired_date, 0, 0, 'C');
+
+        // Date components
+        $pdf->SetXY(118, 122);
+        $pdf->Cell(20, 10, $coupon->discount, 0, 0, 'C'); // Day
+
+        $pdf->SetXY(160, 122);
+        $pdf->Cell(30, 10, $coupon->max, 0, 0, 'C'); // Month
+
+        $pdf->SetXY(200, 122);
+        $pdf->Cell(20, 10, $coupon->expired_date, 0, 0, 'L'); // Year
+
+        // Output the PDF as a response to download
+        return response()->streamDownload(function () use ($pdf) {
+            $pdf->Output();
+        }, 'certificate.pdf');
     }
 
     public function delete($id) {

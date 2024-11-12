@@ -211,6 +211,56 @@
     </div>
 </div>
 
+<div class="modal fade" id="printCouponPdfModal" tabindex="-1" aria-labelledby="printCouponPdfLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="printCouponPdfLabel">{{ __('Print Coupon Pdf') }}</h5>
+                <button type="button" class="btn btn-light btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 col-lg-6 d-flex justify-content-center mb-4">
+                        <iframe id="pdfPreview" style="width: 100%; height: 600px;" frameborder="0"></iframe>
+                    </div>
+                    <!-- Existing form content on the right side -->
+                    <div class="col-md-12 col-lg-6">
+                        <input type="hidden" class="form-control" id="pdid" name="pdid" data-v="required" required>
+                        <div class="mb-3">
+                            <label for="pdcode" class="form-label">{{ __('Code') }}</label>
+                            <input type="text" class="form-control" id="pdcode" name="pdcode" data-v="required" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pduses" class="form-label">{{ __('Max') }}</label>
+                            <input type="text" class="form-control" id="pduses" name="pduses" data-v="required" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pddiscount" class="form-label">{{ __('Discount') }}</label>
+                            <input type="text" class="form-control" id="pddiscount" name="pddiscount" data-v="required" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pdexpired_date" class="form-label">{{ __('Expired At') }}</label>
+                            <input type="datetime-local" class="form-control" id="pdexpired_date" name="pdexpired_date" data-v="required" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pdstatus" class="form-label">{{ __('Status') }}</label>
+                            <select class="form-select" id="pdstatus" name="pdstatus" data-v="required" required>
+                                <option value="1">{{ __('Active') }}</option>
+                                <option value="0">{{ __('Inactive') }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">{{ __('Print') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Upload Coupon Modal -->
 <div class="modal fade" id="uploadCouponModal" tabindex="-1" aria-labelledby="uploadCouponLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -259,12 +309,72 @@
             document.querySelector('.text-overlay.limit').innerText = document.getElementById('puses').value || '';
         }
 
+        function updatePdfOverlay() {
+            $('#loading').show();
+
+            const id = document.getElementById('pdid').value || '';
+            const code = document.getElementById('pdcode').value || '';
+            const uses = document.getElementById('pduses').value || '';
+            const discount = document.getElementById('pddiscount').value || '';
+            const expired_date = document.getElementById('pdexpired_date').value || '';
+            const status = document.getElementById('pdstatus').value || '';
+
+            $.ajax({
+                url: '/coupon/pdf/' + id,
+                type: 'POST',
+                xhrFields: {
+                    responseType: 'blob' // Important to get the binary data
+                },
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                data: {
+                    code: code,
+                    uses: uses,
+                    discount: discount,
+                    expired_date: expired_date,
+                    status: status,
+                },
+                success: function(blob) {
+                    $('#loading').hide();
+
+                    // Create an object URL from the blob
+                    const url = URL.createObjectURL(blob);
+                    // Set the source of the iframe or embed to display the PDF
+                    $('#pdfPreview').attr('src', url);
+                    // $('#printCouponPdfModal').modal('show');
+
+                    // Release the URL when the modal is closed
+                    $('#printCouponPdfModal').on('hidden.bs.modal', function () {
+                        URL.revokeObjectURL(url);
+                        $('#pdfPreview').attr('src', ''); // Clear the src to release memory
+                    });
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    const response = JSON.parse(xhr.responseText);
+                    $('#loading').hide();
+                    Swal.fire({
+                        icon: response.icon,
+                        title: response.state,
+                        text: response.message,
+                        confirmButtonText: __("Ok", lang)
+                    });
+                }
+            });
+        }
+
         document.getElementById('pid').addEventListener('input', updateOverlay);
         document.getElementById('pcode').addEventListener('input', updateOverlay);
         document.getElementById('puses').addEventListener('input', updateOverlay);
         document.getElementById('pdiscount').addEventListener('input', updateOverlay);
         document.getElementById('pexpired_date').addEventListener('input', updateOverlay);
         document.getElementById('pstatus').addEventListener('change', updateOverlay);
+
+        document.getElementById('pdcode').addEventListener('input', updatePdfOverlay);
+        document.getElementById('pduses').addEventListener('input', updatePdfOverlay);
+        document.getElementById('pddiscount').addEventListener('input', updatePdfOverlay);
+        document.getElementById('pdexpired_date').addEventListener('input', updatePdfOverlay);
+        document.getElementById('pdstatus').addEventListener('change', updatePdfOverlay);
 
 
         function printImage() {
@@ -312,6 +422,56 @@
                         title: response.state,
                         text: response.message,
                         confirmButtonText: __("Ok",lang)
+                    });
+                }
+            });
+        }
+
+        function printPdfCoupon(id) {
+            $('#loading').show();
+            $.ajax({
+                url: '/coupon/pdf/' + id,
+                type: 'POST',
+                xhrFields: {
+                    responseType: 'blob' // Important to get the binary data
+                },
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(blob,data) {
+                    $('#loading').hide();
+
+                    coupon = data.coupon;
+                    if (coupon) {
+
+                        $('#pdid').val(coupon.id);
+                        $('#pdcode').val(coupon.code);
+                        $('#pduses').val(coupon.max);
+                        $('#pddiscount').val(coupon.discount);
+                        $('#pdexpired_date').val(coupon.expired_date.replace(' ', 'T'));
+                        $('#pdstatus').val(coupon.status);
+                    }
+
+                    // Create an object URL from the blob
+                    const url = URL.createObjectURL(blob);
+                    // Set the source of the iframe or embed to display the PDF
+                    $('#pdfPreview').attr('src', url);
+                    $('#printCouponPdfModal').modal('show');
+
+                    // Release the URL when the modal is closed
+                    $('#printCouponPdfModal').on('hidden.bs.modal', function () {
+                        URL.revokeObjectURL(url);
+                        $('#pdfPreview').attr('src', ''); // Clear the src to release memory
+                    });
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    const response = JSON.parse(xhr.responseText);
+                    $('#loading').hide();
+                    Swal.fire({
+                        icon: response.icon,
+                        title: response.state,
+                        text: response.message,
+                        confirmButtonText: __("Ok", lang)
                     });
                 }
             });
@@ -852,7 +1012,7 @@
             $('#createCouponForm').submit(function(event) {
                 event.preventDefault();
                 $('#createCouponModal').modal('hide');
-                
+
                 if (!$(this).valid()) {
                     return;
                 }

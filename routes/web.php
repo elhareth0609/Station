@@ -14,6 +14,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CertificateController;
 
 
 
@@ -48,6 +49,7 @@ use Illuminate\Support\Facades\Route;
     // Coupons
     // Dashboard
     Route::get('/coupon/{id}', [CouponController::class, 'get'])->name('coupon');
+    Route::post('/coupon/pdf/{id}', [CouponController::class, 'pdf'])->name('coupon.pdf');
     Route::post('/coupon/create', [CouponController::class, 'create'])->name('coupon.create');
     Route::delete('/coupon/{id}', [CouponController::class, 'delete'])->name('coupon.delete');
     Route::get('/coupon/update', [CouponController::class, 'update'])->name('coupon.update');
@@ -81,6 +83,9 @@ use Illuminate\Support\Facades\Route;
     Route::post('/privacy-and-policy/update', [SettingController::class, 'update_privacy_and_policy'])->name('privacy_and_policy.update');
     Route::post('/delivery/update', [SettingController::class, 'update_delivery'])->name('delivery.update');
     Route::post('/secure-payment/update', [SettingController::class, 'update_secure_payment'])->name('secure_payment.update');
+
+
+    Route::get('/certificate', [CertificateController::class, 'generateCertificate'])->name('certificate.generate');
 
 
     Route::get('pages/pricing', function () {
