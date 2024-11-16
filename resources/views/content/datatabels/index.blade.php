@@ -657,13 +657,7 @@
     $(document).ready(function() {
         // $.noConflict();
             table = $('#table').DataTable({
-                serverSide: true,
-                reponsive: true,
-                processing: true,
                 pageLength: 100,
-                ordering: true,
-                searching: true,
-
                 language: {
                     "emptyTable": "<div id='no-data-animation' style='width: 100%; height: 200px;'></div>",
                     "zeroRecords": "<div id='no-data-animation' style='width: 100%; height: 200px;'></div>"
