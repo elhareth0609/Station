@@ -191,6 +191,12 @@
             "link": "/datatabels"
         },
         {
+            "title": "Google Sheet",
+            "icon": "mdi mdi-table",
+            "name": "google-sheet",
+            "link": "/google-sheet"
+        },
+        {
             "title": "Map",
             "icon": "mdi mdi-map-outline",
             "name": "map",

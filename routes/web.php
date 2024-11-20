@@ -27,7 +27,8 @@ use App\Http\Controllers\CertificateController;
 
     Route::get('users', [DataTabelController::class, 'users'])->name('users');
     Route::get('datatabels', [DataTabelController::class, 'datatabels'])->name('datatabels');
-    Route::post('datatabels', [DataTabelController::class, 'datatabels'])->name('datatabels.table');
+    Route::get('google-sheet', [DataTabelController::class, 'google_sheet'])->name('google-sheet');
+    
     Route::get('logs', [DataTabelController::class, 'logs'])->name('logs');
 
     Route::get('map', [MapController::class, 'index'])->name('map');

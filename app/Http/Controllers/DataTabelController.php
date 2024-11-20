@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Log;
 use Laravel\Telescope\EntryType;
 use Laravel\Telescope\Telescope;
 use Yajra\DataTables\Facades\DataTables;
+use Google_Client;
+use Google_Service_Sheets;
 
 class DataTabelController extends Controller {
 
@@ -154,4 +156,67 @@ class DataTabelController extends Controller {
         }
         return view('content.logs.list');
     }
+    public function google_sheet(Request $request) {
+        // Initialize Google Client
+        $client = new Google_Client();
+        $client->setAuthConfig(env('GOOGLE_SHEET_CREDENTIALS_PATH')); // Your credentials file
+        $client->addScope(Google_Service_Sheets::SPREADSHEETS_READONLY);
+        
+        // Create Google Sheets service
+        $service = new Google_Service_Sheets($client);
+        
+        // Your Google Sheet ID from the URL
+        $spreadsheetId = '1hu8hFq_zWXSsJ7df5uWBwiXqvSbf03mKDahB1RFXUyg';
+        $range = 'Sheet1!A2:E'; // Assuming data starts from A2 and has 5 columns
+        
+        try {
+            $response = $service->spreadsheets_values->get($spreadsheetId, $range);
+            $values = $response->getValues();
+            
+            // Convert Google Sheet data to collection
+            $absences = collect($values)->map(function ($row) {
+                return [
+                    'name' => $row[0] ?? '', // الاسم
+                    'reason' => $row[1] ?? '', // السبب
+                    'from_date' => $row[2] ?? '', // من
+                    'to_date' => $row[3] ?? '', // الى
+                    'company' => $row[4] ?? '', // شركة
+                ];
+            });
+            
+            if ($request->ajax()) {
+                return DataTables::of($absences)
+                    ->editColumn('name', function ($absence) {
+                        return $absence['name'];
+                    })
+                    ->editColumn('reason', function ($absence) {
+                        return $absence['reason'];
+                    })
+                    ->editColumn('from_date', function ($absence) {
+                        return $absence['from_date'];
+                    })
+                    ->editColumn('to_date', function ($absence) {
+                        return $absence['to_date'];
+                    })
+                    ->editColumn('company', function ($absence) {
+                        return $absence['company'];
+                    })
+                    ->addColumn('actions', function ($absence) {
+                        return '
+                            <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary"><i class="mdi mdi-pencil"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-icon btn-outline-success"><i class="mdi mdi-printer"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger"><i class="mdi mdi-trash-can"></i></a>
+                        ';
+                    })
+                    ->rawColumns(['actions'])
+                    ->make(true);
+            }
+            
+            return view('content.google-sheet.index');
+            
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
 }
