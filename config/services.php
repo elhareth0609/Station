@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'google_sheet' => [
+        'credentials_path' => env('GOOGLE_SHEET_CREDENTIALS_PATH', 'sheet_credentials.json'),
+    ],
+
 ];

@@ -1,114 +1,106 @@
 .my-w-fit-content {
-  width: fit-content !important;
+    width: fit-content !important;
 }
 
 .my-h-fit-content {
-  height: fit-content !important;
+    height: fit-content !important;
 }
 
 .my-w-1 {
-  width: 1rem !important;
+    width: 1rem !important;
 }
 
 .my-w-2 {
-  width: 2rem !important;
+    width: 2rem !important;
 }
 
 .my-w-3 {
-  width: 3rem !important;
+    width: 3rem !important;
 }
 
 .my-w-4 {
-  width: 4rem !important;
+    width: 4rem !important;
 }
 
 .my-w-5 {
-  width: 5rem !important;
+    width: 5rem !important;
 }
 
 .my-p-select {
-  padding: 0.7813rem 0.7813rem !important;
+    padding: 0.7813rem 0.7813rem !important;
 }
 
 .my-p-select:focus {
-  padding: 0.7813rem 0.7813rem !important;
+    padding: 0.7813rem 0.7813rem !important;
 }
 
 .my-w-110 {
-  width: 110px !important;
+    width: 110px !important;
 }
-
 .my-w-240 {
-  width: 240px !important;
+    width: 240px !important;
 }
-
 
 .my-h-110 {
-  height: 110px !important;
+    height: 110px !important;
 }
 
 .my-fs-7 {
     font-size: .875rem !important;
 }
-
 .my-fs-8 {
     font-size: .75rem !important;
 }
-
 .my-fs-9 {
     font-size: .5rem !important;
 }
-
 .my-fs-10 {
     font-size: .25rem !important;
 }
 
-/* context menu */
+/* Start context menu */
 .context-menu {
-  position: absolute;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 5px 0;
-  list-style: none;
-  border-radius: 5px;
-  z-index: 1000;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px 0;
+    list-style: none;
+    border-radius: 5px;
+    z-index: 1000;
 }
-
 .context-menu li {
-  padding: 5px 20px;
-  cursor: pointer;
+    padding: 5px 20px;
+    cursor: pointer;
 }
-
 .context-menu li:hover {
-  background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
+/* End context menu */
 
-/* context menu End */
-/* sweet alert */
+/* Start sweet alert */
 .swal2-container.swal2-center.swal2-backdrop-show {
   z-index: 122222;
 }
-/* sweet alert End */
+/* End sweet alert */
 
 article img {
   border-radius: 10px;
 }
 
-/* Table */
 
+/* Table */
 /* Hide the search input */
 .dt-search ,
 .dt-paging ,
 .dt-length ,
 .dt-info {
-  display: none;
+    display: none;
 }
 
 td,
 tr {
-  text-align: center;
+    text-align: center;
 }
-
 tr {
     vertical-align: middle;
 }
@@ -116,11 +108,9 @@ th {
     white-space: nowrap;
     background: #F8FAFC!important;
 }
-
 table tbody tr:last-child td {
     border-bottom: 0px;
 }
-
 .table>:not(:last-child)>:last-child>* {
     border-bottom-color: #dee2e6;
 }
@@ -128,108 +118,103 @@ table tbody tr:last-child td {
 /* TODO : REMOVE COMMENT WHEN CREATE DATATABLE */
 
 table .form-check-input {
-  border-radius: 0.25rem !important;
-  width: 18px;
-  height: 18px;
+    border-radius: 0.25rem !important;
+    width: 18px;
+    height: 18px;
 }
-
 table tbody td {
     white-space: nowrap;
+}
+.sort-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
 }
 
 /* Table End */
 
-
 /* Blog Card */
 .blog-card {
-  transition: transform 0.3s ease;
+    transition: transform 0.3s ease;
 }
-
 .blog-card:hover {
-  transform: translateY(-5px);
+    transform: translateY(-5px);
 }
-
 /* Blog Card End */
 
 
 /* map */
 .map-label {
-  background-color: white;
-  padding: 2px 5px;
-  border-radius: 3px;
-  border: 1px solid black;
-  white-space: nowrap;
-  color: black;
-  font-size: 14px;
-  font-weight: bold;
+    background-color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    border: 1px solid black;
+    white-space: nowrap;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
 }
-/* map end */
+/* End map */
 
 /* Select2 Start */
-
 .select2-selection__arrow {
     height: 100% !important;
     margin-right: 5px;
-  }
-
-  .select2-selection__rendered {
+}
+.select2-selection__rendered {
     height: 100% !important;
     align-items: center;
     display: flex!important;
-  }
-
-  .select2-selection.select2-selection--single {
+}
+.select2-selection.select2-selection--single {
     height: 100% !important;
-  }
-
-  .selection {
+}
+.selection {
     height: 100% !important;
-  }
-
-  .select2.select2-container.select2-container--default {
+}
+.select2.select2-container.select2-container--default {
     height: 100% !important;
-  }
+}
+/* Select2  End */
 
-  /* Select2  End */
 
+/* print Image Start */
+.printimage-container {
+position: relative;
+width: 400px;
+}
+.printimage-container img {
+width: 400px;
+display: block;
+}
+.printimage-container .text-overlay {
+position: absolute;
+font-size: 30px;
+font-weight: bold;
+width: 200px;
+height: 52px;
+text-align: center;
+color: black !important;
+}
+.printimage-container .text-overlay.identifier { top: 14px;}
+.printimage-container .text-overlay.code { top: 74px;}
+.printimage-container .text-overlay.usage { top: 123px;}
+.printimage-container .text-overlay.validity { top: 180px;}
+.printimage-container .text-overlay.discount { top: 236px;}
+.printimage-container .text-overlay.status { top: 280px;}
+.printimage-container .text-overlay.limit { top: 334px;}
+/* print Image End */
 
-  /* print Image Start */
-
-  .printimage-container {
-    position: relative;
-    width: 400px;
-  }
-  .printimage-container img {
-    width: 400px;
-    display: block;
-  }
-  .printimage-container .text-overlay {
-    position: absolute;
-    font-size: 30px;
-    font-weight: bold;
-    width: 200px;
-    height: 52px;
-    text-align: center;
-    color: black !important;
-  }
-  .printimage-container .text-overlay.identifier { top: 14px;}
-  .printimage-container .text-overlay.code { top: 74px;}
-  .printimage-container .text-overlay.usage { top: 123px;}
-  .printimage-container .text-overlay.validity { top: 180px;}
-  .printimage-container .text-overlay.discount { top: 236px;}
-  .printimage-container .text-overlay.status { top: 280px;}
-  .printimage-container .text-overlay.limit { top: 334px;}
-  /* print Image End */
-
-  /* DropZone Start */
-    .dropzone {
-        width: 100%;
-        height: 100%;
-        background-color: #f7f7f7;
-        border: 4px dashed #ccc;
-        border-radius: 1em;
-    }
-  /* DropZone End */
+/* DropZone Start */
+.dropzone {
+    width: 100%;
+    height: 100%;
+    background-color: #f7f7f7;
+    border: 4px dashed #ccc;
+    border-radius: 1em;
+}
+/* DropZone End */
 
 
 a {
@@ -237,38 +222,41 @@ a {
     text-decoration: none;
     background-color: transparent;
 }
-
 a:hover {
     color: #858796;
     text-decoration: none;
     background-color: transparent;
 }
 
+/* Start Card */
 .card {
     /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     border: 0px;
 }
-
 .card .card-header {
     background: white;
     border-bottom: none;
 }
-
 .card .card-footer {
     background: white;
     border-top: none;
 }
+/* End Card */
 
 
+/* Start navbar */
+.navbar {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+}
+/* End navbar */
 
-
-
-/* sidebar */
+/* Start sidebar */
 .sidebar {
     height: 100vh;
     width: 15rem !important;
     z-index: 10;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
 }
 
 .sidebar-rtl {
@@ -299,17 +287,14 @@ body {
     scrollbar-color: #d5d5d5 transparent;
 }
 
-
 /* sidebar myToggled */
 .sidebar.myToggled + #content-wrapper {
     padding-left: 4rem;
 }
-
 .sidebar.sidebar-rtl.myToggled + #content-wrapper {
     padding-right: 4rem;
     padding-left: 0;
 }
-
 .sidebar.myToggled {
     width: 4rem !important;
     overflow: hidden;
@@ -417,8 +402,11 @@ body {
     display: block;
 }
 
-/* Bootstrap .btn ripple styles */
+#wrapper #content-wrapper {
+    background-color: #f5f5f5!important;
+}
 
+/* Bootstrap .btn ripple styles */
 .btn {
 	position: relative!important;
 	overflow: hidden;
@@ -428,7 +416,7 @@ body {
     box-shadow: none!important;
 }
 
-/*  Ripple */
+/* Start Ripple */
 span.ripple-effect {
   width: 0;
   height: 0;
@@ -448,6 +436,7 @@ span.ripple-effect {
 }
 /*  End Ripple */
 
+
 .form-control:focus,
 .form-select:focus,
 .input-group:has(.form-control:focus) .form-control,
@@ -457,7 +446,6 @@ span.ripple-effect {
     box-shadow : none!important;
     border-color: var(--bs-primary)!important;
 }
-
 .input-group:has(.form-control:focus) span,
 .input-group:has(.form-control:focus) button,
 .input-group:has(.form-control:focus) .input-group-text,
@@ -465,23 +453,19 @@ span.ripple-effect {
 .input-group:has(.form-select:focus) button {
     border-color: var(--bs-primary)!important;
 }
-
 .form-floating:has(.form-control:focus) label,
 .form-floating:has(.form-select:focus) label {
     color: var(--bs-primary)!important;
 }
-
 .input-rtl {
     direction: rtl!important;
 }
-
 .input-group.input-rtl:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
     border-top-right-radius: .25rem;
     border-bottom-right-radius: .25rem;
     border-top-left-radius: 0!important;
     border-bottom-left-radius: 0!important;
 }
-
 .input-group.input-rtl>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
     margin-right: -1px!important;
     margin-left: 0!important;
@@ -490,22 +474,26 @@ span.ripple-effect {
     border-top-right-radius: 0!important;
     border-bottom-right-radius: 0!important;
 }
-
 .btn:focus {
     box-shadow : none !important;
 }
+.form-floating>.form-control-plaintext~label::after,
+.form-floating>.form-control:focus~label::after,
+.form-floating>.form-control:not(:placeholder-shown)~label::after,
+.form-floating>.form-select~label::after {
+    background-color: transparent;
+}
 
-/* modal */
+/* Start modal */
 .modal-header {
     border-bottom: none;
 }
-
 .modal-footer {
     border-top: none;
 }
-/* modal */
+/* End modal */
 
-/* pricing */
+/* Start pricing */
 .pricing-card {
     transition: transform 0.3s;
     background-image: url(/assets/img/my/pricing.png);
@@ -514,7 +502,7 @@ span.ripple-effect {
 .pricing-card:hover {
     transform: translateY(-10px);
 }
-/* pricing */
+/* End pricing */
 
 
 .rounded-bottom-start-1 {
@@ -543,7 +531,6 @@ span.ripple-effect {
 .error {
     color: var(--bs-danger);
 }
-
 .form-control.error,
 .form-floating:has(.form-control.error) .form-control,
 .form-floating:has(.form-select.error) .form-select,
@@ -580,8 +567,7 @@ span.ripple-effect {
     color: var(--bs-success);
 }
 
-
-
+/* Start form-group-floating */
 .form-group.form-group-floating {
     position: relative;
 }
@@ -612,8 +598,9 @@ span.ripple-effect {
 .form-group.form-group-floating input:focus {
     border: 1px solid var(--bs-primary);
 }
+/* End form-group-floating */
 
-/* Avatar  */
+/* Start Avatar */
 .avatar {
     border-radius: 50%;
     border: 2px solid white;
@@ -644,7 +631,6 @@ span.ripple-effect {
 .avatar-group .avatar-count:first-child {
     margin-left: 0;
 }
-
 .avatar-sm {
     width: 24px;
     height: 24px;
@@ -661,3 +647,57 @@ span.ripple-effect {
     height: 48px;
     font-size: 0.85rem;
 }
+/* End Avatar */
+
+/* Start Accordion-v1 */
+.accordion.accordion-v1 .accordion-item .accordion-button,
+.accordion.accordion-v2 .accordion-item .accordion-button {
+    box-shadow: none;
+    background-color: transparent;
+}
+.accordion.accordion-v1 .accordion-item .accordion-button:focus,
+.accordion.accordion-v2 .accordion-item .accordion-button:focus {
+    box-shadow: none;
+}
+/* End Accordion-v1 */
+
+
+/* Start Map */
+.accordion.accordion-map {
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #d5d5d5 transparent;
+}
+
+.gm-search-input {
+    background: rgb(255, 255, 255);
+    margin: 10px;
+    padding: 6px;
+    text-transform: none;
+    appearance: none;
+    position: absolute;
+    user-select: none;
+    height: 40px;
+    width: 210px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+    overflow: hidden;
+    top: 0px;
+    right: 47px;
+    border:0;
+    border-radius: 2px;
+}
+/* End Map */
+
+/* Start Icons */
+.my {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+svg {
+    width: 100%;
+    height: 100%;
+}
+/* End Icons */

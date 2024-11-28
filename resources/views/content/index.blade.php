@@ -3,58 +3,54 @@
 @section('title', __('Dashboard'))
 
 @section('content')
-<div class="row g-5">
+<div class="row">
     <div class="col-lg-6 mb-3">
-        <div class="row">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <div class="fw-bold fs-4">{{ __('Charts') }}</div>
-                    <div class="d-flex align-items-center">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="radio1">
-                            <label class="form-check-label" for="inlineCheckbox1">{{ __('Chart') }}</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineCheckbox2" name="radio1">
-                            <label class="form-check-label" for="inlineCheckbox2">{{ __('Show Value') }}</label>
-                        </div>
-                        <div>
-                            <span class="mdi mdi-dots-vertical"></span>
-                        </div>
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div class="fw-bold fs-4">{{ __('Charts') }}</div>
+                <div class="d-flex align-items-center">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="inlineCheckbox1" name="radio1">
+                        <label class="form-check-label" for="inlineCheckbox1">{{ __('Chart') }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="inlineCheckbox2" name="radio1">
+                        <label class="form-check-label" for="inlineCheckbox2">{{ __('Show Value') }}</label>
+                    </div>
+                    <div>
+                        <span class="mdi mdi-dots-vertical"></span>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                            <canvas id="chartDoughnut1" width="200" height="200" style="position: relative;"></canvas>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                            <canvas id="chartDoughnut2" width="200" height="200" class="chartjs-render-monitor" style="display: block; width: 200px; height: 200px;"></canvas>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                            <canvas id="chartDoughnut3" width="200" height="200" class="chartjs-render-monitor" style="display: block; width: 200px; height: 200px;"></canvas>
-                        </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <canvas id="chartDoughnut1" width="200" height="200" style="position: relative;"></canvas>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <canvas id="chartDoughnut2" width="200" height="200" class="chartjs-render-monitor" style="display: block; width: 200px; height: 200px;"></canvas>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <canvas id="chartDoughnut3" width="200" height="200" class="chartjs-render-monitor" style="display: block; width: 200px; height: 200px;"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-lg-6">
-        <div class="row">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <div>
-                        <h5 class="card-title fw-bold">{{ __('Chart Order') }}</h5>
-                        <p class="card-text">{{ __('Lorem ipsum dolor sit amet, consectetur adip.') }}</p>
-                    </div>
-                    <button class="btn btn-outline-primary my-h-fit-content" onclick="saveReport()">
-                        <span class="mdi mdi-download-outline me-1"></span>
-                        {{ __('Save Report') }}
-                    </button>
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title fw-bold">{{ __('Chart Order') }}</h5>
+                    <p class="card-text">{{ __('Lorem ipsum dolor sit amet, consectetur adip.') }}</p>
                 </div>
-                <div class="card-body">
-                    <canvas id="chartLine" width="200" height="200" class="chartjs-render-monitor" style="display: block; width: 200px; height: 200px;"></canvas>
-                </div>
+                <button class="btn btn-outline-primary my-h-fit-content" onclick="saveReport()">
+                    <span class="mdi mdi-download-outline me-1"></span>
+                    {{ __('Save Report') }}
+                </button>
+            </div>
+            <div class="card-body">
+                <canvas id="chartLine" width="200" height="200" class="chartjs-render-monitor" style="display: block; width: 200px; height: 200px;"></canvas>
             </div>
         </div>
     </div>

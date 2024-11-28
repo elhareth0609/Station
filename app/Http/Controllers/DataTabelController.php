@@ -11,7 +11,7 @@ use Laravel\Telescope\EntryType;
 use Laravel\Telescope\Telescope;
 use Yajra\DataTables\Facades\DataTables;
 use Google_Client;
-use Google_Service_Sheets;
+use Google\Service\Sheets as Google_Service_Sheets;
 
 class DataTabelController extends Controller {
 
@@ -156,38 +156,51 @@ class DataTabelController extends Controller {
         }
         return view('content.logs.list');
     }
+
     public function google_sheet(Request $request) {
-        // Initialize Google Client
         $client = new Google_Client();
-        $client->setAuthConfig(env('GOOGLE_SHEET_CREDENTIALS_PATH')); // Your credentials file
-        $client->addScope(Google_Service_Sheets::SPREADSHEETS_READONLY);
-        
-        // Create Google Sheets service
+
+        $client->setAuthConfig(base_path(env('GOOGLE_SHEET_CREDENTIALS_PATH', 'sheet_credentials.json'))); // Your credentials file
+        $client->addScope(Google_Service_Sheets::SPREADSHEETS);
+
         $service = new Google_Service_Sheets($client);
-        
-        // Your Google Sheet ID from the URL
+
         $spreadsheetId = '1hu8hFq_zWXSsJ7df5uWBwiXqvSbf03mKDahB1RFXUyg';
-        $range = 'Sheet1!A2:E'; // Assuming data starts from A2 and has 5 columns
-        
+        $range = 'Students1!A2:L';
+
         try {
             $response = $service->spreadsheets_values->get($spreadsheetId, $range);
             $values = $response->getValues();
-            
-            // Convert Google Sheet data to collection
+
             $absences = collect($values)->map(function ($row) {
                 return [
-                    'name' => $row[0] ?? '', // الاسم
-                    'reason' => $row[1] ?? '', // السبب
-                    'from_date' => $row[2] ?? '', // من
-                    'to_date' => $row[3] ?? '', // الى
-                    'company' => $row[4] ?? '', // شركة
+                    'email' => $row[0] ?? '',
+                    'imei' => $row[1] ?? '',
+                    'first_name' => $row[2] ?? '',
+                    'last_name' => $row[3] ?? '',
+                    'department' => $row[4] ?? '',
+                    'level' => $row[5] ?? '',
+                    'speciality' => $row[6] ?? '',
+                    'group' => $row[7] ?? '',
+                    'reason' => $row[8] ?? '',
+                    'from_date' => $row[9] ?? '',
+                    'to_date' => $row[10] ?? '',
+                    'document' => $row[11] ?? '',
                 ];
             });
-            
+
+            $counter = 0;
+            $actions_counter = 0;
             if ($request->ajax()) {
                 return DataTables::of($absences)
+                    ->addColumn('id', function ($absence) use (&$counter) {
+                        return ++$counter;
+                    })
+                    ->editColumn('imei', function ($absence) {
+                        return $absence['imei'];
+                    })
                     ->editColumn('name', function ($absence) {
-                        return $absence['name'];
+                        return $absence['first_name'] . ' ' . $absence['last_name'];
                     })
                     ->editColumn('reason', function ($absence) {
                         return $absence['reason'];
@@ -198,14 +211,30 @@ class DataTabelController extends Controller {
                     ->editColumn('to_date', function ($absence) {
                         return $absence['to_date'];
                     })
-                    ->editColumn('company', function ($absence) {
-                        return $absence['company'];
+                    ->editColumn('department', function ($absence) {
+                        return $absence['department'];
                     })
-                    ->addColumn('actions', function ($absence) {
+                    ->editColumn('level', function ($absence) {
+                        return $absence['level'];
+                    })
+                    ->editColumn('speciality', function ($absence) {
+                        return $absence['speciality'];
+                    })
+                    ->editColumn('group', function ($absence) {
+                        return $absence['group'];
+                    })
+                    ->editColumn('email', function ($absence) {
+                        return $absence['email'];
+                    })
+                    ->editColumn('document', function ($absence) {
+                        return $absence['document'];
+                    })
+                    ->editColumn('company', function ($absence) {
+                        return $absence['department'];
+                    })
+                    ->addColumn('actions', function ($absence) use (&$actions_counter) {
                         return '
-                            <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary"><i class="mdi mdi-pencil"></i></a>
-                            <a href="javascript:void(0)" class="btn btn-icon btn-outline-success"><i class="mdi mdi-printer"></i></a>
-                            <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger"><i class="mdi mdi-trash-can"></i></a>
+                            <a href="javascript:void(0)" onclick="printPdfCertificate(' . ++$actions_counter . ')" class="btn btn-icon btn-outline-success"><i class="mdi mdi-printer-outline"></i></a>
                         ';
                     })
                     ->rawColumns(['actions'])

@@ -101,6 +101,68 @@
         </div>
     </div>
 
+    <div class="mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1>{{ __('Hi') }}, Admin!</h1>
+                <p class="text-secondary">{{ __("You've some tasks to do today!") }}</p>
+            </div>
+            <button class="btn border" style="color: #1B1B1B;">
+                <i class="mdi mdi-filter"></i> Filter
+            </button>
+        </div>
+
+        <div class="row">
+            <!-- Task Card -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card card rounded-4 p-3 m-2 border">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="d-flex align-items-center justify-content-center btn-icon rounded-pill bg-primary bg-opacity-10">
+                            <i class="mdi mdi-checkbox-marked-circle text-primary"></i>
+                        </div>
+                        <h5 class="ms-3 mb-0">{{ __('Task to complete') }}</h5>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h1 class="mb-0">15<span class="fs-4 text-secondary">/20</span></h1>
+                        <a href="#" class="text-secondary">See all</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Completion Rate Card -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card card rounded-4 p-3 m-2 border">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="d-flex align-items-center justify-content-center btn-icon rounded-pill bg-success bg-opacity-10">
+                            <i class="mdi mdi-chart-line text-success"></i>
+                        </div>
+                        <h5 class="ms-3 mb-0">{{ __('Completion rate') }}</h5>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h1 class="mb-0">95<span class="fs-4 text-secondary">%</span></h1>
+                        <a href="#" class="text-secondary">See all</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Card -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card card rounded-4 p-3 m-2 border">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="d-flex align-items-center justify-content-center btn-icon rounded-pill bg-warning bg-opacity-10" style="background: #DEE3FF;">
+                            <i class="mdi mdi-folder-outline text-warning"></i>
+                        </div>
+                        <h5 class="ms-3 mb-0">{{ __('Projects') }}</h5>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h1 class="mb-0">5<span class="fs-4 text-secondary"> projects</span></h1>
+                        <a href="#" class="text-secondary">See all</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="products-container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="fw-bold">{{ __('Popular Dishes') }}</h2>

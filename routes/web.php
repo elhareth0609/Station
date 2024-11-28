@@ -31,8 +31,12 @@ use App\Http\Controllers\CertificateController;
     
     Route::get('logs', [DataTabelController::class, 'logs'])->name('logs');
 
-    Route::get('map', [MapController::class, 'index'])->name('map');
+    Route::get('logistics', [MapController::class, 'index'])->name('logistics');
+    Route::get('/logistics/locations', [MapController::class, 'getLatestLocations'])->name('logistics.locations');
+
     Route::get('chat', [ChatController::class, 'index'])->name('chat');
+    Route::post('/send-message', [ChatController::class, 'sendMessage'])->name('chat.send-message');
+    
     Route::get('email', [EmailController::class, 'index'])->name('email');
     Route::get('fullcalendar', [FullCalendarController::class, 'index'])->name('fullcalendar');
 
@@ -87,6 +91,8 @@ use App\Http\Controllers\CertificateController;
 
 
     Route::get('/certificate', [CertificateController::class, 'generateCertificate'])->name('certificate.generate');
+
+    Route::post('/certificate/pdf', [CertificateController::class, 'pdf'])->name('certificate.pdf');
 
 
     Route::get('pages/pricing', function () {

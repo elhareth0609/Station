@@ -197,10 +197,10 @@
             "link": "/google-sheet"
         },
         {
-            "title": "Map",
+            "title": "Logistics",
             "icon": "mdi mdi-map-outline",
-            "name": "map",
-            "link": "/map"
+            "name": "logistics",
+            "link": "/logistics"
         },
         {
             "title": "Chat",

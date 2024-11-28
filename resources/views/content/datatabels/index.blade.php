@@ -725,6 +725,7 @@
                     // End of checkboxes
 
                     $(row).find('td').eq(1).on('dblclick', function() {
+
                         var cell = $(this);
 
                         if (cell.find('input').length > 0) {
@@ -789,6 +790,7 @@
                     });
 
                     $(row).find('td').eq(4).on('dblclick', function() {
+
                         var cell = $(this);
 
                         if (cell.find('select').length > 0) {
@@ -940,7 +942,6 @@
 
                 pagination.empty();
 
-
                 var prevButton = $('<li>').addClass('page-item').append($('<a>').addClass('page-link btn btn-icon mx-1').attr('href', 'javascript:void(0);').html('&lsaquo;'));
                 if (info.page > 0) {
                     prevButton.find('a').click(function () {
@@ -982,11 +983,30 @@
                 var pageInfo = startRange + ' ' + __("to",lang) + ' ' + endRange + ' ' + __("from",lang) + ' ' + info.recordsTotal;
                 $('#dataTables_my_info').text(pageInfo);
 
+                $('#table thead th').each(function () {
+                    $(this).find('.sort-icon').remove();
+                });
+
+                // Get the current sort information
+                let order = table.order();
+                if (order.length > 0) {
+                    let columnIndex = order[0][0];
+                    let direction = order[0][1];
+
+                    // Add the appropriate icon
+                    let header = $($('#table thead th')[columnIndex]);
+                    if (direction === 'asc') {
+                        header.append(ascIcon);
+                    } else if (direction === 'desc') {
+                        header.append(descIcon);
+                    }
+                }
+
             });
 
             table.columns().every(function() {
                 var column = this;
-                var columnName = $(column.header()).text(); // Get the column name from the header
+                var columnName = $(column.header()).text() ? $(column.header()).text() : '#'; // Get the column name from the header
                 var columnIndex = column.index(); // Get the column index
 
                 // Append the checkbox to the dropdown
