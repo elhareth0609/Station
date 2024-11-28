@@ -107,7 +107,7 @@
     </style>
 
 
-    {{-- <div class="card">
+    <div class="card">
         <div class="chat-wrapper">
             <!-- Sidebar -->
             <aside class="chat-sidebar border-end d-flex h-100">
@@ -267,7 +267,7 @@
                 </div>
             </main>
         </div>
-    </div> --}}
+    </div>
 
     <div id="chat">
         <div id="messages"></div>
@@ -276,16 +276,15 @@
     </div>
     
     <span class="my my-edit"></span>
+
+
     <script>
 
         Pusher.logToConsole = true;
-        var pusher = new Pusher('local', { // Replace 'local' with your PUSHER_APP_KEY
-                        cluster: 'mt1',               // Replace with your PUSHER_APP_CLUSTER
-                        wsHost: window.location.hostname, // Use localhost or your domain
-                        wsPort: 6001,                 // Port for WebSocket server
-                        forceTLS: false,              // Ensure TLS is disabled for local testing
-                        disableStats: true            // Disable stats to avoid external requests
-                    });
+        var pusher = new Pusher('f513c6dba43174cbee4d', {
+            cluster: 'eu'
+        });
+
         $(document).ready(function() {
             var channel = pusher.subscribe('chat-channel');
             channel.bind('message.sent', function(data) {
