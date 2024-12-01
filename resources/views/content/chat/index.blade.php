@@ -274,7 +274,7 @@
         <input type="text" id="message" placeholder="Type your message...">
         <button id="send">Send</button>
     </div>
-    
+
     <span class="my my-edit"></span>
 
 

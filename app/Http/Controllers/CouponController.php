@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 use setasign\Fpdi\Fpdi;
@@ -159,6 +160,15 @@ class CouponController extends Controller {
             'state' => $state,
             'discount' => $discount
         ]);
+    }
+
+    public function generate() {
+        do {
+            $code = strtoupper(Str::random(6));
+            $coupon = Coupon::where('code', $code)->first();
+        } while ($coupon);
+
+        return response()->json(['code' => $code]);
     }
 
     public function updateCode(Request $request, $id) {

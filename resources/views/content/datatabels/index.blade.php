@@ -27,9 +27,9 @@
                 </select>
 
                 <button class="btn btn-icon btn-outline-primary m-1" id="" data-bs-toggle="modal" data-bs-target="#createCouponModal"><span class="mdi mdi-plus-outline"></span></button>
-                <button class="btn btn-icon btn-outline-primary m-1" id="" data-bs-toggle="modal" data-bs-target="#uploadCouponModal"><span class="mdi mdi-upload"></span></button>
-                <button class="btn btn-icon btn-outline-primary m-1" id=""><span class="mdi mdi-download"></span></button>
-                <button class="btn btn-icon btn-outline-danger m-1" id="trash-button" data-trashed="0"><span class="mdi mdi-trash-can-outline"></span></button>
+                <button class="btn btn-icon btn-outline-primary m-1" id="" data-bs-toggle="modal" data-bs-target="#uploadCouponModal"><span class="mdi mdi-upload-outline"></span></button>
+                <button class="btn btn-icon btn-outline-primary m-1" id=""><span class="mdi mdi-download-outline"></span></button>
+                <button class="btn btn-icon btn-outline-danger m-1" id="trash-button" data-trashed="0"><span class="mdi mdi-delete-alert-outline"></span></button>
 
                 <div class="dropdown my-w-fit-content px-0">
                     <button class="btn btn-icon btn-outline-primary m-1" type="button" data-bs-toggle="dropdown">
@@ -39,7 +39,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="table-responsive rounded-4 border mb-3">
+            <div class="table-responsive rounded-3 border mb-3">
                 <table id="table" class="table table-hover mb-0">
                     <thead>
                         <tr>
@@ -75,9 +75,9 @@
                 <div class="modal-body">
                     @csrf
                     <input type="hidden" id="pid" name="pid" required>
-                    <div class="mb-3">
-                        <label for="pcode" class="form-label">{{ __('Code') }}</label>
-                        <input type="text" class="form-control" id="pcode" name="pcode" data-v="required" required>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="{{ __('Code') }}" id="pcode" name="pcode" data-v="required" aria-label="{{ __('Code') }}" aria-describedby="button-addon2" disabled required>
+                        <button class="btn btn-light border generate-code" type="button">{{ __('Generate') }}</button>
                     </div>
                     <div class="mb-3">
                         <label for="puses" class="form-label">{{ __('Max') }}</label>
@@ -87,7 +87,7 @@
                         <label for="pdiscount" class="form-label">{{ __('Discount') }}</label>
                         <input type="text" class="form-control" id="pdiscount" name="pdiscount" data-v="required" required>
                     </div>
-                    <div class="mb-3">
+                    <div class="form-group mb-3">
                         <label for="pexpired_date" class="form-label">{{ __('Expired At') }}</label>
                         <input type="datetime-local" class="form-control" id="pexpired_date" name="pexpired_date" data-v="required" required>
                     </div>
@@ -119,9 +119,13 @@
                 </div>
                 <div class="modal-body">
                     @csrf
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="code" name="code" data-v="required">
-                        <label for="code">{{ __('Code') }}</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="{{ __('Code') }}" id="code" name="code" data-v="required" aria-label="{{ __('Code') }}" aria-describedby="button-addon2" readonly>
+                        <button class="btn btn-icon border copy-code" type="button" data-clipboard-target="#code" >
+                            <span class="my my-copy"></span>
+                            <span class="my my-doubletick d-none"></span>
+                        </button>
+                        <button class="btn btn-light border generate-code" type="button">{{ __('Generate') }}</button>
                     </div>
                     <div class="input-group mb-3">
                         <span for="max" class="input-group-text">{{ __('Max') }}</span>
@@ -132,7 +136,7 @@
                         <input type="number" class="form-control" name="discount" data-v="required" required>
                         <span class="input-group-text">%</span>
                     </div>
-                    <div class="mb-3">
+                    <div class="form-group mb-3">
                         <label for="expired_date" class="form-label">{{ __('Expired At') }}</label>
                         <input type="datetime-local" class="form-control" name="expired_date" data-v="required" required>
                     </div>
@@ -1026,10 +1030,12 @@
             $('#createCouponForm').submit(function(event) {
                 event.preventDefault();
                 $('#createCouponModal').modal('hide');
-
+                
                 if (!$(this).valid()) {
+                    $('#createCouponModal').modal('show');
                     return;
                 }
+                $('#loading').show();
 
                 var formData = $(this).serialize();
 
@@ -1040,22 +1046,27 @@
                     data: formData,
                     dataType: 'json',
                     success: function(response) {
-                    Swal.fire({
-                        icon: response.icon,
-                        title: response.state,
-                        text: response.message,
-                        confirmButtonText: __("Ok",lang)
-                    });
-                    table.ajax.reload();
+                        $('#loading').hide();
+                        Swal.fire({
+                            icon: response.icon,
+                            title: response.state,
+                            text: response.message,
+                            confirmButtonText: __("Ok",lang)
+                        });
+                        $('#createCouponForm')[0].reset();
+                        $('#createCouponForm .form-control').removeClass('valid');
+                        $('#createCouponForm .form-select').removeClass('valid');
+                        table.ajax.reload();
                     },
                     error: function(xhr, textStatus, errorThrown) {
-                    const response = JSON.parse(xhr.responseText);
-                    Swal.fire({
-                        icon: response.icon,
-                        title: response.state,
-                        text: response.message,
-                        confirmButtonText: __("Ok",lang)
-                    });
+                        $('#loading').hide();
+                        const response = JSON.parse(xhr.responseText);
+                        Swal.fire({
+                            icon: response.icon,
+                            title: response.state,
+                            text: response.message,
+                            confirmButtonText: __("Ok",lang)
+                        });
                     }
                 });
             });
@@ -1104,7 +1115,52 @@
                 }
             });
 
+            $('.generate-code').click(function(event) {
+                event.preventDefault(); // Prevent default button behavior
 
+                $.ajax({
+                    url: "{{ route('coupons.generate') }}",
+                    type: 'GET',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    success: function(response) {
+                        if (response.code) {
+                            $('#code').val(response.code);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error generating code:', error);
+                    }
+                });
+            });
+
+            // Initialize ClipboardJS
+            var clipboard = new ClipboardJS('.copy-code');
+
+            // Success feedback
+            clipboard.on('success', function (e) {
+                const icon = $(e.trigger).find('span.my-copy');
+                const icon1 = $(e.trigger).find('span.my-doubletick');
+                icon.addClass('d-none');
+                icon1.removeClass('d-none');
+
+                // icon.removeClass('my-copy').addClass('my-doubletick');
+                setTimeout(() => {
+                    icon.removeClass('d-none');
+                    icon1.addClass('d-none');
+                    // icon.removeClass('my-doubletick').addClass('my-copy');
+                }, 2000);
+
+                console.log('Copied:', e.text);
+            });
+
+            // Error feedback
+            clipboard.on('error', function (e) {
+                console.error('Copy failed:', e.action); // Log error
+            });
+
+            
             var channel = pusher.subscribe('coupons');
             channel.bind('couponsEdited', function(data) {
                 table.ajax.reload();

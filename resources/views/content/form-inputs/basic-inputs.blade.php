@@ -69,14 +69,13 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1">
+                    <div class="mb-3">
+                        <label for="expired_date" class="form-label">Expired At</label>
+                        <input type="datetime-local" class="form-control" name="expired_date" data-v="required" required="" aria-invalid="false">
                     </div>
-
-                    <div class="form-group">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    <div class="form-group mb-3">
+                        <label for="expired_date" class="form-label">Expired At</label>
+                        <input type="datetime-local" class="form-control" name="expired_date" data-v="required" required="" aria-invalid="false">
                     </div>
                 </div>
             </div>

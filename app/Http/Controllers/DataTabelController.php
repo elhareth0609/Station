@@ -135,21 +135,23 @@ class DataTabelController extends Controller {
 
         Log::info("test");
         $logs = DB::table('telescope_entries')
-        ->where('type', 'log')->get();
+        // ->where('type', 'log')
+        ->get();
+        $id = 0;
 
         if($request->ajax()) {
             return DataTables::of($logs)
-            ->editColumn('id', function ($log) {
-                return (string) $log->id;
+            ->addColumn('id', function ($log) use (&$id) {
+                return (string) ++$id;
             })
             ->editColumn('type', function ($log) {
-                return $log->code;
+                return $log->type;
             })
             ->editColumn('content', function ($log) {
-                return $log->code;
+                return $log->content;
             })
             ->editColumn('created_at', function ($log) {
-                return $log->created_at->format('Y-m-d');
+                return $log->created_at;
             })
             // ->rawColumns([])
             ->make(true);

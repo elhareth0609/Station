@@ -185,8 +185,8 @@
                             Activity Log
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item rounded" href="#" data-bs-toggle="modal" data-target="#logoutModal">
-                            <i class="mdi mdi-logout mdi-sm mdi-fw {{ app()->isLocale("ar") ? "ms-2" : "me-2" }} text-gray-400"></i>
+                        <a class="dropdown-item rounded d-flex" href="#" data-bs-toggle="modal" data-target="#logoutModal">
+                            <i class="mdi mdi-logout mdi-sm mdi-fw {{ app()->isLocale("ar") ? "ms-2 my-transform-180" : "me-2" }} text-gray-400"></i>
                             {{ __('Logout') }}
                         </a>
                     </div>

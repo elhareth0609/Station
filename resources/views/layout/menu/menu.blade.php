@@ -62,7 +62,7 @@
         <div class="sidebar-card d-none d-lg-flex bg-white border mt-3">
             <img class="sidebar-card-illustration mb-2" src="{{ asset('assets/img/undraw_rocket.svg') }}" alt="...">
             <p class="text-center mb-2 text-secondary"><strong>Dashboard</strong> is packed with premium features, components, and more!</p>
-            <a class="btn btn-secondary btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+            <a class="btn btn-secondary btn-sm" href="{{ route('home') }}">Upgrade to Pro!</a>
         </div>
     </div>
 

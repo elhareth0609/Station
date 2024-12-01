@@ -12,13 +12,6 @@
             <div class="row ms-1 mb-2">
                 <input type="text" class="form-control my-w-fit-content m-1" id="dataTables_my_filter" placeholder="{{ __('Search ...') }}" name="search">
 
-                <select class="form-select my-w-fit-content m-1" id="selectType" name="type">
-                    <option value="all">{{ __('All') }}</option>
-                    <option value="active">{{ __('Active') }}</option>
-                    <option value="inactive">{{ __('InActive') }}</option>
-                    <option value="expired">{{ __('Expired') }}</option>
-                </select>
-
                 <select class="form-select my-w-fit-content m-1" id="dataTables_my_length" name="length">
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -55,11 +48,6 @@
 
 <script type="text/javascript">
         var table;
-        // Start of checkboxes
-        var selectedIds = [];
-        var ids = [];
-        let isCheckAllTrigger = false;
-        // End of checkboxes
 
 
         Pusher.logToConsole = true;
@@ -166,7 +154,7 @@
         // $.noConflict();
             table = $('#table').DataTable({
                 serverSide: true,
-                pageLength: 100,
+                pageLength: 10,
                 language: {
                     "emptyTable": "<div id='no-data-animation' style='width: 100%; height: 200px;'></div>",
                     "zeroRecords": "<div id='no-data-animation' style='width: 100%; height: 200px;'></div>"
@@ -176,38 +164,14 @@
                 },
                 ajax: {
                     url: "{{ route('logs') }}",
-                    data: function(d) {
-                        d.type = $('#selectType').val();
-                    }
-                  // Start of checkboxes
-                // dataSrc: function(response) {
-                //     ids = (response.ids || []).map(id => parseInt(id, 10)); // Ensure all IDs are integers
-                //     selectedIds = [];
-                //     return response.data;
-                // }
-                // End of checkboxes
                 },
                 columns: [
-                    // Start of checkboxes
-                    {
-                        data: 'id',
-                        name: '#',
-                        orderable: false,
-                        searchable: false,
-                        render: function(data, type, full, meta) {
-                            return '<input type="checkbox" class="form-check-input rounded-2 check-item" value="' + data + '">';
-                        }
-                    },
-                    // End  of checkboxes
+                    {data: 'id', name: '#',},
                     {data: 'type', name: '{{__("Type")}}',},
                     {data: 'content', name: '{{__("Content")}}',},
                     {data: 'created_at', name: '{{__("Created At")}}',},
                 ],
                 order: [[3, 'desc']], // Default order by created_at column
-
-                // Start of checkboxes
-
-                // End of checkboxes
                 rowCallback: function(row, data) {
                     $(row).attr('id', 'log_' + data.id);
 
@@ -220,56 +184,8 @@
                         showContextMenu(data.id, e.pageX, e.pageY);
                     });
 
-                    // Start of checkboxes
-                    var $checkbox = $(row).find('.check-item');
-                    var couponId = parseInt($checkbox.val());
-
-                    if (selectedIds.includes(couponId)) {
-                        $checkbox.prop('checked', true);
-                    } else {
-                        $checkbox.prop('checked', false);
-                    }
-                    // End of checkboxes
-
                 },
-                drawCallback: function() {
-                  // Start of checkboxes
-                    $('#check-all').off('click').on('click', function() { // Unbind previous event and bind a new one
-                        $('.check-item').prop('checked', this.checked);
-                        var totalCheckboxes = ids.length;
-                        var checkedCheckboxes = selectedIds.length;
 
-                        if (checkedCheckboxes === 0 || checkedCheckboxes < totalCheckboxes) { // if new all checked or some checked
-                            selectedIds = [];
-                            selectedIds = ids.slice();
-                        } else {
-                            selectedIds = [];
-                        }
-                    });
-
-                    $('.check-item').on('change', function() {
-                        var itemId = parseInt($(this).val());
-
-                        if (this.checked) { // if new checked add to selected
-                            selectedIds.push(itemId);
-                        } else { // if remove checked remove from selected
-                            selectedIds = selectedIds.filter(id => id !== itemId);
-                        }
-
-                        var totalCheckboxes = ids.length;
-                        var checkedCheckboxes = selectedIds.length;
-                        if (checkedCheckboxes === totalCheckboxes) { // all checkboxes checked
-                            $('#check-all').prop('checked', true).prop('indeterminate', false);
-                            selectedIds = ids.slice();
-                        } else if (checkedCheckboxes > 0) { // not all checkboxes are checked
-                            $('#check-all').prop('checked', false).prop('indeterminate', true);
-                        } else {  // all checkboxes are not checked
-                            $('#check-all').prop('checked', false).prop('indeterminate', false);
-                            selectedIds = [];
-                        }
-                    });
-                  // End of checkboxes
-                }
 
             });
 
@@ -281,10 +197,6 @@
             $('#dataTables_my_filter').on('input', function () {
                 var query = $(this).val();
                 table.search(query).draw();
-            });
-
-            $('#selectType').change(function() {
-                table.ajax.reload();
             });
 
             table.on('draw', function () {

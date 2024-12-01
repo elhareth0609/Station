@@ -8,7 +8,7 @@
         },
         {
             "title": "Components",
-            "icon": "mdi mdi-layers-outline",
+            "icon": "mdi mdi-cube-outline",
             "name": "components",
             "link": "/components",
             "submenu": [
@@ -180,7 +180,7 @@
         },
         {
             "title": "Charts",
-            "icon": "mdi mdi-chart-box-multiple-outline",
+            "icon": "mdi mdi-chart-line",
             "name": "charts",
             "link": "/charts"
         },
@@ -192,19 +192,19 @@
         },
         {
             "title": "Google Sheet",
-            "icon": "mdi mdi-table",
+            "icon": "mdi mdi-google",
             "name": "google-sheet",
             "link": "/google-sheet"
         },
         {
             "title": "Logistics",
-            "icon": "mdi mdi-map-outline",
+            "icon": "mdi mdi-truck-delivery-outline",
             "name": "logistics",
             "link": "/logistics"
         },
         {
             "title": "Chat",
-            "icon": "mdi mdi-message-outline",
+            "icon": "mdi mdi-chat-outline",
             "name": "chat",
             "link": "/chat",
             "badge" : {
@@ -220,25 +220,25 @@
         },
         {
             "title": "FullCalendar",
-            "icon": "mdi mdi-calendar-month-outline",
+            "icon": "mdi mdi-calendar-outline",
             "name": "fullcalendar",
             "link": "/fullcalendar"
         },
         {
             "title": "Pricing",
-            "icon": "mdi mdi-all-inclusive",
+            "icon": "mdi mdi-currency-usd",
             "name": "pages.pricing",
             "link": "/pricing"
         },
         {
             "title": "Logs",
-            "icon": "mdi mdi-all-inclusive",
+            "icon": "mdi mdi-code-tags",
             "name": "logs",
             "link": "/logs"
         },
         {
             "title": "Form Inputs",
-            "icon": "mdi mdi-clipboard-outline",
+            "icon": "mdi mdi-code-block-tags",
             "name": "form-inputs.basic-inputs",
             "link": "/form-inputs",
             "submenu": [
@@ -256,19 +256,19 @@
         },
         {
             "title": "Icons",
-            "icon": "mdi mdi-code-block-tags",
+            "icon": "mdi mdi-image-outline",
             "name": "pages.icons",
             "link": "/pages/icons"
         },
         {
             "title": "E-Learning",
-            "icon": "mdi mdi-code-block-tags",
+            "icon": "mdi mdi-video-outline",
             "name": "pages.elearnings",
             "link": "/pages/elearnings"
         },
         {
             "title": "Kanban",
-            "icon": "mdi mdi-format-list-bulleted",
+            "icon": "mdi mdi-list-status",
             "name": "pages.kanban",
             "link": "/pages/kanban"
         },
