@@ -158,7 +158,7 @@
     </div>
 </div>
 
-<!-- Print Coupon Modal -->
+<!-- Print Coupon Image Modal -->
 <div class="modal fade" id="printCouponModal" tabindex="-1" aria-labelledby="printCouponLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -215,6 +215,7 @@
     </div>
 </div>
 
+<!-- Print Coupon Pdf Modal -->
 <div class="modal fade" id="printCouponPdfModal" tabindex="-1" aria-labelledby="printCouponPdfLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -263,7 +264,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Upload Coupon Modal -->
 <div class="modal fade" id="uploadCouponModal" tabindex="-1" aria-labelledby="uploadCouponLabel" aria-hidden="true">

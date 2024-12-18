@@ -5,7 +5,7 @@
 @section('content')
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">{{ __('DataTables') }}</h1>
+    <h1 class="h3 mb-4 text-gray-800" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">{{ __('Google Sheet') }}</h1>
 
     <div class="card p-2" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">
         <div class="container-fluid mt-5">
@@ -18,6 +18,8 @@
                     <option value="50">50</option>
                     <option value="100">100</option>
                 </select>
+
+                <button class="btn btn-icon btn-outline-primary m-1" id="" data-bs-toggle="modal" data-bs-target="#createCouponModal"><span class="mdi mdi-plus-outline"></span></button>
 
                 <div class="dropdown my-w-fit-content px-0">
                     <button class="btn btn-icon btn-outline-primary m-1" type="button" data-bs-toggle="dropdown">
@@ -49,6 +51,100 @@
         </div>
     </div>
 
+<!-- Edit Google Sheet Row Modal -->
+<div class="modal fade" id="editCouponModal" tabindex="-1" aria-labelledby="editCouponLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="validate" id="editCouponForm" action="{{route('coupon.update')}}" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCouponLabel">{{ __('Edit Coupon') }}</h5>
+                    <button type="button" class="btn btn-light btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @csrf
+                    <input type="hidden" id="pid" name="pid" required>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="{{ __('Code') }}" id="pcode" name="pcode" data-v="required" aria-label="{{ __('Code') }}" aria-describedby="button-addon2" disabled required>
+                        <button class="btn btn-light border generate-code" type="button">{{ __('Generate') }}</button>
+                    </div>
+                    <div class="mb-3">
+                        <label for="puses" class="form-label">{{ __('Max') }}</label>
+                        <input type="text" class="form-control" id="puses" name="puses" data-v="required" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pdiscount" class="form-label">{{ __('Discount') }}</label>
+                        <input type="text" class="form-control" id="pdiscount" name="pdiscount" data-v="required" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="pexpired_date" class="form-label">{{ __('Expired At') }}</label>
+                        <input type="datetime-local" class="form-control" id="pexpired_date" name="pexpired_date" data-v="required" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pstatus" class="form-label">{{ __('Status') }}</label>
+                        <select class="form-select" id="pstatus" name="pstatus" data-v="required" required>
+                            <option value="1">{{ __('Active') }}</option>
+                            <option value="0">{{ __('Inactive') }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">{{ __('Save') }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Create Google Sheet Row Modal -->
+<div class="modal fade" id="createCouponModal" tabindex="-1" aria-labelledby="createCouponLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="validate" id="createCouponForm" action="{{route('coupon.create')}}" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createCouponLabel">{{ __('Create Coupon') }}</h5>
+                    <button type="button" class="btn btn-light btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="{{ __('Code') }}" id="code" name="code" data-v="required" aria-label="{{ __('Code') }}" aria-describedby="button-addon2" readonly>
+                        <button class="btn btn-icon border copy-code" type="button" data-clipboard-target="#code" >
+                            <span class="my my-copy"></span>
+                            <span class="my my-doubletick d-none"></span>
+                        </button>
+                        <button class="btn btn-light border generate-code" type="button">{{ __('Generate') }}</button>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span for="max" class="input-group-text">{{ __('Max') }}</span>
+                        <input type="number" class="form-control" name="max" data-v="required" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span for="discount" class="input-group-text">{{ __('Discount') }}</span>
+                        <input type="number" class="form-control" name="discount" data-v="required" required>
+                        <span class="input-group-text">%</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="expired_date" class="form-label">{{ __('Expired At') }}</label>
+                        <input type="datetime-local" class="form-control" name="expired_date" data-v="required" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="status">{{ __('Status') }}</label>
+                        <select class="form-select" name="status" data-v="required" required>
+                            <option selected="0">{{ __('Select Status') }}</option>
+                            <option value="active">{{ __('Active') }}</option>
+                            <option value="inactive">{{ __('Inactive') }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 <div class="modal fade" id="printCertificatePdfModal" tabindex="-1" aria-labelledby="printCertificatePdfLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
@@ -118,173 +214,247 @@
 
 
 <script type="text/javascript">
-        var table;
-        // Start of checkboxes
-        var selectedIds = [];
-        var ids = [];
-        let isCheckAllTrigger = false;
-        // End of checkboxes
+    var table;
+    // Start of checkboxes
+    var selectedIds = [];
+    var ids = [];
+    let isCheckAllTrigger = false;
+    // End of checkboxes
 
-        function updatePdfOverlay() {
-            $('#loading').show();
+    function updatePdfOverlay() {
+        $('#loading').show();
 
-            const id = document.getElementById('pdid').value || '';
-            const name = document.getElementById('pdname').value || '';
-            const name_x = document.getElementById('pdname-x').value || '';
-            const name_y = document.getElementById('pdname-y').value || '';
-            const reason = document.getElementById('pdreason').value || '';
-            const from_date = document.getElementById('pdfrom_date').value || '';
-            const to_date = document.getElementById('pdto_date').value || '';
-            const company = document.getElementById('pdcompany').value || '';
-            const company_x = document.getElementById('pdcompany-x').value || '';
-            const company_y = document.getElementById('pdcompany-y').value || '';
+        const id = document.getElementById('pdid').value || '';
+        const name = document.getElementById('pdname').value || '';
+        const name_x = document.getElementById('pdname-x').value || '';
+        const name_y = document.getElementById('pdname-y').value || '';
+        const reason = document.getElementById('pdreason').value || '';
+        const from_date = document.getElementById('pdfrom_date').value || '';
+        const to_date = document.getElementById('pdto_date').value || '';
+        const company = document.getElementById('pdcompany').value || '';
+        const company_x = document.getElementById('pdcompany-x').value || '';
+        const company_y = document.getElementById('pdcompany-y').value || '';
 
-            $.ajax({
-                url: '/certificate/pdf',
-                type: 'POST',
-                data: {
-                    id: id,
-                    name: name,
-                    name_x: name_x,
-                    name_y: name_y,
-                    reason: reason,
-                    from_date: from_date,
-                    to_date: to_date,
-                    company: company,
-                    company_x: company_x,
-                    company_y: company_y,
-                },
-                xhrFields: {
-                    responseType: 'blob' // Important to get the binary data
-                },
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                success: function(blob) {
-                    $('#loading').hide();
+        $.ajax({
+            url: '/certificate/pdf',
+            type: 'POST',
+            data: {
+                id: id,
+                name: name,
+                name_x: name_x,
+                name_y: name_y,
+                reason: reason,
+                from_date: from_date,
+                to_date: to_date,
+                company: company,
+                company_x: company_x,
+                company_y: company_y,
+            },
+            xhrFields: {
+                responseType: 'blob' // Important to get the binary data
+            },
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(blob) {
+                $('#loading').hide();
 
-                    // Create an object URL from the blob
-                    const url = URL.createObjectURL(blob);
-                    // Set the source of the iframe or embed to display the PDF
-                    $('#pdfPreview').attr('src', url);
-                    // $('#printCouponPdfModal').modal('show');
+                // Create an object URL from the blob
+                const url = URL.createObjectURL(blob);
+                // Set the source of the iframe or embed to display the PDF
+                $('#pdfPreview').attr('src', url);
+                // $('#printCouponPdfModal').modal('show');
 
-                    // Release the URL when the modal is closed
-                    $('#printCertificatePdfModal').on('hidden.bs.modal', function () {
-                        URL.revokeObjectURL(url);
-                        $('#pdfPreview').attr('src', ''); // Clear the src to release memory
-                    });
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    const response = JSON.parse(xhr.responseText);
-                    $('#loading').hide();
-                    Swal.fire({
-                        icon: response.icon,
-                        title: response.state,
-                        text: response.message,
-                        confirmButtonText: __("Ok", lang)
-                    });
-                }
-            });
-        }
-
-        document.getElementById('pdname').addEventListener('input', updatePdfOverlay);
-        document.getElementById('pdname-x').addEventListener('input', updatePdfOverlay);
-        document.getElementById('pdname-y').addEventListener('input', updatePdfOverlay);
-        document.getElementById('pdreason').addEventListener('input', updatePdfOverlay);
-        document.getElementById('pdfrom_date').addEventListener('input', updatePdfOverlay);
-        document.getElementById('pdto_date').addEventListener('input', updatePdfOverlay);
-        document.getElementById('pdcompany').addEventListener('input', updatePdfOverlay);
-        document.getElementById('pdcompany-x').addEventListener('input', updatePdfOverlay);
-        document.getElementById('pdcompany-y').addEventListener('input', updatePdfOverlay);
-
-
-        function printPdfCertificate(id) {
-            $('#loading').show();
-            let rowData = table.row(id - 1).data(); // DataTables is zero-indexed
-
-            $.ajax({
-                url: '/certificate/pdf',
-                type: 'POST',
-                data: {
-                    id: rowData.id,
-                    name: rowData.name,
-                    name_x: 137,
-                    name_y: 216,
-                    reason: rowData.reason,
-                    from_date: rowData.from_date,
-                    to_date: rowData.to_date,
-                    company: rowData.company,
-                    company_x: 30,
-                    company_y: 30,
-                },
-
-                xhrFields: {
-                    responseType: 'blob' // Important to get the binary data
-                },
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                success: function(blob,data) {
-                    $('#loading').hide();
-
-                    $('#pdid').val(rowData.id);
-                    $('#pdname').val(rowData.name);
-                    $('#pdname-x').val(137);
-                    $('#pdname-y').val(216);
-                    $('#pdreason').val(rowData.reason);
-                    $('#pdfrom_date').val(rowData.from_date);
-                    $('#pdto_date').val(rowData.to_date);
-                    $('#pdcompany').val(rowData.company);
-                    $('#pdcompany-x').val(30);
-                    $('#pdcompany-y').val(30);
-
-                    // Create an object URL from the blob
-                    const url = URL.createObjectURL(blob);
-                    // Set the source of the iframe or embed to display the PDF
-                    $('#pdfPreview').attr('src', url);
-                    $('#printCertificatePdfModal').modal('show');
-
-                    // Release the URL when the modal is closed
-                    $('#printCertificatePdfModal').on('hidden.bs.modal', function () {
-                        URL.revokeObjectURL(url);
-                        $('#pdfPreview').attr('src', ''); // Clear the src to release memory
-                    });
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    const response = JSON.parse(xhr.responseText);
-                    $('#loading').hide();
-                    Swal.fire({
-                        icon: response.icon,
-                        title: response.state,
-                        text: response.message,
-                        confirmButtonText: __("Ok", lang)
-                    });
-                }
-            });
-        }
-
-        function showContextMenu(id, x, y) {
-
-            var contextMenu = $('<ul class="context-menu" dir="{{ app()->isLocale("ar") ? "rtl" : "" }}"></ul>')
-                .append('<li><a onclick="printPdfCertificate(' + id + ')"><i class="tf-icons mdi mdi-printer-outline {{ app()->isLocale("ar") ? "ms-1" : "me-1" }}"></i>{{ __("Print") }}</a></li>');
-
-
-            contextMenu.css({
-                top: y,
-                left: x
-            });
-
-
-            $('body').append(contextMenu);
-                $(document).on('click', function() {
-                $('.context-menu').remove();
+                // Release the URL when the modal is closed
+                $('#printCertificatePdfModal').on('hidden.bs.modal', function () {
+                    URL.revokeObjectURL(url);
+                    $('#pdfPreview').attr('src', ''); // Clear the src to release memory
                 });
-        }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                const response = JSON.parse(xhr.responseText);
+                $('#loading').hide();
+                Swal.fire({
+                    icon: response.icon,
+                    title: response.state,
+                    text: response.message,
+                    confirmButtonText: __("Ok", lang)
+                });
+            }
+        });
+    }
 
-        function checkAndLoadLottie(table) {
-            loademptyTableLottieAnimation();
-        }
+    document.getElementById('pdname').addEventListener('blur', updatePdfOverlay);
+    document.getElementById('pdname-x').addEventListener('input', updatePdfOverlay);
+    document.getElementById('pdname-y').addEventListener('input', updatePdfOverlay);
+    document.getElementById('pdreason').addEventListener('input', updatePdfOverlay);
+    document.getElementById('pdfrom_date').addEventListener('input', updatePdfOverlay);
+    document.getElementById('pdto_date').addEventListener('input', updatePdfOverlay);
+    document.getElementById('pdcompany').addEventListener('input', updatePdfOverlay);
+    document.getElementById('pdcompany-x').addEventListener('input', updatePdfOverlay);
+    document.getElementById('pdcompany-y').addEventListener('input', updatePdfOverlay);
+
+
+    function printPdfCertificate(id) {
+        $('#loading').show();
+        let rowData = table.row(id - 1).data(); // DataTables is zero-indexed
+
+        $.ajax({
+            url: '/certificate/pdf',
+            type: 'POST',
+            data: {
+                id: rowData.id,
+                name: rowData.name,
+                name_x: 137,
+                name_y: 216,
+                reason: rowData.reason,
+                from_date: rowData.from_date,
+                to_date: rowData.to_date,
+                company: rowData.company,
+                company_x: 30,
+                company_y: 30,
+            },
+
+            xhrFields: {
+                responseType: 'blob' // Important to get the binary data
+            },
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(blob,data) {
+                $('#loading').hide();
+
+                $('#pdid').val(rowData.id);
+                $('#pdname').val(rowData.name);
+                $('#pdname-x').val(137);
+                $('#pdname-y').val(216);
+                $('#pdreason').val(rowData.reason);
+                $('#pdfrom_date').val(rowData.from_date);
+                $('#pdto_date').val(rowData.to_date);
+                $('#pdcompany').val(rowData.company);
+                $('#pdcompany-x').val(30);
+                $('#pdcompany-y').val(30);
+
+                // Create an object URL from the blob
+                const url = URL.createObjectURL(blob);
+                // Set the source of the iframe or embed to display the PDF
+                $('#pdfPreview').attr('src', url);
+                $('#printCertificatePdfModal').modal('show');
+
+                // Release the URL when the modal is closed
+                $('#printCertificatePdfModal').on('hidden.bs.modal', function () {
+                    URL.revokeObjectURL(url);
+                    $('#pdfPreview').attr('src', ''); // Clear the src to release memory
+                });
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                const response = JSON.parse(xhr.responseText);
+                $('#loading').hide();
+                Swal.fire({
+                    icon: response.icon,
+                    title: response.state,
+                    text: response.message,
+                    confirmButtonText: __("Ok", lang)
+                });
+            }
+        });
+    }
+
+    function editCoupon(id) {
+        $('#loading').show();
+
+        $.ajax({
+            url: '/coupon/' + id,
+            type: 'GET',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(data) {
+            coupon = data.coupon;
+            $('#id').val(coupon.id);
+            $('#code').val(coupon.code);
+            $('#uses').val(coupon.max);
+            $('#discount').val(coupon.discount);
+            $('#expired_date').val(coupon.expired_date.replace(' ', 'T'));
+            $('#status').val(coupon.status);
+
+            $('#loading').hide();
+            $('#editCouponModal').modal('show');
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                const response = JSON.parse(xhr.responseText);
+                $('#loading').hide();
+                Swal.fire({
+                    icon: response.icon,
+                    title: response.state,
+                    text: response.message,
+                    confirmButtonText: __("Ok",lang)
+                });
+            }
+        });
+
+    }
+
+    function deleteCoupon(id) {
+        Swal.fire({
+            title: __("Do you really want to delete this Coupon?",lang),
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: __("Submit",lang),
+            cancelButtonText: __("Cancel",lang),
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/coupon/' + id,
+                    type: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: response.icon,
+                            title: response.state,
+                            text: response.message,
+                            confirmButtonText: __("Ok",lang)
+                        });
+                        table.ajax.reload();
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        const response = JSON.parse(xhr.responseText);
+                        Swal.fire({
+                            icon: response.icon,
+                            title: response.state,
+                            text: response.message,
+                            confirmButtonText: __("Ok",lang)
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    function showContextMenu(id, x, y) {
+
+        var contextMenu = $('<ul class="context-menu" dir="{{ app()->isLocale("ar") ? "rtl" : "" }}"></ul>')
+            .append('<li><a onclick="printPdfCertificate(' + id + ')"><i class="tf-icons mdi mdi-printer-outline {{ app()->isLocale("ar") ? "ms-1" : "me-1" }}"></i>{{ __("Print") }}</a></li>');
+
+
+        contextMenu.css({
+            top: y,
+            left: x
+        });
+
+
+        $('body').append(contextMenu);
+            $(document).on('click', function() {
+            $('.context-menu').remove();
+            });
+    }
+
+    function checkAndLoadLottie(table) {
+        loademptyTableLottieAnimation();
+    }
 
     $(document).ready(function() {
         // $.noConflict();

@@ -237,6 +237,8 @@ class DataTabelController extends Controller {
                     ->addColumn('actions', function ($absence) use (&$actions_counter) {
                         return '
                             <a href="javascript:void(0)" onclick="printPdfCertificate(' . ++$actions_counter . ')" class="btn btn-icon btn-outline-success"><i class="mdi mdi-printer-outline"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editCertificate(' . $absence->id . ')"><i class="mdi mdi-pencil"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteCertificate(' . $absence->id . ')"><i class="mdi mdi-trash-can"></i></a>
                         ';
                     })
                     ->rawColumns(['actions'])
