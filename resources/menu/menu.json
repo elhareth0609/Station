@@ -7,6 +7,10 @@
             "link": "/dashboard"
         },
         {
+            "type": "hr",
+            "title": "Components"
+        },
+        {
             "title": "Components",
             "icon": "mdi mdi-cube-outline",
             "name": "components",
@@ -179,6 +183,28 @@
             ]
         },
         {
+            "title": "Form Inputs",
+            "icon": "mdi mdi-code-block-tags",
+            "name": "form-inputs.basic-inputs",
+            "link": "/form-inputs",
+            "submenu": [
+                {
+                    "title": "Form Basic Inputs",
+                    "name": "form-inputs.basic-inputs",
+                    "link": "/form-basic-inputs"
+                },
+                {
+                    "title": "Form Group Inputs",
+                    "name": "form-inputs.group-inputs",
+                    "link": "/form-group-inputs"
+                }
+            ]
+        },
+        {
+            "type": "hr",
+            "title": "Apps"
+        },
+        {
             "title": "Charts",
             "icon": "mdi mdi-chart-line",
             "name": "charts",
@@ -237,24 +263,6 @@
             "link": "/logs"
         },
         {
-            "title": "Form Inputs",
-            "icon": "mdi mdi-code-block-tags",
-            "name": "form-inputs.basic-inputs",
-            "link": "/form-inputs",
-            "submenu": [
-                {
-                    "title": "Form Basic Inputs",
-                    "name": "form-inputs.basic-inputs",
-                    "link": "/form-basic-inputs"
-                },
-                {
-                    "title": "Form Group Inputs",
-                    "name": "form-inputs.group-inputs",
-                    "link": "/form-group-inputs"
-                }
-            ]
-        },
-        {
             "title": "Icons",
             "icon": "mdi mdi-image-outline",
             "name": "pages.icons",
@@ -271,6 +279,16 @@
             "icon": "mdi mdi-list-status",
             "name": "pages.kanban",
             "link": "/pages/kanban"
+        },
+        {
+            "title": "Tinymce",
+            "icon": "mdi mdi-text",
+            "name": "tinymce",
+            "link": "/tinymce"
+        },
+        {
+            "type": "hr",
+            "title": "Settings"
         },
         {
             "title": "Settings",
@@ -294,8 +312,6 @@
                 }
             ]
         }
-
-
 
     ]
 }

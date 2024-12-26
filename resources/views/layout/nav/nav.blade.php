@@ -172,20 +172,12 @@
                     </a>
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu shadow animated--grow-in px-1 {{ app()->isLocale("ar") ? "text-end dropdown-menu-start" : "dropdown-menu-end" }}" dir="{{ app()->isLocale("ar") ? "rtl" : "" }}" aria-labelledby="userDropdown">
-                        <a class="dropdown-item rounded" href="#">
-                            <i class="mdi mdi-account-circle mdi-sm mdi-fw {{ app()->isLocale("ar") ? "ms-2" : "me-2" }} text-gray-400"></i>
-                            {{ __('Profile') }}
-                        </a>
-                        <a class="dropdown-item rounded" href="#">
-                            <i class="mdi mdi-cog mdi-sm mdi-fw {{ app()->isLocale("ar") ? "ms-2" : "me-2" }} text-gray-400"></i>
+                        <a class="dropdown-item rounded" href="{{ route('settings.account.get') }}">
+                            <i class="mdi mdi-cog-outline mdi-sm mdi-fw {{ app()->isLocale("ar") ? "ms-2" : "me-2" }} text-gray-400"></i>
                             {{ __('Settings') }}
                         </a>
-                        <a class="dropdown-item rounded" href="#">
-                            <i class="mdi mdi-format-list-checkbox mdi-sm mdi-fw {{ app()->isLocale("ar") ? "ms-2" : "me-2" }} text-gray-400"></i>
-                            Activity Log
-                        </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item rounded d-flex" href="#" data-bs-toggle="modal" data-target="#logoutModal">
+                        <a class="dropdown-item rounded d-flex" href="{{ route('auth.logout') }}">
                             <i class="mdi mdi-logout mdi-sm mdi-fw {{ app()->isLocale("ar") ? "ms-2 my-transform-180" : "me-2" }} text-gray-400"></i>
                             {{ __('Logout') }}
                         </a>

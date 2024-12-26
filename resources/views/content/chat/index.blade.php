@@ -140,8 +140,9 @@
                             </div>
                             <small class="text-muted">Enter your message des...</small>
                         </div>
-                        <div class="text-center">
+                        <div class="text-end">
                             <small class="text-secondary d-block">12:25</small>
+                            <span class="mdi mdi-check-all text-primary"></span>
                         </div>
                     </div>
 
@@ -158,9 +159,9 @@
                             </div>
                             <small class="text-muted">Enter your message des...</small>
                         </div>
-                        <div class="text-center">
-                            <small class="text-secondary d-block">12:25</small>
-                            <span class="badge bg-primary rounded-pill d-block">999</span>
+                        <div class="text-end">
+                            <small class="text-secondary d-block">{{ __('Tomorrow') }}</small>
+                            <span class="mdi mdi-check-all text-secondary"></span>
                         </div>
                     </div>
 
@@ -177,9 +178,9 @@
                             </div>
                             <small class="text-muted">Enter your message des...</small>
                         </div>
-                        <div class="text-center">
+                        <div class="text-end">
                             <small class="text-secondary d-block">12:25</small>
-                            <span class="badge bg-primary rounded-pill d-block">999</span>
+                            <span class="badge text-secondary rounded-pill d-block">{{ __('Typing ...') }}</span>
                         </div>
                     </div>
 
@@ -195,7 +196,7 @@
                             </div>
                             <small class="text-muted">Enter your message des...</small>
                         </div>
-                        <div class="text-center">
+                        <div class="text-end">
                             <small class="text-secondary d-block">12:25</small>
                             <span class="badge bg-primary rounded-pill d-block">999</span>
                         </div>
@@ -213,6 +214,7 @@
                         <small class="text-muted">Last seen 7h ago</small>
                     </div>
                     <div class="ms-auto d-flex gap-2">
+                        <button class="btn btn-outline-secondary rounded-pill"><i class="mdi mdi-phone"></i></button>
                         <button class="btn btn-outline-secondary rounded-pill"><i class="mdi mdi-share"></i></button>
                         <button class="btn btn-outline-secondary rounded-pill"><i class="mdi mdi-magnify"></i></button>
                         <button class="btn btn-outline-secondary rounded-pill"><i class="mdi mdi-dots-vertical"></i></button>
@@ -269,15 +271,6 @@
         </div>
     </div>
 
-    <div id="chat">
-        <div id="messages"></div>
-        <input type="text" id="message" placeholder="Type your message...">
-        <button id="send">Send</button>
-    </div>
-
-    <span class="my my-edit"></span>
-
-
     <script>
 
         Pusher.logToConsole = true;
@@ -292,18 +285,18 @@
             });
         });
 
-        document.getElementById('send').addEventListener('click', () => {
-            const message = document.getElementById('message').value;
+        // document.getElementById('send').addEventListener('click', () => {
+        //     const message = document.getElementById('message').value;
     
-            fetch('/send-message', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                },
-                body: JSON.stringify({ message }),
-            });
-        });
+        //     fetch('/send-message', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+        //         },
+        //         body: JSON.stringify({ message }),
+        //     });
+        // });
     </script>
     
 @endsection

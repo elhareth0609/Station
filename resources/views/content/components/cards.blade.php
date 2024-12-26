@@ -15,7 +15,7 @@
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
                                     <p class="text-muted mb-1">Total User</p>
-                                    <h3 class="mb-2">40,689</h3>
+                                    <h3 class="mb-2" counter-number="40689">0</h3>
                                 </div>
                                 <div class="card-icon bg-primary bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center">
                                     <i class="mdi mdi-account text-primary fs-4"></i>
@@ -38,7 +38,7 @@
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
                                     <p class="text-muted mb-1">Total Order</p>
-                                    <h3 class="mb-2">10293</h3>
+                                    <h3 class="mb-2" counter-number="10293">0</h3>
                                 </div>
                                 <div class="card-icon bg-warning bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center">
                                     <i class="mdi mdi-package text-warning fs-4"></i>
@@ -61,7 +61,7 @@
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
                                     <p class="text-muted mb-1">Total Sales</p>
-                                    <h3 class="mb-2">$89,000</h3>
+                                    <h3 class="mb-2" counter-number="89000" counter-prefix="$">$0</h3>
                                 </div>
                                 <div class="card-icon bg-success bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center">
                                     <i class="mdi mdi-chart-line text-success fs-4"></i>
@@ -84,7 +84,7 @@
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
                                     <p class="text-muted mb-1">Total Pending</p>
-                                    <h3 class="mb-2">2040</h3>
+                                    <h3 class="mb-2" counter-number="2040">0</h3>
                                 </div>
                                 <div class="card-icon bg-danger bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center">
                                     <i class="mdi mdi-clock-outline text-danger fs-4"></i>
@@ -389,6 +389,7 @@
             document.getElementById('minus').firstChild.classList.add('d-none');
         }
     });
+
 </script>
 @endsection
 

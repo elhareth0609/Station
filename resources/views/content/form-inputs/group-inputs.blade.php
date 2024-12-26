@@ -308,4 +308,36 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-lg-6 col-sm-12 mb-3">
+
+        </div>
+    </div>
+
+{{-- <script>
+        $('#type').select2({
+            placeholder: 'Select an option',
+            templateResult: formatType,
+            templateSelection: formatType
+
+        });
+
+    function formatType(type) {
+        if (!type.id) {
+            return type.text;
+        }
+        var imgSrc = $(type.element).data('image');
+        var $type = $(
+            '<span><img src="' + imgSrc + '" class="img-circle me-2" style="width: 30px; height: 30px;" />' + type.text + '</span>'
+        );
+        return $type;
+    }
+
+    var tags = document.querySelector('textarea[name=tags]'),
+    tagstagify = new Tagify(tags, {
+        enforceWhitelist : false,
+    }) --}}
+
+
+
 @endsection

@@ -15,47 +15,54 @@
 
     <div class="scrollable-content">
         @foreach($menu['sections'] as $section)
+            @if (isset($section['type']) && $section['type'] == 'hr')
+            <div class="{{ app()->isLocale('ar') ? 'text-end' : 'text-start' }} nav-hr pt-2">
+                <hr class="text-center border-1 border-secondary">
+                <div class="{{ app()->isLocale('ar') ? 'text-end' : 'text-start' }} position-relative" style="margin-top: -32px;">
+                    <span class="bg-white text-secondary px-3 py-1">{{ __($section['title']) }}</span>
+                </div>
+            </div>
+            @else
+                @php
+                    $isActiveSection = Route::currentRouteName() == $section['name'];
+                    $isActiveSubmenu = false;
 
-            @php
-                $isActiveSection = Route::currentRouteName() == $section['name'];
-                $isActiveSubmenu = false;
-
-                if(isset($section['submenu'])) {
-                    foreach ($section['submenu'] as $item) {
-                        if (isset($item['name']) && Route::currentRouteName() == $item['name']) {
-                            $isActiveSubmenu = true;
-                            break;
-                        }
-                        if (isset($item['submenu'])) {
-                            foreach ($item['submenu'] as $subItem) {
-                                if (isset($subItem['name']) && Route::currentRouteName() == $subItem['name']) {
-                                    $isActiveSubmenu = true;
-                                    break;
+                    if(isset($section['submenu'])) {
+                        foreach ($section['submenu'] as $item) {
+                            if (isset($item['name']) && Route::currentRouteName() == $item['name']) {
+                                $isActiveSubmenu = true;
+                                break;
+                            }
+                            if (isset($item['submenu'])) {
+                                foreach ($item['submenu'] as $subItem) {
+                                    if (isset($subItem['name']) && Route::currentRouteName() == $subItem['name']) {
+                                        $isActiveSubmenu = true;
+                                        break;
+                                    }
                                 }
                             }
                         }
+                    } else {
+                        $isActiveSubmenu = false;
                     }
-                } else {
-                    $isActiveSubmenu = false;
-                }
-            @endphp
+                @endphp
 
-            <li class="nav-item my-1 {{ $isActiveSection || $isActiveSubmenu ? 'active' : '' }}">
-                <a class="nav-link d-flex align-items-center rounded {{ isset($section['submenu']) ? (($isActiveSection || $isActiveSubmenu) ? '' : 'collapsed') : '' }} mx-1"
-                href="{{ route($section['name']) }}"
-                @if(isset($section['submenu'])) data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->index }}" aria-expanded="{{ $isActiveSection || $isActiveSubmenu ? 'true' : 'false' }}" aria-controls="collapse{{ $loop->index }}" @endif>
-                    <i class="{{ $section['icon'] }}"></i>
-                    <span>{{ __($section['title']) }}</span>
-                    @isset($section['badge'])
-                        <span class="{{ $section['badge']['class'] }} {{ app()->getLocale() == 'ar' ? 'me-auto' : 'ms-auto' }} my-fs-7">{{ $section['badge']['value'] }}</span>
-                    @endisset
-                </a>
+                <li class="nav-item my-1 {{ $isActiveSection || $isActiveSubmenu ? 'active' : '' }}">
+                    <a class="nav-link d-flex align-items-center rounded {{ isset($section['submenu']) ? (($isActiveSection || $isActiveSubmenu) ? '' : 'collapsed') : '' }} mx-1"
+                    href="{{ route($section['name']) }}"
+                    @if(isset($section['submenu'])) data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->index }}" aria-expanded="{{ $isActiveSection || $isActiveSubmenu ? 'true' : 'false' }}" aria-controls="collapse{{ $loop->index }}" @endif>
+                        <i class="{{ $section['icon'] }}"></i>
+                        <span>{{ __($section['title']) }}</span>
+                        @isset($section['badge'])
+                            <span class="{{ $section['badge']['class'] }} {{ app()->getLocale() == 'ar' ? 'me-auto' : 'ms-auto' }} my-fs-7">{{ $section['badge']['value'] }}</span>
+                        @endisset
+                    </a>
 
-                @if (isset($section['submenu']) && is_array($section['submenu']))
-                    @include('layout.menu.submenu', ['submenu' => $section['submenu']])
-                @endif
-            </li>
-            {{-- <hr class="sidebar-divider"> --}}
+                    @if (isset($section['submenu']) && is_array($section['submenu']))
+                        @include('layout.menu.submenu', ['submenu' => $section['submenu']])
+                    @endif
+                </li>
+            @endif
         @endforeach
 
         <!-- Sidebar Message -->

@@ -4,29 +4,29 @@
 
 @section('content')
 
+<h1 class="h3 mb-4 text-gray-800" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">{{ __('Email') }}</h1>
 
-
-<div class="container-fluid">
+<div class="card">
     <div class="row">
         <div class="col-md-3 sidebar-email">
-            <button class="btn btn-primary compose-btn"><i class="mdi mdi-plus me-2"></i>Compose</button>
+            <button class="btn btn-primary w-100 mb-3"><i class="mdi mdi-plus me-2"></i>Compose</button>
             <h6 class="mb-3">My Email</h6>
             <ul class="nav flex-column">
-                <li class="nav-item"><a href="#" class="nav-link active"><i class="mdi mdi-inbox me-2"></i>Inbox <span class="float-end">1,253</span></a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-star me-2"></i>Starred <span class="float-end">245</span></a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-send me-2"></i>Sent <span class="float-end">24,532</span></a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-file me-2"></i>Draft <span class="float-end">09</span></a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-alert-circle me-2"></i>Spam <span class="float-end">14</span></a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-exclamation me-2"></i>Important <span class="float-end">10</span></a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-trash-can me-2"></i>Bin <span class="float-end">9</span></a></li>
+                <li class="nav-item my-1"><a href="#" class="nav-link nav-email active"><i class="mdi mdi-inbox me-2"></i>Inbox <span class="float-end">1,253</span></a></li>
+                <li class="nav-item my-1"><a href="#" class="nav-link nav-email"><i class="mdi mdi-star me-2"></i>Starred <span class="float-end">245</span></a></li>
+                <li class="nav-item my-1"><a href="#" class="nav-link nav-email"><i class="mdi mdi-send me-2"></i>Sent <span class="float-end">24,532</span></a></li>
+                <li class="nav-item my-1"><a href="#" class="nav-link nav-email"><i class="mdi mdi-file me-2"></i>Draft <span class="float-end">09</span></a></li>
+                <li class="nav-item my-1"><a href="#" class="nav-link nav-email"><i class="mdi mdi-alert-circle me-2"></i>Spam <span class="float-end">14</span></a></li>
+                <li class="nav-item my-1"><a href="#" class="nav-link nav-email"><i class="mdi mdi-exclamation me-2"></i>Important <span class="float-end">10</span></a></li>
+                <li class="nav-item my-1"><a href="#" class="nav-link nav-email"><i class="mdi mdi-trash-can me-2"></i>Bin <span class="float-end">9</span></a></li>
             </ul>
             <h6 class="mt-4 mb-3">Label</h6>
             <ul class="nav flex-column">
-                <li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-circle text-primary me-2"></i>Primary</a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-circle text-success me-2"></i>Social</a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-circle text-warning me-2"></i>Work</a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-circle text-danger me-2"></i>Friends</a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="mdi mdi-plus me-2"></i>Create New Label</a></li>
+                <li class="nav-item my-1"><a href="#" class="nav-link nav-email"><i class="mdi mdi-circle text-primary me-2"></i>Primary</a></li>
+                <li class="nav-item my-1"><a href="#" class="nav-link nav-email"><i class="mdi mdi-circle text-success me-2"></i>Social</a></li>
+                <li class="nav-item my-1"><a href="#" class="nav-link nav-email"><i class="mdi mdi-circle text-warning me-2"></i>Work</a></li>
+                <li class="nav-item my-1"><a href="#" class="nav-link nav-email"><i class="mdi mdi-circle text-danger me-2"></i>Friends</a></li>
+                <li class="nav-item my-1"><a href="#" class="nav-link nav-email"><i class="mdi mdi-plus me-2"></i>Create New Label</a></li>
             </ul>
         </div>
         <div class="col-md-9 main-content">
@@ -39,6 +39,176 @@
                 </div>
             </div>
             <div class="email-list">
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
+                <div class="email-item d-flex align-items-center">
+                    <input type="checkbox" class="me-3">
+                    <i class="mdi mdi-star me-3"></i>
+                    <div class="flex-grow-1">
+                        <strong>Julia Jalal</strong>
+                        <span class="label bg-info text-white ms-2">Primary</span>
+                        <span class="ms-3">Our Bachelor of Commerce program is ACBSP-accredited</span>
+                    </div>
+                    <span class="text-muted">8:38 AM</span>
+                </div>
                 <div class="email-item d-flex align-items-center">
                     <input type="checkbox" class="me-3">
                     <i class="mdi mdi-star me-3"></i>
@@ -62,30 +232,20 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
 <style>
-    body {
-        background-color: #f8f9fa;
-    }
     .sidebar-email {
-        background-color: white;
-        height: 100vh;
+        /* height: 100vh; */
         padding: 20px;
     }
     .main-content {
-        background-color: white;
-        height: 100vh;
+        /* height: 100vh; */
         padding: 20px;
     }
-    .compose-btn {
-        width: 100%;
-        margin-bottom: 20px;
+    .nav-email {
+        border-radius: .375rem;
+    }
+    .nav-email:hover {
+        background-color: #e9ecef;
     }
     .nav-link {
         color: #495057;

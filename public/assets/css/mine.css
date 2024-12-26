@@ -389,6 +389,13 @@ body {
 .sidebar.myToggled .scrollable-content .sidebar-card {
     display: none!important;
 }
+
+.sidebar.myToggled:hover .nav-hr {
+    display: block;
+}
+.sidebar.myToggled .nav-hr {
+    display: none;
+}
 /* End sidebar myToggled */
 
 @media (max-width: 767px) {
@@ -615,7 +622,7 @@ span.ripple-effect {
 }
 .form-group.form-group-floating label {
     position: absolute;
-    left: .75rem;
+    left: 1.5rem;
     top: .75rem;
     background: white;
     padding-inline: .3em;

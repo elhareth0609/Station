@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use Kreait\Firebase\Exception\Auth\UserNotFound;
 use stdClass;
 
-class AuthenticationApiController extends Controller {
+class AuthController extends Controller {
     public function authenticate(Request $request) {
         $validator = Validator::make($request->all(), [
             'uid' => 'required|string',

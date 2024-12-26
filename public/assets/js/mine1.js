@@ -137,5 +137,3 @@ $('.input-group-text .mdi-lock-outline').on('click', function() {
         $(this).removeClass('mdi-lock-open-outline').addClass('mdi-lock-outline');
     }
 });
-
-

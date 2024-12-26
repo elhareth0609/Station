@@ -10,7 +10,7 @@
 {{-- <script type="module" src="{{ asset('assets/vendor/chart.js/Chart.min.js') }}"></script> --}}
 
 
-{{-- <script src="https://cdn.tiny.cloud/1/7gjdmwd28tv3zgd10agg1omfs4akvf56ukwbb85qqzlzgxd1/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> --}}
+<script src="https://cdn.tiny.cloud/1/7gjdmwd28tv3zgd10agg1omfs4akvf56ukwbb85qqzlzgxd1/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -25,6 +25,7 @@
 <script src="{{ asset('assets/js/pusher.min.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('assets/js/lottie.min.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('assets/js/dropzone-min.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('assets/js/myCounter.js') }}?v={{ time() }}"></script>
 
 <script src="{{ asset('assets/js/myValidate.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('assets/js/myLang.js') }}?v={{ time() }}"></script>

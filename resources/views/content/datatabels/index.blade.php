@@ -4,63 +4,62 @@
 
 @section('content')
 
-    <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">{{ __('DataTables') }}</h1>
+<h1 class="h3 mb-4 text-gray-800" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">{{ __('DataTables') }}</h1>
 
-    <div class="card p-2" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">
-        <div class="container-fluid mt-5">
-            <div class="row {{ app()->getLocale() == "ar" ? "me-1" : "ms-1" }} mb-2">
-                <input type="text" class="form-control my-w-fit-content m-1" id="dataTables_my_filter" placeholder="{{ __('Search ...') }}" name="search">
+<div class="card p-2" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">
+    <div class="container-fluid mt-5">
+        <div class="row {{ app()->getLocale() == "ar" ? "me-1" : "ms-1" }} mb-2">
+            <input type="text" class="form-control my-w-fit-content m-1" id="dataTables_my_filter" placeholder="{{ __('Search ...') }}" name="search">
 
-                <select class="form-select my-w-fit-content m-1" id="selectType" name="type">
-                    <option value="all">{{ __('All') }}</option>
-                    <option value="active">{{ __('Active') }}</option>
-                    <option value="inactive">{{ __('InActive') }}</option>
-                    <option value="expired">{{ __('Expired') }}</option>
-                </select>
+            <select class="form-select my-w-fit-content m-1" id="selectType" name="type">
+                <option value="all">{{ __('All') }}</option>
+                <option value="active">{{ __('Active') }}</option>
+                <option value="inactive">{{ __('InActive') }}</option>
+                <option value="expired">{{ __('Expired') }}</option>
+            </select>
 
-                <select class="form-select my-w-fit-content m-1" id="dataTables_my_length" name="length">
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
+            <select class="form-select my-w-fit-content m-1" id="dataTables_my_length" name="length">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
 
-                <button class="btn btn-icon btn-outline-primary m-1" id="" data-bs-toggle="modal" data-bs-target="#createCouponModal"><span class="mdi mdi-plus-outline"></span></button>
-                <button class="btn btn-icon btn-outline-primary m-1" id="" data-bs-toggle="modal" data-bs-target="#uploadCouponModal"><span class="mdi mdi-upload-outline"></span></button>
-                <button class="btn btn-icon btn-outline-primary m-1" id=""><span class="mdi mdi-download-outline"></span></button>
-                <button class="btn btn-icon btn-outline-danger m-1" id="trash-button" data-trashed="0"><span class="mdi mdi-delete-alert-outline"></span></button>
+            <button class="btn btn-icon btn-outline-primary m-1" id="" data-bs-toggle="modal" data-bs-target="#createCouponModal"><span class="mdi mdi-plus-outline"></span></button>
+            <button class="btn btn-icon btn-outline-primary m-1" id="" data-bs-toggle="modal" data-bs-target="#uploadCouponModal"><span class="mdi mdi-upload-outline"></span></button>
+            <button class="btn btn-icon btn-outline-primary m-1" id=""><span class="mdi mdi-download-outline"></span></button>
+            <button class="btn btn-icon btn-outline-danger m-1" id="trash-button" data-trashed="0"><span class="mdi mdi-delete-alert-outline"></span></button>
 
-                <div class="dropdown my-w-fit-content px-0">
-                    <button class="btn btn-icon btn-outline-primary m-1" type="button" data-bs-toggle="dropdown">
-                        <span class="mdi mdi-filter-outline"></span>
-                    </button>
-                    <ul class="dropdown-menu p-1 {{ app()->getLocale() == "ar" ? "text-end dropdown-menu-end" : "dropdown-menu-start" }}" aria-labelledby="dropdownMenuButton1" id="columns_filter_dropdown">
-                    </ul>
-                </div>
-            </div>
-            <div class="table-responsive rounded-3 border mb-3">
-                <table id="table" class="table table-hover mb-0">
-                    <thead>
-                        <tr>
-                            <th><input class="form-check-input" type="checkbox" id="check-all"></th>
-                            <th>{{__("Code")}}</th>
-                            <th>{{ __('Discount') }}</th>
-                            <th>{{ __('Max') }}</th>
-                            <th>{{ __('Status') }}</th>
-                            <th>{{ __('Expired At') }}</th>
-                            <th>{{ __('Created At') }}</th>
-                            <th>{{ __('Actions') }}</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-            <div class="row align-items-baseline justify-content-end">
-                <div class="my-w-fit-content" id="dataTables_my_info"></div>
-                <nav class="my-w-fit-content" aria-label="Table navigation"><ul class="pagination" id="dataTables_my_paginate"></ul></nav>
+            <div class="dropdown my-w-fit-content px-0">
+                <button class="btn btn-icon btn-outline-primary m-1" type="button" data-bs-toggle="dropdown">
+                    <span class="mdi mdi-filter-outline"></span>
+                </button>
+                <ul class="dropdown-menu p-1 {{ app()->getLocale() == "ar" ? "text-end dropdown-menu-end" : "dropdown-menu-start" }}" aria-labelledby="dropdownMenuButton1" id="columns_filter_dropdown">
+                </ul>
             </div>
         </div>
+        <div class="table-responsive rounded-3 border mb-3">
+            <table id="table" class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th><input class="form-check-input" type="checkbox" id="check-all"></th>
+                        <th>{{__("Code")}}</th>
+                        <th>{{ __('Discount') }}</th>
+                        <th>{{ __('Max') }}</th>
+                        <th>{{ __('Status') }}</th>
+                        <th>{{ __('Expired At') }}</th>
+                        <th>{{ __('Created At') }}</th>
+                        <th>{{ __('Actions') }}</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="row align-items-baseline justify-content-end">
+            <div class="my-w-fit-content" id="dataTables_my_info"></div>
+            <nav class="my-w-fit-content" aria-label="Table navigation"><ul class="pagination" id="dataTables_my_paginate"></ul></nav>
+        </div>
     </div>
+</div>
 
 
 <!-- Edit Coupon Modal -->
