@@ -14,7 +14,7 @@
             <select class="form-select my-w-fit-content m-1" id="selectType" name="type">
                 <option value="all">{{ __('All') }}</option>
                 <option value="active">{{ __('Active') }}</option>
-                <option value="inactive">{{ __('InActive') }}</option>
+                <option value="inactive">{{ __('In Active') }}</option>
                 <option value="expired">{{ __('Expired') }}</option>
             </select>
 
@@ -516,80 +516,18 @@
         }
 
         function deleteCoupon(id) {
-            Swal.fire({
-                title: __("Do you really want to delete this Coupon?",lang),
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: __("Submit",lang),
-                cancelButtonText: __("Cancel",lang),
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: '/coupon/' + id,
-                        type: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': csrfToken
-                        },
-                        success: function(response) {
-                            Swal.fire({
-                                icon: response.icon,
-                                title: response.state,
-                                text: response.message,
-                                confirmButtonText: __("Ok",lang)
-                            });
-                            table.ajax.reload();
-                        },
-                        error: function(xhr, textStatus, errorThrown) {
-                            const response = JSON.parse(xhr.responseText);
-                            Swal.fire({
-                                icon: response.icon,
-                                title: response.state,
-                                text: response.message,
-                                confirmButtonText: __("Ok",lang)
-                            });
-                        }
-                    });
-                }
+            confirmDelete({
+                id: id,
+                url: '/coupon',
+                table: table
             });
         }
 
         function restoreCoupon(id) {
-            Swal.fire({
-                title: __("Do you really want to restore this Coupon?",lang),
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: __("Restore",lang),
-                cancelButtonText: __("Cancel",lang),
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: '/coupon/restore/' + id,
-                        type: 'GET',
-                        headers: {
-                            'X-CSRF-TOKEN': csrfToken
-                        },
-                        success: function(response) {
-                            Swal.fire({
-                                icon: response.icon,
-                                title: response.state,
-                                text: response.message,
-                                confirmButtonText: __("Ok",lang)
-                            });
-                            table.ajax.reload();
-                        },
-                        error: function(xhr, textStatus, errorThrown) {
-                            const response = JSON.parse(xhr.responseText);
-                            Swal.fire({
-                                icon: response.icon,
-                                title: response.state,
-                                text: response.message,
-                                confirmButtonText: __("Ok",lang)
-                            });
-                        }
-                    });
-                }
+            confirmRestore({
+                id: id,
+                url: '/coupon',
+                table: table
             });
         }
 
@@ -622,40 +560,36 @@
                 });
         }
 
-        Dropzone.autoDiscover = false;
-        var myDropzone = new Dropzone("#dropzone", {
-            url: "{{ route('coupons.import') }}",
-            autoProcessQueue: false,
-            acceptedFiles: '.xlsx,.xls',
-            maxFilesize: 150, // Max file size in MB
-            maxFiles: 1, // Allow only one file
-            addRemoveLinks: true,
-            parallelUploads: 1, // Only one upload at a time
-            dictDefaultMessage: "{{ __('Drag and drop Excel files here or click to upload') }}",
-            dictMaxFilesExceeded: "{{ __('You can only upload one file.') }}", // Error message when max files exceeded
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            }
-        });
-
-        // Optional: remove the previous file when a new one is added
-        myDropzone.on("addedfile", function() {
-            if (this.files.length > 1) {
-                this.removeFile(this.files[0]); // Remove the first file to keep only the latest one
-            }
-        });
-
-        myDropzone.on("success", function(file, response) {
-        table.ajax.reload();
-        });
-
-        myDropzone.on("error", function(file, errorMessage) {
-            console.error('Error uploading file:', errorMessage);
-        });
-
-        function checkAndLoadLottie(table) {
-            loademptyTableLottieAnimation();
+    Dropzone.autoDiscover = false;
+    var myDropzone = new Dropzone("#dropzone", {
+        url: "{{ route('coupons.import') }}",
+        autoProcessQueue: false,
+        acceptedFiles: '.xlsx,.xls',
+        maxFilesize: 150, // Max file size in MB
+        maxFiles: 1, // Allow only one file
+        addRemoveLinks: true,
+        parallelUploads: 1, // Only one upload at a time
+        dictDefaultMessage: "{{ __('Drag and drop Excel files here or click to upload') }}",
+        dictMaxFilesExceeded: "{{ __('You can only upload one file.') }}", // Error message when max files exceeded
+        headers: {
+            'X-CSRF-TOKEN': csrfToken
         }
+    });
+
+    // Optional: remove the previous file when a new one is added
+    myDropzone.on("addedfile", function() {
+        if (this.files.length > 1) {
+            this.removeFile(this.files[0]); // Remove the first file to keep only the latest one
+        }
+    });
+
+    myDropzone.on("success", function(file, response) {
+    table.ajax.reload();
+    });
+
+    myDropzone.on("error", function(file, errorMessage) {
+        console.error('Error uploading file:', errorMessage);
+    });
 
     $(document).ready(function() {
         // $.noConflict();
@@ -810,7 +744,7 @@
                         // Add options to the select dropdown
                         var options = [
                             { value: 'active', text: 'Active' },
-                            { value: 'inactive', text: 'InActive' }
+                            { value: 'inactive', text: 'In Active' }
                         ];
 
                         // Append each option to the select element
@@ -908,122 +842,19 @@
 
             });
 
-            $('#dataTables_my_length').change(function() {
-                var selectedValue = $(this).val();
-                table.page.len(selectedValue).draw();
-            });
+            // Initialize Components
+            initLengthChange(table);
+            initSearchFilter(table);
+            initTypeChange(table);
+            initTrashButton(table);
+            // initPagination(table);
+            initColumnVisibilityToggle(table);
 
-            $('#dataTables_my_filter').on('input', function () {
-                var query = $(this).val();
-                table.search(query).draw();
-            });
-
-            $('#selectType').change(function() {
-                table.ajax.reload();
-            });
-
-            $('#trash-button').on('click', function () {
-                const isTrashed = $(this).data('trashed') === 1;
-
-                $(this).data('trashed', isTrashed ? 0 : 1);
-
-                if (isTrashed) {
-                    $(this).toggleClass('btn-danger');
-                    $(this).addClass('btn-outline-danger');
-                } else {
-                    $(this).toggleClass('btn-outline-danger');
-                    $(this).addClass('btn-danger');
-                }
-
-                table.ajax.reload();
-            });
-
+            // Table draw event for sorting icons and pagination updates
             table.on('draw', function () {
-                checkAndLoadLottie(table);
-                var info = table.page.info();
-                var pagination = $('#dataTables_my_paginate');
-
-                pagination.empty();
-
-                var prevButton = $('<li>').addClass('page-item').append($('<a>').addClass('page-link btn btn-icon mx-1').attr('href', 'javascript:void(0);').html('&lsaquo;'));
-                if (info.page > 0) {
-                    prevButton.find('a').click(function () {
-                    table.page('previous').draw('page');
-                    });
-                } else {
-                    prevButton.addClass('disabled');
-                }
-                pagination.append(prevButton);
-
-
-                for (var i = 0; i < info.pages; i++) {
-                    var page = i + 1;
-                    var liClass = (page === info.page + 1) ? 'active' : 'd-none';
-                    var link = $('<a>').addClass('page-link btn btn-icon rounded btn-outline-primary').attr('href', 'javascript:void(0);').text(page);
-                    var listItem = $('<li>').addClass('page-item').addClass(liClass).append(link);
-                    listItem.click((function (pageNumber) {
-                        return function () {
-                            table.page(pageNumber).draw('page');
-                        };
-                    })(i));
-                    pagination.append(listItem);
-                }
-
-
-                var nextButton = $('<li>').addClass('page-item').append($('<a>').addClass('page-link btn btn-icon mx-1').attr('href', 'javascript:void(0);').html('&rsaquo;'));
-                if (info.page < info.pages - 1) {
-                    nextButton.find('a').click(function () {
-                    table.page('next').draw('page');
-                    });
-                } else {
-                    nextButton.addClass('disabled');
-                }
-                pagination.append(nextButton);
-
-
-                var startRange = info.start + 1;
-                var endRange = info.start + info.length;
-                var pageInfo = startRange + ' ' + __("to",lang) + ' ' + endRange + ' ' + __("from",lang) + ' ' + info.recordsTotal;
-                $('#dataTables_my_info').text(pageInfo);
-
-                $('#table thead th').each(function () {
-                    $(this).find('.sort-icon').remove();
-                });
-
-                // Get the current sort information
-                let order = table.order();
-                if (order.length > 0) {
-                    let columnIndex = order[0][0];
-                    let direction = order[0][1];
-
-                    // Add the appropriate icon
-                    let header = $($('#table thead th')[columnIndex]);
-                    if (direction === 'asc') {
-                        header.append(ascIcon);
-                    } else if (direction === 'desc') {
-                        header.append(descIcon);
-                    }
-                }
-
-            });
-
-            table.columns().every(function() {
-                var column = this;
-                var columnName = $(column.header()).text() ? $(column.header()).text() : '#'; // Get the column name from the header
-                var columnIndex = column.index(); // Get the column index
-
-                // Append the checkbox to the dropdown
-                $('#columns_filter_dropdown').append(
-                    '<li><label><input type="checkbox" class="form-check-input column-toggle" data-column="' + columnIndex + '" checked> ' + columnName + '</label></li>'
-                );
-            });
-
-            $('#columns_filter_dropdown').on('change', '.column-toggle', function() {
-                var column = table.column($(this).data('column'));
-                var isChecked = $(this).is(':checked');
-
-                // Toggle the visibility of the column
-                column.visible(isChecked);
+                handlePagination(table);
+                updateSortingIcons(table);
+                updateInfoText(table);
             });
 
             $('#createCouponForm').submit(function(event) {

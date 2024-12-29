@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="lang" content="{{ app()->getLocale() }}">
     <meta name="theme" content="system">
-
+    <meta name="url" content="{{ url('/') }}">
     <title>Dashboard @hasSection('title') - @yield('title') @endif</title>
 
     <!-- Custom fonts for this template-->
@@ -60,9 +60,10 @@
 
 
     @php
-        $isNavbar = isset($isNavbar) ? $isNavbar : true;   // Default to true if not set
-        $isSidebar = isset($isSidebar) ? $isSidebar : true; // Default to true if not set
-        $isFooter = isset($isFooter) ? $isFooter : true;    // Default to true if not set
+        $isNavbar = isset($isNavbar) ? $isNavbar : true;
+        $isSidebar = isset($isSidebar) ? $isSidebar : true;
+        $isFooter = isset($isFooter) ? $isFooter : true;
+        $isContainer = isset($isContainer) ? $isContainer : true;
     @endphp
     <!-- Main Content -->
     <div class="content">
@@ -73,14 +74,19 @@
                 @include('layout.menu.menu')
             @endif
 
+            
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
                     @if (isset($isNavbar) && $isNavbar)
-                        @include('layout.nav.nav')
+                    @include('layout.nav.nav')
                     @endif
-                    <div class="container-fluid">
+                    @if (isset($isContainer) && $isContainer)
+                        <div class="container-fluid">
+                    @endif
                         @yield('content')
-                    </div>
+                    @if (isset($isContainer) && $isContainer)
+                        </div>
+                    @endif
                 </div>
 
 

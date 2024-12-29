@@ -1,8 +1,8 @@
 $('body').append(`
-  <div id="loading" style="display: none;background: #00000069;z-index: 10000;" class="position-fixed h-100 w-100 top-0 start-0">
-      <div id="lottie-animation" class="bg-white rounded-3 border border-primary border-5 position-fixed start-50 top-50" style="width: 100px; height: 100px;transform: translate(-50%, -50%);">
-      </div>
-  </div>
+    <div id="loading" style="display: none;background: #00000069;z-index: 10000;" class="position-fixed h-100 w-100 top-0 start-0">
+        <div id="lottie-animation" class="bg-white rounded-3 border border-primary border-5 position-fixed start-50 top-50" style="width: 100px; height: 100px;transform: translate(-50%, -50%);">
+        </div>
+    </div>
 `);
 
 const ascIcon = '<svg class="sort-icon mx-1" width="800px" height="800px" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.272 5.205L16.272 13.205C16.8964 14.2041 16.1782 15.5 15 15.5H5.00002C3.82186 15.5 3.1036 14.2041 3.72802 13.205L8.72802 5.205C9.31552 4.265 10.6845 4.265 11.272 5.205Z" fill="#000000"/></svg>';
@@ -13,7 +13,7 @@ var animation1 = lottie.loadAnimation({
   renderer: 'svg',
   loop: true,
   autoplay: true,
-  path: 'assets/img/my/defaults/load-svg.json' // Lottie animation URL
+  path: url + '/assets/img/my/defaults/load-svg.json' // Lottie animation URL
 });
 
 

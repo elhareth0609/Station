@@ -79,7 +79,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('/coupons/generate', [CouponController::class, 'generate'])->name('coupons.generate');
         Route::get('/coupons/export', [CouponController::class, 'export'])->name('coupons.export');
         Route::post('/coupons/import', [CouponController::class, 'import'])->name('coupons.import');
-        Route::get('/coupon/restore/{id}', [CouponController::class, 'restore'])->name('coupon.restore');
+        Route::get('/coupon/{id}/restore', [CouponController::class, 'restore'])->name('coupon.restore');
 
         // Logs
         // Dashboard

@@ -1,4 +1,5 @@
 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+const url = document.querySelector('meta[name="url"]').getAttribute('content');
 
 
 function loademptyTableLottieAnimation() {

@@ -29,7 +29,7 @@
                         aria-labelledby="searchDropdown">
                         <form class="form-inline me-auto w-100 navbar-search">
                             <div class="input-group {{ app()->isLocale("ar") ? 'input-rtl' : '' }}">
-                                <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                <input type="text" class="form-control" placeholder="{{ __("Search for...") }}" aria-label="Search" aria-describedby="basic-addon2">
                                 <button class="btn btn-outline-primary" type="button"><i class="mdi mdi-magnify"></i></button>
                             </div>
                         </form>

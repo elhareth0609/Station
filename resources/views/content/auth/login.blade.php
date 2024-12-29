@@ -4,6 +4,7 @@
     $isNavbar = false;
     $isSidebar = false;
     $isFooter = false;
+    $isContainer = false;
 @endphp
 
 @section('title', __('Login'))
@@ -12,83 +13,85 @@
 <style>
 
     .login-container {
-        max-width: 400px;
+        width: 400px;
         box-shadow: 0 0 20px rgba(0,0,0,0.1);
     }
 
 </style>
 
+<div class="d-flex justify-content-center align-items-center h-100">
 
-<div class="login-container bg-white rounded-3 p-3 mx-auto my-5">
-    <!-- Logo -->
-    <a class="d-flex align-items-center justify-content-center text-black fs-4 mb-3" href="{{ route('home') }}">
-        <div class="">
-            <i class="mdi mdi-home-outline"></i>
-        </div>
-        <div class="mx-3">Dashboard</div>
-    </a>
-
-    <!-- Welcome Text -->
-    <h2 class="mb-1">{{ __('Welcome Back!') }}</h2>
-    <p class="text-muted mb-1">{{ __('Please login to your account') }}</p>
-    <div class="alert alert-danger d-none" id="error-alert"></div>
-    <!-- Login Form -->
-    <form id="loginForm" action="{{ route('auth.login.action') }}" method="POST">
-        @csrf
-        <div class="mb-3">
-            <div class="input-group">
-                <span class="input-group-text bg-transparent">
-                    <i class="mdi mdi-email-outline"></i>
-                </span>
-                <input type="email" name="email" class="form-control" placeholder="{{ __('Email address') }}" required>
+    <div class="login-container bg-white rounded-3 p-3 mx-auto my-5 my-h-fit-content">
+        <!-- Logo -->
+        <a class="d-flex align-items-center justify-content-center text-black fs-4 my-3" href="{{ route('home') }}">
+            <div class="">
+                <i class="mdi mdi-home-outline"></i>
             </div>
-        </div>
-        <div class="mb-3">
-            <div class="input-group">
-                <span class="input-group-text bg-transparent">
-                    <i class="mdi mdi-lock-outline"></i>
-                </span>
-                <input type="password" name="password" class="form-control" placeholder="Password" required>
-            </div>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" name="remember" id="remember">
-                <label class="form-check-label" for="remember">{{ __('Remember me') }}</label>
-            </div>
-            <a href="{{ route('auth.forgot-password') }}" class="text-muted">{{ __('Forgot Password?') }}</a>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">{{ __('Login') }}</button>
-    </form>
+            <div class="mx-3">Dashboard</div>
+        </a>
 
-    <!-- Social Login -->
-    {{-- {{ dd(env('GOOGLE_LOGIN')) }} --}}
-
-    @if(env('GOOGLE_LOGIN') == true || env('FACEBOOK_LOGIN') == true)
-        <div class="mt-4">
-            <div class="text-center">
-                <hr class="text-center border-1 border-secondary">
-                <div class="text-center position-relative" style="margin-top: -32px;">
-                    <span class="bg-white text-secondary px-4 py-2">{{ __('Or') }}</span>
+        <!-- Welcome Text -->
+        <h5 class="mb-1">{{ __('Welcome To') }} {{ __('dashboard') }} 🎉</h5>
+        <p class="text-muted mb-3">{{ __('Please login to your account') }}</p>
+        <div class="alert alert-danger d-none" id="error-alert"></div>
+        <!-- Login Form -->
+        <form id="loginForm" action="{{ route('auth.login.action') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent">
+                        <i class="mdi mdi-email-outline"></i>
+                    </span>
+                    <input type="email" name="email" class="form-control" placeholder="{{ __('Email address') }}" required>
                 </div>
             </div>
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent">
+                        <i class="mdi mdi-lock-outline"></i>
+                    </span>
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center my-4">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" name="remember" id="remember">
+                    <label class="form-check-label" for="remember">{{ __('Remember me') }}</label>
+                </div>
+                <a href="{{ route('auth.forgot-password') }}" class="text-muted">{{ __('Forgot Password?') }}</a>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">{{ __('Login') }}</button>
+        </form>
 
-            @if(env('GOOGLE_LOGIN') == true)
-                <button class="btn btn-outline-danger w-100 my-1 p-2">
-                    <i class="mdi mdi-google me-2"></i>
-                    {{ __('Login with Google') }}
-                </button>
-            @endif
-            @if(env('FACEBOOK_LOGIN') == true)
-                <button class="btn btn-outline-primary w-100 my-1 p-2">
-                    <i class="mdi mdi-facebook me-2"></i>
-                    {{ __('Login with Facebook') }}
-                </button>
-            @endif
-        </div>
-    @endif
+        <!-- Social Login -->
+        {{-- {{ dd(env('GOOGLE_LOGIN')) }} --}}
+
+        @if(env('GOOGLE_LOGIN') == true || env('FACEBOOK_LOGIN') == true)
+            <div class="mt-4">
+                <div class="text-center">
+                    <hr class="text-center border-1 border-secondary">
+                    <div class="text-center position-relative" style="margin-top: -32px;">
+                        <span class="bg-white text-secondary px-4 py-2">{{ __('Or') }}</span>
+                    </div>
+                </div>
+
+                @if(env('GOOGLE_LOGIN') == true)
+                    <button class="btn btn-outline-danger w-100 my-1 p-2">
+                        <i class="mdi mdi-google me-2"></i>
+                        {{ __('Login with Google') }}
+                    </button>
+                @endif
+                @if(env('FACEBOOK_LOGIN') == true)
+                    <button class="btn btn-outline-primary w-100 my-1 p-2">
+                        <i class="mdi mdi-facebook me-2"></i>
+                        {{ __('Login with Facebook') }}
+                    </button>
+                @endif
+            </div>
+        @endif
+    </div>
+        
 </div>
-
 <script>
 $(document).ready(function() {
     $('#loginForm').submit(function(event) {

@@ -19,3 +19,5 @@
     {{-- <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script> --}}
     {{-- <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script> --}}
     <script src="{{ asset('assets/js/mine1.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('assets/js/myCrud.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('assets/js/myTable.js') }}?v={{ time() }}"></script>
