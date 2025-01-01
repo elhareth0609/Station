@@ -47,7 +47,7 @@
                     <!-- Dropdown - Alerts -->
                     <div class="dropdown-list dropdown-menu shadow animated--grow-in {{ app()->isLocale("ar") ? "text-end dropdown-menu-start" : "dropdown-menu-end" }}" dir="{{ app()->isLocale("ar") ? "rtl" : "" }}" aria-labelledby="alertsDropdown" data-bs-popper="none">
                         <h6 class="dropdown-header">
-                            Alerts Center
+                            {{ __('Notfications') }}
                         </h6>
                         <a class="dropdown-item d-flex align-items-center" href="#">
                             <div class="{{ app()->isLocale("ar") ? "ms-3" : "me-3" }}">
@@ -95,7 +95,7 @@
                     <!-- Dropdown - Messages -->
                     <div class="dropdown-list dropdown-menu shadow animated--grow-in {{ app()->isLocale("ar") ? "text-end dropdown-menu-start" : "dropdown-menu-end" }}" dir="{{ app()->isLocale("ar") ? "rtl" : "" }}" aria-labelledby="messagesDropdown">
                         <h6 class="dropdown-header">
-                            Message Center
+                            {{ __('Messages') }}
                         </h6>
                         <a class="dropdown-item d-flex align-items-center" href="#">
                             <div class="dropdown-list-image {{ app()->isLocale("ar") ? "ms-3" : "me-3" }}">
@@ -168,7 +168,7 @@
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="img-profile rounded-circle border border-secondary" src="{{ asset('assets/img/undraw_profile.svg') }}">
+                        <img class="img-profile rounded-circle border border-secondary" src="{{ Auth::user()->photoUrl }}">
                     </a>
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu shadow animated--grow-in px-1 {{ app()->isLocale("ar") ? "text-end dropdown-menu-start" : "dropdown-menu-end" }}" dir="{{ app()->isLocale("ar") ? "rtl" : "" }}" aria-labelledby="userDropdown">

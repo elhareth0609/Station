@@ -55,6 +55,16 @@ class User extends Authenticatable
         return $this->first_name . ' ' . $this->last_name;
     }
 
+
+    public function getPhotoUrlAttribute() {
+        return $this->photo ? asset('assets/img/photos/users/' . $this->photo) : asset('assets/img/photos/users/default.png');
+    }
+
+    public function getPhotoPathAttribute() {
+        return $this->photo ? public_path('assets/img/photos/users/' . $this->photo) : null;
+    }
+    
+
     public function chatRooms() {
         return $this->belongsToMany(ChatRoom::class)
                     ->using(ChatRoomUser::class) // Specify the pivot model

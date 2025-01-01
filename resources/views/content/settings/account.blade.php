@@ -43,7 +43,7 @@
                 <div class="row mb-4">
                     <div class="mt-3 col-lg-3 col-md-12 text-center">
                         <div class="position-relative d-inline-block rounded-pill">
-                            <img src="{{ asset('assets/img/my/defaults/default.png') }}" alt="Profile Picture" class="profile-pic border border-secondary p-1 rounded-pill" style="width: 200px;height: 200px;">
+                            <img src="{{ Auth::user()->photoUrl }}" alt="Profile Picture" class="profile-pic border border-secondary p-1 rounded-pill" style="width: 200px;height: 200px;">
                             <a class="position-absolute bg-white px-2 rounded-pill border border-secondary d-flex align-items-center justify-content-center" aria-label="Edit Profile Picture" href="#" style="bottom: 18px;right: 10px;width: 30px;height: 30px;" data-bs-toggle="modal" data-bs-target="#uploadImageModal">
                                 <i class="mdi mdi-pencil fs-5 text-secondary"></i>
                             </a>
