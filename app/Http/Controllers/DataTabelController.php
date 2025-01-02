@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Coupon;
+use App\Models\Order;
 use App\Models\User;
+use Google\Service\Sheets as Google_Service_Sheets;
+use Google_Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Laravel\Telescope\EntryType;
 use Laravel\Telescope\Telescope;
 use Yajra\DataTables\Facades\DataTables;
-use Google_Client;
-use Google\Service\Sheets as Google_Service_Sheets;
 
 class DataTabelController extends Controller {
 
@@ -252,4 +253,98 @@ class DataTabelController extends Controller {
         }
     }
 
+    public function new_orders(Request $request) {
+        if ($request->ajax()) {
+            $orders = Order::where('status', 'new')->get();
+            return DataTables::of($orders)
+            ->editColumn('id', function ($order) {
+                return $order->id;
+            })
+            ->editColumn('customer_name', function ($order) {
+                return $order->customer_name;
+            })
+            ->editColumn('customer_email', function ($order) {
+                return $order->customer_email;
+            })
+            ->editColumn('customer_phone', function ($order) {
+                return $order->customer_phone;
+            })
+            ->editColumn('status', function ($order) {
+                return $order->status;
+            })
+            ->addColumn('actions', function ($order) {
+                return '
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editOrder(' . $order->id . ')"><i class="mdi mdi-pencil"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteOrder(' . $order->id . ')"><i class="mdi mdi-trash-can"></i></a>
+                ';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+        }
+
+        return view('content.orders.new');
+    }
+
+    public function progress_orders(Request $request) {
+        if ($request->ajax()) {
+            $orders = Order::where('status', '!=', 'completed')->get();
+            return DataTables::of($orders)
+            ->editColumn('id', function ($order) {
+                return $order->id;
+            })
+            ->editColumn('customer_name', function ($order) {
+                return $order->customer_name;
+            })
+            ->editColumn('customer_email', function ($order) {
+                return $order->customer_email;
+            })
+            ->editColumn('customer_phone', function ($order) {
+                return $order->customer_phone;
+            })
+            ->editColumn('status', function ($order) {
+                return $order->status;
+            })
+            ->addColumn('actions', function ($order) {
+                return '
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editOrder(' . $order->id . ')"><i class="mdi mdi-pencil"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteOrder(' . $order->id . ')"><i class="mdi mdi-trash-can"></i></a>
+                ';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+        }
+
+        return view('content.orders.progress');
+    }
+
+    public function completed_orders(Request $request) {
+        if ($request->ajax()) {
+            $orders = Order::where('status', 'completed')->get();
+            return DataTables::of($orders)
+            ->editColumn('id', function ($order) {
+                return $order->id;
+            })
+            ->editColumn('customer_name', function ($order) {
+                return $order->customer_name;
+            })
+            ->editColumn('customer_email', function ($order) {
+                return $order->customer_email;
+            })
+            ->editColumn('customer_phone', function ($order) {
+                return $order->customer_phone;
+            })
+            ->editColumn('status', function ($order) {
+                return $order->status;
+            })
+            ->make(true);   
+        }
+
+        return view('content.orders.completed');
+    }
+
+    public function cars(Request $request) {
+        if() {
+
+        }
+    }
 }

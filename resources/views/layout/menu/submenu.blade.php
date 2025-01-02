@@ -4,7 +4,7 @@
             <a class="nav-link d-flex align-items-center nav-link-1 collapse-item rounded {{ Route::currentRouteName() == $submenu['name'] ? 'active' : '' }} {{ isset($section['submenu']) ? (($isActiveSection || $isActiveSubmenu) ? '' : 'collapsed') : '' }}"
             href="{{ isset($submenu['link']) ? route($submenu['name']) : '#' }}"
             @if(isset($submenu['submenu'])) data-bs-toggle="collapse" data-bs-target="#subcollapse{{ $loop->parent->index }}-{{ $loop->index }}" aria-expanded="{{ $isActiveSection || $isActiveSubmenu ? 'true' : 'false' }}" aria-controls="subcollapse{{ $loop->parent->index }}-{{ $loop->index }}" @endif>
-                {{ $submenu['title'] }}
+                {{ __($submenu['title']) }}
             </a>
 
                 @if(isset($submenu['submenu']))

@@ -12,4 +12,8 @@ class HomeController extends Controller {
     public function dashboard() {
         return view('content.index');
     }
+
+    public function redirect() {
+        return view('content.pages.redirect');
+    }
 }

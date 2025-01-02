@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CouponController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TinymceController;
@@ -23,7 +25,11 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
+
     Route::get('/', [HomeController::class, 'home'])->name('home');
+    
+    Route::get('/redirect', [HomeController::class, 'redirect'])->name('redirect');
 
     Route::group(['middleware' => ['guest']], function () {
         Route::get('auth/login', [AuthController::class, 'login'])->name('auth.login');
@@ -86,6 +92,29 @@ use Illuminate\Support\Facades\Route;
         Route::get('/log/{id}', [LogController::class, 'get'])->name('log');
         Route::delete('/log/{id}', [LogController::class, 'delete'])->name('log.delete');
 
+        // Orders
+        //Dashboard
+        Route::get('/orders/new', [DataTabelController::class, 'new_orders'])->name('orders.new');
+        Route::get('/orders/completed', [DataTabelController::class, 'completed_orders'])->name('orders.completed');
+        Route::get('/orders/progress', [DataTabelController::class, 'progress_orders'])->name('orders.progress');
+
+        Route::get('/order/{id}', [OrderController::class, 'get'])->name('order');
+        Route::delete('/order/{id}', [OrderController::class, 'delete'])->name('order.delete');
+        Route::get('/order/{id}/restore', [OrderController::class, 'restore'])->name('order.restore');
+        Route::post('/order/update', [OrderController::class, 'update'])->name('order.update');
+        Route::post('/order/create', [OrderController::class, 'create'])->name('order.create');
+
+        // Cars
+        //Dashboard
+        Route::get('/cars', [DataTabelController::class, 'cars'])->name('cars');
+
+        Route::get('/car/{id}', [CarController::class, 'get'])->name('car.get');
+        Route::delete('/car/{id}', [CarController::class, 'delete'])->name('car.delete');
+        Route::put('/car/update', [CarController::class, 'update'])->name('car.update');
+        Route::post('/car/create', [CarController::class, 'create'])->name('car.create');
+
+
+
         Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
         Route::get('pages/terms-of-use', [SettingController::class, 'get_terms_of_use'])->name('services.terms-of-use');
@@ -97,6 +126,8 @@ use Illuminate\Support\Facades\Route;
         Route::get('settings/website', [SettingController::class, 'get_website'])->name('settings.website.get');
         Route::get('settings/application', [SettingController::class, 'get_application'])->name('settings.application.get');
         Route::get('settings/account', [SettingController::class, 'get_account'])->name('settings.account.get');
+
+        Route::post('settings/account/update', [SettingController::class, 'update_account'])->name('settings.account.update');
 
         Route::post('settings/account/upload/image', [SettingController::class, 'upload_image'])->name('settings.account.uploadImage');
 

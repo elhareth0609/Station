@@ -229,12 +229,6 @@
             "link": "/logistics"
         },
         {
-            "title" : "Cars",
-            "icon" : "mdi mdi-car",
-            "name" : "cars",
-            "link" : "/cars"
-        },
-        {
             "title": "Chat",
             "icon": "mdi mdi-chat-outline",
             "name": "chat",

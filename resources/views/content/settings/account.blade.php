@@ -39,7 +39,7 @@
                 <li class="nav-item"><a class="nav-link" href="#"><span class="mdi mdi-key-outline me-2"></span>{{ __('Password') }}</a></li>
             </ul>
 
-            <form>
+            <form id="editProfileForm" action="{{ route('settings.account.update') }}" method="POST">
                 <div class="row mb-4">
                     <div class="mt-3 col-lg-3 col-md-12 text-center">
                         <div class="position-relative d-inline-block rounded-pill">
@@ -262,6 +262,39 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+$(document).ready(function () {
+    $('#editProfileForm').submit(function (event) {
+        event.preventDefault();
+        $('#loading').show();
+        var formData = new FormData(this);
+        $.ajax({
+            url: $(this).attr('action'),
+            type: $(this).attr('method'),
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                $('#loading').hide();
+                Swal.fire({
+                    icon: response.icon,
+                    title: response.state,
+                    text: response.message,
+                    confirmButtonText: __("Ok",lang)
+                });
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $('#loading').hide();
+                const response = JSON.parse(xhr.responseText);
+                Swal.fire({
+                    icon: response.icon,
+                    title: response.state,
+                    text: response.message,
+                    confirmButtonText: __("Ok",lang)
+                });
+            }
+        });
+    });
+});
 </script>
 
 @endsection
