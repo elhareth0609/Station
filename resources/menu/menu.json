@@ -201,6 +201,44 @@
             ]
         },
         {
+            "title": "E-Commerce",
+            "icon": "mdi mdi-cart-outline",
+            "name": "products",
+            "link": "/products",
+            "submenu": [
+                {
+                    "title": "Store",
+                    "name": "store",
+                    "link": "/store"
+                },
+                {
+                    "title": "Categories",
+                    "name": "categories",
+                    "link": "/categories"
+                },
+                {
+                    "title": "Sub Categories",
+                    "name": "sub-categories",
+                    "link": "/sub-categories"
+                },
+                {
+                    "title": "Products",
+                    "name": "products",
+                    "link": "/products"
+                },
+                {
+                    "title": "Orders",
+                    "name": "orders",
+                    "link": "/orders"
+                },
+                {
+                    "title": "Cart",
+                    "name": "cart",
+                    "link": "/cart"
+                }
+            ]
+        },
+        {
             "type": "hr",
             "title": "Apps"
         },

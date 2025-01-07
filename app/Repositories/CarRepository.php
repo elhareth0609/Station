@@ -6,18 +6,18 @@ use App\Models\Car;
 use App\Interfaces\CarRepositoryInterface;
 
 class CarRepository implements CarRepositoryInterface {
-    private $model;
+    private $car;
 
     public function __construct(Car $car) {
-        $this->model = $car;
+        $this->car = $car;
     }
 
     public function find($id) {
-        return $this->model->findOrFail($id);
+        return $this->car->findOrFail($id);
     }
 
     public function create(array $data) {
-        return $this->model->create($data);
+        return $this->car->create($data);
     }
 
     public function update($id, array $data) {

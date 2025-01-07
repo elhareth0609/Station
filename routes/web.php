@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CouponController;
@@ -14,10 +15,20 @@ use App\Http\Controllers\LogController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TinymceController;
+use Dflydev\DotAccessData\Data;
+use Google\Service\AdExchangeBuyerII\Product;
+use Google\Service\Books\Category;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+
+
+
+
 
 
 
@@ -109,11 +120,35 @@ use Illuminate\Support\Facades\Route;
         Route::get('/cars', [DataTabelController::class, 'cars'])->name('cars');
 
         Route::get('/car/{id}', [CarController::class, 'get'])->name('car.get');
-        Route::delete('/car/{id}', [CarController::class, 'delete'])->name('car.delete');
-        Route::put('/car/update', [CarController::class, 'update'])->name('car.update');
         Route::post('/car/create', [CarController::class, 'create'])->name('car.create');
+        Route::put('/car/{id}', [CarController::class, 'update'])->name('car.update');
+        Route::delete('/car/{id}', [CarController::class, 'delete'])->name('car.delete');
 
 
+        // E-commerce
+        Route::get('store', [StoreController::class, 'index'])->name('store');
+        Route::get('cart', [StoreController::class, 'index'])->name('cart');
+        // Route::get('checkout', [StoreController::class, 'index'])->name('checkout');
+        Route::get('orders', [DataTabelController::class, 'index'])->name('orders');
+
+        Route::get('categories', [DataTabelController::class, 'index'])->name('categories');
+        Route::get('/category/{id}', [CategoryController::class, 'get'])->name('category.get');
+        Route::post('/category/create', [CategoryController::class, 'create'])->name('category.create');
+        Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
+        Route::delete('/category/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+        
+        Route::get('sub-categories', [DataTabelController::class, 'index'])->name('sub-categories');
+        Route::get('/sub-category/{id}', [SubCategoryController::class, 'get'])->name('sub-category.get');
+        Route::post('/sub-category/create', [SubCategoryController::class, 'create'])->name('sub-category.create');
+        Route::put('/sub-category/{id}', [SubCategoryController::class, 'update'])->name('sub-category.update');
+        Route::delete('/sub-category/{id}', [SubCategoryController::class, 'delete'])->name('sub-category.delete');
+        
+        Route::get('products', [DataTabelController::class, 'index'])->name('products');
+        Route::get('/product/{id}', [ProductController::class, 'get'])->name('product.get');
+        Route::post('/product/create', [ProductController::class, 'create'])->name('product.create');
+        Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
+        Route::delete('/product/{id}', [ProductController::class, 'delete'])->name('product.delete');
+        
 
         Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 

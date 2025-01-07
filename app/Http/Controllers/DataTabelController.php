@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\User;
@@ -343,8 +344,35 @@ class DataTabelController extends Controller {
     }
 
     public function cars(Request $request) {
-        if() {
-
+        if ($request->ajax()) {
+            $cars = Car::all();
+            return DataTables::of($cars)
+            ->editColumn('id', function ($car) {
+                return $car->id;
+            })
+            ->editColumn('user_id', function ($car) {
+                return $car->user? $car->user->full_name : '';
+            })
+            ->editColumn('name', function ($car) {
+                return $car->name;
+            })
+            ->editColumn('imei', function ($car) {
+                return $car->imei;
+            })
+            ->editColumn('created_at', function ($car) {
+                return $car->created_at->format('Y-m-d');
+            })
+            ->addColumn('actions', function ($car) {
+                return '
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editCar(' . $car->id . ')"><i class="mdi mdi-pencil"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteCar(' . $car->id . ')"><i class="mdi mdi-trash-can"></i></a>
+                ';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
         }
+
+        return view('content.cars.list');
+
     }
 }

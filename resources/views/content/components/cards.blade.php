@@ -183,11 +183,38 @@
         </div>
         <div class="row">
             <!-- Card 1 -->
-            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="product-card col-lg-3 col-md-6 mb-4">
                 <div class="card p-3 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
                     <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
-                    <img src="{{ asset('assets/img/photos/foods/burger-2021-08-26-18-18-28-utc 1.png') }}" class="card-img-top rounded" alt="Beef Burger">
+                    <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                    <div class="card-body pb-0 text-start">
+                        <div class="text-warning">
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title mb-0">Beef Burger</h5>
+                                <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                            </div>
+                            <div class="btn btn-icon btn-warning text-white">
+                                <i class="mdi mdi-cart-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="product-card col-lg-3 col-md-6 mb-4">
+                <div class="card p-3 position-relative">
+                    <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <img src="http://localhost/img/pc/Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
                     <div class="card-body pb-0 text-start">
                         <div class="text-warning">
@@ -210,11 +237,11 @@
                 </div>
             </div>
             <!-- Card 2 -->
-            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="product-card col-lg-3 col-md-6 mb-4">
                 <div class="card p-3 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
                     <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
-                    <img src="{{ asset('assets/img/photos/foods/fresh-tasty-burger-2021-08-29-04-51-34-utc 1.png') }}" class="card-img-top rounded" alt="Beef Burger">
+                    <img src="http://localhost/img/pc/%D9%88%D8%AD%D8%AF%D8%A9%20%D8%AA%D8%B2%D9%88%D9%8A%D8%AF%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9%20-%20%D8%AD%D8%A7%D9%81%D8%B8%D8%A7%D8%AA%20%D8%A7%D9%84%D9%83%D9%85%D8%A8%D9%8A%D9%88%D8%AA%D8%B1%20&%20%D8%A7%D9%84%D8%B9%D9%84%D8%A8%2080%20Plus%20ATX%20%D9%85%D8%AD%D9%88%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
                     <div class="card-body pb-0 text-start">
                         <div class="text-warning">
@@ -237,11 +264,11 @@
                 </div>
             </div>
             <!-- Card 3 -->
-            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="product-card col-lg-3 col-md-6 mb-4">
                 <div class="card h-100 p-3 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
                     <i class="mdi mdi-heart position-absolute fs-5 text-warning" style="right: 10px;"></i>
-                    <img src="{{ asset('assets/img/photos/foods/tasty-burger-with-bacon-2021-08-27-18-32-01-utc 1.png') }}" class="card-img-top rounded" alt="Beef Burger">
+                    <img src="{{ asset('assets/img/photos/foods/tasty-burger-with-bacon-2021-08-27-18-32-01-utc 1.png') }}" class="product-image card-img-top rounded" alt="Beef Burger">
 
                     <div class="card-body pb-0 text-start">
                         {{-- <div class="text-warning">
@@ -360,6 +387,11 @@
 
 
     <style>
+        .products-container .product-card .product-image {
+            object-fit: contain;
+            height: 202px;           
+            width: 100%;           
+        }
         .contacts-container .avatar {
             width: 80px;
             height: 80px;

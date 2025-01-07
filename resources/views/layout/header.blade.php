@@ -25,8 +25,11 @@
 <script src="{{ asset('assets/js/pusher.min.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('assets/js/lottie.min.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('assets/js/dropzone-min.js') }}?v={{ time() }}"></script>
-<script src="{{ asset('assets/js/myCounter.js') }}?v={{ time() }}"></script>
 
+<link href="{{ asset('assets/css/select2.min.css') }}?v={{ time() }}"/>
+<script src="{{ asset('assets/js/select2.min.js') }}?v={{ time() }}"></script>
+
+<script src="{{ asset('assets/js/myCounter.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('assets/js/myValidate.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('assets/js/myLang.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('assets/js/myIcons.js') }}?v={{ time() }}"></script>
@@ -39,7 +42,7 @@
 
 <!-- Custom styles for this template-->
 <link href="{{ asset('assets/css/sb-admin-2.css') }}?v={{ time() }}" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('assets/css/mine.css') }}?v={{ time() }}" />
 
+<link rel="stylesheet" href="{{ asset('assets/css/mine.css') }}?v={{ time() }}" />
 <script src="{{ asset('assets/js/mine.js') }}?v={{ time() }}"></script>
 

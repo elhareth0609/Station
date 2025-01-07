@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Services\CarService;
-use App\Http\Requests\CarRequest;
-use App\Http\Resources\CarResource;
+use App\Http\Requests\Car\App\CarRequest;
+use App\Http\Resources\Car\App\CarResource;
 use App\Traits\ApiResponder;
 
-class CarController extends Controller
-{
+class CarController extends Controller {
     use ApiResponder;
 
     private $carService;

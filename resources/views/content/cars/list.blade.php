@@ -34,6 +34,8 @@
                     <tr>
                         <th>#</th>
                         <th>{{__("Name")}}</th>
+                        <th>{{__("Driver")}}</th>
+                        <th>{{__("Imei")}}</th>
                         <th>{{ __('Created At') }}</th>
                         <th>{{ __('Actions') }}</th>
                     </tr>
@@ -44,34 +46,6 @@
             <div class="my-w-fit-content" id="dataTables_my_info"></div>
             <nav class="my-w-fit-content" aria-label="Table navigation"><ul class="pagination" id="dataTables_my_paginate"></ul></nav>
         </div>
-    </div>
-</div>
-
-
-<!-- Edit Car Modal -->
-<div class="modal fade" id="editCarModal" tabindex="-1" aria-labelledby="editCarLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form class="validate" id="editCarForm" action="{{route('car.update')}}" method="POST">
-            @method('PUT')
-            @csrf
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editCarLabel">{{ __('Edit Car') }}</h5>
-                    <button type="button" class="btn btn-light btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="id" id="edit_id">
-                    <div class="input-group input-group-floating mb-3">
-                        <span for="name" class="input-group-text">{{ __('Name') }}</span>
-                        <input type="text" class="form-control" name="name" id="edit_name" data-v="required" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">{{ __('Save') }}</button>
-                </div>
-            </div>
-        </form>
     </div>
 </div>
 
@@ -90,6 +64,14 @@
                         <span for="name" class="input-group-text">{{ __('Name') }}</span>
                         <input type="text" class="form-control" name="name" id="name" data-v="required" required>
                     </div>
+                    <div class="input-group input-group-floating mb-3">
+                        <span for="user_id" class="input-group-text">{{ __('Driver') }}</span>
+                        <input type="text" class="form-control" name="user_id" id="user_id" data-v="required" required>
+                    </div>
+                    <div class="input-group input-group-floating mb-3">
+                        <span for="imei" class="input-group-text">{{ __('Imei') }}</span>
+                        <input type="text" class="form-control" name="imei" id="imei" data-v="required" required>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
@@ -99,6 +81,43 @@
         </form>
     </div>
 </div>
+
+
+<!-- Edit Car Modal -->
+<div class="modal fade" id="editCarModal" tabindex="-1" aria-labelledby="editCarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="validate" id="editCarForm" method="POST">
+            @method('PUT')
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCarLabel">{{ __('Edit Car') }}</h5>
+                    <button type="button" class="btn btn-light btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="edit_id">
+                    <div class="input-group input-group-floating mb-3">
+                        <span for="name" class="input-group-text">{{ __('Name') }}</span>
+                        <input type="text" class="form-control" name="name" id="edit_name" data-v="required" required>
+                    </div>
+                    <div class="input-group input-group-floating mb-3">
+                        <span for="driver" class="input-group-text">{{ __('Imei') }}</span>
+                        <input type="text" class="form-control" name="imei" id="edit_iemi" data-v="required" required>
+                    </div>
+                    <div class="input-group input-group-floating mb-3">
+                        <span for="user_id" class="input-group-text">{{ __('Driver') }}</span>
+                        <input type="text" class="form-control" name="user_id" id="edit_user_id" data-v="required" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">{{ __('Save') }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 
 
 <script type="text/javascript">
@@ -114,8 +133,12 @@
                 'X-CSRF-TOKEN': csrfToken
             },
             success: function(data) {
-            car = data.car;
+            car = data.data;
             $('#edit_id').val(car.id);
+            $('#edit_name').val(car.name);
+            $('#edit_imei').val(car.imei);
+            var selectDriver = $('#edit_user_id');
+            selectDriver.val(car.user_id).trigger('change');
 
             $('#loading').hide();
             $('#editCarModal').modal('show');
@@ -173,11 +196,13 @@
             },
             columns: [
                 {data: 'id', name: '#',},
-                {data: 'name', name: '{{__("Name")}}',},
+                {data: 'name', name: '{{__("Name")}}'},
+                {data: 'user_id', name: '{{__("Driver")}}'},
+                {data: 'imei', name: '{{__("Imei")}}'},
                 {data: 'created_at', name: '{{__("Created At")}}',},
                 {data: 'actions', name: '{{__("Actions")}}', orderable: false, searchable: false,}
             ],
-            order: [[2, 'desc']],
+            order: [[3, 'desc']],
 
             // Start of checkboxes
 
@@ -204,6 +229,12 @@
             handlePagination(table);
             updateSortingIcons(table);
             updateInfoText(table);
+        });
+
+        $('#edit_user_id').select2({
+            dropdownParent: $('#editCarModal'),
+            width: '100%',
+            placeholder: "{{ __('Select Driver') }}"
         });
 
         $('#createCarForm').submit(function(event) {
@@ -253,9 +284,11 @@
             event.preventDefault();
 
             var formData = $(this).serialize();
+            var id = $('#edit_id').val();
+            console.log(id);
 
             $.ajax({
-                url: $(this).attr('action'),
+                url: "{{ route('car.update', ':id') }}".replace(':id', id),
                 type: $(this).attr('method'),
                 data: formData,
                 dataType: 'json',

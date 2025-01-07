@@ -24,9 +24,7 @@
     <div class="login-container bg-white rounded-3 p-3 mx-auto my-5 my-h-fit-content">
         <!-- Logo -->
         <a class="d-flex align-items-center justify-content-center text-black fs-4 my-3" href="{{ route('home') }}">
-            <div class="">
-                <i class="mdi mdi-home-outline"></i>
-            </div>
+            <div><i class="mdi mdi-home-outline"></i></div>
             <div class="mx-3">Dashboard</div>
         </a>
 
@@ -39,18 +37,14 @@
             @csrf
             <div class="mb-3">
                 <div class="input-group">
-                    <span class="input-group-text bg-transparent">
-                        <i class="mdi mdi-email-outline"></i>
-                    </span>
-                    <input type="email" name="email" class="form-control" placeholder="{{ __('Email address') }}" required>
+                    <span class="input-group-text bg-transparent"><i class="mdi mdi-email-outline"></i></span>
+                    <input type="email" name="email" value="admin@gmail.com" class="form-control" placeholder="{{ __('Email address') }}" required>
                 </div>
             </div>
             <div class="mb-3">
                 <div class="input-group">
-                    <span class="input-group-text bg-transparent">
-                        <i class="mdi mdi-lock-outline"></i>
-                    </span>
-                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    <span class="input-group-text bg-transparent"><i class="mdi mdi-lock-outline"></i></span>
+                    <input type="password" name="password" value="123456789" class="form-control" placeholder="Password" required>
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center my-4">
