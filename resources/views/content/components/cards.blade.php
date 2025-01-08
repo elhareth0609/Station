@@ -104,7 +104,7 @@
     <div class="mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h1>{{ __('Hi') }}, Admin!</h1>
+                <h1>{{ __('Hi') }}, {{ Auth::user()->full_name }}!</h1>
                 <p class="text-secondary">{{ __("You've some tasks to do today!") }}</p>
             </div>
             <button class="btn border" style="color: #1B1B1B;">
@@ -114,8 +114,8 @@
 
         <div class="row">
             <!-- Task Card -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="card card rounded-4 p-3 m-2 border">
+            <div class="col-lg-4 col-md-6 col-sm-12 my-2">
+                <div class="card card rounded-4 p-3 border">
                     <div class="d-flex align-items-center mb-3">
                         <div class="d-flex align-items-center justify-content-center btn-icon rounded-pill bg-primary bg-opacity-10">
                             <i class="mdi mdi-checkbox-marked-circle text-primary"></i>
@@ -130,8 +130,8 @@
             </div>
 
             <!-- Completion Rate Card -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="card card rounded-4 p-3 m-2 border">
+            <div class="col-lg-4 col-md-6 col-sm-12 my-2">
+                <div class="card card rounded-4 p-3 border">
                     <div class="d-flex align-items-center mb-3">
                         <div class="d-flex align-items-center justify-content-center btn-icon rounded-pill bg-success bg-opacity-10">
                             <i class="mdi mdi-chart-line text-success"></i>
@@ -139,15 +139,15 @@
                         <h5 class="ms-3 mb-0">{{ __('Completion rate') }}</h5>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
-                        <h1 class="mb-0">95<span class="fs-4 text-secondary">%</span></h1>
+                        <h1 class="mb-0">95</h1><span class="fs-4 text-secondary">%</span>
                         <a href="#" class="text-secondary">See all</a>
                     </div>
                 </div>
             </div>
 
             <!-- Projects Card -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="card card rounded-4 p-3 m-2 border">
+            <div class="col-lg-4 col-md-6 col-sm-12 my-2">
+                <div class="card card rounded-4 p-3 border">
                     <div class="d-flex align-items-center mb-3">
                         <div class="d-flex align-items-center justify-content-center btn-icon rounded-pill bg-warning bg-opacity-10" style="background: #DEE3FF;">
                             <i class="mdi mdi-folder-outline text-warning"></i>
@@ -165,7 +165,7 @@
 
     <div class="products-container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="fw-bold">{{ __('Popular Dishes') }}</h2>
+            <h2 class="fw-bold">{{ __('Popular Products') }}</h2>
             <nav aria-label="Page navigation example">
                 <ul class="pagination mb-0">
                     <li class="page-item mx-1">
@@ -184,12 +184,12 @@
         <div class="row">
             <!-- Card 1 -->
             <div class="product-card col-lg-3 col-md-6 mb-4">
-                <div class="card p-3 position-relative">
+                <div class="card p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
                     <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
-                    <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
+                    <img src="https://img.sadeem-labs.com/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
-                    <div class="card-body pb-0 text-start">
+                    <div class="card-body px-1 pb-0 text-start">
                         <div class="text-warning">
                             <i class="mdi mdi-star"></i>
                             <i class="mdi mdi-star"></i>
@@ -211,12 +211,12 @@
             </div>
             <!-- Card 2 -->
             <div class="product-card col-lg-3 col-md-6 mb-4">
-                <div class="card p-3 position-relative">
+                <div class="card p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
                     <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
-                    <img src="http://localhost/img/pc/Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
+                    <img src="https://img.sadeem-labs.com/pc/Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
-                    <div class="card-body pb-0 text-start">
+                    <div class="card-body px-1 pb-0 text-start">
                         <div class="text-warning">
                             <i class="mdi mdi-star"></i>
                             <i class="mdi mdi-star"></i>
@@ -238,12 +238,12 @@
             </div>
             <!-- Card 2 -->
             <div class="product-card col-lg-3 col-md-6 mb-4">
-                <div class="card p-3 position-relative">
+                <div class="card p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
                     <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
-                    <img src="http://localhost/img/pc/%D9%88%D8%AD%D8%AF%D8%A9%20%D8%AA%D8%B2%D9%88%D9%8A%D8%AF%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9%20-%20%D8%AD%D8%A7%D9%81%D8%B8%D8%A7%D8%AA%20%D8%A7%D9%84%D9%83%D9%85%D8%A8%D9%8A%D9%88%D8%AA%D8%B1%20&%20%D8%A7%D9%84%D8%B9%D9%84%D8%A8%2080%20Plus%20ATX%20%D9%85%D8%AD%D9%88%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9.png" class="product-image card-img-top rounded" alt="Beef Burger">
+                    <img src="https://img.sadeem-labs.com/pc/%D9%88%D8%AD%D8%AF%D8%A9%20%D8%AA%D8%B2%D9%88%D9%8A%D8%AF%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9%20-%20%D8%AD%D8%A7%D9%81%D8%B8%D8%A7%D8%AA%20%D8%A7%D9%84%D9%83%D9%85%D8%A8%D9%8A%D9%88%D8%AA%D8%B1%20&%20%D8%A7%D9%84%D8%B9%D9%84%D8%A8%2080%20Plus%20ATX%20%D9%85%D8%AD%D9%88%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
-                    <div class="card-body pb-0 text-start">
+                    <div class="card-body px-1 pb-0 text-start">
                         <div class="text-warning">
                             <i class="mdi mdi-star"></i>
                             <i class="mdi mdi-star"></i>
@@ -265,12 +265,12 @@
             </div>
             <!-- Card 3 -->
             <div class="product-card col-lg-3 col-md-6 mb-4">
-                <div class="card h-100 p-3 position-relative">
+                <div class="card h-100 p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
                     <i class="mdi mdi-heart position-absolute fs-5 text-warning" style="right: 10px;"></i>
                     <img src="{{ asset('assets/img/photos/foods/tasty-burger-with-bacon-2021-08-27-18-32-01-utc 1.png') }}" class="product-image card-img-top rounded" alt="Beef Burger">
 
-                    <div class="card-body pb-0 text-start">
+                    <div class="card-body px-1 pb-0 text-start">
                         {{-- <div class="text-warning">
                             <i class="mdi mdi-star"></i>
                             <i class="mdi mdi-star"></i>
@@ -298,6 +298,234 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="products-container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold">{{ __('All Products') }}</h2>
+        </div>
+        <div class="row">
+            <!-- Card 1 -->
+            <div class="product-card col-lg-3 col-md-6 mb-4">
+                <div class="card p-2 position-relative">
+                    <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <img src="https://img.sadeem-labs.com/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                    <div class="card-body px-1 pb-0 text-start">
+                        <div class="text-warning">
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title mb-0">Beef Burger</h5>
+                                <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                            </div>
+                            <div class="btn btn-icon btn-warning text-white">
+                                <i class="mdi mdi-cart-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="product-card col-lg-3 col-md-6 mb-4">
+                <div class="card p-2 position-relative">
+                    <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <img src="https://img.sadeem-labs.com/pc/Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                    <div class="card-body px-1 pb-0 text-start">
+                        <div class="text-warning">
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title mb-0">Beef Burger</h5>
+                                <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                            </div>
+                            <div class="btn btn-icon btn-warning text-white">
+                                <i class="mdi mdi-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="product-card col-lg-3 col-md-6 mb-4">
+                <div class="card p-2 position-relative">
+                    <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <img src="https://img.sadeem-labs.com/pc/%D9%88%D8%AD%D8%AF%D8%A9%20%D8%AA%D8%B2%D9%88%D9%8A%D8%AF%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9%20-%20%D8%AD%D8%A7%D9%81%D8%B8%D8%A7%D8%AA%20%D8%A7%D9%84%D9%83%D9%85%D8%A8%D9%8A%D9%88%D8%AA%D8%B1%20&%20%D8%A7%D9%84%D8%B9%D9%84%D8%A8%2080%20Plus%20ATX%20%D9%85%D8%AD%D9%88%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                    <div class="card-body px-1 pb-0 text-start">
+                        <div class="text-warning">
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title mb-0">Beef Burger</h5>
+                                <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                            </div>
+                            <div class="btn btn-icon btn-warning text-white">
+                                <i class="mdi mdi-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="product-card col-lg-3 col-md-6 mb-4">
+                <div class="card p-2 position-relative">
+                    <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <img src="https://img.sadeem-labs.com/pc/%D8%B4%D8%A7%D8%AD%D9%86%20%D8%A8%D8%B7%D8%A7%D8%B1%D9%8A%D8%A9%20%D9%85%D9%83%D8%A8%D8%B1%20%D8%B5%D9%88%D8%AA%20%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%20%D9%85%D9%83%D8%A8%D8%B1%20%D8%B5%D9%88%D8%AA.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                    <div class="card-body px-1 pb-0 text-start">
+                        <div class="text-warning">
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title mb-0">Beef Burger</h5>
+                                <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                            </div>
+                            <div class="btn btn-icon btn-warning text-white">
+                                <i class="mdi mdi-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="product-card col-lg-3 col-md-6 mb-4">
+                <div class="card p-2 position-relative">
+                    <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <img src="https://img.sadeem-labs.com/clothes/%D8%B3%D8%AA%D8%B1%D8%A9%20%D8%A7%D9%84%D8%B1%D9%85%D8%B2%20%D8%A7%D9%84%D8%A8%D8%B1%D9%8A%D8%AF%D9%8A%20%D8%A7%D9%84%D8%A3%D8%B3%D9%88%D8%AF%20%D9%88%D8%A7%D9%84%D8%A3%D8%AD%D9%85%D8%B1.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                    <div class="card-body px-1 pb-0 text-start">
+                        <div class="text-warning">
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title mb-0">Beef Burger</h5>
+                                <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                            </div>
+                            <div class="btn btn-icon btn-warning text-white">
+                                <i class="mdi mdi-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="product-card col-lg-3 col-md-6 mb-4">
+                <div class="card p-2 position-relative">
+                    <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <img src="https://img.sadeem-labs.com/clothes/%D9%87%D9%88%D8%AF%D9%8A%D9%8A%20%D8%B3%D8%AA%D8%B1%D8%A9%20%D9%85%D8%B9%D8%B7%D9%81%20%D8%B3%D8%AA%D8%B1%D8%A9%20%D9%88%D8%A7%D9%82%D9%8A%D8%A9%20%D9%85%D9%84%D8%A7%D8%A8%D8%B3%20%D8%A7%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                    <div class="card-body px-1 pb-0 text-start">
+                        <div class="text-warning">
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title mb-0">Beef Burger</h5>
+                                <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                            </div>
+                            <div class="btn btn-icon btn-warning text-white">
+                                <i class="mdi mdi-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 7 -->
+            <div class="product-card col-lg-3 col-md-6 mb-4">
+                <div class="card p-2 position-relative">
+                    <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <img src="https://img.sadeem-labs.com/clothes/%D9%87%D9%88%D8%AF%D9%8A%D9%8A%20%D9%85%D9%84%D8%A7%D8%A8%D8%B3%20%D8%A7%D9%84%D8%B7%D9%81%D9%84%20%D8%B3%D8%AA%D8%B1%D8%A9%20%D9%85%D8%B9%D8%B7%D9%81%20%D9%88%D8%A7%D9%82%20%D9%85%D9%86%20%D8%A7%D9%84%D9%85%D8%B7%D8%B1.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                    <div class="card-body px-1 pb-0 text-start">
+                        <div class="text-warning">
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title mb-0">Beef Burger</h5>
+                                <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                            </div>
+                            <div class="btn btn-icon btn-warning text-white">
+                                <i class="mdi mdi-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 8 -->
+            <div class="product-card col-lg-3 col-md-6 mb-4">
+                <div class="card p-2 position-relative">
+                    <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <img src="https://img.sadeem-labs.com/clothes/%D8%B3%D8%AA%D8%B1%D8%A9%20%D9%87%D9%88%D8%AF%D9%8A%D9%8A%20%D9%87%D9%8A%D9%84%D9%8A%20%D9%87%D8%A7%D9%86%D8%B3%D9%86.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                    <div class="card-body px-1 pb-0 text-start">
+                        <div class="text-warning">
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title mb-0">Beef Burger</h5>
+                                <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                            </div>
+                            <div class="btn btn-icon btn-warning text-white">
+                                <i class="mdi mdi-plus"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
