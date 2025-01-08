@@ -273,6 +273,12 @@
             "link" : "/cars"
         },
         {
+            "title" : "Coupons",
+            "icon" : "mdi mdi-ticket",
+            "name" : "coupons",
+            "link" : "/coupons"
+        },
+        {
             "title": "Chat",
             "icon": "mdi mdi-chat-outline",
             "name": "chat",

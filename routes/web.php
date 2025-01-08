@@ -54,11 +54,22 @@ use Illuminate\Support\Facades\Route;
     Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-
+        
         Route::get('users', [DataTabelController::class, 'users'])->name('users');
         Route::get('datatabels', [DataTabelController::class, 'datatabels'])->name('datatabels');
         Route::get('google-sheet', [DataTabelController::class, 'google_sheet'])->name('google-sheet');
-        
+        Route::get('/orders/new', [DataTabelController::class, 'new_orders'])->name('orders.new');
+        Route::get('/orders/completed', [DataTabelController::class, 'completed_orders'])->name('orders.completed');
+        Route::get('/orders/progress', [DataTabelController::class, 'progress_orders'])->name('orders.progress');
+        Route::get('products', [DataTabelController::class, 'index'])->name('products');
+        Route::get('/cars', [DataTabelController::class, 'cars'])->name('cars');
+        Route::get('orders', [DataTabelController::class, 'orders'])->name('orders');
+        Route::get('categories', [DataTabelController::class, 'categories'])->name('categories');
+        Route::get('sub-categories', [DataTabelController::class, 'sub_categories'])->name('sub-categories');
+        Route::get('coupons', [DataTabelController::class, 'coupons'])->name('coupons');
+
+
+
         Route::get('logs', [DataTabelController::class, 'logs'])->name('logs');
 
         Route::get('logistics', [MapController::class, 'index'])->name('logistics');
@@ -98,6 +109,22 @@ use Illuminate\Support\Facades\Route;
         Route::post('/coupons/import', [CouponController::class, 'import'])->name('coupons.import');
         Route::get('/coupon/{id}/restore', [CouponController::class, 'restore'])->name('coupon.restore');
 
+        // Catgories
+        // Dashboard
+        Route::get('/category/{id}', [CategoryController::class, 'get'])->name('category');
+        Route::post('/category/create', [CategoryController::class, 'create'])->name('category.create');
+        Route::delete('/category/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+        Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
+        Route::get('/category/{id}/restore', [CategoryController::class, 'restore'])->name('category.restore');
+
+        // Sub Catgories
+        // Dashboard
+        Route::get('/sub-category/{id}', [SubCategoryController::class, 'get'])->name('sub-category');
+        Route::post('/sub-category/create', [SubCategoryController::class, 'create'])->name('sub-category.create');
+        Route::delete('/sub-category/{id}', [SubCategoryController::class, 'delete'])->name('sub-category.delete');
+        Route::put('/sub-category/{id}', [SubCategoryController::class, 'update'])->name('sub-category.update');
+        Route::get('/sub-category/{id}/restore', [SubCategoryController::class, 'restore'])->name('sub-category.restore');
+
         // Logs
         // Dashboard
         Route::get('/log/{id}', [LogController::class, 'get'])->name('log');
@@ -105,20 +132,15 @@ use Illuminate\Support\Facades\Route;
 
         // Orders
         //Dashboard
-        Route::get('/orders/new', [DataTabelController::class, 'new_orders'])->name('orders.new');
-        Route::get('/orders/completed', [DataTabelController::class, 'completed_orders'])->name('orders.completed');
-        Route::get('/orders/progress', [DataTabelController::class, 'progress_orders'])->name('orders.progress');
 
         Route::get('/order/{id}', [OrderController::class, 'get'])->name('order');
         Route::delete('/order/{id}', [OrderController::class, 'delete'])->name('order.delete');
         Route::get('/order/{id}/restore', [OrderController::class, 'restore'])->name('order.restore');
-        Route::post('/order/update', [OrderController::class, 'update'])->name('order.update');
+        Route::post('/order/{id}', [OrderController::class, 'update'])->name('order.update');
         Route::post('/order/create', [OrderController::class, 'create'])->name('order.create');
 
         // Cars
         //Dashboard
-        Route::get('/cars', [DataTabelController::class, 'cars'])->name('cars');
-
         Route::get('/car/{id}', [CarController::class, 'get'])->name('car.get');
         Route::post('/car/create', [CarController::class, 'create'])->name('car.create');
         Route::put('/car/{id}', [CarController::class, 'update'])->name('car.update');
@@ -129,21 +151,8 @@ use Illuminate\Support\Facades\Route;
         Route::get('store', [StoreController::class, 'index'])->name('store');
         Route::get('cart', [StoreController::class, 'index'])->name('cart');
         // Route::get('checkout', [StoreController::class, 'index'])->name('checkout');
-        Route::get('orders', [DataTabelController::class, 'index'])->name('orders');
 
-        Route::get('categories', [DataTabelController::class, 'index'])->name('categories');
-        Route::get('/category/{id}', [CategoryController::class, 'get'])->name('category.get');
-        Route::post('/category/create', [CategoryController::class, 'create'])->name('category.create');
-        Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
-        Route::delete('/category/{id}', [CategoryController::class, 'delete'])->name('category.delete');
-        
-        Route::get('sub-categories', [DataTabelController::class, 'index'])->name('sub-categories');
-        Route::get('/sub-category/{id}', [SubCategoryController::class, 'get'])->name('sub-category.get');
-        Route::post('/sub-category/create', [SubCategoryController::class, 'create'])->name('sub-category.create');
-        Route::put('/sub-category/{id}', [SubCategoryController::class, 'update'])->name('sub-category.update');
-        Route::delete('/sub-category/{id}', [SubCategoryController::class, 'delete'])->name('sub-category.delete');
-        
-        Route::get('products', [DataTabelController::class, 'index'])->name('products');
+
         Route::get('/product/{id}', [ProductController::class, 'get'])->name('product.get');
         Route::post('/product/create', [ProductController::class, 'create'])->name('product.create');
         Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');

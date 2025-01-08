@@ -620,9 +620,17 @@ span.ripple-effect {
 .form-group.form-group-floating input {
     padding: .75rem;
 }
+.form-group.form-group-floating select {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+}
+.form-group.form-group-floating.input-rtl label {
+    right: 1rem;
+    left: auto;
+}
 .form-group.form-group-floating label {
     position: absolute;
-    left: 1.5rem;
+    left: 1rem;
     top: .75rem;
     background: white;
     padding-inline: .3em;
@@ -635,15 +643,23 @@ span.ripple-effect {
 .form-group.form-group-floating input::placeholder {
     opacity: 0;
 }
-.form-group.form-group-floating input:focus + label,
-.form-group.form-group-floating input:not(:placeholder-shown) + label {
+.form-group.form-group-floating:has(input:focus) label,
+.form-group.form-group-floating:has(select) label,
+.form-group.form-group-floating:has(input:not(:placeholder-shown)) label {
     transform: translateY(calc(-50% - .75rem)) scale(.8);
+}
+.form-group.form-group-floating:has(input:disabled) label {
+    background-color: transparent;
+}
+.form-group.form-group-floating input:focus,
+.form-group.form-group-floating select:focus {
+    border: 1px solid var(--bs-primary);
+}
+.form-group.form-group-floating:has(input:focus) label,
+.form-group.form-group-floating:has(select:focus) label {
     color: var(--bs-primary);
 }
 
-.form-group.form-group-floating input:focus {
-    border: 1px solid var(--bs-primary);
-}
 /* End form-group-floating */
 
 

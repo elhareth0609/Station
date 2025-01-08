@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('sub_category_id');
+            $table->string('name');
+            $table->string('image');
+            $table->string('description');
+            $table->decimal('price', 10, 2);
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
+
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade');
         });
     }
 
