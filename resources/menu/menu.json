@@ -243,6 +243,33 @@
             "title": "Apps"
         },
         {
+            "title": "Tinymce",
+            "icon": "mdi mdi-text",
+            "name": "apps.tinymce",
+            "link": "/apps/tinymce",
+            "submenu" : [
+                {
+                    "title": "Tinymce",
+                    "name": "apps.tinymce",
+                    "link": "/apps/tinymce"
+                },
+                {
+                    "title": "Tag",
+                    "name": "apps.tag",
+                    "link": "/apps/tag"
+                },
+                {
+                    "title": "Select",
+                    "name": "apps.select",
+                    "link": "/apps/select"
+                }
+            ]
+        },
+        {
+            "type": "hr",
+            "title": "Pages"
+        },
+        {
             "title": "Charts",
             "icon": "mdi mdi-chart-line",
             "name": "charts",
@@ -307,6 +334,12 @@
             "link": "/pricing"
         },
         {
+            "title" : "Languages",
+            "icon" : "mdi mdi-translate",
+            "name" : "languages",
+            "link" : "/languages"
+        },
+        {
             "title": "Logs",
             "icon": "mdi mdi-code-tags",
             "name": "logs",
@@ -329,12 +362,6 @@
             "icon": "mdi mdi-list-status",
             "name": "pages.kanban",
             "link": "/pages/kanban"
-        },
-        {
-            "title": "Tinymce",
-            "icon": "mdi mdi-text",
-            "name": "tinymce",
-            "link": "/tinymce"
         },
         {
             "type": "hr",

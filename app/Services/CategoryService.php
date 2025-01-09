@@ -16,6 +16,14 @@ class CategoryService {
         return $this->categoryRepository->find($id);
     }
 
+    public function allCategory() {
+        return $this->categoryRepository->all();
+    }
+
+    public function activedCategory() {
+        return $this->categoryRepository->actived();    
+    }
+
     public function createCategory(array $data) {
         return $this->categoryRepository->create($data);
     }

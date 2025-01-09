@@ -659,6 +659,10 @@ span.ripple-effect {
 .form-group.form-group-floating:has(select:focus) label {
     color: var(--bs-primary);
 }
+.form-group.form-group-floating:has(.custom-select-container) label {
+    z-index: 1;
+}
+
 
 /* End form-group-floating */
 

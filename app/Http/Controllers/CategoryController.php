@@ -26,6 +26,16 @@ class CategoryController extends Controller {
         }
     }
 
+    public function all() {
+        try {
+            $allCategory = $this->categoryService->allCategory();
+            return $this->success(CategoryResource::collection($allCategory));
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
+    }
+
+
     public function create(CategoryRequest $request) {
         try {
             $category = $this->categoryService->createCategory($request->validated());

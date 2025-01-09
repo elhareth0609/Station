@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TinymceController extends Controller {
-    public function index() {
-        return view('content.tinymce.index');
+class AppsController extends Controller {
+    public function tinymce() {
+        return view('content.apps.tinymce');
     }
 
-    public function store(Request $request) {
+    public function select() {
+        return view('content.apps.select');
+    }
+
+    public function tag() {
+        return view('content.apps.tag');
+    }
+
+    public function tinymce_store(Request $request) {
         try {
             return response()->json([
                 'icon' => 'success',

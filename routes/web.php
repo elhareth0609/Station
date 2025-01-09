@@ -19,7 +19,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SubCategoryController;
-use App\Http\Controllers\TinymceController;
+use App\Http\Controllers\AppsController;
 use Dflydev\DotAccessData\Data;
 use Google\Service\AdExchangeBuyerII\Product;
 use Google\Service\Books\Category;
@@ -82,8 +82,6 @@ use Illuminate\Support\Facades\Route;
         Route::get('fullcalendar', [FullCalendarController::class, 'index'])->name('fullcalendar');
 
 
-        Route::get('tinymce', [TinymceController::class, 'index'])->name('tinymce');
-        Route::post('tinymce', [TinymceController::class, 'store'])->name('tinymce.store');
         
         Route::get('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
         Route::get('auth/destroy', [AuthController::class, 'destroy'])->name('auth.destroy');
@@ -116,6 +114,8 @@ use Illuminate\Support\Facades\Route;
         Route::delete('/category/{id}', [CategoryController::class, 'delete'])->name('category.delete');
         Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
         Route::get('/category/{id}/restore', [CategoryController::class, 'restore'])->name('category.restore');
+
+        Route::get('/categories/all', [CategoryController::class, 'all'])->name('categories.all');
 
         // Sub Catgories
         // Dashboard
@@ -152,12 +152,14 @@ use Illuminate\Support\Facades\Route;
         Route::get('cart', [StoreController::class, 'index'])->name('cart');
         // Route::get('checkout', [StoreController::class, 'index'])->name('checkout');
 
-
+        // Products
+        // Dashboard
         Route::get('/product/{id}', [ProductController::class, 'get'])->name('product.get');
         Route::post('/product/create', [ProductController::class, 'create'])->name('product.create');
         Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::delete('/product/{id}', [ProductController::class, 'delete'])->name('product.delete');
         
+        Route::post('languages', [LanguageController::class, 'index'])->name('languages');
 
         Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
@@ -166,7 +168,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('pages/privacy-and-policy', [SettingController::class, 'get_privacy_and_policy'])->name('services.privacy-and-policy');
         Route::get('pages/delivery', [SettingController::class, 'get_delivery'])->name('services.delivery');
         Route::get('pages/secure-payment', [SettingController::class, 'get_secure_payment'])->name('services.secure-payment');
-
+        
         Route::get('settings/website', [SettingController::class, 'get_website'])->name('settings.website.get');
         Route::get('settings/application', [SettingController::class, 'get_application'])->name('settings.application.get');
         Route::get('settings/account', [SettingController::class, 'get_account'])->name('settings.account.get');
@@ -185,6 +187,13 @@ use Illuminate\Support\Facades\Route;
         Route::get('/certificate', [CertificateController::class, 'generateCertificate'])->name('certificate.generate');
 
         Route::post('/certificate/pdf', [CertificateController::class, 'pdf'])->name('certificate.pdf');
+
+
+        Route::get('apps/tinymce', [AppsController::class, 'tinymce'])->name('apps.tinymce');
+        Route::get('apps/select', [AppsController::class, 'select'])->name('apps.select');
+        Route::get('apps/tag', [AppsController::class, 'tag'])->name('apps.tag');
+        Route::post('apps/tinymce', [AppsController::class, 'tinymce_store'])->name('apps.tinymce.store');
+        
 
 
         Route::get('pages/pricing', function () {

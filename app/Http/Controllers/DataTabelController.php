@@ -557,7 +557,11 @@ class DataTabelController extends Controller {
             ->with('ids', $ids)
             ->make(true);
         }
-        return view('content.sub-categories.list');
+
+        $categories = Category::all();
+
+        return view('content.sub-categories.list')
+        ->with('categories',$categories);
 
     }
 }

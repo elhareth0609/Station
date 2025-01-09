@@ -74,6 +74,15 @@
                         <label for="name" class="form-label">{{ __('Name') }}</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('Name') }}" data-v="required" required>
                     </div>
+
+                        <div class="form-group form-group-floating {{ app()->getLocale() == "ar" ? "input-rtl" : "" }} mb-3">
+                            <label for="category_id" class="form-label">{{ __('Category') }}</label>
+                            <div class="custom-select-container">
+                                <select class="form-select custom-select" id="category_id" name="category_id" data-v="required" required>
+                                    <option value="">{{ __('Select Category') }}</option>
+                                </select>
+                            </div>
+                        </div>
                     <div class="form-group form-group-floating {{ app()->getLocale() == "ar" ? "input-rtl" : "" }} mb-3">
                         <label for="name" class="form-label">{{ __('Status') }}</label>
                         <select class="form-select" id="name" name="status" data-v="required" required>
@@ -107,6 +116,12 @@
                     <div class="form-group form-group-floating {{ app()->getLocale() == "ar" ? "input-rtl" : "" }} mb-3">
                         <label for="edit_name" class="form-label">{{ __('Name') }}</label>
                         <input type="text" class="form-control" id="edit_name" name="name" placeholder="{{ __('Name') }}" data-v="required" required>
+                    </div>
+                    <div class="form-group form-group-floating {{ app()->getLocale() == "ar" ? "input-rtl" : "" }} mb-3">
+                        <label for="edit_category_id" class="form-label">{{ __('Category') }}</label>
+                        <select class="form-select" id="edit_category_id" name="category_id" data-v="required" required>
+                            <option value="">{{ __('Select Category') }}</option>
+                        </select>
                     </div>
                     <div class="form-group form-group-floating {{ app()->getLocale() == "ar" ? "input-rtl" : "" }} mb-3">
                         <label for="edit_status" class="form-label">{{ __('Status') }}</label>
@@ -203,190 +218,161 @@
                 });
         }
 
-
+        
     $(document).ready(function() {
-            table = $('#table').DataTable({
-                pageLength: 100,
-                language: {
-                    "emptyTable": "<div id='no-data-animation' style='width: 100%; height: 200px;'></div>",
-                    "zeroRecords": "<div id='no-data-animation' style='width: 100%; height: 200px;'></div>"
+
+
+
+        table = $('#table').DataTable({
+            pageLength: 100,
+            language: {
+                "emptyTable": "<div id='no-data-animation' style='width: 100%; height: 200px;'></div>",
+                "zeroRecords": "<div id='no-data-animation' style='width: 100%; height: 200px;'></div>"
+            },
+            ajax: {
+                url: "{{ route('sub-categories') }}",
+                data: function(d) {
+                    d.type = $('#selectType').val();
+                    d.trashed = $('#trash-button').data('trashed');
                 },
-                ajax: {
-                    url: "{{ route('sub-categories') }}",
-                    data: function(d) {
-                        d.type = $('#selectType').val();
-                        d.trashed = $('#trash-button').data('trashed');
-                    },
-                    // Start of checkboxes
-                    dataSrc: function(response) {
-                        ids = (response.ids || []).map(id => parseInt(id, 10)); // Ensure all IDs are integers
-                        selectedIds = [];
-                        return response.data;
+                // Start of checkboxes
+                dataSrc: function(response) {
+                    ids = (response.ids || []).map(id => parseInt(id, 10)); // Ensure all IDs are integers
+                    selectedIds = [];
+                    return response.data;
+                }
+            // End of checkboxes
+            },
+            columns: [
+                // Start of checkboxes
+                {
+                    data: 'id',
+                    name: '#',
+                    orderable: false,
+                    searchable: false,
+                    render: function(data, type, full, meta) {
+                        return '<input type="checkbox" class="form-check-input rounded-2 check-item" value="' + data + '">';
                     }
+                },
+                // End  of checkboxes
+                {data: '#', name: "#"},
+                {data: 'name', name: '{{__("Name")}}',},
+                {data: 'category_id', name: '{{__("Category")}}',},
+                {data: 'status', name: '{{__("Status")}}',},
+                {data: 'created_at', name: '{{__("Created At")}}',},
+                {data: 'actions', name: '{{__("Actions")}}', orderable: false, searchable: false,}
+            ],
+            order: [[5, 'desc']], // Default order by created_at column
+
+            rowCallback: function(row, data) {
+                $(row).attr('id', 'sub_category_' + data.id);
+
+                $(row).on('contextmenu', function(e) {
+                    e.preventDefault();
+                    showContextMenu(data.id, e.pageX, e.pageY);
+                });
+
+                // Start of checkboxes
+                var $checkbox = $(row).find('.check-item');
+                var sub_categoryId = parseInt($checkbox.val());
+
+                if (selectedIds.includes(sub_categoryId)) {
+                    $checkbox.prop('checked', true);
+                } else {
+                    $checkbox.prop('checked', false);
+                }
                 // End of checkboxes
-                },
-                columns: [
-                    // Start of checkboxes
-                    {
-                        data: 'id',
-                        name: '#',
-                        orderable: false,
-                        searchable: false,
-                        render: function(data, type, full, meta) {
-                            return '<input type="checkbox" class="form-check-input rounded-2 check-item" value="' + data + '">';
-                        }
-                    },
-                    // End  of checkboxes
-                    {data: '#', name: "#"},
-                    {data: 'name', name: '{{__("Name")}}',},
-                    {data: 'category_id', name: '{{__("Category")}}',},
-                    {data: 'status', name: '{{__("Status")}}',},
-                    {data: 'created_at', name: '{{__("Created At")}}',},
-                    {data: 'actions', name: '{{__("Actions")}}', orderable: false, searchable: false,}
-                ],
-                order: [[5, 'desc']], // Default order by created_at column
 
-                rowCallback: function(row, data) {
-                    $(row).attr('id', 'sub_category_' + data.id);
+            },
+            drawCallback: function() {
+                // Start of checkboxes
+                $('#check-all').off('click').on('click', function() { // Unbind previous event and bind a new one
+                    $('.check-item').prop('checked', this.checked);
+                    var totalCheckboxes = ids.length;
+                    var checkedCheckboxes = selectedIds.length;
 
-                    $(row).on('contextmenu', function(e) {
-                        e.preventDefault();
-                        showContextMenu(data.id, e.pageX, e.pageY);
-                    });
-
-                    // Start of checkboxes
-                    var $checkbox = $(row).find('.check-item');
-                    var sub_categoryId = parseInt($checkbox.val());
-
-                    if (selectedIds.includes(sub_categoryId)) {
-                        $checkbox.prop('checked', true);
+                    if (checkedCheckboxes === 0 || checkedCheckboxes < totalCheckboxes) { // if new all checked or some checked
+                        selectedIds = [];
+                        selectedIds = ids.slice();
                     } else {
-                        $checkbox.prop('checked', false);
-                    }
-                    // End of checkboxes
-
-                },
-                drawCallback: function() {
-                  // Start of checkboxes
-                    $('#check-all').off('click').on('click', function() { // Unbind previous event and bind a new one
-                        $('.check-item').prop('checked', this.checked);
-                        var totalCheckboxes = ids.length;
-                        var checkedCheckboxes = selectedIds.length;
-
-                        if (checkedCheckboxes === 0 || checkedCheckboxes < totalCheckboxes) { // if new all checked or some checked
-                            selectedIds = [];
-                            selectedIds = ids.slice();
-                        } else {
-                            selectedIds = [];
-                        }
-                    });
-
-                    $('.check-item').on('change', function() {
-                        var itemId = parseInt($(this).val());
-
-                        if (this.checked) { // if new checked add to selected
-                            selectedIds.push(itemId);
-                        } else { // if remove checked remove from selected
-                            selectedIds = selectedIds.filter(id => id !== itemId);
-                        }
-
-                        var totalCheckboxes = ids.length;
-                        var checkedCheckboxes = selectedIds.length;
-                        if (checkedCheckboxes === totalCheckboxes) { // all checkboxes checked
-                            $('#check-all').prop('checked', true).prop('indeterminate', false);
-                            selectedIds = ids.slice();
-                        } else if (checkedCheckboxes > 0) { // not all checkboxes are checked
-                            $('#check-all').prop('checked', false).prop('indeterminate', true);
-                        } else {  // all checkboxes are not checked
-                            $('#check-all').prop('checked', false).prop('indeterminate', false);
-                            selectedIds = [];
-                        }
-                    });
-                  // End of checkboxes
-                }
-
-            });
-
-            // Initialize Components
-            initLengthChange(table);
-            initSearchFilter(table);
-            initTypeChange(table);
-            initTrashButton(table);
-            // initPagination(table);
-            initColumnVisibilityToggle(table);
-
-            // Table draw event for sorting icons and pagination updates
-            table.on('draw', function () {
-                handlePagination(table);
-                updateSortingIcons(table);
-                updateInfoText(table);
-            });
-
-            $('#createSubCategoryForm').submit(function(event) {
-                event.preventDefault();
-                $('#createSubCategoryModal').modal('hide');
-                
-                if (!$(this).valid()) {
-                    $('#createSubCategoryModal').modal('show');
-                    return;
-                }
-                $('#loading').show();
-
-                var formData = $(this).serialize();
-
-
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: $(this).attr('method'),
-                    data: formData,
-                    dataType: 'json',
-                    success: function(response) {
-                        $('#loading').hide();
-                        Swal.fire({
-                            icon: response.icon,
-                            title: response.state,
-                            text: response.message,
-                            confirmButtonText: __("Ok",lang)
-                        });
-                        $('#createSubCategoryForm')[0].reset();
-                        $('#createSubCategoryForm .form-control').removeClass('valid');
-                        $('#createSubCategoryForm .form-select').removeClass('valid');
-                        table.ajax.reload();
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        $('#loading').hide();
-                        const response = JSON.parse(xhr.responseText);
-                        Swal.fire({
-                            icon: response.icon,
-                            title: response.state,
-                            text: response.message,
-                            confirmButtonText: __("Ok",lang)
-                        });
+                        selectedIds = [];
                     }
                 });
-            });
 
-            $('#editSubCategoryForm').submit(function(event) {
-                event.preventDefault();
+                $('.check-item').on('change', function() {
+                    var itemId = parseInt($(this).val());
 
-                var formData = $(this).serialize();
-                var id = $('#edit_id').val();
+                    if (this.checked) { // if new checked add to selected
+                        selectedIds.push(itemId);
+                    } else { // if remove checked remove from selected
+                        selectedIds = selectedIds.filter(id => id !== itemId);
+                    }
 
-                $.ajax({
-                    url: "{{ route('sub-category.update', ':id') }}".replace(':id', id),
-                    type: $(this).attr('method'),
-                    data: formData,
-                    dataType: 'json',
-                    success: function(response) {
+                    var totalCheckboxes = ids.length;
+                    var checkedCheckboxes = selectedIds.length;
+                    if (checkedCheckboxes === totalCheckboxes) { // all checkboxes checked
+                        $('#check-all').prop('checked', true).prop('indeterminate', false);
+                        selectedIds = ids.slice();
+                    } else if (checkedCheckboxes > 0) { // not all checkboxes are checked
+                        $('#check-all').prop('checked', false).prop('indeterminate', true);
+                    } else {  // all checkboxes are not checked
+                        $('#check-all').prop('checked', false).prop('indeterminate', false);
+                        selectedIds = [];
+                    }
+                });
+                // End of checkboxes
+            }
+
+        });
+
+        // Initialize Components
+        initLengthChange(table);
+        initSearchFilter(table);
+        initTypeChange(table);
+        initTrashButton(table);
+        // initPagination(table);
+        initColumnVisibilityToggle(table);
+
+        // Table draw event for sorting icons and pagination updates
+        table.on('draw', function () {
+            handlePagination(table);
+            updateSortingIcons(table);
+            updateInfoText(table);
+        });
+
+        $('#createSubCategoryForm').submit(function(event) {
+            event.preventDefault();
+            $('#createSubCategoryModal').modal('hide');
+            
+            if (!$(this).valid()) {
+                $('#createSubCategoryModal').modal('show');
+                return;
+            }
+            $('#loading').show();
+
+            var formData = $(this).serialize();
+
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    $('#loading').hide();
                     Swal.fire({
                         icon: response.icon,
                         title: response.state,
                         text: response.message,
                         confirmButtonText: __("Ok",lang)
                     });
+                    $('#createSubCategoryForm')[0].reset();
+                    $('#createSubCategoryForm .form-control').removeClass('valid');
+                    $('#createSubCategoryForm .form-select').removeClass('valid');
                     table.ajax.reload();
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    $('#loading').hide();
                     const response = JSON.parse(xhr.responseText);
                     Swal.fire({
                         icon: response.icon,
@@ -394,38 +380,76 @@
                         text: response.message,
                         confirmButtonText: __("Ok",lang)
                     });
-                    }
+                }
+            });
+        });
+
+        $('#editSubCategoryForm').submit(function(event) {
+            event.preventDefault();
+
+            var formData = $(this).serialize();
+            var id = $('#edit_id').val();
+
+            $.ajax({
+                url: "{{ route('sub-category.update', ':id') }}".replace(':id', id),
+                type: $(this).attr('method'),
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                Swal.fire({
+                    icon: response.icon,
+                    title: response.state,
+                    text: response.message,
+                    confirmButtonText: __("Ok",lang)
                 });
+                table.ajax.reload();
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                const response = JSON.parse(xhr.responseText);
+                Swal.fire({
+                    icon: response.icon,
+                    title: response.state,
+                    text: response.message,
+                    confirmButtonText: __("Ok",lang)
+                });
+                }
             });
+        });
 
 
-            // Initialize ClipboardJS
-            var clipboard = new ClipboardJS('.copy-code');
+        // Initialize ClipboardJS
+        var clipboard = new ClipboardJS('.copy-code');
 
-            // Success feedback
-            clipboard.on('success', function (e) {
-                const icon = $(e.trigger).find('span.my-copy');
-                const icon1 = $(e.trigger).find('span.my-doubletick');
-                icon.addClass('d-none');
-                icon1.removeClass('d-none');
+        // Success feedback
+        clipboard.on('success', function (e) {
+            const icon = $(e.trigger).find('span.my-copy');
+            const icon1 = $(e.trigger).find('span.my-doubletick');
+            icon.addClass('d-none');
+            icon1.removeClass('d-none');
 
-                // icon.removeClass('my-copy').addClass('my-doubletick');
-                setTimeout(() => {
-                    icon.removeClass('d-none');
-                    icon1.addClass('d-none');
-                    // icon.removeClass('my-doubletick').addClass('my-copy');
-                }, 2000);
+            // icon.removeClass('my-copy').addClass('my-doubletick');
+            setTimeout(() => {
+                icon.removeClass('d-none');
+                icon1.addClass('d-none');
+                // icon.removeClass('my-doubletick').addClass('my-copy');
+            }, 2000);
 
-                console.log('Copied:', e.text);
-            });
+            console.log('Copied:', e.text);
+        });
 
-            // Error feedback
-            clipboard.on('error', function (e) {
-                console.error('Copy failed:', e.action); // Log error
-            });
+        // Error feedback
+        clipboard.on('error', function (e) {
+            console.error('Copy failed:', e.action); // Log error
+        });
 
     });
 
+new SearchableSelect({
+    selectId: 'category_id',
+    // url: '/categories/all',
+    // method: 'GET',
+    // csrfToken: document.querySelector('meta[name="csrf-token"]').content
+});
 </script>
 
 @endsection

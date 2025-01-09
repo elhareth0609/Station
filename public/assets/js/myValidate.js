@@ -17,6 +17,12 @@ $(document).ready(function() {
         // Loop through each input field in the form
         this.find('input, select, textarea').each(function() {
             var inputName = $(this).attr('name');
+
+            if (!inputName) {
+                return true; // continue to next element
+            }
+
+
             var inputLabel = inputName.replace(/_/g, ' '); // Create a user-friendly name for messages
             var validation = $(this).data('v'); // Get data-v attribute
 

@@ -16,6 +16,10 @@ class CategoryRepository implements CategoryRepositoryInterface {
         return $this->category->findOrFail($id);
     }
 
+    public function all() {
+        return $this->category->all();
+    }
+
     public function create(array $data) {
         return $this->category->create($data);
     }
@@ -28,5 +32,9 @@ class CategoryRepository implements CategoryRepositoryInterface {
 
     public function delete($id) {
         return $this->find($id)->delete();
+    }
+
+    public function actived() {
+        return $this->category->where('status', 'active')->get();
     }
 }
