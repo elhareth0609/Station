@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Interfaces\CarRepositoryInterface;
-use App\Http\Requests\Car\App\CarRequest;
 
 class CarService {
     private $carRepository;

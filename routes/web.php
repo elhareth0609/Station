@@ -61,7 +61,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('/orders/new', [DataTabelController::class, 'new_orders'])->name('orders.new');
         Route::get('/orders/completed', [DataTabelController::class, 'completed_orders'])->name('orders.completed');
         Route::get('/orders/progress', [DataTabelController::class, 'progress_orders'])->name('orders.progress');
-        Route::get('products', [DataTabelController::class, 'index'])->name('products');
+        Route::get('products', [DataTabelController::class, 'products'])->name('products');
         Route::get('/cars', [DataTabelController::class, 'cars'])->name('cars');
         Route::get('orders', [DataTabelController::class, 'orders'])->name('orders');
         Route::get('categories', [DataTabelController::class, 'categories'])->name('categories');
@@ -132,7 +132,6 @@ use Illuminate\Support\Facades\Route;
 
         // Orders
         //Dashboard
-
         Route::get('/order/{id}', [OrderController::class, 'get'])->name('order');
         Route::delete('/order/{id}', [OrderController::class, 'delete'])->name('order.delete');
         Route::get('/order/{id}/restore', [OrderController::class, 'restore'])->name('order.restore');
@@ -158,8 +157,10 @@ use Illuminate\Support\Facades\Route;
         Route::post('/product/create', [ProductController::class, 'create'])->name('product.create');
         Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::delete('/product/{id}', [ProductController::class, 'delete'])->name('product.delete');
+        // Website
+        Route::get('view/product/{id}', [ProductController::class, 'view'])->name('product.view');
         
-        Route::post('languages', [LanguageController::class, 'index'])->name('languages');
+        Route::get('languages', [LanguageController::class, 'index'])->name('languages');
 
         Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 

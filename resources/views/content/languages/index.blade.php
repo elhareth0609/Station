@@ -1,3 +1,8 @@
+@extends('layout.app')
+
+@section('title', __('Form Basic Inputs'))
+
+@section('content')
         repeater has  select for langauge and tow inputs one for english and one for selected
 
 
@@ -12,3 +17,6 @@
             @endforeach
 
         @endforeach
+
+@endsection
+

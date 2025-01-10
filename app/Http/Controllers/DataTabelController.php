@@ -6,11 +6,13 @@ use App\Models\Car;
 use App\Models\Category;
 use App\Models\Coupon;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\SubCategory;
 use App\Models\User;
 use Google\Service\Sheets as Google_Service_Sheets;
 use Google_Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Laravel\Telescope\EntryType;
@@ -562,6 +564,136 @@ class DataTabelController extends Controller {
 
         return view('content.sub-categories.list')
         ->with('categories',$categories);
+
+    }
+
+    public function products(Request $request) {
+        $query = Product::query();
+
+        if ($request->has('trashed') && $request->trashed == 1) {
+            $query->onlyTrashed();
+        }
+
+        if ($request->has('type') && $request->type != 'all') {
+            if ($request->type == 'active') {
+                $query->where('status', 'active');
+            } elseif ($request->type == 'inactive') {
+                $query->where('status', 'inactive');
+            }
+        }
+
+        $products = $query->where('user_id',Auth::user()->id)->get();
+
+        $ids = $products->pluck('id');
+        if($request->ajax()) {
+            return DataTables::of($products)
+            ->editColumn('id', function ($product) {
+                return (string) $product->id;
+            })
+            ->editColumn('name', function ($product) {
+                return $product->name;
+            })
+            ->editColumn('price', function ($product) {
+                return $product->price;
+            })
+            ->editColumn('image', function ($product) {
+                return $product->image;
+            })
+            ->editColumn('status', function ($product) {
+                if ($product->status == 'active') {
+                    return '<span class="badge bg-success-subtle border border-success-subtle text-success-emphasis rounded-pill">'. __('Active') .'</span>';
+                } else {
+                    return '<span class="badge bg-secondary-subtle border border-secondary-subtle text-secondary-emphasis rounded-pill">'. __('In Active') .'</span>';
+                }
+            })
+            ->editColumn('created_at', function ($product) {
+                return $product->created_at->format('Y-m-d');
+            })
+            ->addColumn('actions', function ($product) use ($request) {
+                if ($request->has('trashed') && $request->trashed == 1) {
+                    return '
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-warning" onclick="restoreProduct(' . $product->id . ')"><i class="mdi mdi-backup-restore"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteProduct(' . $product->id . ')"><i class="mdi mdi-delete-forever-outline"></i></a>
+                    ';
+                } else {
+                    return '
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editProduct(' . $product->id . ')"><i class="mdi mdi-pencil"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="demoProduct(' . $product->id . ')"><i class="mdi mdi-pencil"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteProduct(' . $product->id . ')"><i class="mdi mdi-trash-can"></i></a>
+                    ';
+                }
+            })
+            ->rawColumns(['status','actions'])
+            ->with('ids', $ids)
+            ->make(true);
+        }
+
+        return view('content.products.list');
+
+    }
+
+    public function orders(Request $request) {
+        $query = Product::query();
+
+        if ($request->has('trashed') && $request->trashed == 1) {
+            $query->onlyTrashed();
+        }
+
+        if ($request->has('type') && $request->type != 'all') {
+            if ($request->type == 'active') {
+                $query->where('status', 'active');
+            } elseif ($request->type == 'inactive') {
+                $query->where('status', 'inactive');
+            }
+        }
+
+        $products = $query->where('user_id',Auth::user()->id)->get();
+
+        $ids = $products->pluck('id');
+        if($request->ajax()) {
+            return DataTables::of($products)
+            ->editColumn('id', function ($product) {
+                return (string) $product->id;
+            })
+            ->editColumn('name', function ($product) {
+                return $product->name;
+            })
+            ->editColumn('price', function ($product) {
+                return $product->price;
+            })
+            ->editColumn('image', function ($product) {
+                return $product->image;
+            })
+            ->editColumn('status', function ($product) {
+                if ($product->status == 'active') {
+                    return '<span class="badge bg-success-subtle border border-success-subtle text-success-emphasis rounded-pill">'. __('Active') .'</span>';
+                } else {
+                    return '<span class="badge bg-secondary-subtle border border-secondary-subtle text-secondary-emphasis rounded-pill">'. __('In Active') .'</span>';
+                }
+            })
+            ->editColumn('created_at', function ($product) {
+                return $product->created_at->format('Y-m-d');
+            })
+            ->addColumn('actions', function ($product) use ($request) {
+                if ($request->has('trashed') && $request->trashed == 1) {
+                    return '
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-warning" onclick="restoreProduct(' . $product->id . ')"><i class="mdi mdi-backup-restore"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteProduct(' . $product->id . ')"><i class="mdi mdi-delete-forever-outline"></i></a>
+                    ';
+                } else {
+                    return '
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editProduct(' . $product->id . ')"><i class="mdi mdi-pencil"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="demoProduct(' . $product->id . ')"><i class="mdi mdi-pencil"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteProduct(' . $product->id . ')"><i class="mdi mdi-trash-can"></i></a>
+                    ';
+                }
+            })
+            ->rawColumns(['status','actions'])
+            ->with('ids', $ids)
+            ->make(true);
+        }
+
+        return view('content.products.list');
 
     }
 }

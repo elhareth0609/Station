@@ -243,7 +243,7 @@
             "title": "Apps"
         },
         {
-            "title": "Tinymce",
+            "title": "Apps",
             "icon": "mdi mdi-text",
             "name": "apps.tinymce",
             "link": "/apps/tinymce",
@@ -254,14 +254,14 @@
                     "link": "/apps/tinymce"
                 },
                 {
-                    "title": "Tag",
-                    "name": "apps.tag",
-                    "link": "/apps/tag"
-                },
-                {
                     "title": "Select",
                     "name": "apps.select",
                     "link": "/apps/select"
+                },
+                {
+                    "title": "Tag",
+                    "name": "apps.tag",
+                    "link": "/apps/tag"
                 }
             ]
         },

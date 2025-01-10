@@ -1,0 +1,418 @@
+@extends('layout.app')
+
+@php
+    $isNavbar = false;
+    $isSidebar = false;
+    $isFooter = false;
+    // $isContainer = false;
+@endphp
+
+@section('title', __('Login'))
+
+@section('content')
+
+
+<div class="products-container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">{{ __('Popular Products') }}</h2>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination mb-0">
+                <li class="page-item mx-1">
+                    <a class="page-link btn btn-icon text-warning border-warning" href="#">
+                        <i class="mdi mdi-chevron-left"></i>
+                    </a>
+                </li>
+                <li class="page-item mx-1">
+                    <a class="page-link btn btn-icon text-warning border-warning" href="#">
+                        <i class="mdi mdi-chevron-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="row">
+        <!-- Card 1 -->
+        <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="card p-2 position-relative">
+                <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                <img src="{{ url('/') == 'http://dashboard.test' ? 'http://localhost/img' : 'https://img.sadeem-labs.com' }}/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
+                <div class="card-body px-1 pb-0 text-start">
+                    <div class="text-warning">
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title mb-0">Beef Burger</h5>
+                            <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                        </div>
+                        <div class="btn btn-icon btn-warning text-white">
+                            <i class="mdi mdi-cart-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="card p-2 position-relative">
+                <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                <img src="{{ url('/') == 'http://dashboard.test' ? 'http://localhost/img' : 'https://img.sadeem-labs.com' }}/pc/Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                <div class="card-body px-1 pb-0 text-start">
+                    <div class="text-warning">
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title mb-0">Beef Burger</h5>
+                            <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                        </div>
+                        <div class="btn btn-icon btn-warning text-white">
+                            <i class="mdi mdi-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="card p-2 position-relative">
+                <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                <img src="{{ url('/') == 'http://dashboard.test' ? 'http://localhost/img' : 'https://img.sadeem-labs.com' }}/pc/%D9%88%D8%AD%D8%AF%D8%A9%20%D8%AA%D8%B2%D9%88%D9%8A%D8%AF%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9%20-%20%D8%AD%D8%A7%D9%81%D8%B8%D8%A7%D8%AA%20%D8%A7%D9%84%D9%83%D9%85%D8%A8%D9%8A%D9%88%D8%AA%D8%B1%20&%20%D8%A7%D9%84%D8%B9%D9%84%D8%A8%2080%20Plus%20ATX%20%D9%85%D8%AD%D9%88%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                <div class="card-body px-1 pb-0 text-start">
+                    <div class="text-warning">
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title mb-0">Beef Burger</h5>
+                            <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                        </div>
+                        <div class="btn btn-icon btn-warning text-white">
+                            <i class="mdi mdi-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="card h-100 p-2 position-relative">
+                <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                <i class="mdi mdi-heart position-absolute fs-5 text-warning" style="right: 10px;"></i>
+                <img src="{{ asset('assets/img/photos/foods/tasty-burger-with-bacon-2021-08-27-18-32-01-utc 1.png') }}" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                <div class="card-body px-1 pb-0 text-start">
+                    {{-- <div class="text-warning">
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title mb-0">Beef Burger</h5>
+                            <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                        </div>
+                        <div class="btn btn-icon btn-warning text-white">
+                            <i class="mdi mdi-plus"></i>
+                        </div>
+                    </div> --}}
+                    <div class="d-flex justify-content-center">
+                        <div class="btn btn-icon btn-warning text-white w-20" id="minus">
+                            <i class="mdi mdi-minus"></i>
+                        </div>
+                        <input type="number" class="form-control text-center mx-2 w-75" value="1" min="1" max="10" id="count">
+                        <div class="btn btn-icon btn-warning text-white w-20" id="plus">
+                            <i class="mdi mdi-plus"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="products-container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">{{ __('All Products') }}</h2>
+    </div>
+    <div class="row">
+        <!-- Card 1 -->
+        <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="card p-2 position-relative">
+                <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                <img src="{{ url('/') == 'http://dashboard.test' ? 'http://localhost/img' : 'https://img.sadeem-labs.com' }}/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                <div class="card-body px-1 pb-0 text-start">
+                    <div class="text-warning">
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title mb-0">Beef Burger</h5>
+                            <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                        </div>
+                        <div class="btn btn-icon btn-warning text-white">
+                            <i class="mdi mdi-cart-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="card p-2 position-relative">
+                <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                <img src="{{ url('/') == 'http://dashboard.test' ? 'http://localhost/img' : 'https://img.sadeem-labs.com' }}/pc/Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                <div class="card-body px-1 pb-0 text-start">
+                    <div class="text-warning">
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title mb-0">Beef Burger</h5>
+                            <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                        </div>
+                        <div class="btn btn-icon btn-warning text-white">
+                            <i class="mdi mdi-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="card p-2 position-relative">
+                <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                <img src="{{ url('/') == 'http://dashboard.test' ? 'http://localhost/img' : 'https://img.sadeem-labs.com' }}/pc/%D9%88%D8%AD%D8%AF%D8%A9%20%D8%AA%D8%B2%D9%88%D9%8A%D8%AF%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9%20-%20%D8%AD%D8%A7%D9%81%D8%B8%D8%A7%D8%AA%20%D8%A7%D9%84%D9%83%D9%85%D8%A8%D9%8A%D9%88%D8%AA%D8%B1%20&%20%D8%A7%D9%84%D8%B9%D9%84%D8%A8%2080%20Plus%20ATX%20%D9%85%D8%AD%D9%88%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                <div class="card-body px-1 pb-0 text-start">
+                    <div class="text-warning">
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title mb-0">Beef Burger</h5>
+                            <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                        </div>
+                        <div class="btn btn-icon btn-warning text-white">
+                            <i class="mdi mdi-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="card p-2 position-relative">
+                <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                <img src="{{ url('/') == 'http://dashboard.test' ? 'http://localhost/img' : 'https://img.sadeem-labs.com' }}/pc/%D8%B4%D8%A7%D8%AD%D9%86%20%D8%A8%D8%B7%D8%A7%D8%B1%D9%8A%D8%A9%20%D9%85%D9%83%D8%A8%D8%B1%20%D8%B5%D9%88%D8%AA%20%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%20%D9%85%D9%83%D8%A8%D8%B1%20%D8%B5%D9%88%D8%AA.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                <div class="card-body px-1 pb-0 text-start">
+                    <div class="text-warning">
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title mb-0">Beef Burger</h5>
+                            <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                        </div>
+                        <div class="btn btn-icon btn-warning text-white">
+                            <i class="mdi mdi-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="card p-2 position-relative">
+                <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                <img src="{{ url('/') == 'http://dashboard.test' ? 'http://localhost/img' : 'https://img.sadeem-labs.com' }}/clothes/%D8%B3%D8%AA%D8%B1%D8%A9%20%D8%A7%D9%84%D8%B1%D9%85%D8%B2%20%D8%A7%D9%84%D8%A8%D8%B1%D9%8A%D8%AF%D9%8A%20%D8%A7%D9%84%D8%A3%D8%B3%D9%88%D8%AF%20%D9%88%D8%A7%D9%84%D8%A3%D8%AD%D9%85%D8%B1.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                <div class="card-body px-1 pb-0 text-start">
+                    <div class="text-warning">
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title mb-0">Beef Burger</h5>
+                            <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                        </div>
+                        <div class="btn btn-icon btn-warning text-white">
+                            <i class="mdi mdi-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 6 -->
+        <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="card p-2 position-relative">
+                <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                <img src="{{ url('/') == 'http://dashboard.test' ? 'http://localhost/img' : 'https://img.sadeem-labs.com' }}/clothes/%D9%87%D9%88%D8%AF%D9%8A%D9%8A%20%D8%B3%D8%AA%D8%B1%D8%A9%20%D9%85%D8%B9%D8%B7%D9%81%20%D8%B3%D8%AA%D8%B1%D8%A9%20%D9%88%D8%A7%D9%82%D9%8A%D8%A9%20%D9%85%D9%84%D8%A7%D8%A8%D8%B3%20%D8%A7%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                <div class="card-body px-1 pb-0 text-start">
+                    <div class="text-warning">
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title mb-0">Beef Burger</h5>
+                            <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                        </div>
+                        <div class="btn btn-icon btn-warning text-white">
+                            <i class="mdi mdi-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 7 -->
+        <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="card p-2 position-relative">
+                <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                <img src="{{ url('/') == 'http://dashboard.test' ? 'http://localhost/img' : 'https://img.sadeem-labs.com' }}/clothes/%D9%87%D9%88%D8%AF%D9%8A%D9%8A%20%D9%85%D9%84%D8%A7%D8%A8%D8%B3%20%D8%A7%D9%84%D8%B7%D9%81%D9%84%20%D8%B3%D8%AA%D8%B1%D8%A9%20%D9%85%D8%B9%D8%B7%D9%81%20%D9%88%D8%A7%D9%82%20%D9%85%D9%86%20%D8%A7%D9%84%D9%85%D8%B7%D8%B1.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                <div class="card-body px-1 pb-0 text-start">
+                    <div class="text-warning">
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title mb-0">Beef Burger</h5>
+                            <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                        </div>
+                        <div class="btn btn-icon btn-warning text-white">
+                            <i class="mdi mdi-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 8 -->
+        <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="card p-2 position-relative">
+                <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
+                <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                <img src="{{ url('/') == 'http://dashboard.test' ? 'http://localhost/img' : 'https://img.sadeem-labs.com' }}/clothes/%D8%B3%D8%AA%D8%B1%D8%A9%20%D9%87%D9%88%D8%AF%D9%8A%D9%8A%20%D9%87%D9%8A%D9%84%D9%8A%20%D9%87%D8%A7%D9%86%D8%B3%D9%86.png" class="product-image card-img-top rounded" alt="Beef Burger">
+
+                <div class="card-body px-1 pb-0 text-start">
+                    <div class="text-warning">
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                        <i class="mdi mdi-star-outline"></i>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title mb-0">Beef Burger</h5>
+                            <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
+                        </div>
+                        <div class="btn btn-icon btn-warning text-white">
+                            <i class="mdi mdi-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <button class="btn btn-warning text-white my-w-fit-content">
+            <i class="mdi mdi-cart-outline me-2 text-white"></i>
+            {{ __('View All') }}
+        </button>
+    </div>
+</div>
+
+
+<style>
+    .products-container .product-card .product-image {
+        object-fit: contain;
+        height: 202px;           
+        width: 100%;           
+    }
+</style>
+
+
+
+<script>
+document.getElementById('plus').addEventListener('click', function() {
+    var count = document.getElementById('count');
+    count.value = parseInt(count.value) + 1;
+    if (count.value > 1) {
+        document.getElementById('minus').firstChild.classList.remove('d-none');
+    }
+});
+
+document.getElementById('minus').addEventListener('click', function() {
+    var count = document.getElementById('count');
+    count.value = parseInt(count.value) - 1;
+    if (count.value <= 1) {
+        document.getElementById('minus').firstChild.classList.add('d-none');
+    }
+});
+
+</script>
+@endsection
+

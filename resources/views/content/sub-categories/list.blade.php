@@ -12,10 +12,9 @@
             <input type="text" class="form-control my-w-fit-content m-1" id="dataTables_my_filter" placeholder="{{ __('Search ...') }}" name="search">
 
             <select class="form-select my-w-fit-content m-1" id="selectType" name="type">
-                <option value="all">{{ __('All') }}</option>
+                <option value="">{{ __('All') }}</option>
                 <option value="active">{{ __('Active') }}</option>
                 <option value="inactive">{{ __('In Active') }}</option>
-                <option value="expired">{{ __('Expired') }}</option>
             </select>
 
             <select class="form-select my-w-fit-content m-1" id="dataTables_my_length" name="length">
@@ -255,7 +254,7 @@
                     }
                 },
                 // End  of checkboxes
-                {data: '#', name: "#"},
+                {data: '#', name: '{{__("Id")}}'},
                 {data: 'name', name: '{{__("Name")}}',},
                 {data: 'category_id', name: '{{__("Category")}}',},
                 {data: 'status', name: '{{__("Status")}}',},

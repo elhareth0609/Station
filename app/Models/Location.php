@@ -11,7 +11,7 @@ class Location extends Model {
         'long',
         'late',
     ];
-    
+
 
     public function car() {
         return $this->belongsTo(Car::class);
