@@ -67,6 +67,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('categories', [DataTabelController::class, 'categories'])->name('categories');
         Route::get('sub-categories', [DataTabelController::class, 'sub_categories'])->name('sub-categories');
         Route::get('coupons', [DataTabelController::class, 'coupons'])->name('coupons');
+        Route::get('languages', [DataTabelController::class, 'languages'])->name('languages');
 
 
 
@@ -160,8 +161,11 @@ use Illuminate\Support\Facades\Route;
         // Website
         Route::get('view/product/{id}', [ProductController::class, 'view'])->name('product.view');
         
-        Route::get('languages', [LanguageController::class, 'index'])->name('languages');
-
+        Route::post('/language', [LanguageController::class, 'create'])->name('language.create');
+        Route::get('/language/{word}', [LanguageController::class, 'get'])->name('language.get');
+        Route::put('/language/{word}', [LanguageController::class, 'update'])->name('language.update');
+        Route::delete('/language/{word}', [LanguageController::class, 'destroy'])->name('language.destroy');
+        
         Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
         Route::get('pages/terms-of-use', [SettingController::class, 'get_terms_of_use'])->name('services.terms-of-use');
@@ -193,6 +197,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('apps/tinymce', [AppsController::class, 'tinymce'])->name('apps.tinymce');
         Route::get('apps/select', [AppsController::class, 'select'])->name('apps.select');
         Route::get('apps/tag', [AppsController::class, 'tag'])->name('apps.tag');
+        Route::get('apps/wizard', [AppsController::class, 'wizard'])->name('apps.wizard');
         Route::post('apps/tinymce', [AppsController::class, 'tinymce_store'])->name('apps.tinymce.store');
         
 

@@ -12,9 +12,13 @@ class AppsController extends Controller {
     public function select() {
         return view('content.apps.select');
     }
-
+    
     public function tag() {
         return view('content.apps.tag');
+    }
+
+    public function wizard() {
+        return view('content.apps.wizard');
     }
 
     public function tinymce_store(Request $request) {

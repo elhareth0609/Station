@@ -14,6 +14,7 @@ use Google_Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Laravel\Telescope\EntryType;
 use Laravel\Telescope\Telescope;
@@ -695,5 +696,57 @@ class DataTabelController extends Controller {
 
         return view('content.products.list');
 
+    }
+
+    public function languages(Request $request) {
+        $languages = [];
+        foreach (config('language') as $locale => $language) {
+            $languages[] = $locale;
+        }
+
+        
+        if ($request->ajax()) {
+            $words = [];
+    
+            foreach ($languages as $lang) {
+                $jsonPath = resource_path("lang/{$lang}.json");
+    
+                if (File::exists($jsonPath)) {
+                    $translations = json_decode(File::get($jsonPath), true);
+    
+                    foreach ($translations as $key => $translation) {
+                        $words[$key][$lang] = $translation;
+                    }
+                }
+            }
+    
+            $words = collect($words)->map(function ($translations, $word) use ($languages) {
+                $row = ['word' => $word];
+                foreach ($languages as $lang) {
+                    $row[$lang] = $translations[$lang] ?? __('Not available');
+                }
+                return $row;
+            });
+
+            $id = 0;
+            return DataTables::of($words)
+            ->addColumn('id', function ($word) use (&$id) {
+                return (string) ++$id;
+            })
+            ->addColumn('word', function ($word){
+                return $word['word'];
+            })
+            ->addColumn('actions', function ($word) {
+                    return '
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editLanguage(\'' . addslashes($word['word']) . '\')"><i class="mdi mdi-pencil"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteLanguage(\'' . addslashes($word['word']) . '\')"><i class="mdi mdi-trash-can"></i></a>
+                    ';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+        }
+
+        return view('content.languages.index')
+            ->with('languages', $languages);
     }
 }

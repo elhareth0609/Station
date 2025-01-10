@@ -89,7 +89,6 @@
     </div>
 </div>
 
-
 <!-- Edit Category Modal -->
 <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -400,31 +399,6 @@
                     });
                     }
                 });
-            });
-
-            // Initialize ClipboardJS
-            var clipboard = new ClipboardJS('.copy-code');
-
-            // Success feedback
-            clipboard.on('success', function (e) {
-                const icon = $(e.trigger).find('span.my-copy');
-                const icon1 = $(e.trigger).find('span.my-doubletick');
-                icon.addClass('d-none');
-                icon1.removeClass('d-none');
-
-                // icon.removeClass('my-copy').addClass('my-doubletick');
-                setTimeout(() => {
-                    icon.removeClass('d-none');
-                    icon1.addClass('d-none');
-                    // icon.removeClass('my-doubletick').addClass('my-copy');
-                }, 2000);
-
-                console.log('Copied:', e.text);
-            });
-
-            // Error feedback
-            clipboard.on('error', function (e) {
-                console.error('Copy failed:', e.action); // Log error
             });
 
     });

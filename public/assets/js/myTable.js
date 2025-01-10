@@ -53,10 +53,12 @@ function handlePagination(table) {
     // Create Page Numbers
     for (let i = 0; i < info.pages; i++) {
         const isActive = i === info.page;
-        const pageButton = createPaginationButton(i + 1, isActive, function () {
+        const pageButton = createPaginationButton(i + 1, !isActive, function () {
             table.page(i).draw('page');
         });
-        pagination.append(pageButton);
+        if (isActive) {
+            pagination.append(pageButton);
+        }
     }
 
     // Create Next Button

@@ -18,14 +18,14 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination mb-0">
                 <li class="page-item mx-1">
-                    <a class="page-link btn btn-icon text-warning border-warning" href="#">
+                    <button class="page-link btn btn-icon text-warning border-warning" id="prev">
                         <i class="mdi mdi-chevron-left"></i>
-                    </a>
+                    </button>
                 </li>
                 <li class="page-item mx-1">
-                    <a class="page-link btn btn-icon text-warning border-warning" href="#">
+                    <button class="page-link btn btn-icon text-warning border-warning" id="next">
                         <i class="mdi mdi-chevron-right"></i>
-                    </a>
+                    </button>
                 </li>
             </ul>
         </nav>
@@ -84,7 +84,7 @@
                 </div>
             </div>
         </div>
-        <!-- Card 2 -->
+        <!-- Card 3 -->
         <div class="product-card col-lg-3 col-md-6 mb-4">
             <div class="card p-2 position-relative">
                 <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
@@ -111,7 +111,7 @@
                 </div>
             </div>
         </div>
-        <!-- Card 3 -->
+        <!-- Card 4 -->
         <div class="product-card col-lg-3 col-md-6 mb-4">
             <div class="card h-100 p-2 position-relative">
                 <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
@@ -119,22 +119,6 @@
                 <img src="{{ asset('assets/img/photos/foods/tasty-burger-with-bacon-2021-08-27-18-32-01-utc 1.png') }}" class="product-image card-img-top rounded" alt="Beef Burger">
 
                 <div class="card-body px-1 pb-0 text-start">
-                    {{-- <div class="text-warning">
-                        <i class="mdi mdi-star"></i>
-                        <i class="mdi mdi-star"></i>
-                        <i class="mdi mdi-star"></i>
-                        <i class="mdi mdi-star-outline"></i>
-                        <i class="mdi mdi-star-outline"></i>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="card-title mb-0">Beef Burger</h5>
-                            <p class="fw-bold text-warning mb-0 fs-4">$5.59</p>
-                        </div>
-                        <div class="btn btn-icon btn-warning text-white">
-                            <i class="mdi mdi-plus"></i>
-                        </div>
-                    </div> --}}
                     <div class="d-flex justify-content-center">
                         <div class="btn btn-icon btn-warning text-white w-20" id="minus">
                             <i class="mdi mdi-minus"></i>
@@ -154,7 +138,7 @@
 
 
 
-
+{{-- 
 <div class="products-container my-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold">{{ __('All Products') }}</h2>
@@ -383,7 +367,7 @@
             {{ __('View All') }}
         </button>
     </div>
-</div>
+</div> --}}
 
 
 <style>

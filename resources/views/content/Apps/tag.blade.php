@@ -1,80 +1,277 @@
 @extends('layout.app')
 
-@section('title', __('Tinymce'))
+@section('title', __('Tag'))
 
 @section('content')
 
-<h1 class="h3 mb-4 text-gray-800" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">{{ __('Tinymce') }}</h1>
+<h1 class="h3 mb-4 text-gray-800" dir="{{ app()->getLocale() == "ar" ? "rtl" : "" }}">{{ __('Tag') }}</h1>
 
-<div class="row">
-    <div class="col-md-12">
+<div class="row mb-4">
+    <div class="col-md-6 ">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">{{ __('Basic usage with existing select options:') }}</h5>
+            </div>
+            <div class="card-body">
+                <code>
+                    new MyTag({
+                        inputId: 'tagInput'
+                    });
+                </code>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <form id="contentForm" action="{{ route('tinymce.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <textarea name="content" id="content"></textarea>
-                    </div>
-                </form>
+                <div class="form-group form-group-floating {{ app()->getLocale() == "ar" ? "input-rtl" : "" }}">
+                    <input type="text" class="form-control" id="item_id0" placeholder="Select Item">
+                    <label for="item_id0" class="form-label">{{ __('Select Item') }}</label>
+                </div>
+                <script>
+                    new MyTag({
+                        inputId: 'item_id0'
+                    });
+                </script>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
 
-        tinymce.init({
-            selector: 'textarea[name="content"]',
-            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | Save',
-            setup: function (editor) {
-                editor.ui.registry.addButton('save', {
-                    text: 'Save',
-                    onAction: function () {
-                    $('textarea[name="content"]').val(editor.getContent());
-                    $('#contentForm').submit();
-                    }
-                });
-            }
-        });
-
-        $('#contentForm').submit(function(event) {
-            event.preventDefault();
-
-            $('#loading').show();
-            var formData = new FormData(this);
-
-            $.ajax({
-                url: $(this).attr('action'),
-                type: $(this).attr('method'),
-                data: formData,
-                dataType: "json",
-                contentType: false, // Don't set content type (let browser handle it)
-                processData: false, // Don't process data (let browser handle it)
-                success: function(response) {
-                    $('#loading').hide();
-                    Swal.fire({
-                        icon: response.icon,
-                        title: response.state,
-                        text: response.message,
-                        confirmButtonText: __("Ok",lang)
+<div class="row mb-4">
+    <div class="col-md-6 ">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">{{ __('Basic usage with existing select options:') }}</h5>
+            </div>
+            <div class="card-body">
+                <code>
+                    new MyTag({
+                        inputId: 'tagInput'
                     });
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    const response = JSON.parse(xhr.responseText);
-                    $('#loading').hide();
-                    Swal.fire({
-                        icon: response.icon,
-                        title: response.state,
-                        text: response.message,
-                        confirmButtonText: __("Ok",lang)
+                </code>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group form-group-floating {{ app()->getLocale() == "ar" ? "input-rtl" : "" }}">
+                    <input type="text" class="form-control" id="item_id1" placeholder="Select Item">
+                    <label for="item_id1" class="form-label">{{ __('Select Item') }}</label>
+                </div>
+                <script>
+                    new MyTag({
+                        inputId: 'item_id1',
+                        tagsPosition: 'inside'
                     });
-                }
-            });
-        });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
 
-    });
-</script>
+
+<div class="row mb-4">
+    <div class="col-md-6 ">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">{{ __('With Max Tags:') }}</h5>
+            </div>
+            <div class="card-body">
+                <code>
+                    new MyTag({
+                        inputId: 'tagInput',
+                        maxTags: 5
+                    });
+                </code>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group form-group-floating {{ app()->getLocale() == "ar" ? "input-rtl" : "" }}">
+                    <input type="text" class="form-control" id="item_id2" placeholder="Select Item">
+                    <label for="item_id1" class="form-label">{{ __('Select Item') }}</label>
+                </div>
+                <script>
+                    new MyTag({
+                        inputId: 'item_id2',
+                        maxTags: 5
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6 ">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">{{ __('With Callbacks:') }}</h5>
+            </div>
+            <div class="card-body">
+                <code>
+                    new MyTag({
+                        inputId: 'tagInput',
+                        onAddTag: (tag) => {
+                            console.log(`Tag added: ${tag}`);
+                        },
+                        onRemoveTag: (tag) => {
+                            console.log(`Tag removed: ${tag}`);
+                        }
+                    });
+                </code>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group form-group-floating {{ app()->getLocale() == "ar" ? "input-rtl" : "" }}">
+                    <input type="text" class="form-control" id="item_id3" placeholder="Select Item">
+                    <label for="item_id1" class="form-label">{{ __('Select Item') }}</label>
+                </div>
+                <script>
+                    new MyTag({
+                        inputId: 'item_id3',
+                        onAddTag: (tag) => {
+                            console.log(`Tag added: ${tag}`);
+                        },
+                        onRemoveTag: (tag) => {
+                            console.log(`Tag removed: ${tag}`);
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6 ">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">{{ __('With Custom Placeholder:') }}</h5>
+            </div>
+            <div class="card-body">
+                <code>
+                    new MyTag({
+                        inputId: 'tagInput',
+                        placeholderText: 'Type and press enter...'
+                    });
+                </code>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group form-group-floating {{ app()->getLocale() == "ar" ? "input-rtl" : "" }}">
+                    <input type="text" class="form-control" id="item_id4" placeholder="Select Item">
+                    <label for="item_id1" class="form-label">{{ __('Select Item') }}</label>
+                </div>
+                <script>
+                    new MyTag({
+                        inputId: 'item_id4',
+                        placeholderText: 'Type and press enter...'
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row mb-4">
+    <div class="col-md-6 ">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">{{ __('With URL fetch:') }}</h5>
+            </div>
+            <div class="card-body">
+                <code>
+                    new MyTag({
+                        inputId: 'tagInput',
+                        fetchUrl: '/api/tags',
+                        fetchMethod: 'GET',
+                        csrfToken: document.querySelector('meta[name="csrf-token"]').content
+                    });
+                </code>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group form-group-floating {{ app()->getLocale() == "ar" ? "input-rtl" : "" }}">
+                    <div class="form-group form-group-floating {{ app()->getLocale() == "ar" ? "input-rtl" : "" }}">
+                        <input type="text" class="form-control" id="item_id5" placeholder="Select Item">
+                        <label for="item_id1" class="form-label">{{ __('Select Item') }}</label>
+                    </div>
+                </div>
+                <script>
+                    new MyTag({
+                        inputId: 'item_id5',
+                        fetchUrl: '/categories/all',
+                        fetchMethod: 'GET',
+                        csrfToken: csrfToken
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{--
+<div class="row mb-4">
+    <div class="col-md-6 ">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">{{ __('With custom option rendering:') }}</h5>
+            </div>
+            <div class="card-body">
+                <code>
+                    new SearchableSelect({
+                        selectId: 'item_id3',
+                        renderOption: (option) => `
+                            <div class="d-flex align-items-center">
+                                <img src="${option.image}" class="me-2" width="20" height="20">
+                                <span>${option.name}</span>
+                            </div>
+                        `
+                    });
+                </code>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group form-group-floating {{ app()->getLocale() == "ar" ? "input-rtl" : "" }}">
+                    <select class="form-select" id="item_id3">
+                        <option value="">{{ __('Select Item') }}</option>
+                        <option data-image="{{ asset('assets/img/photos/foods/fresh-tasty-burger-2021-08-29-04-51-34-utc 1.png') }}" value="1">ssssssssss</option>
+                    </select>
+                </div>
+                <script>
+                    new SearchableSelect({
+                        selectId: 'item_id3',
+                        renderOption: (option) => `
+                            <div class="d-flex align-items-center">
+                                <img src="${option.image}" class="me-2" width="20" height="20">
+                                <span>${option.name}</span>
+                            </div>
+                        `
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
 
 @endsection

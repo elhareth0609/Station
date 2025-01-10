@@ -262,6 +262,11 @@
                     "title": "Tag",
                     "name": "apps.tag",
                     "link": "/apps/tag"
+                },
+                {
+                    "title": "Wizard",
+                    "name": "apps.wizard",
+                    "link": "/apps/wizard"
                 }
             ]
         },

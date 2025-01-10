@@ -2,79 +2,104 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-
+use App\Traits\ApiResponder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class LanguageController extends Controller {
+    use ApiResponder;
 
-    public function index() {
-        $languages = [];
-        foreach (config('language') as $locale => $language) {
-            $languages []= $locale;
-        }
-          // $languages = ['en', 'ar', 'fr']; // Define your supported languages
-        $words = [];
+    public function create(Request $request) {
+        try {
+            $word = $request->input('word');
+            $translations = $request->input('translations');
 
-        foreach ($languages as $lang) {
-            // Get the path of the JSON file for each language
-            $jsonPath = resource_path("lang/{$lang}.json");
+            foreach ($translations as $lang => $translation) {
+                $jsonPath = resource_path("lang/{$lang}.json");
 
-            // Check if the file exists
-            if (File::exists($jsonPath)) {
-                // Read and decode the JSON file
-                $translations = json_decode(File::get($jsonPath), true);
-
-                // Iterate over each translation and organize them by key
-                foreach ($translations as $key => $translation) {
-                    $words[$key][$lang] = $translation;
+                if (File::exists($jsonPath)) {
+                    $data = json_decode(File::get($jsonPath), true);
+                    if (isset($data[$word])) {
+                        return $this->error(__('Word already exists.'));
+                    }
+                    $data[$word] = $translation;
+                    File::put($jsonPath, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 }
             }
+            return $this->success(null, __('Created Successfully.'));
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
         }
-
-        // Pass the collected translations to the view
-        return view('content.languages.index')
-        ->with('words',$words)
-        ->with('languages',$languages);
     }
 
-    public function store(Request $request){
-        // $data = $request->input('translations');
+    public function get($word) {
+        try {
 
-        // foreach ($data as $translation) {
-        //     $language = $translation['language'];
-        //     $word = $translation['word'];
+            $languages = [];
+            foreach (config('language') as $locale => $language) {
+                $languages[] = $locale;
+            }
 
-        //     // Store the translation in the specified language folder
-        //     $filePath = resource_path("lang/{$language}.php");
-        //     $translations = [];
+            $translations = [];
 
-        //     // Check if the file exists and load the existing translations
-        //     if (File::exists($filePath)) {
-        //         $translations = include $filePath;
-        //     }
+            foreach ($languages as $lang) {
+                $jsonPath = resource_path("lang/{$lang}.json");
 
-        //     // Add or update the translation
-        //     $translations['word'] = $word;
+                if (File::exists($jsonPath)) {
+                    $data = json_decode(File::get($jsonPath), true);
+                    if (isset($data[$word])) {
+                        $translations[$lang] = $data[$word];
+                    }
+                }
+            }
 
-        //     // Save the updated translations
-        //     File::put($filePath, "<?php\n\nreturn " . var_export($translations, true) . ";\n");
-        // }
-
-        // return redirect()->back()->with('success', __('Translations saved successfully!'));
+            return $this->success([$word,$translations], __('Getting Successfully.'));
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 
-    public function change(Request $request, $locale) {
-        $user = User::find(Auth::user()->id);
-        $user->lang = $locale;
-        $user->save();
+    public function update(Request $request, $word){
+        try {
+            $translations = $request->input('translations');
 
-        App::setLocale($locale);
-        session()->put('locale', $locale);
-        return redirect()->back();
+            foreach ($translations as $lang => $translation) {
+                $jsonPath = resource_path("lang/{$lang}.json");
+
+                if (File::exists($jsonPath)) {
+                    $data = json_decode(File::get($jsonPath), true);
+                    $data[$word] = $translation;
+                    File::put($jsonPath, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                }
+            }
+
+            return $this->success(null, __('Updated Successfully.'));
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 
+    public function destroy($word) {
+        try {
+            $languages = [];
+            foreach (config('language') as $locale => $language) {
+                $languages[] = $locale;
+            }
+
+            foreach ($languages as $lang) {
+                $jsonPath = resource_path("lang/{$lang}.json");
+
+                if (File::exists($jsonPath)) {
+                    $data = json_decode(File::get($jsonPath), true);
+                    if (isset($data[$word])) {
+                        unset($data[$word]);
+                        File::put($jsonPath, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                    }
+                }
+            }
+            return $this->success(null, __('Deleted Successfully.'));
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
+    }
 }
