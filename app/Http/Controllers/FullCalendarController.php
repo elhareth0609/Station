@@ -7,6 +7,6 @@ use Illuminate\Support\Facades\Log;
 
 class FullCalendarController extends Controller {
     public function index() {
-        return view('content.fuLlcalendar.index');
+        return view('content.fullcalendar.index');
     }
 }
