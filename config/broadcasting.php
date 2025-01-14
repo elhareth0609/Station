@@ -77,6 +77,11 @@ return [
             'driver' => 'null',
         ],
 
-    ],
-
+        // 'websockets' => [
+        //     'driver' => 'websockets',
+        //     'host' => '127.0.0.1',
+        //     'port' => 4444,
+        // ],
+    
+    ]
 ];

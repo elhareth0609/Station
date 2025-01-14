@@ -311,6 +311,13 @@
             "link" : "/coupons"
         },
         {
+            "title" : "File Manager",
+            "icon" : "mdi mdi-folder",
+            "name" : "file-manager",
+            "link" : "/file-manager"
+        },
+        
+        {
             "title": "Chat",
             "icon": "mdi mdi-chat-outline",
             "name": "chat",

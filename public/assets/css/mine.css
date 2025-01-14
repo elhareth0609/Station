@@ -804,3 +804,20 @@ svg {
     height: 100%;
 }
 /* End Icons */
+
+/* Start Anime */
+[data-anime] {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+[data-anime="fade-up"] {
+    transform: translateY(50px);
+}
+[data-anime="fade-down"] {
+    transform: translateY(-50px);
+}
+[data-anime].animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* End Anime */

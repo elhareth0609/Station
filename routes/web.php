@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CategoryController;
@@ -8,6 +9,8 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DataTabelController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\FolderController;
 use App\Http\Controllers\FullCalendarController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
@@ -19,12 +22,13 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SubCategoryController;
-use App\Http\Controllers\AppsController;
 use Dflydev\DotAccessData\Data;
 use Google\Service\AdExchangeBuyerII\Product;
 use Google\Service\Books\Category;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+
+
 
 
 
@@ -68,6 +72,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('sub-categories', [DataTabelController::class, 'sub_categories'])->name('sub-categories');
         Route::get('coupons', [DataTabelController::class, 'coupons'])->name('coupons');
         Route::get('languages', [DataTabelController::class, 'languages'])->name('languages');
+        Route::get('file-manager', [DataTabelController::class, 'file_manager'])->name('file-manager');
 
 
 
@@ -146,6 +151,16 @@ use Illuminate\Support\Facades\Route;
         Route::put('/car/{id}', [CarController::class, 'update'])->name('car.update');
         Route::delete('/car/{id}', [CarController::class, 'delete'])->name('car.delete');
 
+        // Cars
+        //Dashboard
+
+        Route::post('/files/upload', [FileController::class, 'upload'])->name('files.upload');
+        Route::delete('/files/{file}', [FileController::class, 'destroy'])->name('files.destroy');
+        Route::get('/files/download/{file}', [FileController::class, 'download'])->name('files.download');
+
+        Route::post('/folders/create', [FolderController::class, 'create'])->name('folders.create');
+        Route::delete('/folders/{folder}', [FolderController::class, 'destroy'])->name('folders.destroy');
+    
 
         // E-commerce
         Route::get('store', [StoreController::class, 'index'])->name('store');

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use setasign\Fpdi\Tcpdf\Fpdi;
-use Exception;
 
 class CertificateController extends Controller {
 
@@ -140,17 +141,84 @@ class CertificateController extends Controller {
             $pdf->SetXY($request->name_x, $request->name_y);
             $pdf->Cell(10, 10, $request->name, 0, 1, 'R');
 
-            $pdf->SetXY(10, 70);
-            $pdf->Cell(0, 10, $request->reason, 0, 1, 'C', 0, '', 0, false, 'T', 'M');
-
             $pdf->SetXY($request->company_x, $request->company_y);
             $pdf->Cell(10, 10, $request->company, 0, 1, 'R');
 
-            $pdf->SetXY(10, 160);
-            $pdf->Cell(0, 10, $request->from_date, 0, 1, 'C', 0, '', 0, false, 'T', 'M');
+            // $pdf->SetXY(10, 160);
+            // $pdf->Cell(0, 10, $request->from_date, 0, 1, 'C', 0, '', 0, false, 'T', 'M');
+            $dateParts = explode('-', $request->from_date); // Split the date into parts
 
-            $pdf->SetXY(10, 180);
-            $pdf->Cell(0, 10, $request->to_date, 0, 1, 'C', 0, '', 0, false, 'T', 'M');
+            // Assign day, month, and year
+            $day = $dateParts[2];   // Day
+            $month = $dateParts[1]; // Month
+            $year = $dateParts[0];  // Year
+
+            $pdf->SetXY(84, 100); // Set the position
+            $pdf->SetFont('amiri', '', 17); // Set font family, style, and size (e.g., 12pt)
+            $pdf->Cell(0, 10, $year . '  ' . $month . '   ' . $day, 0, 1, 'C', 0, '', 0, false, 'T', 'M');
+
+            $dateParts = explode('-', $request->to_date); // Split the date into parts
+
+            $day = $dateParts[2];   // Day
+            $month = $dateParts[1]; // Month
+            $year = $dateParts[0];  // Year
+
+            $pdf->SetXY(21, 110); // Set the position (X=0 to start from the left edge)
+            $pdf->SetFont('amiri', '', 17); // Set Amiri font with size 17
+            $pdf->Cell(0, 10, $year . '  ' . $month . '   ' . $day, 0, 1, 'R', 0, '', 0, false, 'T', 'M');
+
+            function writeMultiLineText($pdf, $x, $y, $text, $maxY = 270) {
+                $pdf->SetFont('amiri', '', 17); // Set the font and size (adjust as needed)
+            
+                $maxWidth1 = 20; // Maximum width for each line (adjust as needed)
+                $maxWidth2 = 130; // Maximum width for each line (adjust as needed)
+                $lineHeight = 10; // Height of each line
+            
+                // Split the text into lines
+                $lines1 = explode("\n", wordwrap($text, $maxWidth1, "\n")); // Break text into lines
+                $firstLine = $lines1[0];
+
+                $pdf->SetXY($x, $y); // Set the position for the current line
+                $pdf->Cell(0, $lineHeight, $firstLine, 0, 1, 'R'); // Write the line
+
+                $remainingText = substr($text, strlen($firstLine)); // Get the remaining text
+
+                // Split the remaining text into lines for the second part
+                $lines2 = explode("\n", wordwrap($remainingText, $maxWidth2, "\n")); // Break remaining text into lines
+
+                // Loop through each line and write it to the PDF
+                foreach ($lines2 as $line) {
+                    // Check if the next line will exceed the maxY (page height)
+                    if ($y + $lineHeight > $maxY) {
+                        break; // Stop writing if the next line exceeds the maximum Y position
+                    }
+            
+                    $y += $lineHeight + 4; // Move Y position down for the next line
+                    $pdf->SetXY(17, $y); // Set the position for subsequent lines (X=10)
+                    $pdf->Cell(0, $lineHeight, $line, 0, 1, 'R'); // Write the line
+                }
+            }
+
+            writeMultiLineText($pdf, 146, 110, $request->reason);
+
+            $now = Carbon::now();
+
+            // Extract day, month, and year
+            $day = $now->day;   // Day
+            $month = $now->month; // Month
+            $year = $now->year;  // Year
+            
+            $pdf->SetXY(98, 176); // Set the position (X=0 to start from the left edge)
+            $pdf->SetFont('amiri', '', 17); // Set Amiri font with size 17
+            $pdf->Cell(0, 10, $year . '    ' . $month . '   ' . $day, 0, 1, 'R', 0, '', 0, false, 'T', 'M');
+
+            $today = Carbon::now();
+
+            $todayArabic = $today->locale('ar')->isoFormat('dddd'); // Example: الثلاثاء
+
+            $pdf->SetXY(48, 176); // Set the position (X=0 to start from the left edge)
+            $pdf->SetFont('amiri', '', 17); // Set Amiri font with size 17
+            $pdf->Cell(0, 10, $todayArabic, 0, 1, 'R', 0, '', 0, false, 'T', 'M');
 
             return response()->streamDownload(function () use ($pdf) {
                 $pdf->Output();

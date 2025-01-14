@@ -38,7 +38,7 @@
                             <th>{{ __('Raison') }}</th>
                             <th>{{ __('From') }}</th>
                             <th>{{ __('To') }}</th>
-                            <th>{{ __('Company') }}</th>
+                            <th>{{ __('Speciality') }}</th>
                             <th>{{ __('Actions') }}</th>
                         </tr>
                     </thead>
@@ -188,7 +188,7 @@
                             <input type="text" class="form-control" id="pdto_date" name="pdto_date">
                         </div>
                         <div class="mb-3">
-                            <label for="pdcompany" class="form-label">{{ __('Company') }}</label>
+                            <label for="pdcompany" class="form-label">{{ __('Speciality') }}</label>
                             <div class="row">
                                 <div class="col-8">
                                     <input type="text" class="form-control" id="pdcompany" name="pdcompany">

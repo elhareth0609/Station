@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Models\Category;
 use App\Models\Coupon;
+use App\Models\File;
+use App\Models\Folder;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\SubCategory;
@@ -14,7 +16,7 @@ use Google_Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\File as LaravelFile;
 use Illuminate\Support\Facades\Log;
 use Laravel\Telescope\EntryType;
 use Laravel\Telescope\Telescope;
@@ -175,7 +177,7 @@ class DataTabelController extends Controller {
         $service = new Google_Service_Sheets($client);
 
         $spreadsheetId = '1hu8hFq_zWXSsJ7df5uWBwiXqvSbf03mKDahB1RFXUyg';
-        $range = 'Students1!A2:L';
+        $range = 'Students1!A2:L2';
 
         try {
             $response = $service->spreadsheets_values->get($spreadsheetId, $range);
@@ -242,10 +244,11 @@ class DataTabelController extends Controller {
                         return $absence['department'];
                     })
                     ->addColumn('actions', function ($absence) use (&$actions_counter) {
+                        $actions_counter = $actions_counter + 1;
                         return '
-                            <a href="javascript:void(0)" onclick="printPdfCertificate(' . ++$actions_counter . ')" class="btn btn-icon btn-outline-success"><i class="mdi mdi-printer-outline"></i></a>
-                            <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editCertificate(' . $absence->id . ')"><i class="mdi mdi-pencil"></i></a>
-                            <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteCertificate(' . $absence->id . ')"><i class="mdi mdi-trash-can"></i></a>
+                            <a href="javascript:void(0)" onclick="printPdfCertificate(' . $actions_counter . ')" class="btn btn-icon btn-outline-success"><i class="mdi mdi-printer-outline"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editCertificate(' . $actions_counter . ')"><i class="mdi mdi-pencil"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteCertificate(' . $actions_counter . ')"><i class="mdi mdi-trash-can"></i></a>
                         ';
                     })
                     ->rawColumns(['actions'])
@@ -704,22 +707,21 @@ class DataTabelController extends Controller {
             $languages[] = $locale;
         }
 
-        
         if ($request->ajax()) {
             $words = [];
-    
+
             foreach ($languages as $lang) {
                 $jsonPath = resource_path("lang/{$lang}.json");
     
-                if (File::exists($jsonPath)) {
-                    $translations = json_decode(File::get($jsonPath), true);
+                if (LaravelFile::exists($jsonPath)) {
+                    $translations = json_decode(LaravelFile::get($jsonPath), true);
     
                     foreach ($translations as $key => $translation) {
                         $words[$key][$lang] = $translation;
                     }
                 }
             }
-    
+
             $words = collect($words)->map(function ($translations, $word) use ($languages) {
                 $row = ['word' => $word];
                 foreach ($languages as $lang) {
@@ -748,5 +750,85 @@ class DataTabelController extends Controller {
 
         return view('content.languages.index')
             ->with('languages', $languages);
+    }
+
+    public function file_manager(Request $request) {
+        
+        $currentFolderId = null;
+        $currentFolder = null;
+        if ($request->has('folder_id') && $request->folder_id != null) {
+            $currentFolderId = $request->folder_id;
+            $currentFolder = Folder::findOrFail($request->folder_id);
+        }
+        
+        if ($request->ajax()) {
+            
+            // Get folders in current directory
+            $folders = Folder::where('user_id', Auth::user()->id)
+            ->where('parent_id', $currentFolderId)
+            ->select(['id', 'name', 'created_at'])
+            ->get()
+            ->map(function ($folder) {
+                return [
+                    'id' => $folder->id,
+                    'name' => $folder->name,
+                    'type' => 'folder',
+                    'size' => '-',
+                    'created_at' => $folder->created_at,
+                ];
+            });
+            
+            // Get files in current directory
+            // return File::all();
+            $files = File::where('user_id', Auth::user()->id)
+            ->where('folder_id', $currentFolderId)
+            ->select(['id', 'name', 'size', 'created_at'])
+            ->get()
+            ->map(function ($file) {
+                return [
+                    'id' => $file->id,
+                    'name' => $file->name,
+                    'type' => 'file',
+                    'size' => $this->formatSize($file->size),
+                    'created_at' => $file->created_at,
+                ];
+            });
+            
+            // Combine folders and files
+            $data = $folders->concat($files);
+
+            return DataTables::of($data)
+            ->addColumn('actions', function ($row) {
+                $actions = '<div class="btn-group">';
+                
+                if ($row['type'] === 'folder') {
+                    $actions .= '<a href="' . route('file-manager', ['folder_id' => $row['id']]) . '" 
+                                class="btn btn-sm btn-primary">Open</a>';
+                } else {
+                    $actions .= '<a href="' . route('files.download', $row['id']) . '" 
+                                class="btn btn-sm btn-success">Download</a>';
+                }
+                
+                $actions .= '<button class="btn btn-sm btn-danger delete-btn" 
+                            data-type="' . $row['type'] . '" 
+                            data-id="' . $row['id'] . '">Delete</button>';
+                $actions .= '</div>';
+                
+                return $actions;
+            })
+            ->addColumn('icon', function ($row) {
+                return $row['type'] === 'folder' 
+                    ? '<i class="fas fa-folder text-warning"></i>' 
+                    : '<i class="fas fa-file text-primary"></i>';
+            })
+            ->editColumn('created_at', function ($row) {
+                return $row['created_at']->format('Y-m-d H:i:s');
+            })
+            ->rawColumns(['actions', 'icon'])
+            ->make(true);
+        }
+
+        return view('content.file-manager.index')
+        ->with('currentFolder', $currentFolder);
     }
 }

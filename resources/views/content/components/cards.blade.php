@@ -8,7 +8,7 @@
     <div class="card-container mt-4">
         <div class="row g-3">
             <!-- Total Users Card -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-3 col-md-4 col-sm-6" data-anime="fade-up" data-anime-delay="100">
                 <div class="card">
                     <div class="card-body">
                         <div>
@@ -31,7 +31,7 @@
             </div>
 
             <!-- Total Orders Card -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-3 col-md-4 col-sm-6" data-anime="fade-up" data-anime-delay="200">
                 <div class="card">
                     <div class="card-body">
                         <div>
@@ -54,7 +54,7 @@
             </div>
 
             <!-- Total Sales Card -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-3 col-md-4 col-sm-6" data-anime="fade-up" data-anime-delay="300">
                 <div class="card">
                     <div class="card-body">
                         <div>
@@ -77,7 +77,7 @@
             </div>
 
             <!-- Total Pending Card -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-3 col-md-4 col-sm-6" data-anime="fade-up" data-anime-delay="400">
                 <div class="card">
                     <div class="card-body">
                         <div>
@@ -186,7 +186,7 @@
             <div class="product-card col-lg-3 col-md-6 mb-4">
                 <div class="card p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
-                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <button class="btn btn-white position-absolute my-w-fit-content border-0" style="right: 10px;position: absolute!important;"><i class="mdi mdi-heart-outline fs-5 text-secondary"></i></button>
                     <img src="https://img.sadeem-labs.com/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
                     <div class="card-body px-1 pb-0 text-start">
@@ -213,7 +213,7 @@
             <div class="product-card col-lg-3 col-md-6 mb-4">
                 <div class="card p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
-                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <button class="btn btn-white position-absolute my-w-fit-content border-0" style="right: 10px;position: absolute!important;"><i class="mdi mdi-heart-outline fs-5 text-secondary"></i></button>
                     <img src="https://img.sadeem-labs.com/pc/Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
                     <div class="card-body px-1 pb-0 text-start">
@@ -240,7 +240,7 @@
             <div class="product-card col-lg-3 col-md-6 mb-4">
                 <div class="card p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
-                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <button class="btn btn-white position-absolute my-w-fit-content border-0" style="right: 10px;position: absolute!important;"><i class="mdi mdi-heart-outline fs-5 text-secondary"></i></button>
                     <img src="https://img.sadeem-labs.com/pc/%D9%88%D8%AD%D8%AF%D8%A9%20%D8%AA%D8%B2%D9%88%D9%8A%D8%AF%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9%20-%20%D8%AD%D8%A7%D9%81%D8%B8%D8%A7%D8%AA%20%D8%A7%D9%84%D9%83%D9%85%D8%A8%D9%8A%D9%88%D8%AA%D8%B1%20&%20%D8%A7%D9%84%D8%B9%D9%84%D8%A8%2080%20Plus%20ATX%20%D9%85%D8%AD%D9%88%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
                     <div class="card-body px-1 pb-0 text-start">
@@ -309,14 +309,14 @@
 
     <div class="products-container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="fw-bold">{{ __('All Products') }}</h2>
+            <h2 class="fw-bold" data-anime="fade-down">{{ __('All Products') }}</h2>
         </div>
         <div class="row">
             <!-- Card 1 -->
-            <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="product-card col-lg-3 col-md-6 mb-4" data-anime="fade-up" data-anime-delay="100">
                 <div class="card p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
-                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <button class="btn btn-white position-absolute my-w-fit-content border-0" style="right: 10px;position: absolute!important;"><i class="mdi mdi-heart-outline fs-5 text-secondary"></i></button>
                     <img src="https://img.sadeem-labs.com/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
                     <div class="card-body px-1 pb-0 text-start">
@@ -340,10 +340,10 @@
                 </div>
             </div>
             <!-- Card 2 -->
-            <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="product-card col-lg-3 col-md-6 mb-4" data-anime="fade-up" data-anime-delay="200">
                 <div class="card p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
-                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <button class="btn btn-white position-absolute my-w-fit-content border-0" style="right: 10px;position: absolute!important;"><i class="mdi mdi-heart-outline fs-5 text-secondary"></i></button>
                     <img src="https://img.sadeem-labs.com/pc/Watch%20Series%203%20Nike.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
                     <div class="card-body px-1 pb-0 text-start">
@@ -367,10 +367,10 @@
                 </div>
             </div>
             <!-- Card 3 -->
-            <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="product-card col-lg-3 col-md-6 mb-4" data-anime="fade-up" data-anime-delay="300">
                 <div class="card p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
-                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <button class="btn btn-white position-absolute my-w-fit-content border-0" style="right: 10px;position: absolute!important;"><i class="mdi mdi-heart-outline fs-5 text-secondary"></i></button>
                     <img src="https://img.sadeem-labs.com/pc/%D9%88%D8%AD%D8%AF%D8%A9%20%D8%AA%D8%B2%D9%88%D9%8A%D8%AF%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9%20-%20%D8%AD%D8%A7%D9%81%D8%B8%D8%A7%D8%AA%20%D8%A7%D9%84%D9%83%D9%85%D8%A8%D9%8A%D9%88%D8%AA%D8%B1%20&%20%D8%A7%D9%84%D8%B9%D9%84%D8%A8%2080%20Plus%20ATX%20%D9%85%D8%AD%D9%88%D9%84%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
                     <div class="card-body px-1 pb-0 text-start">
@@ -394,10 +394,10 @@
                 </div>
             </div>
             <!-- Card 4 -->
-            <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="product-card col-lg-3 col-md-6 mb-4" data-anime="fade-up" data-anime-delay="400">
                 <div class="card p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
-                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <button class="btn btn-white position-absolute my-w-fit-content border-0" style="right: 10px;position: absolute!important;"><i class="mdi mdi-heart-outline fs-5 text-secondary"></i></button>
                     <img src="https://img.sadeem-labs.com/pc/%D8%B4%D8%A7%D8%AD%D9%86%20%D8%A8%D8%B7%D8%A7%D8%B1%D9%8A%D8%A9%20%D9%85%D9%83%D8%A8%D8%B1%20%D8%B5%D9%88%D8%AA%20%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%20%D9%85%D9%83%D8%A8%D8%B1%20%D8%B5%D9%88%D8%AA.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
                     <div class="card-body px-1 pb-0 text-start">
@@ -421,10 +421,10 @@
                 </div>
             </div>
             <!-- Card 5 -->
-            <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="product-card col-lg-3 col-md-6 mb-4" data-anime="fade-up" data-anime-delay="500">
                 <div class="card p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
-                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <button class="btn btn-white position-absolute my-w-fit-content border-0" style="right: 10px;position: absolute!important;"><i class="mdi mdi-heart-outline fs-5 text-secondary"></i></button>
                     <img src="https://img.sadeem-labs.com/clothes/%D8%B3%D8%AA%D8%B1%D8%A9%20%D8%A7%D9%84%D8%B1%D9%85%D8%B2%20%D8%A7%D9%84%D8%A8%D8%B1%D9%8A%D8%AF%D9%8A%20%D8%A7%D9%84%D8%A3%D8%B3%D9%88%D8%AF%20%D9%88%D8%A7%D9%84%D8%A3%D8%AD%D9%85%D8%B1.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
                     <div class="card-body px-1 pb-0 text-start">
@@ -448,10 +448,10 @@
                 </div>
             </div>
             <!-- Card 6 -->
-            <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="product-card col-lg-3 col-md-6 mb-4" data-anime="fade-up" data-anime-delay="600">
                 <div class="card p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
-                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <button class="btn btn-white position-absolute my-w-fit-content border-0" style="right: 10px;position: absolute!important;"><i class="mdi mdi-heart-outline fs-5 text-secondary"></i></button>
                     <img src="https://img.sadeem-labs.com/clothes/%D9%87%D9%88%D8%AF%D9%8A%D9%8A%20%D8%B3%D8%AA%D8%B1%D8%A9%20%D9%85%D8%B9%D8%B7%D9%81%20%D8%B3%D8%AA%D8%B1%D8%A9%20%D9%88%D8%A7%D9%82%D9%8A%D8%A9%20%D9%85%D9%84%D8%A7%D8%A8%D8%B3%20%D8%A7%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
                     <div class="card-body px-1 pb-0 text-start">
@@ -475,10 +475,10 @@
                 </div>
             </div>
             <!-- Card 7 -->
-            <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="product-card col-lg-3 col-md-6 mb-4" data-anime="fade-up" data-anime-delay="700">
                 <div class="card p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
-                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <button class="btn btn-white position-absolute my-w-fit-content border-0" style="right: 10px;position: absolute!important;"><i class="mdi mdi-heart-outline fs-5 text-secondary"></i></button>
                     <img src="https://img.sadeem-labs.com/clothes/%D9%87%D9%88%D8%AF%D9%8A%D9%8A%20%D9%85%D9%84%D8%A7%D8%A8%D8%B3%20%D8%A7%D9%84%D8%B7%D9%81%D9%84%20%D8%B3%D8%AA%D8%B1%D8%A9%20%D9%85%D8%B9%D8%B7%D9%81%20%D9%88%D8%A7%D9%82%20%D9%85%D9%86%20%D8%A7%D9%84%D9%85%D8%B7%D8%B1.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
                     <div class="card-body px-1 pb-0 text-start">
@@ -502,10 +502,10 @@
                 </div>
             </div>
             <!-- Card 8 -->
-            <div class="product-card col-lg-3 col-md-6 mb-4">
+            <div class="product-card col-lg-3 col-md-6 mb-4" data-anime="fade-up" data-anime-delay="800">
                 <div class="card p-2 position-relative">
                     <div class="position-absolute fs-6 bg-danger text-white rounded" style="padding: 2px 8px;">15% Off</div>
-                    <i class="mdi mdi-heart-outline position-absolute fs-5 text-secondary" style="right: 10px;"></i>
+                    <button class="btn btn-white position-absolute my-w-fit-content border-0" style="right: 10px;position: absolute!important;"><i class="mdi mdi-heart-outline fs-5 text-secondary"></i></button>
                     <img src="https://img.sadeem-labs.com/clothes/%D8%B3%D8%AA%D8%B1%D8%A9%20%D9%87%D9%88%D8%AF%D9%8A%D9%8A%20%D9%87%D9%8A%D9%84%D9%8A%20%D9%87%D8%A7%D9%86%D8%B3%D9%86.png" class="product-image card-img-top rounded" alt="Beef Burger">
 
                     <div class="card-body px-1 pb-0 text-start">
@@ -539,11 +539,7 @@
 
 
 
-
-
-
-
-
+    
     <div class="contacts-container mt-5">
         <div class="d-flex mb-4">
             <h2 class="fw-bold">{{ __('Contacts') }}</h2>
@@ -613,6 +609,252 @@
     </div>
 
 
+
+
+    <style>
+        .crypto-card {
+            background: white;
+            border: none;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .crypto-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .crypto-icon {
+            width: 40px;
+            height: 40px;
+            background: #ecefff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+        
+        .eth-icon {
+            color: #627EEA;
+        }
+        
+        .crypto-name {
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 0.2rem;
+        }
+        
+        .crypto-amount {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .crypto-price {
+            font-weight: 600;
+            color: #212529;
+        }
+        
+        .price-change {
+            color: #28a745;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+    </style>
+
+
+
+        <div class="row my-3">
+            <div class="col-md-6 col-lg-4">
+                <div class="crypto-card d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="crypto-icon">
+                            <i class="eth-icon mdi mdi-ethereum"></i>
+                        </div>
+                        <div>
+                            <div class="crypto-name">Ethereum</div>
+                            <div class="crypto-amount">1.02 ETH</div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="crypto-price">$404.18</div>
+                        <div class="price-change">+$24.50</div>
+                    </div>
+                </div>
+                <div class="crypto-card d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="crypto-icon">
+                            <i class="eth-icon mdi mdi-ethereum"></i>
+                        </div>
+                        <div>
+                            <div class="crypto-name">Ethereum</div>
+                            <div class="crypto-amount">1.02 ETH</div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="crypto-price">$404.18</div>
+                        <div class="price-change">+$24.50</div>
+                    </div>
+                </div>
+                <div class="crypto-card d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="crypto-icon">
+                            <i class="eth-icon mdi mdi-ethereum"></i>
+                        </div>
+                        <div>
+                            <div class="crypto-name">Avax</div>
+                            <div class="crypto-amount">1.02 ETH</div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="crypto-price">$404.18</div>
+                        <div class="price-change">+$24.50</div>
+                    </div>
+                </div>
+                <div class="crypto-card d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="crypto-icon">
+                            <i class="eth-icon mdi mdi-ethereum"></i>
+                        </div>
+                        <div>
+                            <div class="crypto-name">Matic</div>
+                            <div class="crypto-amount">1.02 ETH</div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="crypto-price">$404.18</div>
+                        <div class="price-change">+$24.50</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="crypto-card d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="crypto-icon">
+                            <i class="eth-icon mdi mdi-ethereum"></i>
+                        </div>
+                        <div>
+                            <div class="crypto-name">Ethereum</div>
+                            <div class="crypto-amount">1.02 ETH</div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="crypto-price">$404.18</div>
+                        <div class="price-change">+$24.50</div>
+                    </div>
+                </div>
+                <div class="crypto-card d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="crypto-icon">
+                            <i class="eth-icon mdi mdi-ethereum"></i>
+                        </div>
+                        <div>
+                            <div class="crypto-name">Avax</div>
+                            <div class="crypto-amount">1.02 ETH</div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="crypto-price">$404.18</div>
+                        <div class="price-change">+$24.50</div>
+                    </div>
+                </div>
+                <div class="crypto-card d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="crypto-icon">
+                            <i class="eth-icon mdi mdi-ethereum"></i>
+                        </div>
+                        <div>
+                            <div class="crypto-name">Avax</div>
+                            <div class="crypto-amount">1.02 ETH</div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="crypto-price">$404.18</div>
+                        <div class="price-change">+$24.50</div>
+                    </div>
+                </div>
+                <div class="crypto-card d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="crypto-icon">
+                            <i class="eth-icon mdi mdi-ethereum"></i>
+                        </div>
+                        <div>
+                            <div class="crypto-name">Matic</div>
+                            <div class="crypto-amount">1.02 ETH</div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="crypto-price">$404.18</div>
+                        <div class="price-change">+$24.50</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="crypto-card d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="crypto-icon">
+                            <i class="eth-icon mdi mdi-ethereum"></i>
+                        </div>
+                        <div>
+                            <div class="crypto-name">Ethereum</div>
+                            <div class="crypto-amount">1.02 ETH</div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="crypto-price">$404.18</div>
+                        <div class="price-change">+$24.50</div>
+                    </div>
+                </div>
+                <div class="crypto-card d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="crypto-icon">
+                            <i class="eth-icon mdi mdi-ethereum"></i>
+                        </div>
+                        <div>
+                            <div class="crypto-name">Ethereum</div>
+                            <div class="crypto-amount">1.02 ETH</div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="crypto-price">$404.18</div>
+                        <div class="price-change">+$24.50</div>
+                    </div>
+                </div>
+                <div class="crypto-card d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="crypto-icon">
+                            <i class="eth-icon mdi mdi-ethereum"></i>
+                        </div>
+                        <div>
+                            <div class="crypto-name">Avax</div>
+                            <div class="crypto-amount">1.02 ETH</div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="crypto-price">$404.18</div>
+                        <div class="price-change">+$24.50</div>
+                    </div>
+                </div>
+                <div class="crypto-card d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="crypto-icon">
+                            <i class="eth-icon mdi mdi-ethereum"></i>
+                        </div>
+                        <div>
+                            <div class="crypto-name">Matic</div>
+                            <div class="crypto-amount">1.02 ETH</div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <div class="crypto-price">$404.18</div>
+                        <div class="price-change">+$24.50</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <style>
         .products-container .product-card .product-image {

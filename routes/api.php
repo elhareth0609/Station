@@ -1,14 +1,16 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Middleware\BearerTokenMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('v1/status', function () {
-    return response()->json(['status' => 'API is working']);
-});
+
+Route::get('v1/status', [NotificationController::class, 'test'])->name('test');
+
+
 
 Route::post('v1/login', [AuthController::class, 'authenticate'])->name('api.login');
 // Route::get('v1/version', [AuthController::class, 'version'])->name('api.version');

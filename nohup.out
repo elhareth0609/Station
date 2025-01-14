@@ -1,0 +1,6 @@
+WebSocket Server started on ws://127.0.0.1:4444
+New client connected
+Server received message: é
+Server sent message: é
+Client disconnected
+New client connected

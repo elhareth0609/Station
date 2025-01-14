@@ -35,7 +35,7 @@
 <script src="{{ asset('assets/js/myIcons.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('assets/js/mySelect.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('assets/js/myTag.js') }}?v={{ time() }}"></script>
-
+<script src="{{ asset('assets/js/myAnime.js') }}?v={{ time() }}"></script>
 
 <link rel="stylesheet" href="{{ asset('assets/vendor/materialdesignicons/css/materialdesignicons.min.css') }}?v={{ time() }}" />
 
