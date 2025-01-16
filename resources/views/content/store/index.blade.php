@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @php
     $isNavbar = false;
@@ -293,6 +293,9 @@
         </div>
     </div>
 
+
+
+    
     
     {{-- <!-- Category Sidebar -->
     <div class="sidebar-overlay"></div>

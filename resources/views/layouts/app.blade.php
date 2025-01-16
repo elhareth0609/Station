@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Enter:wght@400;500;700&display=swap" rel="stylesheet">
 
-    @include('layout.header')
+    @include('layouts.app.header')
 
 </head>
 <body id="page-top">
@@ -71,14 +71,14 @@
 
             <!-- Sidebar -->
             @if (isset($isSidebar) && $isSidebar)
-                @include('layout.menu.menu')
+                @include('layouts.app.menu.menu')
             @endif
 
             
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
                     @if (isset($isNavbar) && $isNavbar)
-                    @include('layout.nav.nav')
+                    @include('layouts.app.nav.nav')
                     @endif
                     @if (isset($isContainer) && $isContainer)
                         <div class="container-fluid">
@@ -133,7 +133,7 @@
         </div>
 
         <!-- Footer -->
-        @include('layout.footer')
+        @include('layouts.app.footer')
         <!-- End of Footer -->
 
 

@@ -59,7 +59,7 @@
                     </a>
 
                     @if (isset($section['submenu']) && is_array($section['submenu']))
-                        @include('layout.menu.submenu', ['submenu' => $section['submenu']])
+                        @include('layouts.app.menu.submenu', ['submenu' => $section['submenu']])
                     @endif
                 </li>
             @endif
