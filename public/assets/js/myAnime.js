@@ -28,7 +28,6 @@ setTimeout(animateOnScroll, 100); // Small delay to ensure proper calculation
 // Throttle scroll event for better performance
 let scrollTimeout;
 $('#content-wrapper').on('scroll', function () {
-    console.log('ddd');
     if (scrollTimeout) {
         cancelAnimationFrame(scrollTimeout);
     }

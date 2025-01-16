@@ -27,6 +27,16 @@ class ProductController extends Controller {
         }
     }
 
+    public function view($id) {
+        try {
+            // $product = $this->productService->getProduct($id);
+            return view('content.products.index');
+            // ->with('product',new ProductResource($product));
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
+    }
+
     public function create(ProductRequest $request) {
         try {
             $product = $this->productService->createProduct($request->validated());

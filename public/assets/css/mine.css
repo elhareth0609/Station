@@ -452,6 +452,9 @@ body {
 .page-link:focus {
     box-shadow: none!important;
 }
+.btn.btn-outline-warning:hover {
+    color: white;
+}
 
 /* Start Ripple */
 span.ripple-effect {
