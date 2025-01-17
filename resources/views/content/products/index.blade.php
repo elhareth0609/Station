@@ -11,11 +11,6 @@
 
 @section('content')
 <style>
-    /* Breadcrumb styles */
-    .breadcrumb-item + .breadcrumb-item::before {
-        content: ">";
-    }
-
     /* Product details styles */
     .color-option {
         width: 30px;
@@ -31,66 +26,64 @@
     }
 
         /* Custom Indicators Container */
-.product-shower .custom-indicators-container {
-    /* width: 400px; //Match the width of the carousel */
-    margin-top: 10px; /* Space between carousel and indicators */
-}
+    .product-shower .custom-indicators-container {
+        /* width: 400px; //Match the width of the carousel */
+        margin-top: 10px; /* Space between carousel and indicators */
+    }
 
-/* Custom Indicators */
-.product-shower .custom-indicators {
-    display: flex;
-    justify-content: center;
-    gap: 10px; /* Space between indicator images */
-    padding: 0;
-    margin: 0;
-}
+    /* Custom Indicators */
+    .product-shower .custom-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 10px; /* Space between indicator images */
+        padding: 0;
+        margin: 0;
+    }
 
-/* Indicator Buttons */
-.product-shower .custom-indicators button {
-    padding: 0;
-    border: none;
-    background: none;
-    width: 80px; /* Adjust width as needed */
-    height: 50px; /* Adjust height as needed */
-    overflow: hidden;
-    position: relative;
-    display: none; /* Hide all indicators by default */
-}
+    /* Indicator Buttons */
+    .product-shower .custom-indicators button {
+        padding: 0;
+        border: none;
+        background: none;
+        width: 80px; /* Adjust width as needed */
+        height: 50px; /* Adjust height as needed */
+        overflow: hidden;
+        position: relative;
+        display: none; /* Hide all indicators by default */
+    }
 
-/* Indicator Images */
-.product-shower .custom-indicators button img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.3s ease;
-}
+    /* Indicator Images */
+    .product-shower .custom-indicators button img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.3s ease;
+    }
 
-/* Dark Transparent Overlay for Inactive Images */
-.product-shower .custom-indicators button:not(.active) img {
-    opacity: 0.5; /* Darken inactive images */
-    filter: brightness(0.5); /* Add dark overlay */
-}
+    /* Dark Transparent Overlay for Inactive Images */
+    .product-shower .custom-indicators button:not(.active) img {
+        opacity: 0.5; /* Darken inactive images */
+        filter: brightness(0.5); /* Add dark overlay */
+    }
 
-/* Active Image (No Overlay) */
-.product-shower .custom-indicators button.active img {
-    opacity: 1;
-    filter: brightness(1); /* No overlay for active image */
-}
-/* Base styles for zoomable images */
-.product-shower .carousel-item img.zoomable {
-    transition: transform 0.3s ease-in-out, transform-origin 0.1s ease-in-out; /* Smooth zoom and origin adjustment */
-    transform-origin: center center; /* Default origin */
-    object-fit: contain;
-}
+    /* Active Image (No Overlay) */
+    .product-shower .custom-indicators button.active img {
+        opacity: 1;
+        filter: brightness(1); /* No overlay for active image */
+    }
+    /* Base styles for zoomable images */
+    .product-shower .carousel-item img.zoomable {
+        transition: transform 0.3s ease-in-out, transform-origin 0.1s ease-in-out; /* Smooth zoom and origin adjustment */
+        transform-origin: center center; /* Default origin */
+        object-fit: contain;
+    }
 
-.product-shower .carousel-item.active img.zoomable:hover {
-    transform: scale(2); /* Zoom level */
-    cursor: crosshair; /* Visual cue for zooming */
-}
+    .product-shower .carousel-item.active img.zoomable:hover {
+        transform: scale(2); /* Zoom level */
+        cursor: crosshair; /* Visual cue for zooming */
+    }
 
-
-
-.nav-pills .nav-link {
+    .nav-pills .nav-link {
         color: #6c757d;
         background-color: #f8f9fa;
         margin-right: 10px;
@@ -129,17 +122,33 @@
         height: 202px;           
         width: 100%;           
     }
+    .breadcrumb-item + .breadcrumb-item::before {
+      font-family: "Material Design Icons";
+      content: "\F0142";
+      color: #6c757d;
+    }
+
 </style>
 
 
 <!-- Breadcrumbs -->
-<nav aria-label="breadcrumb" class="container mt-3">
+<nav class="container mt-3">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Category</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Product Name</li>
+      <li class="breadcrumb-item fw-bold">
+        <i class="mdi mdi-home text-warning"></i>
+        <a href="{{ route('home') }}">Home</a>
+      </li>
+      <li class="breadcrumb-item fw-bold">
+        <i class="mdi mdi-folder text-warning"></i>
+        <a href="{{ route('category.view', ['id' => 1]) }}">Category</a>
+      </li>
+      <li class="breadcrumb-item fw-bold active">
+        <i class="mdi mdi-package text-warning"></i>
+        Product Name
+      </li>
     </ol>
-</nav>
+  </nav>
+
 
 <!-- Main Product Section -->
 <div class="container">
@@ -161,14 +170,14 @@
             </div>
 
             <!-- Price -->
-            <div class="mb-4">
-                <h2 class="h4">$299.99</h2>
-                <small class="text-muted">Tax included</small>
+            <div class="mb-4 d-flex align-items-baseline">
+                <h2 class="h4 mb-0">$299.99</h2>
+                <del class="ms-1">$299.99</del>
             </div>
 
             <!-- Color Options -->
             <div class="mb-4">
-                <h3 class="h6 mb-3">Available Colors</h3>
+                <h3 class="h6 mb-3">Available Colors :</h3>
                 <div class="d-flex">
                     <div class="color-option active" style="background-color: #000000;"></div>
                     <div class="color-option" style="background-color: #FFFFFF;"></div>
@@ -176,39 +185,41 @@
                 </div>
             </div>
 
-            <div class="row justify-content-between mb-2 quantity-controls">
-                <div class="col-8">
-                    <div class="row">
-                        <div class="col-7">
-                            <div class="row align-items-center justify-content-between">
-                                <!-- Minus Button -->
-                                <div class="col-3 p-0 my-w-fit-content">
-                                    <button class="btn btn-icon btn-warning text-white col-2 minus-btn">
-                                        <i class="mdi mdi-minus"></i>
-                                    </button>
-                                </div>
-                                <!-- Input Quantity -->
-                                <div class="col-6 p-0">
-                                    <input type="number" class="form-control w-100 text-center quantity-input" value="1" min="1" max="10">
-                                </div>
-                                <!-- Plus Button -->
-                                <div class="col-3 p-0 my-w-fit-content">
-                                    <button class="btn btn-icon btn-warning text-white col-2 plus-btn">
-                                        <i class="mdi mdi-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Cart Button -->
-                        <div class="col-5">
-                            <button class="btn btn-icon btn-warning text-white cart-btn">
-                                <i class="mdi mdi-cart-plus"></i>
+            <!-- Product Description -->
+            <div class="mb-4">
+                <h3 class="h6 mb-3">Product Description :</h3>
+                <p class="text-muted">
+                    This is a detailed description of the product. It highlights the key features, benefits, and specifications. 
+                    For example, this product is made with high-quality materials, offers excellent durability, and comes with a 
+                    one-year warranty. It is perfect for everyday use and designed to meet your needs.
+                </p>
+            </div>
+
+            <!-- Quantity Controls and Buttons -->
+            <div class="d-flex justify-content-between mb-2 quantity-controls">
+                <div class="d-flex">
+                    <div class="my-w-fit-content">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <!-- Minus Button -->
+                            <button class="btn btn-icon btn-warning me-1 minus-btn">
+                                <i class="mdi mdi-minus"></i>
+                            </button>
+                            <!-- Input Quantity -->
+                            <input type="number" class="form-control text-center quantity-input" value="1" min="1" max="10" style="width: 90px;">
+                            <!-- Plus Button -->
+                            <button class="btn btn-icon btn-warning ms-1 plus-btn">
+                                <i class="mdi mdi-plus"></i>
                             </button>
                         </div>
                     </div>
+                    
+                    <!-- Cart Button -->
+                    <button class="btn btn-outline-warning d-flex mx-1 cart-btn">
+                        <i class="mdi mdi-cart-plus"></i>
+                        <label class="ms-1 d-none d-lg-flex d-md-flex">Add to Cart</label>
+                    </button>
                 </div>
-                <div class="col-3 my-w-fit-content">
+                <div class="my-w-fit-content">
                     <button class="btn btn-icon btn-outline-warning">
                         <i class="mdi mdi-heart-outline"></i>
                     </button>
@@ -467,6 +478,107 @@
         color.addEventListener('click', () => {
             document.querySelectorAll('.color-option').forEach(c => c.classList.remove('active'));
             color.classList.add('active');
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get all product cards
+        const productCards = document.querySelectorAll('.product-card');
+
+        productCards.forEach((card) => {
+            const rating = card.querySelector('.rating');
+            const titlePrice1 = card.querySelector('.title-price-1');
+            const titlePrice2 = card.querySelector('.title-price-2');
+            const quantityControls = card.querySelector('.quantity-controls');
+            const cartActions = card.querySelector('.cart-actions');
+            const plusBtn = card.querySelector('.plus-btn');
+            const minusBtn = card.querySelector('.minus-btn');
+            const quantityInput = card.querySelector('.quantity-input');
+            const cartBtn = card.querySelector('.cart-btn');
+            const goToCartBtn = card.querySelector('.go-to-cart-btn');
+            const deleteBtn = card.querySelector('.delete-btn');
+
+            if (!(rating || titlePrice1 || titlePrice2 || quantityControls || cartActions || cartActions || plusBtn || minusBtn 
+                || cartBtn || goToCartBtn || deleteBtn
+            )) {
+                return false;
+            }
+
+            titlePrice2.style.setProperty('display', 'none', 'important');
+
+            // Plus Button Click
+            plusBtn.addEventListener('click', () => {
+                // Hide rating and first title-price
+                rating.style.display = 'none';
+                // titlePrice1.style.display = 'none';
+                titlePrice1.style.setProperty('display', 'none', 'important');
+
+                // Show second title-price and quantity controls
+                // titlePrice2.style.display = 'flex';
+                titlePrice2.style.removeProperty('display');
+
+                quantityControls.style.display = 'flex';
+            });
+
+            // Minus Button Click
+            minusBtn.addEventListener('click', () => {
+                const currentValue = parseInt(quantityInput.value);
+                if (currentValue > 1) {
+                    quantityInput.value = currentValue - 1;
+                    // Show plus button if value is less than max
+                    if (currentValue - 1 < 10) {
+                        quantityControls.querySelector('.plus-btn').style.display = 'block';
+                    }
+                } else {
+                    // Reset to initial state if quantity is 0
+                    quantityControls.style.display = 'none';
+                    cartActions.style.display = 'none';
+                    rating.style.display = 'block';
+                    // titlePrice1.style.display = 'flex';
+                    titlePrice1.style.removeProperty('display');
+                    // titlePrice2.style.display = 'none';
+                    titlePrice2.style.setProperty('display', 'none', 'important');
+
+                }
+            });
+
+            // Plus Button in Quantity Controls
+            quantityControls.querySelector('.plus-btn').addEventListener('click', () => {
+                const currentValue = parseInt(quantityInput.value);
+                if (currentValue < 10) {
+                    quantityInput.value = currentValue + 1;
+                    // Hide plus button if value reaches max
+                    if (currentValue + 1 === 10) {
+                        quantityControls.querySelector('.plus-btn').style.display = 'none';
+                    }
+                }
+            });
+
+            // Cart Button Click
+            cartBtn.addEventListener('click', () => {
+                // Hide quantity controls and second title-price
+                quantityControls.style.display = 'none';
+                // titlePrice2.style.display = 'none';
+                titlePrice1.style.setProperty('display', 'none', 'important');
+                titlePrice2.style.removeProperty('display');
+
+                // Show Go To Cart and Delete buttons
+                cartActions.style.display = 'flex';
+            });
+
+            // Delete Button Click
+            deleteBtn.addEventListener('click', () => {
+                // Reset to initial state
+                cartActions.style.display = 'none';
+                quantityControls.style.display = 'none';
+                rating.style.display = 'block';
+                // titlePrice1.style.display = 'flex';
+                titlePrice1.style.removeProperty('display');
+                titlePrice2.style.setProperty('display', 'none', 'important');
+                quantityInput.value = 1;
+                // Ensure plus button is visible
+                quantityControls.querySelector('.plus-btn').style.display = 'block';
+            });
         });
     });
 

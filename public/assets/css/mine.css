@@ -456,6 +456,14 @@ body {
     color: white;
 }
 
+.btn.btn-warning,
+.btn.btn-warning:hover {
+    color: white;
+}
+
+.btn label {
+    cursor: pointer;
+}
 /* Start Ripple */
 span.ripple-effect {
   width: 0;

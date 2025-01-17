@@ -26,6 +26,16 @@ class CategoryController extends Controller {
         }
     }
 
+    public function view($id) {
+        try {
+            // $products = $this->categoryService->getProducts($id);
+            return view('content.categories.index');
+            // ->with('products',ProductResource::collection($products));
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
+    }
+
     public function all() {
         try {
             $allCategory = $this->categoryService->allCategory();
@@ -34,7 +44,6 @@ class CategoryController extends Controller {
             return $this->error($e->getMessage());
         }
     }
-
 
     public function create(CategoryRequest $request) {
         try {

@@ -120,6 +120,7 @@ use Illuminate\Support\Facades\Route;
         Route::delete('/category/{id}', [CategoryController::class, 'delete'])->name('category.delete');
         Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
         Route::get('/category/{id}/restore', [CategoryController::class, 'restore'])->name('category.restore');
+        Route::get('view/category/{id}', [CategoryController::class, 'view'])->name('category.view');
 
         Route::get('/categories/all', [CategoryController::class, 'all'])->name('categories.all');
 

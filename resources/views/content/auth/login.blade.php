@@ -38,13 +38,13 @@
             <div class="mb-3">
                 <div class="input-group">
                     <span class="input-group-text bg-transparent"><i class="mdi mdi-email-outline"></i></span>
-                    <input type="email" name="email" value="admin@gmail.com" class="form-control" placeholder="{{ __('Email address') }}" required>
+                    <input type="email" name="email" value="admin@gmail.com" class="form-control border-start-0 p-0" placeholder="{{ __('Email address') }}" required>
                 </div>
             </div>
             <div class="mb-3">
                 <div class="input-group">
                     <span class="input-group-text bg-transparent"><i class="mdi mdi-lock-outline"></i></span>
-                    <input type="password" name="password" value="123456789" class="form-control" placeholder="Password" required>
+                    <input type="password" name="password" value="123456789" class="form-control border-start-0 p-0" placeholder="Password" required>
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center my-4">

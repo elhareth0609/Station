@@ -72,7 +72,7 @@
     }
 
     .search-bar {
-        max-width: 400px;
+        width: 360px;
     }
 
     @media (max-width: 768px) {
@@ -177,16 +177,17 @@
     </div>
 </nav>
 
+<div style="margin-top: 85px;"></div>
 <!-- desktop Bottom Navigation -->
-<nav class="navbar navbar-expand-lg shadow-none desktop-nav" style="margin-top: 80px;">
+<nav class="navbar navbar-expand-lg shadow-none desktop-nav">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center w-100">
             <div class="search-bar">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search products...">
-                    <button class="btn btn-outline-secondary" type="button">
+                    <span class="input-group-text border-end-0 bg-white">
                         <i class="mdi mdi-magnify"></i>
-                    </button>
+                    </span>
+                    <input type="text" class="form-control border-start-0 ps-0" placeholder="Search...">
                 </div>
             </div>
             <button class="btn" id="cartButton" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas">
@@ -232,10 +233,26 @@
                     <div>
                         <h6 class="mb-1">Product Name</h6>
                         <p class="mb-1">$99.99</p>
-                        <div class="input-group input-group-sm" style="width: 100px;">
-                            <button class="btn btn-outline-secondary">-</button>
-                            <input type="text" class="form-control text-center" value="1">
-                            <button class="btn btn-outline-secondary">+</button>
+                        <div class="d-flex">
+                            <div class="my-w-fit-content">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <!-- Minus Button -->
+                                    <button class="btn btn-icon btn-warning me-1 minus-btn">
+                                        <i class="mdi mdi-minus"></i>
+                                    </button>
+                                    <!-- Input Quantity -->
+                                    <input type="number" class="form-control text-center quantity-input" value="1" min="1" max="10" style="width: 90px;">
+                                    <!-- Plus Button -->
+                                    <button class="btn btn-icon btn-warning ms-1 plus-btn">
+                                        <i class="mdi mdi-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Cart Button -->
+                            <button class="btn btn-outline-danger d-flex mx-1 cart-btn">
+                                <i class="mdi mdi-trash-can-outline"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -250,10 +267,26 @@
                     <div>
                         <h6 class="mb-1">Another Product</h6>
                         <p class="mb-1">$49.99</p>
-                        <div class="input-group input-group-sm" style="width: 100px;">
-                            <button class="btn btn-outline-secondary">-</button>
-                            <input type="text" class="form-control text-center" value="2">
-                            <button class="btn btn-outline-secondary">+</button>
+                        <div class="d-flex">
+                            <div class="my-w-fit-content">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <!-- Minus Button -->
+                                    <button class="btn btn-icon btn-warning me-1 minus-btn">
+                                        <i class="mdi mdi-minus"></i>
+                                    </button>
+                                    <!-- Input Quantity -->
+                                    <input type="number" class="form-control text-center quantity-input" value="1" min="1" max="10" style="width: 90px;">
+                                    <!-- Plus Button -->
+                                    <button class="btn btn-icon btn-warning ms-1 plus-btn">
+                                        <i class="mdi mdi-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Cart Button -->
+                            <button class="btn btn-outline-danger d-flex mx-1 cart-btn">
+                                <i class="mdi mdi-trash-can-outline"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -267,8 +300,8 @@
             <strong>Total:</strong>
             <strong>$149.98</strong>
         </div>
-        <a href="/cart" class="btn btn-primary w-100">
-            Go to Cart <i class="mdi mdi-cart"></i>
+        <a href="{{ route('cart') }}" class="btn btn-warning w-100">
+            <i class="mdi mdi-cart-check"></i> Go to Cart
         </a>
     </div>
 </div>
@@ -315,7 +348,6 @@
 
 
 <style>
-
     /* Navigation */
     nav.nav-store {
         background: rgba(255, 255, 255, 0.95);
@@ -361,7 +393,7 @@
     }
 
     .nav-links a:hover {
-        color: #007bff;
+        color: #ffc107;
     }
 
             /* Hamburger Menu Button */
