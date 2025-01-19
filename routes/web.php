@@ -193,6 +193,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('settings/website', [SettingController::class, 'get_website'])->name('settings.website.get');
         Route::get('settings/application', [SettingController::class, 'get_application'])->name('settings.application.get');
         Route::get('settings/account', [SettingController::class, 'get_account'])->name('settings.account.get');
+        Route::get('settings/pages', [SettingController::class, 'get_pages'])->name('settings.pages.get');
 
         Route::post('settings/account/update', [SettingController::class, 'update_account'])->name('settings.account.update');
 

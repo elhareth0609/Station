@@ -316,7 +316,6 @@
             "name" : "file-manager",
             "link" : "/file-manager"
         },
-        
         {
             "title": "Chat",
             "icon": "mdi mdi-chat-outline",
@@ -394,10 +393,16 @@
                     "title": "Application",
                     "name": "settings.application.get",
                     "link": "/settings/application"
-                },{
+                },
+                {
                     "title" : "Website",
                     "name" : "settings.website.get",
                     "link" : "/settings/website"
+                },
+                {
+                    "title" : "Pages",
+                    "name" : "settings.pages.get",
+                    "link" : "/settings/pages"
                 }
             ]
         }

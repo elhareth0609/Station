@@ -132,7 +132,7 @@
 
 
 <!-- Breadcrumbs -->
-<nav class="container mt-3">
+<nav class="mt-3">
     <ol class="breadcrumb">
       <li class="breadcrumb-item fw-bold">
         <i class="mdi mdi-home text-warning"></i>
@@ -151,234 +151,232 @@
 
 
 <!-- Main Product Section -->
-<div class="container">
-    <div class="row">
-        <!-- Product Details (Left Side) -->
-        <div class="col-lg-6">
-            <h1 class="h2 mb-4">Product Name</h1>
-            
-            <!-- Rating -->
-            <div class="mb-3 d-flex">
-                <div class="text-warning my-w-fit-content">
-                    <small class="mdi mdi-star"></small>
-                    <small class="mdi mdi-star"></small>
-                    <small class="mdi mdi-star"></small>
-                    <small class="mdi mdi-star"></small>
-                    <small class="mdi mdi-star-outline"></small>
-                </div>
-                <span class="ms-2">(4.0/5) - 123 Reviews</span>
+<div class="row">
+    <!-- Product Details (Left Side) -->
+    <div class="col-lg-6">
+        <h1 class="h2 mb-4">Product Name</h1>
+        
+        <!-- Rating -->
+        <div class="mb-3 d-flex">
+            <div class="text-warning my-w-fit-content">
+                <small class="mdi mdi-star"></small>
+                <small class="mdi mdi-star"></small>
+                <small class="mdi mdi-star"></small>
+                <small class="mdi mdi-star"></small>
+                <small class="mdi mdi-star-outline"></small>
             </div>
-
-            <!-- Price -->
-            <div class="mb-4 d-flex align-items-baseline">
-                <h2 class="h4 mb-0">$299.99</h2>
-                <del class="ms-1">$299.99</del>
-            </div>
-
-            <!-- Color Options -->
-            <div class="mb-4">
-                <h3 class="h6 mb-3">Available Colors :</h3>
-                <div class="d-flex">
-                    <div class="color-option active" style="background-color: #000000;"></div>
-                    <div class="color-option" style="background-color: #FFFFFF;"></div>
-                    <div class="color-option" style="background-color: #C0C0C0;"></div>
-                </div>
-            </div>
-
-            <!-- Product Description -->
-            <div class="mb-4">
-                <h3 class="h6 mb-3">Product Description :</h3>
-                <p class="text-muted">
-                    This is a detailed description of the product. It highlights the key features, benefits, and specifications. 
-                    For example, this product is made with high-quality materials, offers excellent durability, and comes with a 
-                    one-year warranty. It is perfect for everyday use and designed to meet your needs.
-                </p>
-            </div>
-
-            <!-- Quantity Controls and Buttons -->
-            <div class="d-flex justify-content-between mb-2 quantity-controls">
-                <div class="d-flex">
-                    <div class="my-w-fit-content">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <!-- Minus Button -->
-                            <button class="btn btn-icon btn-warning me-1 minus-btn">
-                                <i class="mdi mdi-minus"></i>
-                            </button>
-                            <!-- Input Quantity -->
-                            <input type="number" class="form-control text-center quantity-input" value="1" min="1" max="10" style="width: 90px;">
-                            <!-- Plus Button -->
-                            <button class="btn btn-icon btn-warning ms-1 plus-btn">
-                                <i class="mdi mdi-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Cart Button -->
-                    <button class="btn btn-outline-warning d-flex mx-1 cart-btn">
-                        <i class="mdi mdi-cart-plus"></i>
-                        <label class="ms-1 d-none d-lg-flex d-md-flex">Add to Cart</label>
-                    </button>
-                </div>
-                <div class="my-w-fit-content">
-                    <button class="btn btn-icon btn-outline-warning">
-                        <i class="mdi mdi-heart-outline"></i>
-                    </button>
-                    <button class="btn btn-icon btn-outline-warning">
-                        <i class="mdi mdi-share-outline"></i>
-                    </button>
-                </div>
-            </div>
-
+            <span class="ms-2">(4.0/5) - 123 Reviews</span>
         </div>
 
-        <!-- Product Shower (Right Side) -->
-        <div class="col-lg-6">
-            <!-- Your existing product-shower code goes here -->
-            <div class="product-shower card p-2">
-                <div id="carouselExampleIndicators" class="carousel carousel-dark slide" style="height: 400px;">
-                    <!-- Carousel Inner -->
-                    <div class="carousel-inner h-100">
-                        <div class="carousel-item active" style="height: inherit;">
-                            <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 1" style="height: inherit;">
-                        </div>
-                        <div class="carousel-item" style="height: inherit;">
-                            <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 2" style="height: inherit;">
-                        </div>
-                        <div class="carousel-item" style="height: inherit;">
-                            <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 3" style="height: inherit;">
-                        </div>
-                        <div class="carousel-item" style="height: inherit;">
-                            <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 4" style="height: inherit;">
-                        </div>
-                        <div class="carousel-item" style="height: inherit;">
-                            <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 5" style="height: inherit;">
-                        </div>
+        <!-- Price -->
+        <div class="mb-4 d-flex align-items-baseline">
+            <h2 class="h4 mb-0">$299.99</h2>
+            <del class="ms-1">$299.99</del>
+        </div>
+
+        <!-- Color Options -->
+        <div class="mb-4">
+            <h3 class="h6 mb-3">Available Colors :</h3>
+            <div class="d-flex">
+                <div class="color-option active" style="background-color: #000000;"></div>
+                <div class="color-option" style="background-color: #FFFFFF;"></div>
+                <div class="color-option" style="background-color: #C0C0C0;"></div>
+            </div>
+        </div>
+
+        <!-- Product Description -->
+        <div class="mb-4">
+            <h3 class="h6 mb-3">Product Description :</h3>
+            <p class="text-muted">
+                This is a detailed description of the product. It highlights the key features, benefits, and specifications. 
+                For example, this product is made with high-quality materials, offers excellent durability, and comes with a 
+                one-year warranty. It is perfect for everyday use and designed to meet your needs.
+            </p>
+        </div>
+
+        <!-- Quantity Controls and Buttons -->
+        <div class="d-flex justify-content-between mb-2 quantity-controls">
+            <div class="d-flex">
+                <div class="my-w-fit-content">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <!-- Minus Button -->
+                        <button class="btn btn-icon btn-warning me-1 minus-btn">
+                            <i class="mdi mdi-minus"></i>
+                        </button>
+                        <!-- Input Quantity -->
+                        <input type="number" class="form-control text-center quantity-input" value="1" min="1" max="10" style="width: 90px;">
+                        <!-- Plus Button -->
+                        <button class="btn btn-icon btn-warning ms-1 plus-btn">
+                            <i class="mdi mdi-plus"></i>
+                        </button>
                     </div>
-            
-                    <!-- Carousel Controls -->
-                    <button class="carousel-control-prev top-50 my-h-fit-content" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next top-50 my-h-fit-content" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
                 </div>
-            
-                <div class="custom-indicators-container p-2">
-                    <div class="carousel-indicators custom-indicators m-0" style="position: relative;">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-label="Slide 1" style="height: auto; width: 80px;">
-                            <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 1">
-                        </button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" style="height: auto; width: 80px;">
-                            <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 2">
-                        </button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3" style="height: auto; width: 80px;">
-                            <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 3">
-                        </button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4" style="height: auto; width: 80px;">
-                            <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 4">
-                        </button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5" style="height: auto; width: 80px;">
-                            <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 5">
-                        </button>
+                
+                <!-- Cart Button -->
+                <button class="btn btn-outline-warning d-flex mx-1 cart-btn">
+                    <i class="mdi mdi-cart-plus"></i>
+                    <label class="ms-1 d-none d-lg-flex d-md-flex">Add to Cart</label>
+                </button>
+            </div>
+            <div class="my-w-fit-content">
+                <button class="btn btn-icon btn-outline-warning">
+                    <i class="mdi mdi-heart-outline"></i>
+                </button>
+                <button class="btn btn-icon btn-outline-warning">
+                    <i class="mdi mdi-share-outline"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Product Shower (Right Side) -->
+    <div class="col-lg-6">
+        <!-- Your existing product-shower code goes here -->
+        <div class="product-shower card p-2">
+            <div id="carouselExampleIndicators" class="carousel carousel-dark slide" style="height: 400px;">
+                <!-- Carousel Inner -->
+                <div class="carousel-inner h-100">
+                    <div class="carousel-item active" style="height: inherit;">
+                        <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 1" style="height: inherit;">
                     </div>
+                    <div class="carousel-item" style="height: inherit;">
+                        <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 2" style="height: inherit;">
+                    </div>
+                    <div class="carousel-item" style="height: inherit;">
+                        <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 3" style="height: inherit;">
+                    </div>
+                    <div class="carousel-item" style="height: inherit;">
+                        <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 4" style="height: inherit;">
+                    </div>
+                    <div class="carousel-item" style="height: inherit;">
+                        <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 5" style="height: inherit;">
+                    </div>
+                </div>
+        
+                <!-- Carousel Controls -->
+                <button class="carousel-control-prev top-50 my-h-fit-content" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next top-50 my-h-fit-content" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        
+            <div class="custom-indicators-container p-2">
+                <div class="carousel-indicators custom-indicators m-0" style="position: relative;">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-label="Slide 1" style="height: auto; width: 80px;">
+                        <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 1">
+                    </button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" style="height: auto; width: 80px;">
+                        <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 2">
+                    </button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3" style="height: auto; width: 80px;">
+                        <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 3">
+                    </button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4" style="height: auto; width: 80px;">
+                        <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 4">
+                    </button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5" style="height: auto; width: 80px;">
+                        <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 5">
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Tabs Section -->
-    <div class="mt-5">
-        <ul class="nav nav-pills mb-4" id="productTabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab">Description</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="information-tab" data-bs-toggle="tab" href="#information" role="tab">Information</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="seller-tab" data-bs-toggle="tab" href="#seller" role="tab">Seller</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="comments-tab" data-bs-toggle="tab" href="#comments" role="tab">Comments</a>
-            </li>
-        </ul>
-        <div class="tab-content" id="productTabsContent">
-            <div class="tab-pane fade show active" id="description" role="tabpanel">
-                <p>Detailed product description goes here...</p>
-            </div>
-            <div class="tab-pane fade" id="information" role="tabpanel">
-                <p>Product information and specifications...</p>
-            </div>
-            <div class="tab-pane fade" id="seller" role="tabpanel">
-                <p>Seller information and details...</p>
-            </div>
-            <div class="tab-pane fade" id="comments" role="tabpanel">
-                <!-- Comments Section -->
-                <div class="comments-section">
-                    <!-- New Comment Form -->
-                    <div class="comment-form p-4 mb-4">
-                        <h4 class="mb-3">Leave a Comment</h4>
-                        <form>
-                            <div class="mb-3">
-                                <label for="commentName" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="commentName" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="commentEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="commentEmail" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="commentRating" class="form-label">Rating</label>
-                                <select class="form-select" id="commentRating" required>
-                                    <option value="">Select rating</option>
-                                    <option value="5">5 stars</option>
-                                    <option value="4">4 stars</option>
-                                    <option value="3">3 stars</option>
-                                    <option value="2">2 stars</option>
-                                    <option value="1">1 star</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="commentText" class="form-label">Your Comment</label>
-                                <textarea class="form-control" id="commentText" rows="4" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit Comment</button>
-                        </form>
-                    </div>
+<!-- Tabs Section -->
+<div class="mt-5">
+    <ul class="nav nav-pills mb-4" id="productTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab">Description</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="information-tab" data-bs-toggle="tab" href="#information" role="tab">Information</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="seller-tab" data-bs-toggle="tab" href="#seller" role="tab">Seller</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="comments-tab" data-bs-toggle="tab" href="#comments" role="tab">Comments</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="productTabsContent">
+        <div class="tab-pane fade show active" id="description" role="tabpanel">
+            <p>Detailed product description goes here...</p>
+        </div>
+        <div class="tab-pane fade" id="information" role="tabpanel">
+            <p>Product information and specifications...</p>
+        </div>
+        <div class="tab-pane fade" id="seller" role="tabpanel">
+            <p>Seller information and details...</p>
+        </div>
+        <div class="tab-pane fade" id="comments" role="tabpanel">
+            <!-- Comments Section -->
+            <div class="comments-section">
+                <!-- New Comment Form -->
+                <div class="comment-form p-4 mb-4">
+                    <h4 class="mb-3">Leave a Comment</h4>
+                    <form>
+                        <div class="mb-3">
+                            <label for="commentName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="commentName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="commentEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="commentEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="commentRating" class="form-label">Rating</label>
+                            <select class="form-select" id="commentRating" required>
+                                <option value="">Select rating</option>
+                                <option value="5">5 stars</option>
+                                <option value="4">4 stars</option>
+                                <option value="3">3 stars</option>
+                                <option value="2">2 stars</option>
+                                <option value="1">1 star</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="commentText" class="form-label">Your Comment</label>
+                            <textarea class="form-control" id="commentText" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Comment</button>
+                    </form>
+                </div>
 
-                    <!-- Example Comments -->
-                    <div class="comment p-3 bg-light">
-                        <div class="d-flex">
-                            <div class="user-avatar me-3">JD</div>
-                            <div class="flex-grow-1">
-                                <div class="d-flex justify-content-between">
-                                    <h5 class="mb-1">John Doe</h5>
-                                    <small class="text-muted">2 days ago</small>
-                                </div>
-                                <div class="mb-2">
-                                    <span class="stars">★★★★★</span>
-                                </div>
-                                <p>Great product! The quality exceeded my expectations. I especially love the design and how comfortable it is to use. Would definitely recommend to others.</p>
+                <!-- Example Comments -->
+                <div class="comment p-3 bg-light">
+                    <div class="d-flex">
+                        <div class="user-avatar me-3">JD</div>
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="mb-1">John Doe</h5>
+                                <small class="text-muted">2 days ago</small>
                             </div>
+                            <div class="mb-2">
+                                <span class="stars">★★★★★</span>
+                            </div>
+                            <p>Great product! The quality exceeded my expectations. I especially love the design and how comfortable it is to use. Would definitely recommend to others.</p>
                         </div>
                     </div>
+                </div>
 
-                    <div class="comment p-3 bg-light mt-3">
-                        <div class="d-flex">
-                            <div class="user-avatar me-3">MS</div>
-                            <div class="flex-grow-1">
-                                <div class="d-flex justify-content-between">
-                                    <h5 class="mb-1">Maria Smith</h5>
-                                    <small class="text-muted">1 week ago</small>
-                                </div>
-                                <div class="mb-2">
-                                    <span class="stars">★★★★☆</span>
-                                </div>
-                                <p>Very satisfied with my purchase. The only minor issue was the delivery time, but the product itself is fantastic. The battery life is impressive, and the features are exactly as described.</p>
+                <div class="comment p-3 bg-light mt-3">
+                    <div class="d-flex">
+                        <div class="user-avatar me-3">MS</div>
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="mb-1">Maria Smith</h5>
+                                <small class="text-muted">1 week ago</small>
                             </div>
+                            <div class="mb-2">
+                                <span class="stars">★★★★☆</span>
+                            </div>
+                            <p>Very satisfied with my purchase. The only minor issue was the delivery time, but the product itself is fantastic. The battery life is impressive, and the features are exactly as described.</p>
                         </div>
                     </div>
                 </div>

@@ -160,10 +160,8 @@
             <div class="sidebar-brand-text mx-3" style="font-size: 1rem;font-weight: 800;text-transform: uppercase;letter-spacing: 0.05rem;">Dashboard</div>
         </a>
 
-        <button class="menu-btn" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+        <button class="btn btn-icon btn-white d-md-none d-sm-flex">
+            <span class="mdi mdi-magnify fs-2"></span>
         </button>
         <div class="nav-links align-items-center">
             <a href="#home">Home</a>
@@ -177,7 +175,7 @@
     </div>
 </nav>
 
-<div style="margin-top: 85px;"></div>
+<div id="page-top" style="margin-top: 85px;"></div>
 <!-- desktop Bottom Navigation -->
 <nav class="navbar navbar-expand-lg shadow-none desktop-nav">
     <div class="container">
@@ -200,13 +198,13 @@
 
 <!-- Mobile Bottom Navigation -->
 <div class="mobile-bottom-nav">
-    <a href="#" class="nav-item-mobile flex-fill active">
-        <i class="mdi mdi-home"></i>
-        <div class="small">Home</div>
-    </a>
     <a href="#" class="nav-item-mobile flex-fill" type="button" data-bs-toggle="offcanvas" data-bs-target="#categoriesOffcanvas">
         <i class="mdi mdi-menu"></i>
         <div class="small">Categories</div>
+    </a>
+    <a href="{{ route('home') }}" class="nav-item-mobile flex-fill active">
+        <i class="mdi mdi-home"></i>
+        <div class="small">Home</div>
     </a>
     <a href="#" class="nav-item-mobile flex-fill" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas">
         <i class="mdi mdi-cart-outline">
@@ -396,24 +394,6 @@
         color: #ffc107;
     }
 
-            /* Hamburger Menu Button */
-    .menu-btn {
-        display: none;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 5px;
-        z-index: 1001;
-    }
-
-    .menu-btn span {
-        display: block;
-        width: 25px;
-        height: 3px;
-        background-color: #333;
-        margin: 5px 0;
-        transition: all 0.3s;
-    }
 
     /* Hero Section */
     .hero {
@@ -497,10 +477,6 @@
             font-size: 36px;
         }
 
-        .menu-btn {
-            display: block;
-        }
-
         .nav-links {
             position: fixed;
             top: 0;
@@ -520,19 +496,6 @@
 
         .nav-links.active {
             right: 0;
-        }
-
-        /* Hamburger Animation */
-        .menu-btn.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .menu-btn.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-btn.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
         }
 
     }

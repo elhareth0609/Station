@@ -1,17 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.store')
 
 @php
-    $isNavbar = false;
-    $isSidebar = false;
-    $isFooter = false;
-    $isContainer = false;
+    // $isNavbar = false;
+    // $isSidebar = false;
+    // $isFooter = false;
+    // $isContainer = false;
 @endphp
 
 @section('title', __('Store'))
 
 @section('content')
 
-    <style>
+    {{-- <style>
         .mobile-bottom-nav {
             position: fixed;
             bottom: 0;
@@ -113,227 +113,17 @@
                 padding-bottom: 60px;
             }
         }
-    </style>
+    </style> --}}
 
 
-    <!-- Top Navigation -->
-    <nav class="top-nav">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-3">
-                    <a class="d-flex align-items-center text-black" href="http://dashboard.test">
-                        <div class="sidebar-brand-icon" style="font-size: 2rem;">
-                            <i class="mdi mdi-home-outline"></i>
-                        </div>
-                        <div class="sidebar-brand-text mx-3" style="font-size: 1rem;font-weight: 800;text-transform: uppercase;letter-spacing: 0.05rem;">Dashboard</div>
-                    </a>
-                </div>
-                <div class="col-md-6 category-list">
-                    <ul class="nav">
-                        <!-- Electronics Dropdown -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Electronics
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Smartphones</a></li>
-                                <li><a class="dropdown-item" href="#">Laptops</a></li>
-                                <li><a class="dropdown-item" href="#">Gaming Laptops <span class="badge bg-danger">Sale</span></a></li>
-                                <li><a class="dropdown-item" href="#">Business Laptops</a></li>
-                            </ul>
-                        </li>
-                        <!-- Fashion Dropdown -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Fashion
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Men's Wear</a></li>
-                                <li><a class="dropdown-item" href="#">Women's Wear <span class="badge bg-success">New</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-3 text-end">
-                    <img src="{{ Auth::user()->photo_url }}" alt="Avatar" class="avatar avatar-md border-secondary">
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Mobile Bottom Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light desktop-nav">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center w-100">
-                <div class="search-bar">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search products...">
-                        <button class="btn btn-outline-secondary" type="button">
-                            <i class="mdi mdi-magnify"></i>
-                        </button>
-                    </div>
-                </div>
-                <button class="btn" id="cartButton" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas">
-                    <i class="mdi mdi-cart-outline mdi-24px"></i>
-                    <span class="badge bg-danger">3</span>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Mobile Bottom Navigation -->
-    <div class="mobile-bottom-nav">
-        <a href="#" class="nav-item-mobile flex-fill active">
-            <i class="mdi mdi-home"></i>
-            <div class="small">Home</div>
-        </a>
-        <a href="#" class="nav-item-mobile flex-fill" type="button" data-bs-toggle="offcanvas" data-bs-target="#categoriesOffcanvas">
-            <i class="mdi mdi-menu"></i>
-            <div class="small">Categories</div>
-        </a>
-        <a href="#" class="nav-item-mobile flex-fill" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas">
-            <i class="mdi mdi-cart-outline">
-                <span class="badge bg-danger position-absolute" style="font-size: 8px;">3</span>
-            </i>
-            <div class="small">Cart</div>
-        </a>
-    </div>
-
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
-        <!-- Offcanvas Header -->
-        <div class="offcanvas-header p-3 border-bottom">
-            <h5 class="offcanvas-title" id="cartOffcanvasLabel">Shopping Cart</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-
-        <!-- Offcanvas Body (Cart Items) -->
-        <div class="offcanvas-body p-3">
-            <!-- Sample Cart Item -->
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex">
-                        <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="me-3" style="width: 80px;" alt="Product">
-                        <div>
-                            <h6 class="mb-1">Product Name</h6>
-                            <p class="mb-1">$99.99</p>
-                            <div class="input-group input-group-sm" style="width: 100px;">
-                                <button class="btn btn-outline-secondary">-</button>
-                                <input type="text" class="form-control text-center" value="1">
-                                <button class="btn btn-outline-secondary">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Repeat for more items -->
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex">
-                        <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="me-3" style="width: 80px;" alt="Product">
-                        <div>
-                            <h6 class="mb-1">Another Product</h6>
-                            <p class="mb-1">$49.99</p>
-                            <div class="input-group input-group-sm" style="width: 100px;">
-                                <button class="btn btn-outline-secondary">-</button>
-                                <input type="text" class="form-control text-center" value="2">
-                                <button class="btn btn-outline-secondary">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Offcanvas Footer (Total and Checkout Button) -->
-        <div class="p-3 border-top mt-auto">
-            <div class="d-flex justify-content-between mb-2">
-                <strong>Total:</strong>
-                <strong>$149.98</strong>
-            </div>
-            <a href="/cart" class="btn btn-primary w-100">
-                Go to Cart <i class="mdi mdi-cart"></i>
-            </a>
-        </div>
-    </div>
+ 
 
 
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="categoriesOffcanvas" aria-labelledby="categoriesOffcanvasLabel">
-        <!-- Offcanvas Header -->
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="categoriesOffcanvasLabel">Categories</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-
-        <!-- Offcanvas Body (Dropdowns) -->
-        <div class="offcanvas-body">
-            <!-- Electronics Dropdown -->
-            <div class="dropdown mb-3">
-                <a class="btn btn-secondary dropdown-toggle w-100 text-start" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Electronics
-                </a>
-                <ul class="dropdown-menu w-100">
-                    <li><a class="dropdown-item" href="#">Smartphones</a></li>
-                    <li><a class="dropdown-item" href="#">Laptops</a></li>
-                    <li><a class="dropdown-item" href="#">Gaming Laptops <span class="badge bg-danger">Sale</span></a></li>
-                    <li><a class="dropdown-item" href="#">Business Laptops</a></li>
-                </ul>
-            </div>
-
-            <!-- Fashion Dropdown -->
-            <div class="dropdown mb-3">
-                <a class="btn btn-secondary dropdown-toggle w-100 text-start" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Fashion
-                </a>
-                <ul class="dropdown-menu w-100">
-                    <li><a class="dropdown-item" href="#">Men's Wear</a></li>
-                    <li><a class="dropdown-item" href="#">Women's Wear <span class="badge bg-success">New</span></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-
-
-    
-    
-    {{-- <!-- Category Sidebar -->
-    <div class="sidebar-overlay"></div>
-    <div class="category-sidebar">
-        <div class="p-3 border-bottom">
-            <div class="d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Categories</h5>
-                <button class="btn btn-link" id="closeSidebar">
-                    <i class="mdi mdi-close"></i>
-                </button>
-            </div>
-        </div>
-        <div class="list-group list-group-flush">
-            <div class="list-group-item">
-                <div class="d-flex justify-content-between" data-bs-toggle="collapse" href="#electronicsSubmenu">
-                    Electronics
-                    <i class="mdi mdi-chevron-down"></i>
-                </div>
-                <div class="collapse" id="electronicsSubmenu">
-                    <div class="list-group list-group-flush mt-2">
-                        <a href="#" class="list-group-item list-group-item-action">Smartphones</a>
-                        <a href="#" class="list-group-item list-group-item-action">Laptops</a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            Gaming Laptops
-                            <span class="badge bg-danger">Sale</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- More categories -->
-        </div>
-    </div>
- --}}
 
 
 
     <!-- Main Product Carousel -->
-    <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+    {{-- <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item product-carousel active">
                 <div style="background-image: url('https://via.placeholder.com/800x400')" class="w-100 h-100">
@@ -458,12 +248,12 @@
         <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon"></span>
         </button>
-    </div>
+    </div> --}}
 
 
 
 
-    <div id="adssCarousel" class="carousel slide adss-carousel" data-bs-ride="carousel">
+    {{-- <div id="adssCarousel" class="carousel slide adss-carousel" data-bs-ride="carousel">
         <!-- Indicators -->
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#adssCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
@@ -517,7 +307,7 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
-    </div>
+    </div> --}}
 
 
     <script>
@@ -547,312 +337,6 @@
 
         });
     </script>
-
-
-
-
-
-<div class="product-shower card p-2 my-4 my-w-fit-content">
-    <div id="carouselExampleIndicators" class="carousel slide" style="width: 400px; height: 400px;">
-        <!-- Carousel Inner -->
-        <div class="carousel-inner h-100">
-            <div class="carousel-item active" style="height: inherit;">
-                <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 1" style="height: inherit;">
-            </div>
-            <div class="carousel-item" style="height: inherit;">
-                <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 2" style="height: inherit;">
-            </div>
-            <div class="carousel-item" style="height: inherit;">
-                <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 3" style="height: inherit;">
-            </div>
-            <div class="carousel-item" style="height: inherit;">
-                <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 4" style="height: inherit;">
-            </div>
-            <div class="carousel-item" style="height: inherit;">
-                <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100 zoomable" alt="Slide 5" style="height: inherit;">
-            </div>
-        </div>
-
-        <!-- Carousel Controls -->
-        <button class="carousel-control-prev top-50 my-h-fit-content" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next top-50 my-h-fit-content" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-
-    <div class="custom-indicators-container p-2">
-        <div class="carousel-indicators custom-indicators m-0" style="position: relative;">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-label="Slide 1" style="height: auto; width: 80px;">
-                <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 1">
-            </button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" style="height: auto; width: 80px;">
-                <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 2">
-            </button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3" style="height: auto; width: 80px;">
-                <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 3">
-            </button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4" style="height: auto; width: 80px;">
-                <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 4">
-            </button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5" style="height: auto; width: 80px;">
-                <img src="http://localhost/img/pc/Apple%20Watch%20Series%202%20Apple%20Watch%20Series%203%20Nike.png" class="d-block w-100" alt="Slide 5">
-            </button>
-        </div>
-    </div>
-</div>
-<style>
-
-    /* Custom Indicators Container */
-    .product-shower .custom-indicators-container {
-        width: 400px; /* Match the width of the carousel */
-        margin-top: 10px; /* Space between carousel and indicators */
-    }
-
-    /* Custom Indicators */
-    .product-shower .custom-indicators {
-        display: flex;
-        justify-content: center;
-        gap: 10px; /* Space between indicator images */
-        padding: 0;
-        margin: 0;
-    }
-
-    /* Indicator Buttons */
-    .product-shower .custom-indicators button {
-        padding: 0;
-        border: none;
-        background: none;
-        width: 80px; /* Adjust width as needed */
-        height: 50px; /* Adjust height as needed */
-        overflow: hidden;
-        position: relative;
-        display: none; /* Hide all indicators by default */
-    }
-
-    /* Indicator Images */
-    .product-shower .custom-indicators button img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: opacity 0.3s ease;
-    }
-
-    /* Dark Transparent Overlay for Inactive Images */
-    .product-shower .custom-indicators button:not(.active) img {
-        opacity: 0.5; /* Darken inactive images */
-        filter: brightness(0.5); /* Add dark overlay */
-    }
-
-    /* Active Image (No Overlay) */
-    .product-shower .custom-indicators button.active img {
-        opacity: 1;
-        filter: brightness(1); /* No overlay for active image */
-    }
-    /* Base styles for zoomable images */
-    .product-shower .carousel-item img.zoomable {
-        transition: transform 0.3s ease-in-out, transform-origin 0.1s ease-in-out; /* Smooth zoom and origin adjustment */
-        transform-origin: center center; /* Default origin */
-    }
-
-    .product-shower .carousel-item.active img.zoomable:hover {
-        transform: scale(2); /* Zoom level */
-        cursor: crosshair; /* Visual cue for zooming */
-    }
-
-</style>
-
-<script>
-    const productShower = document.querySelector('.product-shower');
-
-    if (productShower) {
-        // Select elements inside the parent
-        const carousel = productShower.querySelector('#carouselExampleIndicators');
-        const customIndicators = productShower.querySelectorAll('.custom-indicators button');
-        const carouselItems = productShower.querySelectorAll('.carousel-item');
-
-        // Function to update visible indicators
-        const updateIndicators = (activeIndex) => {
-            // Hide all indicators
-            customIndicators.forEach((indicator) => {
-                indicator.style.display = 'none';
-            });
-
-            // Show the active indicator and its neighbors
-            if (activeIndex > 0) {
-                customIndicators[activeIndex - 1].style.display = 'block'; // Left neighbor
-            }
-            customIndicators[activeIndex].style.display = 'block'; // Active indicator
-            if (activeIndex < customIndicators.length - 1) {
-                customIndicators[activeIndex + 1].style.display = 'block'; // Right neighbor
-            }
-
-            // Remove the 'active' class from all indicators
-            customIndicators.forEach((indicator) => {
-                indicator.classList.remove('active');
-            });
-
-            // Add the 'active' class to the current indicator
-            customIndicators[activeIndex].classList.add('active');
-        };
-
-        // Initialize indicators based on the current active slide
-        const initActiveIndicator = () => {
-            const activeItemIndex = [...carouselItems].findIndex((item) =>
-                item.classList.contains('active')
-            );
-            if (activeItemIndex !== -1) {
-                updateIndicators(activeItemIndex);
-            }
-        };
-
-        // Initialize the active indicator on page load
-        initActiveIndicator();
-
-        // Update indicators on carousel slide
-        carousel.addEventListener('slide.bs.carousel', (event) => {
-            const activeIndex = event.to; // Get the index of the new active slide
-            updateIndicators(activeIndex);
-        });
-
-
-        const carouselInner = carousel.querySelector('.carousel-inner');
-
-        // Function to initialize zoom and move functionality
-        function initializeZoom(image) {
-            if (!image) return;
-
-            image.addEventListener('mousemove', (e) => {
-                const { offsetX, offsetY, target } = e;
-                const { offsetWidth, offsetHeight } = target;
-
-                // Calculate the position of the mouse relative to the image
-                const xPercent = (offsetX / offsetWidth) * 100;
-                const yPercent = (offsetY / offsetHeight) * 100;
-
-                // Set transform-origin based on mouse position
-                image.style.transformOrigin = `${xPercent}% ${yPercent}%`;
-            });
-
-            image.addEventListener('mouseenter', () => {
-                image.style.transform = 'scale(2)'; // Zoom in
-                image.style.transition = 'transform 0.3s ease'; // Smooth zoom transition
-            });
-
-            image.addEventListener('mouseleave', () => {
-                image.style.transform = 'scale(1)'; // Reset zoom
-            });
-        }
-
-        // Apply zoom functionality to the active image
-        function applyZoomToActiveImage() {
-            // Find the currently active carousel item
-            const activeItem = carouselInner.querySelector('.carousel-item.active');
-            const activeImage = activeItem ? activeItem.querySelector('img') : null;
-
-            // Remove previous event listeners and reinitialize zoom
-            carouselInner.querySelectorAll('img').forEach((img) => {
-                img.style.transform = 'scale(1)'; // Reset zoom
-                img.onmousemove = null;
-                img.onmouseenter = null;
-                img.onmouseleave = null;
-            });
-
-            // Initialize zoom for the new active image
-            initializeZoom(activeImage);
-        }
-
-        // Event listener for when the carousel finishes sliding
-        carousel.addEventListener('slid.bs.carousel', applyZoomToActiveImage);
-
-        // Initialize zoom for the first active image
-        applyZoomToActiveImage();
-    }
-
-
-</script>
-
-
-
-
-
-
-{{-- <div class="sponsors-bar-container my-5">
-    <div class="sponsors-bar">
-        <!-- Sponsor Icons -->
-        <div class="sponsor-icon">
-            <img src="http://localhost/img/icons/blogger-svgrepo-com.svg" alt="Sponsor 1">
-        </div>
-        <div class="sponsor-icon">
-            <img src="http://localhost/img/icons/blogger-svgrepo-com.svg" alt="Sponsor 2">
-        </div>
-        <div class="sponsor-icon">
-            <img src="http://localhost/img/icons/blogger-svgrepo-com.svg" alt="Sponsor 3">
-        </div>
-        <div class="sponsor-icon">
-            <img src="http://localhost/img/icons/blogger-svgrepo-com.svg" alt="Sponsor 4">
-        </div>
-        <div class="sponsor-icon">
-            <img src="http://localhost/img/icons/blogger-svgrepo-com.svg" alt="Sponsor 5">
-        </div>
-        <div class="sponsor-icon">
-            <img src="http://localhost/img/icons/blogger-svgrepo-com.svg" alt="Sponsor 6">
-        </div>
-    </div>
-</div>
-
-<style>
-    /* Sponsors Bar Container */
-.sponsors-bar-container {
-    overflow: hidden; /* Hide overflow to create seamless scrolling */
-    white-space: nowrap; /* Prevent wrapping of icons */
-    width: 100%;
-    background-color: #f8f9fa; /* Light background for the bar */
-    padding: 20px 0;
-}
-
-/* Sponsors Bar */
-.sponsors-bar {
-    display: inline-block;
-    animation: scroll 20s linear infinite; /* Animation for scrolling */
-}
-
-/* Sponsor Icons */
-.sponsor-icon {
-    display: inline-block;
-    margin: 0 20px; /* Space between icons */
-    transition: transform 0.3s ease, filter 0.3s ease; /* Smooth hover effects */
-}
-
-.sponsor-icon img {
-    width: 40px; /* Adjust size as needed */
-    height: auto;
-    filter: grayscale(100%); /* Make icons grayscale by default */
-    transition: filter 0.3s ease; /* Smooth transition for hover effect */
-}
-
-/* Hover Effect */
-.sponsor-icon:hover img {
-    filter: grayscale(0%); /* Show full color on hover */
-    transform: scale(1.1); /* Slightly enlarge the icon */
-}
-
-/* Animation Keyframes */
-@keyframes scroll {
-    0% {
-        transform: translateX(0); /* Start from the right */
-    }
-    100% {
-        transform: translateX(-50%); /* Move to the left */
-    }
-}
-.sponsors-bar-container:hover .sponsors-bar {
-    animation-play-state: paused;
-}
-</style> --}}
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

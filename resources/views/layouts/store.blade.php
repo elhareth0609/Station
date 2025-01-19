@@ -22,7 +22,7 @@
     @include('layouts.store.header')
 
 </head>
-<body id="page-top">
+<body>
 
     @php
         $isNavbar = isset($isNavbar) ? $isNavbar : true;
@@ -39,14 +39,13 @@
                 @include('layouts.store.menu.menu')
             @endif
 
-            
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
                     @if (isset($isNavbar) && $isNavbar)
                     @include('layouts.store.nav.nav')
                     @endif
                     @if (isset($isContainer) && $isContainer)
-                        <div class="container-fluid">
+                        <div class="container-fluid container-lg">
                     @endif
                         @yield('content')
                     @if (isset($isContainer) && $isContainer)
@@ -65,9 +64,9 @@
 
         </div>
                 <!-- Scroll to Top Button-->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="mdi mdi-arrow-up"></i>
-            </a>
+                <a class="btn btn-icon position-fixed rounded btn-warning" href="#page-top" style="right: 20px;bottom: 10px;">
+                    <i class="mdi mdi-arrow-up"></i>
+                </a>
 
         </div>
 

@@ -138,6 +138,10 @@ class SettingController extends Controller {
         return view('content.settings.application');
     }
 
+    public function get_pages() {
+        return view('content.settings.pages');
+    }
+
     public function secure_payment() {
         $content = Details::where('type','secure-payment')->first();
         return view('content.home.pages.secure-payment')

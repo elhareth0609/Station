@@ -445,7 +445,7 @@ body {
 
 /* Bootstrap .btn ripple styles */
 .btn {
-	position: relative!important;
+	position: relative;
 	overflow: hidden;
 }
 .btn:hover,
@@ -832,3 +832,11 @@ svg {
     transform: translateY(0);
 }
 /* End Anime */
+
+.accordion.accordion-rtl {
+    direction: rtl;
+}
+.accordion.accordion-rtl .accordion-button::after {
+    margin-left: 0px;
+    margin-right: auto;
+}

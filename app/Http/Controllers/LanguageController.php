@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Traits\ApiResponder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 
 class LanguageController extends Controller {
@@ -101,5 +102,11 @@ class LanguageController extends Controller {
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
+    }
+
+    public function change(Request $request, $locale) {
+        App::setLocale($locale);
+        session()->put('locale', $locale);
+        return redirect()->back();
     }
 }
