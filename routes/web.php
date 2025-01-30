@@ -390,7 +390,6 @@ use Illuminate\Support\Facades\Route;
         Artisan::call('view:cache');
         // Clear views
         Artisan::call('view:clear');
-        
         // back to past page
         return 'ok';
     });

@@ -259,7 +259,7 @@
     }
 
     /* Footer */
-    footer {
+    /* footer {
         background: #333;
         color: white;
         padding: 60px 20px 20px;
@@ -280,6 +280,7 @@
 
     .footer-links {
         list-style: none;
+        padding: 0;
     }
 
     .footer-links li {
@@ -294,7 +295,7 @@
 
     .footer-links a:hover {
         color: #007bff;
-    }
+    } */
 
     .copyright {
         text-align: center;
@@ -390,8 +391,8 @@
     <h1>Welcome to AppName</h1>
     <p>Your ultimate solution for everything you need</p>
     <div class="app-store-buttons">
-        <img src="/api/placeholder/200/60" alt="Download on App Store">
-        <img src="/api/placeholder/200/60" alt="Get it on Google Play">
+        <a href="#" target="_blank"><img src="{{ asset('assets/img/my/defaults/app.png') }}" alt="Download on App Store"></a>
+        <a href="#" target="_blank"><img src="{{ asset('assets/img/my/defaults/google.png') }}" alt="Get it on Google Play"></a>
     </div>
 </section>
 
@@ -433,6 +434,201 @@
         <img src="/api/placeholder/150/80" alt="Sponsor 4" class="sponsor-logo">
     </div>
 </section>
+
+
+<style>
+    .app-showcase {
+        background: #f8f9fa;
+        overflow: hidden;
+        padding: 60px 0;
+    }
+
+    .app-screens-container {
+        position: relative;
+        height: 600px;
+    }
+
+    .app-screens {
+        position: relative;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1000px;
+    }
+
+    /* .screen {
+        position: absolute;
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    } */
+
+    .screen {
+        position: absolute;
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer; /* Add cursor pointer to indicate clickable */
+    }
+
+    .screen img {
+        height: 500px;
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .screen-prev {
+        transform: translateX(-50%) scale(0.8) rotateY(10deg);
+        opacity: 0.6;
+        filter: blur(1px);
+    }
+
+    .screen-main {
+        transform: translateX(0) scale(1) rotateY(0);
+        opacity: 1;
+        filter: blur(0);
+        z-index: 1;
+    }
+
+    .screen-next {
+        transform: translateX(50%) scale(0.8) rotateY(-10deg);
+        opacity: 0.6;
+        filter: blur(1px);
+    }
+
+    .nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.5);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        z-index: 2;
+        transition: all 0.3s ease;
+    }
+
+    .nav-btn:hover {
+        background: rgba(0,0,0,0.7);
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    .prev-btn { left: 20px; }
+    .next-btn { right: 20px; }
+</style>
+
+
+<section class="app-showcase py-5" id="features">
+    <h2 class="section-title text-center mb-5">App Features</h2>
+    <div class="container">
+        <div id="appScreensSlider" class="app-screens-container">
+            <div class="app-screens">
+                <div class="screen screen-prev" onclick="goToSlide(0)">
+                    <img src="{{ asset('assets/my/landing/1.jpg') }}" alt="App Screen 1">
+                </div>
+                <div class="screen screen-main" onclick="goToSlide(1)">
+                    <img src="{{ asset('assets/my/landing/2.jpg') }}" alt="App Screen 2">
+                </div>
+                <div class="screen screen-next" onclick="goToSlide(2)">
+                    <img src="{{ asset('assets/my/landing/3.jpg') }}" alt="App Screen 3">
+                </div>
+            </div>
+            <button class="nav-btn prev-btn" onclick="moveSlider('prev')">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn next-btn" onclick="moveSlider('next')">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    const appScreensSlider = document.getElementById('appScreensSlider');
+    const images = [...appScreensSlider.querySelectorAll('.screen img')].map(img => img.src);
+
+let currentIndex = 1;
+let isAnimating = false;
+
+function goToSlide(index) {
+    if (isAnimating || index === currentIndex) return;
+
+    isAnimating = true;
+
+    const diff = index - currentIndex;
+    const direction = diff > 0 ? 'next' : 'prev';
+    const steps = Math.abs(diff);
+
+    function animate(remaining) {
+        if (remaining === 0) {
+            isAnimating = false;
+            return;
+        }
+
+        moveSlider(direction);
+        setTimeout(() => animate(remaining - 1), 800);
+    }
+
+    animate(steps);
+}
+
+function moveSlider(direction) {
+    console.log(isAnimating,direction);
+
+    if (isAnimating && direction !== 'forced') return;
+    isAnimating = true;
+
+    const screens = appScreensSlider.querySelectorAll('.screen');
+    
+    if (direction === 'next') {
+        currentIndex = (currentIndex + 1) % images.length;
+    } else if (direction === 'prev') {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+    }
+    
+    screens.forEach((screen, index) => {
+        const img = screen.querySelector('img');
+        const imgIndex = (currentIndex + index - 1 + images.length) % images.length;
+        img.style.opacity = '0';
+        setTimeout(() => {
+            img.src = images[imgIndex];
+            img.style.opacity = '1';
+        }, 400);
+    });
+
+    setTimeout(() => {
+        isAnimating = false;
+    }, 800);
+}
+
+// Add click event listeners to screens
+const screens = appScreensSlider.querySelectorAll('.screen');
+screens.forEach((screen, index) => {
+    screen.addEventListener('click', () => {
+        goToSlide(index);
+    });
+});
+
+// Touch support remains the same
+let startX = 0;
+const slider = document.getElementById('appScreensSlider');
+
+slider.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+});
+
+slider.addEventListener('touchend', (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const diff = startX - endX;
+    
+    if (Math.abs(diff) > 50) {
+        moveSlider(diff > 0 ? 'next' : 'prev');
+    }
+});
+</script>
+
 
 <!-- Contact Section -->
 <section class="contact" id="contact">

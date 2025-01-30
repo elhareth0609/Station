@@ -168,8 +168,16 @@
             <a href="#projects">Projects</a>
             <a href="#sponsors">Sponsors</a>
             <a href="#contact">Contact</a>
-            <div>
-                <img src="{{ Auth::user()->photo_url }}" alt="Avatar" class="avatar avatar-md border-secondary">
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{{ Auth::user()->photo_url }}" alt="Avatar" class="avatar avatar-md border-secondary">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('auth.logout') }}">Profile</a>
+                    <a class="dropdown-item" href="{{ route('auth.logout') }}">Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ route('auth.logout') }}">Logout</a>
+                </div>
             </div>
         </div>
     </div>
@@ -413,7 +421,6 @@
         margin-bottom: 30px;
     }
 
- 
 
     @keyframes fadeInUp {
         to {
@@ -423,55 +430,17 @@
     }
 
     /* Footer */
-    footer {
-        background: #333;
-        color: white;
-        padding: 60px 20px 20px;
-    }
-
-    .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 40px;
-        margin-bottom: 40px;
-    }
-
-    .footer-section h3 {
-        margin-bottom: 20px;
-    }
-
-    .footer-links {
-        list-style: none;
-    }
-
-    .footer-links li {
-        margin-bottom: 10px;
-    }
-
-    .footer-links a {
-        color: #fff;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-
-    .footer-links a:hover {
+    footer a:hover {
         color: #007bff;
+        transform: translateX(5px);
     }
-
-    .copyright {
-        text-align: center;
-        padding-top: 20px;
-        border-top: 1px solid #555;
+    footer a {
+        display: flex;
+        transition: color 0.3s ease, transform 0.3s ease;
     }
-
 
     /* Responsive Design */
     @media (max-width: 768px) {
-        /* .nav-links {
-            display: none;
-        } */
 
         .hero h1 {
             font-size: 36px;

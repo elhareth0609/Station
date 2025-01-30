@@ -254,7 +254,7 @@
                     }
                 },
                 // End  of checkboxes
-                {data: '#', name: '{{__("Id")}}'},
+                {data: 'id', name: '{{__("Id")}}'},
                 {data: 'name', name: '{{__("Name")}}',},
                 {data: 'category_id', name: '{{__("Category")}}',},
                 {data: 'status', name: '{{__("Status")}}',},
@@ -445,9 +445,9 @@
 
 new SearchableSelect({
     selectId: 'category_id',
-    // url: '/categories/all',
-    // method: 'GET',
-    // csrfToken: document.querySelector('meta[name="csrf-token"]').content
+    url: '/categories/all',
+    method: 'GET',
+    csrfToken: document.querySelector('meta[name="csrf-token"]').content
 });
 </script>
 

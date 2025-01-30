@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plans', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Basic, Premium, etc.
-            $table->text('description');
-            $table->decimal('price', 8, 2);
+            $table->string('name'); // create_user, delete_user, etc.
+            $table->string('description'); // Create a user, Delete a user, etc.
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plans');
+        Schema::dropIfExists('permissions');
     }
 };

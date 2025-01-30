@@ -7,9 +7,14 @@ use App\Models\Category;
 use App\Models\Coupon;
 use App\Models\File;
 use App\Models\Folder;
+use App\Models\Notification;
 use App\Models\Order;
+use App\Models\Permission;
+use App\Models\Plan;
 use App\Models\Product;
+use App\Models\Role;
 use App\Models\SubCategory;
+use App\Models\Url;
 use App\Models\User;
 use Google\Service\Sheets as Google_Service_Sheets;
 use Google_Client;
@@ -18,8 +23,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File as LaravelFile;
 use Illuminate\Support\Facades\Log;
-use Laravel\Telescope\EntryType;
-use Laravel\Telescope\Telescope;
 use Yajra\DataTables\Facades\DataTables;
 
 class DataTabelController extends Controller {
@@ -830,5 +833,160 @@ class DataTabelController extends Controller {
 
         return view('content.file-manager.index')
         ->with('currentFolder', $currentFolder);
+    }
+
+    public function notifications(Request $request) {
+        $notifications = Notification::where('user_id', Auth::user()->id)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        if ($request->ajax()) {
+            return DataTables::of($notifications)
+            ->editColumn('id', function ($notification) {
+                return $notification->id;
+            })
+            ->editColumn('title', function ($notification) {
+                return $notification->title;
+            })
+            ->editColumn('message', function ($notification) {
+                return $notification->message;
+            })
+            ->editColumn('created_at', function ($notification) {
+                return $notification->created_at->format('Y-m-d H:i:s');
+            })
+            ->addColumn('actions', function ($notification) {
+                return '
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editNotification(' . $notification->id . ')"><i class="mdi mdi-pencil"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteNotification(' . $notification->id . ')"><i class="mdi mdi-trash-can"></i></a>
+                ';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+        }
+
+        return view('content.notifications.index');
+    }
+
+    public function roles(Request $request) {
+        $roles = Role::all();
+
+        if ($request->ajax()) {
+            return DataTables::of($roles)
+            ->editColumn('id', function ($role) {
+                return $role->id;
+            })
+            ->editColumn('name', function ($role) {
+                return $role->name;
+            })
+            ->editColumn('guard_name', function ($role) {
+                return $role->guard_name;
+            })
+            ->editColumn('created_at', function ($role) {
+                return $role->created_at->format('Y-m-d H:i:s');
+            })
+            ->addColumn('actions', function ($role) {
+                return '
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editRole(' . $role->id . ')"><i class="mdi mdi-pencil"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteRole(' . $role->id . ')"><i class="mdi mdi-trash-can"></i></a>
+                ';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+        }
+
+        return view('content.roles.index');
+    }
+
+    public function permissions(Request $request) {
+        $permissions = Permission::all();
+
+        if ($request->ajax()) {
+            return DataTables::of($permissions)
+            ->editColumn('id', function ($permission) {
+                return $permission->id;
+            })
+            ->editColumn('name', function ($permission) {
+                return $permission->name;
+            })
+            ->editColumn('guard_name', function ($permission) {
+                return $permission->guard_name;
+            })
+            ->editColumn('created_at', function ($permission) {
+                return $permission->created_at->format('Y-m-d H:i:s');
+            })
+            ->addColumn('actions', function ($permission) {
+                return '
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editPermission(' . $permission->id . ')"><i class="mdi mdi-pencil"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deletePermission(' . $permission->id . ')"><i class="mdi mdi-trash-can"></i></a>
+                ';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+        }
+
+        return view('content.permissions.index');
+    }
+
+    public function urls(Request $request) {
+        $urls = Url::all();
+
+        if ($request->ajax()) {
+            return DataTables::of($urls)
+            ->editColumn('id', function ($url) {
+                return $url->id;
+            })
+            ->editColumn('name', function ($url) {
+                return $url->name;
+            })
+            ->editColumn('url', function ($url) {
+                return $url->url;
+            })
+            ->editColumn('created_at', function ($url) {
+                return $url->created_at->format('Y-m-d H:i:s');
+            })
+            ->addColumn('actions', function ($url) {
+                return '
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editUrl(' . $url->id . ')"><i class="mdi mdi-pencil"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteUrl(' . $url->id . ')"><i class="mdi mdi-trash-can"></i></a>
+                ';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+        }
+
+        return view('content.urls.index');
+    }
+
+    public function plans(Request $request) {
+        $plans = Plan::all();
+
+        if ($request->ajax()) {
+            return DataTables::of($plans)
+            ->editColumn('id', function ($plan) {
+                return $plan->id;
+            })
+            ->editColumn('name', function ($plan) {
+                return $plan->name;
+            })
+            ->editColumn('price', function ($plan) {
+                return $plan->price;
+            })
+            ->editColumn('duration', function ($plan) {
+                return $plan->duration;
+            })
+            ->editColumn('created_at', function ($plan) {
+                return $plan->created_at->format('Y-m-d H:i:s');
+            })
+            ->addColumn('actions', function ($plan) {
+                return '
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editPlan(' . $plan->id . ')"><i class="mdi mdi-pencil"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deletePlan(' . $plan->id . ')"><i class="mdi mdi-trash-can"></i></a>
+                ';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+        }
+
+        return view('content.plans.index');
     }
 }
