@@ -15,4 +15,5 @@ class NotificationController extends Controller {
     
         return response()->json(['status' => 'Message sent']);
     }
+
 }

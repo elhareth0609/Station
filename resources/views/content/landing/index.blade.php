@@ -164,102 +164,9 @@
     .project-card:nth-child(3) { animation-delay: 0.6s; }
 
 
-    /* Sponsors Section */
-    .sponsors {
-        padding: 80px 20px;
-        background: white;
-        overflow: hidden;
-    }
-
-    .sponsors-grid {
-        display: flex;
-        animation: scrollSponsors 20s linear infinite;
-        width: max-content;
-    }
-
-    .sponsor-logo {
-        margin: 0 40px;
-        flex-shrink: 0;
-    }
-
-    @keyframes scrollSponsors {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(-50%);
-        }
-    }
-
-
-    /* Contact Section */
-    .contact-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-
-    .map-container {
-        width: 100%;
-        height: 400px;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    .map-container iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-
-
-    .contact {
-        padding: 80px 20px;
-        background: #f8f9fa;
-    }
-
-    .contact-form {
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        color: #333;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-
-    .submit-btn {
-        background: #007bff;
-        color: white;
-        padding: 12px 30px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
-
-    .submit-btn:hover {
-        background: #0056b3;
-    }
 
     /* Footer */
-    /* footer {
+    footer {
         background: #333;
         color: white;
         padding: 60px 20px 20px;
@@ -295,7 +202,7 @@
 
     .footer-links a:hover {
         color: #007bff;
-    } */
+    }
 
     .copyright {
         text-align: center;
@@ -317,14 +224,6 @@
         .app-store-buttons {
             flex-direction: column;
             align-items: center;
-        }
-
-        .contact-container {
-            grid-template-columns: 1fr;
-        }
-
-        .sponsors-grid {
-            animation: scrollSponsors 15s linear infinite;
         }
 
         .menu-btn {
@@ -418,37 +317,86 @@
     </div>
 </section>
 
-<!-- Sponsors Section -->
-<section class="sponsors" id="sponsors">
-    <h2 class="section-title">Our Sponsors</h2>
-    <div class="sponsors-grid">
-        <!-- Double the sponsors for smooth infinite scroll -->
-        <img src="/api/placeholder/150/80" alt="Sponsor 1" class="sponsor-logo">
-        <img src="/api/placeholder/150/80" alt="Sponsor 2" class="sponsor-logo">
-        <img src="/api/placeholder/150/80" alt="Sponsor 3" class="sponsor-logo">
-        <img src="/api/placeholder/150/80" alt="Sponsor 4" class="sponsor-logo">
-        <!-- Duplicate sponsors for continuous scroll -->
-        <img src="/api/placeholder/150/80" alt="Sponsor 1" class="sponsor-logo">
-        <img src="/api/placeholder/150/80" alt="Sponsor 2" class="sponsor-logo">
-        <img src="/api/placeholder/150/80" alt="Sponsor 3" class="sponsor-logo">
-        <img src="/api/placeholder/150/80" alt="Sponsor 4" class="sponsor-logo">
+<style>
+    .sponsor-logo {
+        margin: 0 40px;
+        flex-shrink: 0;
+        height: 50px;
+        transition: transform 0.3s ease;
+    }
+
+    .sponsor-logo:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+<section class="bg-white px-3 py-5 overflow-hidden position-relative" id="sponsors">
+    <h2 class="section-title">{{ __('Our Sponsors') }}</h2>
+    <div class="position-relative w-100 overflow-hidden">
+        <div class="sponsors-grid d-flex position-relative my-2">
+            <img src="{{ asset('assets/my/marks/1.png') }}" alt="Sponsor 1" class="sponsor-logo">
+            <img src="{{ asset('assets/my/marks/2.png') }}" alt="Sponsor 2" class="sponsor-logo">
+            <img src="{{ asset('assets/my/marks/3.png') }}" alt="Sponsor 3" class="sponsor-logo">
+            <img src="{{ asset('assets/my/marks/4.png') }}" alt="Sponsor 4" class="sponsor-logo">
+            <img src="{{ asset('assets/my/marks/5.png') }}" alt="Sponsor 5" class="sponsor-logo">
+            <img src="{{ asset('assets/my/marks/6.png') }}" alt="Sponsor 6" class="sponsor-logo">
+            <img src="{{ asset('assets/my/marks/7.png') }}" alt="Sponsor 7" class="sponsor-logo">
+            <img src="{{ asset('assets/my/marks/8.png') }}" alt="Sponsor 8" class="sponsor-logo">
+        </div>
     </div>
 </section>
 
+<script>
+    $(document).ready(function() {
+        // Clone the sponsors and append them to create the infinite effect
+        const $sponsorsGrid = $('.sponsors-grid');
+        const $sponsors = $sponsorsGrid.html();
+        $sponsorsGrid.append($sponsors);
+
+        // Calculate the total width of one set of sponsors
+        let totalWidth = 0;
+        $('.sponsor-logo').each(function(index) {
+            if (index < $('.sponsor-logo').length / 2) {
+                totalWidth += $(this).outerWidth(true);
+            }
+        });
+
+        // Variables for the animation
+        let currentPosition = 0;
+        const speed = 1; // Pixels per frame
+        
+        // Animation function
+        function animate() {
+            currentPosition -= speed;
+            
+            // Reset position when we've scrolled one complete set
+            if (Math.abs(currentPosition) >= totalWidth) {
+                currentPosition = 0;
+            }
+            
+            $sponsorsGrid.css('transform', `translateX(${currentPosition}px)`);
+            requestAnimationFrame(animate);
+        }
+
+        // Start the animation
+        animate();
+    });
+</script>
+
 
 <style>
-    .app-showcase {
+    .app-showcase.app-showcase-v1 {
         background: #f8f9fa;
         overflow: hidden;
         padding: 60px 0;
     }
 
-    .app-screens-container {
+    .app-showcase.app-showcase-v1 .app-screens-container {
         position: relative;
         height: 600px;
     }
 
-    .app-screens {
+    .app-showcase.app-showcase-v1 .app-screens {
         position: relative;
         height: 100%;
         display: flex;
@@ -457,44 +405,39 @@
         perspective: 1000px;
     }
 
-    /* .screen {
-        position: absolute;
-        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    } */
-
-    .screen {
+    .app-showcase.app-showcase-v1 .screen {
         position: absolute;
         transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         cursor: pointer; /* Add cursor pointer to indicate clickable */
     }
 
-    .screen img {
+    .app-showcase.app-showcase-v1 .screen img {
         height: 500px;
         border-radius: 20px;
         box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .screen-prev {
+    .app-showcase.app-showcase-v1 .screen-prev {
         transform: translateX(-50%) scale(0.8) rotateY(10deg);
         opacity: 0.6;
         filter: blur(1px);
     }
 
-    .screen-main {
+    .app-showcase.app-showcase-v1 .screen-main {
         transform: translateX(0) scale(1) rotateY(0);
         opacity: 1;
         filter: blur(0);
         z-index: 1;
     }
 
-    .screen-next {
+    .app-showcase.app-showcase-v1 .screen-next {
         transform: translateX(50%) scale(0.8) rotateY(-10deg);
         opacity: 0.6;
         filter: blur(1px);
     }
 
-    .nav-btn {
+    .app-showcase.app-showcase-v1 .nav-btn {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -509,155 +452,938 @@
         transition: all 0.3s ease;
     }
 
-    .nav-btn:hover {
+    .app-showcase.app-showcase-v1 .nav-btn:hover {
         background: rgba(0,0,0,0.7);
         transform: translateY(-50%) scale(1.1);
     }
 
-    .prev-btn { left: 20px; }
-    .next-btn { right: 20px; }
+    .app-showcase.app-showcase-v1 .prev-btn { left: 20px; }
+    .app-showcase.app-showcase-v1 .next-btn { right: 20px; }
 </style>
 
 
-<section class="app-showcase py-5" id="features">
-    <h2 class="section-title text-center mb-5">App Features</h2>
+<section class="app-showcase app-showcase-v1 py-5" id="features">
+    <h2 class="section-title text-center mb-5">App Features V1</h2>
     <div class="container">
-        <div id="appScreensSlider" class="app-screens-container">
+        <div id="appScreensSlider-v1" class="app-screens-container">
             <div class="app-screens">
-                <div class="screen screen-prev" onclick="goToSlide(0)">
+                <div class="screen screen-prev">
                     <img src="{{ asset('assets/my/landing/1.jpg') }}" alt="App Screen 1">
                 </div>
-                <div class="screen screen-main" onclick="goToSlide(1)">
+                <div class="screen screen-main">
                     <img src="{{ asset('assets/my/landing/2.jpg') }}" alt="App Screen 2">
                 </div>
-                <div class="screen screen-next" onclick="goToSlide(2)">
+                <div class="screen screen-next">
                     <img src="{{ asset('assets/my/landing/3.jpg') }}" alt="App Screen 3">
                 </div>
             </div>
             <button class="nav-btn prev-btn" onclick="moveSlider('prev')">
-                <i class="fas fa-chevron-left"></i>
+                <i class="mdi mdi-chevron-left"></i>
             </button>
             <button class="nav-btn next-btn" onclick="moveSlider('next')">
-                <i class="fas fa-chevron-right"></i>
+                <i class="mdi mdi-chevron-right"></i>
             </button>
         </div>
     </div>
 </section>
 
+<style>
+    .app-showcase.app-showcase-v2 .app-screens-container {
+        position: relative;
+        overflow: hidden;
+        padding: 20px 0;
+    }
+    
+    .app-showcase.app-showcase-v2 .app-screens {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .app-showcase.app-showcase-v2 .screen {
+        position: relative;
+        cursor: pointer;
+    }
+    
+    .app-showcase.app-showcase-v2 .screen img {
+        max-width: 300px;
+        height: auto;
+        border-radius: 10px;
+        transition: all 0.8s ease-in-out;
+    }
+    
+    .app-showcase.app-showcase-v2 .screen-prev img, .screen-next img {
+        transform: scale(0.8);
+        opacity: 0.7;
+    }
+    
+    .app-showcase.app-showcase-v2 .screen-main img {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .app-showcase.app-showcase-v2 .nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.8);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        z-index: 10;
+        transition: all 0.3s ease;
+    }
+    
+    .app-showcase.app-showcase-v2 .nav-btn:hover {
+        background: rgba(255,255,255,1);
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    
+    .app-showcase.app-showcase-v2 .prev-btn { left: 20px; }
+    .app-showcase.app-showcase-v2 .next-btn { right: 20px; }
+</style>
+
+<section class="app-showcase app-showcase-v2 py-5" id="features">
+    <h2 class="section-title text-center mb-5">App Features V2</h2>
+    <div class="container">
+        <div id="appScreensSlider-v2" class="app-screens-container">
+            <div class="app-screens">
+                <div class="screen screen-prev">
+                    <img src="{{ asset('assets/my/landing/1.jpg') }}" alt="App Screen 1">
+                </div>
+                <div class="screen screen-main">
+                    <img src="{{ asset('assets/my/landing/2.jpg') }}" alt="App Screen 2">
+                </div>
+                <div class="screen screen-next">
+                    <img src="{{ asset('assets/my/landing/3.jpg') }}" alt="App Screen 3">
+                </div>
+            </div>
+            <button class="nav-btn prev-btn" onclick="moveSlider('prev')">
+                <i class="mdi mdi-chevron-left"></i>
+            </button>
+            <button class="nav-btn next-btn" onclick="moveSlider('next')">
+                <i class="mdi mdi-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</section>
 
 <script>
-    const appScreensSlider = document.getElementById('appScreensSlider');
-    const images = [...appScreensSlider.querySelectorAll('.screen img')].map(img => img.src);
+    $(document).ready(function() {
+        // Initialize version 1
+        const sliderV1 = new AppShowcase('v1');
 
-let currentIndex = 1;
-let isAnimating = false;
+        // Initialize version 2
+        const sliderV2 = new AppShowcase('v2');
 
-function goToSlide(index) {
-    if (isAnimating || index === currentIndex) return;
-
-    isAnimating = true;
-
-    const diff = index - currentIndex;
-    const direction = diff > 0 ? 'next' : 'prev';
-    const steps = Math.abs(diff);
-
-    function animate(remaining) {
-        if (remaining === 0) {
-            isAnimating = false;
-            return;
-        }
-
-        moveSlider(direction);
-        setTimeout(() => animate(remaining - 1), 800);
-    }
-
-    animate(steps);
-}
-
-function moveSlider(direction) {
-    console.log(isAnimating,direction);
-
-    if (isAnimating && direction !== 'forced') return;
-    isAnimating = true;
-
-    const screens = appScreensSlider.querySelectorAll('.screen');
-    
-    if (direction === 'next') {
-        currentIndex = (currentIndex + 1) % images.length;
-    } else if (direction === 'prev') {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-    }
-    
-    screens.forEach((screen, index) => {
-        const img = screen.querySelector('img');
-        const imgIndex = (currentIndex + index - 1 + images.length) % images.length;
-        img.style.opacity = '0';
-        setTimeout(() => {
-            img.src = images[imgIndex];
-            img.style.opacity = '1';
-        }, 400);
     });
-
-    setTimeout(() => {
-        isAnimating = false;
-    }, 800);
-}
-
-// Add click event listeners to screens
-const screens = appScreensSlider.querySelectorAll('.screen');
-screens.forEach((screen, index) => {
-    screen.addEventListener('click', () => {
-        goToSlide(index);
-    });
-});
-
-// Touch support remains the same
-let startX = 0;
-const slider = document.getElementById('appScreensSlider');
-
-slider.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-});
-
-slider.addEventListener('touchend', (e) => {
-    const endX = e.changedTouches[0].clientX;
-    const diff = startX - endX;
-    
-    if (Math.abs(diff) > 50) {
-        moveSlider(diff > 0 ? 'next' : 'prev');
-    }
-});
 </script>
 
 
-<!-- Contact Section -->
-<section class="contact" id="contact">
-    <h2 class="section-title">Contact Us</h2>
-    <div class="contact-container">
-        <div class="form-container">
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" required>
+
+<!-- Testimonials Section -->
+<section class="testimonials py-5 bg-light" id="testimonials">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">What Our Users Say</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card p-4 bg-white rounded shadow">
+                    <p class="testimonial-text">"This app has completely transformed the way I manage my tasks. Highly recommended!"</p>
+                    <div class="testimonial-author d-flex align-items-center mt-3">
+                        <img src="{{ asset('assets/my/testimonials/1.jpg') }}" alt="User 1" class="rounded-circle me-3" width="50">
+                        <div>
+                            <h5 class="mb-0">John Doe</h5>
+                            <small>CEO, Company A</small>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card p-4 bg-white rounded shadow">
+                    <p class="testimonial-text">"The features are amazing and the support team is very responsive. Great job!"</p>
+                    <div class="testimonial-author d-flex align-items-center mt-3">
+                        <img src="{{ asset('assets/my/testimonials/2.jpg') }}" alt="User 2" class="rounded-circle me-3" width="50">
+                        <div>
+                            <h5 class="mb-0">Jane Smith</h5>
+                            <small>CTO, Company B</small>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" rows="5" required></textarea>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card p-4 bg-white rounded shadow">
+                    <p class="testimonial-text">"I love how intuitive and user-friendly the app is. It has made my life so much easier."</p>
+                    <div class="testimonial-author d-flex align-items-center mt-3">
+                        <img src="{{ asset('assets/my/testimonials/3.jpg') }}" alt="User 3" class="rounded-circle me-3" width="50">
+                        <div>
+                            <h5 class="mb-0">Alice Johnson</h5>
+                            <small>Product Manager, Company C</small>
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="submit-btn">Send Message</button>
-            </form>
+            </div>
         </div>
-        <div class="map-container">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.30591910525!2d-74.25986432970231!3d40.69714941680757!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1672809207556!5m2!1sen!2s"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+    </div>
+</section>
+
+
+
+<!-- Pricing Plans Section -->
+<section class="pricing py-5 bg-white" id="pricing">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Pricing Plans</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="pricing-card p-4 bg-light rounded shadow text-center">
+                    <h3 class="mb-3">Basic</h3>
+                    <p class="price"><span class="currency">$</span>9<span class="period">/mo</span></p>
+                    <ul class="list-unstyled mb-4">
+                        <li>10 Projects</li>
+                        <li>5 GB Storage</li>
+                        <li>Basic Support</li>
+                    </ul>
+                    <button class="btn btn-outline-primary">Get Started</button>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="pricing-card p-4 bg-primary text-white rounded shadow text-center">
+                    <h3 class="mb-3">Pro</h3>
+                    <p class="price"><span class="currency">$</span>29<span class="period">/mo</span></p>
+                    <ul class="list-unstyled mb-4">
+                        <li>Unlimited Projects</li>
+                        <li>50 GB Storage</li>
+                        <li>Priority Support</li>
+                    </ul>
+                    <button class="btn btn-light">Get Started</button>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="pricing-card p-4 bg-light rounded shadow text-center">
+                    <h3 class="mb-3">Enterprise</h3>
+                    <p class="price"><span class="currency">$</span>99<span class="period">/mo</span></p>
+                    <ul class="list-unstyled mb-4">
+                        <li>Unlimited Projects</li>
+                        <li>Unlimited Storage</li>
+                        <li>24/7 Support</li>
+                    </ul>
+                    <button class="btn btn-outline-primary">Contact Us</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- Team Section -->
+<section class="team py-5 bg-light" id="team">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Meet Our Team</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="team-card p-4 bg-white rounded shadow text-center">
+                    <img src="{{ asset('assets/my/team/1.jpg') }}" alt="Team Member 1" class="rounded-circle mb-3" width="100">
+                    <h4 class="mb-2">John Doe</h4>
+                    <p class="text-muted">CEO & Founder</p>
+                    <div class="social-links">
+                        <a href="#" class="text-primary me-2"><i class="mdi mdi-twitter"></i></a>
+                        <a href="#" class="text-primary me-2"><i class="mdi mdi-linkedin"></i></a>
+                        <a href="#" class="text-primary"><i class="mdi mdi-email"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="team-card p-4 bg-white rounded shadow text-center">
+                    <img src="{{ asset('assets/my/team/2.jpg') }}" alt="Team Member 2" class="rounded-circle mb-3" width="100">
+                    <h4 class="mb-2">Jane Smith</h4>
+                    <p class="text-muted">CTO</p>
+                    <div class="social-links">
+                        <a href="#" class="text-primary me-2"><i class="mdi mdi-twitter"></i></a>
+                        <a href="#" class="text-primary me-2"><i class="mdi mdi-linkedin"></i></a>
+                        <a href="#" class="text-primary"><i class="mdi mdi-email"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="team-card p-4 bg-white rounded shadow text-center">
+                    <img src="{{ asset('assets/my/team/3.jpg') }}" alt="Team Member 3" class="rounded-circle mb-3" width="100">
+                    <h4 class="mb-2">Alice Johnson</h4>
+                    <p class="text-muted">Product Manager</p>
+                    <div class="social-links">
+                        <a href="#" class="text-primary me-2"><i class="mdi mdi-twitter"></i></a>
+                        <a href="#" class="text-primary me-2"><i class="mdi mdi-linkedin"></i></a>
+                        <a href="#" class="text-primary"><i class="mdi mdi-email"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- Newsletter Section -->
+<section class="newsletter py-5 bg-primary text-white" id="newsletter">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2 class="mb-3">Subscribe to Our Newsletter</h2>
+                <p class="mb-0">Get the latest updates and exclusive offers straight to your inbox.</p>
+            </div>
+            <div class="col-md-6">
+                <form class="newsletter-form d-flex">
+                    <input type="email" class="form-control me-2" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-light">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<!-- FAQ Section -->
+<section class="faq py-5 bg-light" id="faq">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Frequently Asked Questions</h2>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        How do I get started?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Getting started is easy! Simply sign up for an account, choose a plan, and start using our app right away.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Can I upgrade my plan later?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Yes, you can upgrade or downgrade your plan at any time from your account settings.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Is there a free trial?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Yes, we offer a 14-day free trial for all new users. No credit card is required to start the trial.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Call to Action Section -->
+<section class="cta py-5 bg-dark text-white text-center" id="cta">
+    <div class="container">
+        <h2 class="mb-4">Ready to Get Started?</h2>
+        <p class="mb-4">Join thousands of satisfied users and take control of your tasks today.</p>
+        <a href="#pricing" class="btn btn-primary btn-lg">Choose a Plan</a>
+    </div>
+</section>
+
+
+
+
+
+
+
+<!-- Blog Section -->
+<section class="blog py-5 bg-white" id="blog">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Latest from Our Blog</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="blog-card p-4 bg-light rounded shadow">
+                    <img src="{{ asset('assets/my/blog/1.jpg') }}" alt="Blog Post 1" class="img-fluid mb-3 rounded">
+                    <h4 class="mb-2">10 Tips for Productivity</h4>
+                    <p class="text-muted">Discover how to boost your productivity with these simple tips.</p>
+                    <a href="#" class="btn btn-outline-primary">Read More</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="blog-card p-4 bg-light rounded shadow">
+                    <img src="{{ asset('assets/my/blog/2.jpg') }}" alt="Blog Post 2" class="img-fluid mb-3 rounded">
+                    <h4 class="mb-2">The Future of Task Management</h4>
+                    <p class="text-muted">Explore the latest trends in task management and how they can benefit you.</p>
+                    <a href="#" class="btn btn-outline-primary">Read More</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="blog-card p-4 bg-light rounded shadow">
+                    <img src="{{ asset('assets/my/blog/3.jpg') }}" alt="Blog Post 3" class="img-fluid mb-3 rounded">
+                    <h4 class="mb-2">How to Stay Organized</h4>
+                    <p class="text-muted">Learn the best practices for staying organized in a busy world.</p>
+                    <a href="#" class="btn btn-outline-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- Statistics Section -->
+<section class="statistics py-5 bg-primary text-white" id="statistics">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 mb-4">
+                <h2 class="mb-0">10,000+</h2>
+                <p class="mb-0">Happy Users</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h2 class="mb-0">500+</h2>
+                <p class="mb-0">Projects Completed</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h2 class="mb-0">99%</h2>
+                <p class="mb-0">Customer Satisfaction</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h2 class="mb-0">24/7</h2>
+                <p class="mb-0">Support Available</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- Partners Section -->
+<section class="partners py-5 bg-light" id="partners">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Our Partners</h2>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/partners/1.png') }}" alt="Partner 1" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/partners/2.png') }}" alt="Partner 2" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/partners/3.png') }}" alt="Partner 3" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/partners/4.png') }}" alt="Partner 4" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/partners/5.png') }}" alt="Partner 5" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!-- Timeline Section -->
+<section class="timeline py-5 bg-white" id="timeline">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Our Journey</h2>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>2018</h4>
+                    <p>Founded the company with a vision to revolutionize task management.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>2019</h4>
+                    <p>Launched our first product and gained 1,000 users within the first month.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>2020</h4>
+                    <p>Expanded our team and introduced new features based on user feedback.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>2021</h4>
+                    <p>Reached 10,000 users and received several industry awards.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>2022</h4>
+                    <p>Launched our mobile app and expanded to international markets.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<!-- Video Section -->
+<section class="video py-5 bg-light" id="video">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Watch Our Story</h2>
+        <div class="ratio ratio-16x9">
+            <iframe src="https://www.youtube.com/embed/your-video-id" allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- Social Proof Section -->
+<section class="social-proof py-5 bg-white" id="social-proof">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">As Seen On</h2>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/social-proof/1.png') }}" alt="Logo 1" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/social-proof/2.png') }}" alt="Logo 2" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/social-proof/3.png') }}" alt="Logo 3" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/social-proof/4.png') }}" alt="Logo 4" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/social-proof/5.png') }}" alt="Logo 5" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Download Section -->
+<section class="download py-5 bg-primary text-white text-center" id="download">
+    <div class="container">
+        <h2 class="mb-4">Download Our App Today</h2>
+        <p class="mb-4">Join thousands of users who are already enjoying the benefits of our app.</p>
+        <div class="app-store-buttons">
+            <a href="#" target="_blank"><img src="{{ asset('assets/img/my/defaults/app.png') }}" alt="Download on App Store"></a>
+            <a href="#" target="_blank"><img src="{{ asset('assets/img/my/defaults/google.png') }}" alt="Get it on Google Play"></a>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- Awards Section -->
+<section class="awards py-5 bg-light" id="awards">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Awards & Recognitions</h2>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/awards/1.png') }}" alt="Award 1" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/awards/2.png') }}" alt="Award 2" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/awards/3.png') }}" alt="Award 3" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/awards/4.png') }}" alt="Award 4" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/awards/5.png') }}" alt="Award 5" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Contact Form Section (Alternative) -->
+<section class="contact-form-alt py-5 bg-white" id="contact-form-alt">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Get in Touch</h2>
+        <form class="contact-form p-4 bg-light rounded shadow">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="subject" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </div>
+</section>
+
+
+
+<!-- Gallery Section -->
+<section class="gallery py-5 bg-light" id="gallery">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Our Gallery</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <img src="{{ asset('assets/my/gallery/1.jpg') }}" alt="Gallery Image 1" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="{{ asset('assets/my/gallery/2.jpg') }}" alt="Gallery Image 2" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="{{ asset('assets/my/gallery/3.jpg') }}" alt="Gallery Image 3" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="{{ asset('assets/my/gallery/4.jpg') }}" alt="Gallery Image 4" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="{{ asset('assets/my/gallery/5.jpg') }}" alt="Gallery Image 5" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="{{ asset('assets/my/gallery/6.jpg') }}" alt="Gallery Image 6" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Events Section -->
+<section class="events py-5 bg-white" id="events">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Upcoming Events</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="event-card p-4 bg-light rounded shadow">
+                    <h4 class="mb-2">Webinar: Productivity Tips</h4>
+                    <p class="text-muted">Join us for a live webinar on how to boost your productivity.</p>
+                    <p class="text-muted"><strong>Date:</strong> October 15, 2023</p>
+                    <a href="#" class="btn btn-outline-primary">Register Now</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="event-card p-4 bg-light rounded shadow">
+                    <h4 class="mb-2">Workshop: Task Management</h4>
+                    <p class="text-muted">Learn the best practices for managing your tasks effectively.</p>
+                    <p class="text-muted"><strong>Date:</strong> November 10, 2023</p>
+                    <a href="#" class="btn btn-outline-primary">Register Now</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="event-card p-4 bg-light rounded shadow">
+                    <h4 class="mb-2">Conference: Future of Work</h4>
+                    <p class="text-muted">Explore the latest trends in the future of work and productivity.</p>
+                    <p class="text-muted"><strong>Date:</strong> December 5, 2023</p>
+                    <a href="#" class="btn btn-outline-primary">Register Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Press Section -->
+<section class="press py-5 bg-light" id="press">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Press & Media</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="press-card p-4 bg-white rounded shadow">
+                    <h4 class="mb-2">Featured in TechCrunch</h4>
+                    <p class="text-muted">Read about how we're revolutionizing task management.</p>
+                    <a href="#" class="btn btn-outline-primary">Read Article</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="press-card p-4 bg-white rounded shadow">
+                    <h4 class="mb-2">Interview with Forbes</h4>
+                    <p class="text-muted">Our CEO discusses the future of productivity tools.</p>
+                    <a href="#" class="btn btn-outline-primary">Read Article</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="press-card p-4 bg-white rounded shadow">
+                    <h4 class="mb-2">Coverage in The Verge</h4>
+                    <p class="text-muted">Learn how our app is changing the way people work.</p>
+                    <a href="#" class="btn btn-outline-primary">Read Article</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Case Studies Section -->
+<section class="case-studies py-5 bg-white" id="case-studies">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Case Studies</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="case-study-card p-4 bg-light rounded shadow">
+                    <h4 class="mb-2">Case Study: Company A</h4>
+                    <p class="text-muted">How Company A increased productivity by 50% using our app.</p>
+                    <a href="#" class="btn btn-outline-primary">Read More</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="case-study-card p-4 bg-light rounded shadow">
+                    <h4 class="mb-2">Case Study: Company B</h4>
+                    <p class="text-muted">Company B reduced task management time by 30% with our solution.</p>
+                    <a href="#" class="btn btn-outline-primary">Read More</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="case-study-card p-4 bg-light rounded shadow">
+                    <h4 class="mb-2">Case Study: Company C</h4>
+                    <p class="text-muted">Company C achieved a 20% increase in team efficiency.</p>
+                    <a href="#" class="btn btn-outline-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Integration Section -->
+<section class="integrations py-5 bg-light" id="integrations">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Integrations</h2>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/integrations/1.png') }}" alt="Integration 1" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/integrations/2.png') }}" alt="Integration 2" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/integrations/3.png') }}" alt="Integration 3" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/integrations/4.png') }}" alt="Integration 4" class="img-fluid">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ asset('assets/my/integrations/5.png') }}" alt="Integration 5" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- Roadmap Section -->
+<section class="roadmap py-5 bg-white" id="roadmap">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Product Roadmap</h2>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>Q1 2023</h4>
+                    <p>Launch of new mobile app for iOS and Android.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>Q2 2023</h4>
+                    <p>Introduction of advanced analytics and reporting features.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>Q3 2023</h4>
+                    <p>Integration with popular third-party tools like Slack and Trello.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>Q4 2023</h4>
+                    <p>Launch of AI-powered task prioritization and scheduling.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Security Section -->
+<section class="security py-5 bg-light" id="security">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Security & Privacy</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="security-card p-4 bg-white rounded shadow text-center">
+                    <i class="mdi mdi-shield-check-outline display-4 text-primary mb-3"></i>
+                    <h4 class="mb-2">Data Encryption</h4>
+                    <p class="text-muted">All your data is encrypted both in transit and at rest.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="security-card p-4 bg-white rounded shadow text-center">
+                    <i class="mdi mdi-lock-outline display-4 text-primary mb-3"></i>
+                    <h4 class="mb-2">Access Control</h4>
+                    <p class="text-muted">Granular access controls to ensure only authorized users can access your data.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="security-card p-4 bg-white rounded shadow text-center">
+                    <i class="mdi mdi-security display-4 text-primary mb-3"></i>
+                    <h4 class="mb-2">Compliance</h4>
+                    <p class="text-muted">We comply with GDPR, CCPA, and other global data protection regulations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Support Section -->
+<section class="support py-5 bg-white" id="support">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Support & Help Center</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="support-card p-4 bg-light rounded shadow text-center">
+                    <i class="mdi mdi-help-circle-outline display-4 text-primary mb-3"></i>
+                    <h4 class="mb-2">FAQs</h4>
+                    <p class="text-muted">Find answers to common questions in our FAQ section.</p>
+                    <a href="#" class="btn btn-outline-primary">Visit FAQs</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="support-card p-4 bg-light rounded shadow text-center">
+                    <i class="mdi mdi-email-outline display-4 text-primary mb-3"></i>
+                    <h4 class="mb-2">Contact Support</h4>
+                    <p class="text-muted">Reach out to our support team for personalized assistance.</p>
+                    <a href="#" class="btn btn-outline-primary">Contact Us</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="support-card p-4 bg-light rounded shadow text-center">
+                    <i class="mdi mdi-book-open-outline display-4 text-primary mb-3"></i>
+                    <h4 class="mb-2">Documentation</h4>
+                    <p class="text-muted">Explore our comprehensive documentation for detailed guides.</p>
+                    <a href="#" class="btn btn-outline-primary">Read</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Contact Section -->
+<section class="contact py-5" id="contact">
+    <div class="container">
+        <h2 class="text-center mb-5">Contact Us</h2>
+        <div class="row">
+            <!-- Form Column -->
+            <div class="col-md-6 mb-4 mb-md-0">
+                <form class="contact-form p-3 bg-white rounded" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Map Column -->
+            <div class="col-md-6">
+                <div class="map-container ratio ratio-16x9">
+                    <iframe
+                        class="rounded-2"    
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.30591910525!2d-74.25986432970231!3d40.69714941680757!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1672809207556!5m2!1sen!2s"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
         </div>
     </div>
 </section>
