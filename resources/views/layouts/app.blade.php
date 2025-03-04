@@ -12,7 +12,7 @@
     <meta name="lang" content="{{ app()->getLocale() }}">
     <meta name="theme" content="system">
     <meta name="url" content="{{ url('/') }}">
-    <title>Dashboard @hasSection('title') - @yield('title') @endif</title>
+    <title>Station @hasSection('title') - @yield('title') @endif</title>
 
     <!-- Custom fonts for this template-->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -74,7 +74,7 @@
                 @include('layouts.app.menu.menu')
             @endif
 
-            
+
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
                     @if (isset($isNavbar) && $isNavbar)

@@ -16,7 +16,7 @@ class AuthController extends Controller {
           $validator = Validator::make($request->all(), [
               'email' => 'required|email',
               'password' => 'required',
-              'remember' => 'sometimes|in:on',  
+              'remember' => 'sometimes|in:on',
           ]);
 
           if ($validator->fails()) {
@@ -50,18 +50,18 @@ class AuthController extends Controller {
             ], 500);
           }
         }
-        return view('content.auth.login');
+        return view('content.dashboard.auth.login');
     }
 
     public function redirectToGoogle() {
         return Socialite::driver('google')->redirect();
     }
-    
+
     public function handleGoogleCallback() {
       $googleUser = Socialite::driver('google')->user();
-  
+
       $user = User::where('email', $googleUser->getEmail())->first();
-  
+
       if (!$user) {
           $user = new User;
           $user->email = $googleUser->getEmail();
@@ -69,22 +69,22 @@ class AuthController extends Controller {
           $user->photo = $googleUser->getAvatar();
           $user->save();
       }
-  
+
       Auth::login($user);
-  
+
       return redirect()->route('home');
     }
-    
+
     public function redirectToFacebook() {
       return Socialite::driver('facebook')->redirect();
     }
-    
+
     public function handleFacebookCallback() {
-  
+
       $facebookUser = Socialite::driver('facebook')->user();
-  
+
       $user = User::where('email', $facebookUser->getEmail())->first();
-  
+
       if (!$user) {
           $user = new User;
           $user->email = $facebookUser->getEmail();
@@ -93,20 +93,20 @@ class AuthController extends Controller {
           $user->save();
 
       }
-  
+
       Auth::login($user);
-  
+
       return redirect()->route('home');
-  
+
     }
-    
+
     public function change(Request $request) {
       $validator = Validator::make($request->all(), [
         'newPassword' => 'required|min:8',
         'confirmPassword' => 'required|same:newPassword',
         'currentPassword' => 'required',
       ]);
-  
+
       if ($validator->fails()) {
           return response()->json([
           'icon' => 'error',
@@ -114,7 +114,7 @@ class AuthController extends Controller {
           'message' => $validator->errors()->first()
           ], 422);
       }
-  
+
       try {
         if (!Auth::attempt(['email' => Auth::user()->email, 'password' => $request->currentPassword])) {
             return response()->json([
@@ -123,17 +123,17 @@ class AuthController extends Controller {
               'message' => __("Current password is incorrect."),
             ]);
         }
-  
+
         $user = User::find(Auth::user()->id);
         $user->password = bcrypt($request->newPassword);
         $user->save();
-  
+
         return response()->json([
           'icon' => 'success',
           'state' => __("Success"),
           'message' => __("Password changed successfully.")
         ]);
-  
+
       } catch (\Exception $e) {
         return response()->json([
           'icon' => 'error',
@@ -142,7 +142,7 @@ class AuthController extends Controller {
         ]);
       }
     }
-    
+
     public function update(Request $request) {
         $validator = Validator::make($request->all(), [
           'fullname' => 'required|string',
@@ -150,7 +150,7 @@ class AuthController extends Controller {
           'phone' => 'nullable|string|max:15',
           'image' => 'sometimes|image|mimes:jpeg,png,jpg', // Adjust image validation rules as needed
         ]);
-  
+
         if ($validator->fails()) {
             return response()->json([
             'icon' => 'error',
@@ -158,9 +158,9 @@ class AuthController extends Controller {
             'message' => $validator->errors()->first()
             ], 422);
         }
-  
+
         try {
-  
+
           // $profile = Profile::where('user_id',Auth::user()->id)->where('active', '1')->first();
           //   if ($request->hasFile('image')) {
           //     if (Auth::user()->profile->photoPath()) {
@@ -171,21 +171,21 @@ class AuthController extends Controller {
           //     $image->move(public_path('assets/img/photos/users/'), $imageName);
           //     $profile->photo = $imageName;
           //   }
-  
+
           //   $profile->fullname = $request->fullname;
           //   $profile->phone = $request->phone;
           //   $profile->save();
-  
+
             $user = User::find(Auth::user()->id);
             $user->email = $request->email;
             $user->save();
-  
+
           return response()->json([
             'icon' => 'success',
             'state' => __("Success"),
             'message' => __("Profile details updated successfully.")
           ]);
-  
+
         } catch (\Exception $e) {
           return response()->json([
             'icon' => 'error',
@@ -209,18 +209,18 @@ class AuthController extends Controller {
         'theme' => $user->theme
         ]);
     }
-    
+
     public function logout() {
       Auth::logout();
       return redirect()->route('auth.login');
     }
 
     public function register(Request $request) {
-        return view('content.auth.register'); // Register page
+        return view('content.dashboard.auth.register'); // Register page
     }
 
     public function forgot_password(Request $request) {
-        return view('content.auth.forgot-password'); // Forgot Password page
+        return view('content.dashboard.auth.forgot-password'); // Forgot Password page
     }
 
 

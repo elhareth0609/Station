@@ -12,7 +12,7 @@
     <meta name="lang" content="{{ app()->getLocale() }}">
     <meta name="theme" content="system">
     <meta name="url" content="{{ url('/') }}">
-    <title>Store @hasSection('title') - @yield('title') @endif</title>
+    <title>Station @hasSection('title') - @yield('title') @endif</title>
 
     <!-- Custom fonts for this template-->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -45,7 +45,7 @@
                     @include('layouts.store.nav.nav')
                     @endif
                     @if (isset($isContainer) && $isContainer)
-                        <div class="container-fluid container-lg">
+                        <div class="container-fluid">
                     @endif
                         @yield('content')
                     @if (isset($isContainer) && $isContainer)
@@ -74,14 +74,14 @@
         @include('layouts.store.footer')
         <!-- End of Footer -->
 
-        
+
     <script>
         $(document).ready(function() {
             // Quantity Controls
             $('.input-group .btn').click(function() {
                 var input = $(this).closest('.input-group').find('input');
                 var value = parseInt(input.val());
-                
+
                 if($(this).text() === '+') {
                     input.val(value + 1);
                 } else if(value > 1) {

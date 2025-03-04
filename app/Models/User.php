@@ -63,22 +63,6 @@ class User extends Authenticatable
     public function getPhotoPathAttribute() {
         return $this->photo ? public_path('assets/img/photos/users/' . $this->photo) : null;
     }
-    
-
-    public function chatRooms() {
-        return $this->belongsToMany(ChatRoom::class)
-                    ->using(ChatRoomUser::class) // Specify the pivot model
-                    ->withTimestamps(); // Include timestamps if needed
-    }
-    
-
-    public function messages() {
-        return $this->hasMany(Message::class);
-    }
-
-    public function car() {
-        return $this->belongsTo(Car::class);
-    }
 
     public function role() {
         return $this->belongsTo(Role::class);

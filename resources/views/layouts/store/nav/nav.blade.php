@@ -102,7 +102,7 @@
     }
 </style>
 
-{{-- 
+{{--
 <!-- Top Navigation -->
 <nav class="top-nav">
     <div class="container">
@@ -151,13 +151,13 @@
 
  <!-- Navigation -->
 <nav class="nav-store">
-    <div class="nav-container">
+    <div class="nav-container container-fluid">
         {{-- <a href="#" class="logo">AppName</a> --}}
         <a class="d-flex align-items-center text-black" href="{{ route('home') }}">
             <div class="sidebar-brand-icon fs-6">
-                <i class="mdi mdi-home-outline mdi-24px"></i>
+                <i class="mdi mdi-cart-outline mdi-24px"></i>
             </div>
-            <div class="sidebar-brand-text mx-3" style="font-size: 1rem;font-weight: 800;text-transform: uppercase;letter-spacing: 0.05rem;">Dashboard</div>
+            <div class="sidebar-brand-text mx-3" style="font-size: 1rem;font-weight: 800;text-transform: uppercase;letter-spacing: 0.05rem;">My Store</div>
         </a>
 
         <button class="btn btn-icon btn-white d-md-none d-sm-flex">
@@ -186,7 +186,7 @@
 <div id="page-top" style="margin-top: 85px;"></div>
 <!-- desktop Bottom Navigation -->
 <nav class="navbar navbar-expand-lg shadow-none desktop-nav">
-    <div class="container">
+    <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center w-100">
             <div class="search-bar">
                 <div class="input-group">
@@ -254,7 +254,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
+
                             <!-- Cart Button -->
                             <button class="btn btn-outline-danger d-flex mx-1 cart-btn">
                                 <i class="mdi mdi-trash-can-outline"></i>
@@ -288,7 +288,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
+
                             <!-- Cart Button -->
                             <button class="btn btn-outline-danger d-flex mx-1 cart-btn">
                                 <i class="mdi mdi-trash-can-outline"></i>
@@ -373,8 +373,8 @@
 
 
     .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
+        /* max-width: 1200px; */
+        /* margin: 0 auto; */
         display: flex;
         justify-content: space-between;
         align-items: center;
