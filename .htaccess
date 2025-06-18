@@ -3,3 +3,22 @@ RewriteEngine On
 # Redirect all requests to the public directory
 RewriteCond %{REQUEST_URI} !^/public/
 RewriteRule ^(.*)$ public/$1 [L]
+
+# .htaccess
+
+# START: WebSocket Reverse Proxy for websocket.sadeem-labs.com
+
+
+# 1. Check if the request is for your websocket subdomain
+RewriteCond %{HTTP_HOST} ^websocket\.sadeem-labs\.com$ [NC]
+
+# 2. Check if the request is a WebSocket upgrade request
+RewriteCond %{HTTP:Upgrade} websocket [NC]
+
+# 3. If both are true, proxy it to your internal PHP script's port
+RewriteRule /(.*) ws://127.0.0.1:8080/$1 [P,L]
+
+# 4. Also proxy regular HTTP traffic to the gateway (for health checks, etc.)
+RewriteCond %{HTTP_HOST} ^websocket\.sadeem-labs\.com$ [NC]
+RewriteRule /(.*) http://127.0.0.1:8080/$1 [P,L]
+# END: WebSocket Reverse Proxy
