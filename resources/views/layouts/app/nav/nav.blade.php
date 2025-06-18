@@ -8,19 +8,19 @@
             </button>
 
             <!-- Topbar Search -->
-            <form
+            {{-- <form
                 class="d-none d-sm-inline-block form-inline {{ app()->isLocale("ar") ? 'ms-auto me-md-3' : 'me-auto ms-md-3' }} my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group {{ app()->isLocale("ar") ? 'input-rtl' : '' }}">
                     <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                     <button class="btn btn-outline-primary" type="button"><i class="mdi mdi-magnify"></i></button>
                 </div>
-            </form>
+            </form> --}}
 
             <!-- Topbar Navbar -->
             <ul class="navbar-nav {{ app()->isLocale("ar") ? 'me-auto' : 'ms-auto' }}">
 
                 <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                <li class="nav-item dropdown no-arrow d-sm-none">
+                {{-- <li class="nav-item dropdown no-arrow d-sm-none">
                     <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="mdi mdi-magnify"></i>
                     </a>
@@ -34,10 +34,10 @@
                             </div>
                         </form>
                     </div>
-                </li>
+                </li> --}}
 
                 <!-- Nav Item - Alerts -->
-                <li class="nav-item dropdown no-arrow mx-1 d-flex align-items-center">
+                {{-- <li class="nav-item dropdown no-arrow mx-1 d-flex align-items-center">
                     <a class="btn btn-outline-primary rounded-circle p-2 lh-1 position-relative overflow-visible" href="#" id="alertsDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="mdi mdi-bell-outline"></span>
                             <span class="position-absolute top-25 start-100 translate-middle p-1 bg-primary border border-light rounded-circle">
@@ -84,11 +84,11 @@
                         </a>
                         <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                     </div>
-                </li>
+                </li> --}}
 
 
                 <!-- Nav Item - Messages -->
-                <li class="nav-item dropdown no-arrow mx-1 d-flex align-items-center">
+                {{-- <li class="nav-item dropdown no-arrow mx-1 d-flex align-items-center">
                     <a class="btn btn-outline-primary rounded-circle p-2 lh-1" href="#" id="messagesDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="mdi mdi-email-outline"></span>
                     </a>
@@ -143,7 +143,7 @@
                         </a>
                         <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                     </div>
-                </li>
+                </li> --}}
 
                 <!-- Nav Item - language -->
                 <li class="nav-item dropdown no-arrow mx-1 d-flex align-items-center">

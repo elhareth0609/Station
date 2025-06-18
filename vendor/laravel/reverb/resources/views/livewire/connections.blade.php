@@ -64,7 +64,7 @@
 </x-pulse::card>
 
 @script
-<script>
+<script defer>
 Alpine.data('connectionsChart', (config) => ({
     init() {
         let chart = new Chart(

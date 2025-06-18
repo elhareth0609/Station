@@ -73,7 +73,7 @@ class DataTabelController extends Controller {
                 return (string) $station->id;
             })
             ->editColumn('user_id', function ($station) {
-                return $station->client->full_name;
+                return $station->user->full_name;
             })
             ->editColumn('name', function ($station) {
                 return $station->name;
@@ -126,6 +126,9 @@ class DataTabelController extends Controller {
             ->editColumn('id', function ($sim) {
                 return (string) $sim->id;
             })
+            ->editColumn('station_id', function ($sim) {
+                return (string) $sim->station->name;
+            })
             ->editColumn('name', function ($sim) {
                 return $sim->name;
             })
@@ -141,8 +144,8 @@ class DataTabelController extends Controller {
             })
             ->addColumn('actions', function ($sim) use ($request) {
                     return '
-                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editStation(' . $sim->id . ')"><i class="mdi mdi-pencil"></i></a>
-                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteStation(' . $sim->id . ')"><i class="mdi mdi-trash-can"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-primary" onclick="editSim(' . $sim->id . ')"><i class="mdi mdi-pencil"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-icon btn-outline-danger" onclick="deleteSim(' . $sim->id . ')"><i class="mdi mdi-trash-can"></i></a>
                     ';
             })
             ->rawColumns(['status','actions'])
@@ -196,6 +199,7 @@ class DataTabelController extends Controller {
         }
         return view('content.dashboard.transactions.list');
     }
+
     public function languages(Request $request) {
         $languages = [];
         foreach (config('language') as $locale => $language) {

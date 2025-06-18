@@ -73,7 +73,7 @@
 </x-pulse::card>
 
 @script
-<script>
+<script defer>
 Alpine.data('messagesChart', (config) => ({
     init() {
         let chart = new Chart(

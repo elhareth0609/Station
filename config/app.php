@@ -134,4 +134,6 @@ return [
     |
     */
 
+    'gateway_url' => env('GATEWAY_URL', 'ws://127.0.0.1:8080'),
+
 ];

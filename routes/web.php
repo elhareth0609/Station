@@ -11,6 +11,9 @@ use App\Http\Controllers\StationController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CardController;
+use App\Http\Controllers\FlexyController;
+
 
 
 
@@ -72,6 +75,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/station/create', [StationController::class, 'create'])->name('station.create');
     Route::delete('/station/{id}', [StationController::class, 'delete'])->name('station.delete');
     Route::put('/station/{id}', [StationController::class, 'update'])->name('station.update');
+
+    Route::get('/cards', [CardController::class, 'index'])->name('cards.index');
+    Route::get('/cards/data', [CardController::class, 'data'])->name('cards.data');
+
+
+    Route::get('/flexy', [FlexyController::class, 'index'])->name('flexy.index');
 
     Route::post('/language', [LanguageController::class, 'create'])->name('language.create');
     Route::get('/language/{word}', [LanguageController::class, 'get'])->name('language.get');

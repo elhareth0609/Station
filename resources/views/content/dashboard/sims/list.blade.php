@@ -39,7 +39,7 @@
                 <thead>
                     <tr>
                         <th><input class="form-check-input" type="checkbox" id="check-all"></th>
-                        <th>{{__("Id")}}</th>
+                        {{-- <th>{{__("Id")}}</th>
                         <th>{{__("Station")}}</th>
                         <th>{{__("Name")}}</th>
                         <th>{{ __('Ip') }}</th>
@@ -47,7 +47,24 @@
                         <th>{{ __('Phone') }}</th>
                         <th>{{ __('Status') }}</th>
                         <th>{{ __('Created At') }}</th>
-                        <th>{{ __('Actions') }}</th>
+                        <th>{{ __('Actions') }}</th> --}}
+                                            <th>{{__("Id")}}</th>
+                    <th>{{__("Station")}}</th>
+                    <th>{{__("Name")}}</th>
+                    <th>{{__("Provider")}}</th> <!-- NEW COLUMN -->
+                    <th>{{ __('Ip') }}</th>
+                    <!-- NEW COLUMNS -->
+                    <th>{{ __('Signal') }}</th>
+                    <th>{{ __('Network') }}</th>
+                    <th>{{ __('Connection') }}</th>
+                    <th>{{ __('Unread') }}</th>
+                    <!-- END NEW COLUMNS -->
+                    <th>{{ __('Imei') }}</th>
+                    <th>{{ __('Phone') }}</th>
+                    <th>{{ __('Status') }}</th>
+                    <th>{{ __('Last Seen') }}</th>
+                    <th>{{ __('Actions') }}</th>
+
                     </tr>
                 </thead>
             </table>
@@ -190,6 +207,36 @@
             });
 
         }
+    function changeIp(simId) {
+        Swal.fire({
+            title: 'Change Modem IP',
+            text: 'Enter the new IP address for this modem:',
+            input: 'text',
+            inputAttributes: { autocapitalize: 'off' },
+            showCancelButton: true,
+            confirmButtonText: 'Change IP',
+            showLoaderOnConfirm: true,
+            preConfirm: (newIp) => {
+                return $.ajax({
+                    url: `/api/sims/${simId}/change-ip`, // Use your actual API route
+                    type: 'POST',
+                    data: { new_ip: newIp },
+                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' } // Ensure CSRF token if needed for web routes
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    Swal.showValidationMessage(`Request failed: ${jqXHR.responseJSON.error || errorThrown}`);
+                });
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: `Success!`,
+                    text: result.value.message + ' The agent will now attempt the change.',
+                });
+                // The dashboard will update once the agent reports back.
+            }
+        });
+    }
 
         function deleteSim(id) {
             confirmDelete({
@@ -207,25 +254,35 @@
             });
         }
 
-        function showContextMenu(id, x, y) {
+        // function showContextMenu(id, x, y) {
 
+        //     var contextMenu = $('<ul class="context-menu" dir="{{ app()->isLocale("ar") ? "rtl" : "" }}"></ul>')
+        //         .append('<li><a onclick="editSim(' + id + ')"><i class="tf-icons mdi mdi-pencil-outline {{ app()->isLocale("ar") ? "ms-1" : "me-1" }}"></i>{{ __("Edit") }}</a></li>')
+        //         .append('<li class="px-0 pe-none"><div class="divider border-top my-0"></div></li>')
+        //         .append('<li><a onclick="deleteSim(' + id + ')"><i class="tf-icons mdi mdi-trash-can-outline {{ app()->isLocale("ar") ? "ms-1" : "me-1" }}"></i>{{ __("Delete") }}</a></li>');
+
+
+        //     contextMenu.css({
+        //         top: y,
+        //         left: x
+        //     });
+
+
+        //     $('body').append(contextMenu);
+
+        //         $(document).on('click', function() {
+        //         $('.context-menu').remove();
+        //         });
+        // }
+        function showContextMenu(id, x, y) {
             var contextMenu = $('<ul class="context-menu" dir="{{ app()->isLocale("ar") ? "rtl" : "" }}"></ul>')
                 .append('<li><a onclick="editSim(' + id + ')"><i class="tf-icons mdi mdi-pencil-outline {{ app()->isLocale("ar") ? "ms-1" : "me-1" }}"></i>{{ __("Edit") }}</a></li>')
+                .append('<li><a onclick="changeIp(' + id + ')"><i class="tf-icons mdi mdi-ip-network-outline {{ app()->isLocale("ar") ? "ms-1" : "me-1" }}"></i>{{ __("Change IP") }}</a></li>')
                 .append('<li class="px-0 pe-none"><div class="divider border-top my-0"></div></li>')
                 .append('<li><a onclick="deleteSim(' + id + ')"><i class="tf-icons mdi mdi-trash-can-outline {{ app()->isLocale("ar") ? "ms-1" : "me-1" }}"></i>{{ __("Delete") }}</a></li>');
-
-
-            contextMenu.css({
-                top: y,
-                left: x
-            });
-
-
+            contextMenu.css({ top: y, left: x });
             $('body').append(contextMenu);
-
-                $(document).on('click', function() {
-                $('.context-menu').remove();
-                });
+            $(document).on('click', function() { $('.context-menu').remove(); });
         }
 
 
@@ -249,28 +306,32 @@
                     }
                 // End of checkboxes
                 },
-                columns: [
-                    // Start of checkboxes
-                    {
-                        data: 'id',
-                        name: '#',
-                        orderable: false,
-                        searchable: false,
-                        render: function(data, type, full, meta) {
-                            return '<input type="checkbox" class="form-check-input rounded-2 check-item" value="' + data + '">';
-                        }
-                    },
-                    // End  of checkboxes
-                    {data: 'id', name: '{{__("Id")}}'},
-                    {data: 'station_id', name: '{{__("Station")}}'},
-                    {data: 'name', name: '{{__("Name")}}'},
-                    {data: 'ip', name: '{{__("Ip")}}'},
-                    {data: 'imei', name: '{{__("Imei")}}'},
-                    {data: 'phone', name: '{{__("Phone")}}'},
-                    {data: 'status', name: '{{__("Status")}}'},
-                    {data: 'created_at', name: '{{__("Created At")}}'},
-                    {data: 'actions', name: '{{__("Actions")}}', orderable: false, searchable: false}
-                ],
+            columns: [
+                { data: 'id', name: '#', orderable: false, searchable: false, render: (d) => `<input type="checkbox" class="form-check-input rounded-2 check-item" value="${d}">` },
+                { data: 'id', name: '{{__("Id")}}'},
+                { data: 'station_id', name: '{{__("Station")}}'}, // Corrected to get station name
+                { data: 'name', name: '{{__("Name")}}'},
+                { data: 'provider_name', name: '{{__("Provider")}}', render: (d,t,r) => `<span id="provider-${r.id}" class="fw-bold">${d || '-'}</span>`},
+                { data: 'ip', name: '{{__("Ip")}}', render: (d,t,r) => `<span id="ip-${r.id}">${d}</span>`},
+                { data: 'signal_strength', name: '{{__("Signal")}}', orderable: false, searchable: false,
+                  render: (d,t,r) => `<span id="signal-${r.id}" class="d-flex align-items-center"><img src="/assets/res/signal-0.svg" style="height:20px;" class="me-1" /> <span>-</span></span>`
+                },
+                { data: 'network_type', name: '{{__("Network")}}', orderable: false, searchable: false,
+                  render: (d,t,r) => `<span id="network-${r.id}" class="badge bg-secondary">Offline</span>`
+                },
+                { data: 'connection_status', name: '{{__("Connection")}}', orderable: false, searchable: false,
+                  render: (d,t,r) => `<span id="connection-${r.id}"><img src="/res/wan_disable.png" style="height:20px;" /></span>`
+                },
+                { data: 'unread_messages', name: '{{__("Unread")}}', orderable: false, searchable: false,
+                  render: (d,t,r) => `<span id="unread-${r.id}" class="badge bg-secondary">${d || 0}</span>`
+                },
+                { data: 'imei', name: '{{__("Imei")}}'},
+                { data: 'phone', name: '{{__("Phone")}}'},
+                { data: 'status', name: '{{__("Status")}}'},
+                { data: 'last_seen_at', name: '{{__("Last Seen")}}', render: (d,t,r) => `<span id="last_seen-${r.id}">${d ? new Date(d).toLocaleString() : 'Never'}</span>` },
+                { data: 'actions', name: '{{__("Actions")}}', orderable: false, searchable: false }
+            ],
+
                 order: [[8, 'desc']], // Default order by created_at column
 
                 rowCallback: function(row, data) {
@@ -431,6 +492,73 @@
                 });
             });
 
+
+
+        function connectWebSocket() {
+            // ==================  THE #1 FIX IS HERE ==================
+            // Use 127.0.0.1 (localhost) if the gateway is on the same machine.
+            // If the gateway is on a different server, use its IP address.
+            // const ws = new WebSocket("{{ config('app.gateway_url') }}" . ?clientType=dashboard);
+                        const gatewayIp = "{{ config('app.gateway_url') }}";
+
+            // ==================  THE FIX IS HERE ==================
+            // We identify this client as a 'dashboard' so the server doesn't disconnect it.
+            const ws = new WebSocket(`${gatewayIp}?clientType=dashboard`);
+
+            // =======================================================
+
+            ws.onopen = function() {
+                console.log('✅ Dashboard connected to WebSocket Gateway.');
+            };
+
+            ws.onmessage = function(event) {
+                const message = JSON.parse(event.data);
+                if (message.event !== 'sim.status.updated') return;
+
+                const sim = message.data;
+                if (!sim || !sim.id) return;
+
+                $(`#provider-${sim.id}`).text(sim.provider_name || 'N/A');
+                $(`#ip-${sim.id}`).text(sim.ip || 'N/A');
+
+                // --- Update Signal with SVG ---
+                const signalLevel = Math.min(5, Math.max(0, parseInt(sim.signal_strength, 10) || 0));
+                const signalImg = `/assets/res/signal-${signalLevel}.svg`;
+                $(`#signal-${sim.id} img`).attr('src', signalImg);
+                $(`#signal-${sim.id} span`).text(`${sim.rat}`);
+                // $(`#signal-${sim.id} span`).text(`${signalLevel}/5`);
+
+                // --- Update Network Type ---
+                const netElem = $(`#network-${sim.id}`);
+                netElem.text(sim.network_type || 'Offline');
+                const netColor = sim.network_type.includes('4G') || sim.network_type.includes('LTE') ? 'bg-label-success' : 'bg-label-primary';
+                netElem.removeClass('bg-label-secondary bg-label-primary bg-label-success').addClass(netColor);
+
+                // --- Update Connection Status ---
+                const connImg = sim.connection_status === 'Connected' ? '/res/wan_enable.png' : '/res/wan_disable.png';
+                $(`#connection-${sim.id} img`).attr('src', connImg);
+
+                // --- Update Unread Messages ---
+                const unreadElem = $(`#unread-${sim.id}`);
+                unreadElem.text(sim.unread_messages);
+                unreadElem.removeClass('bg-secondary bg-danger').addClass(sim.unread_messages > 0 ? 'bg-danger' : 'bg-secondary');
+
+                // --- Update Last Seen ---
+                $(`#last_seen-${sim.id}`).text(new Date(sim.last_seen_at).toLocaleString());
+            };
+
+            ws.onclose = function() {
+                console.warn('❌ WebSocket disconnected. Reconnecting in 5 seconds...');
+                setTimeout(connectWebSocket, 5000);
+            };
+
+            ws.onerror = function(err) {
+                console.error('WebSocket connection error. Is the gateway running and IP correct?', err);
+            };
+
+        }
+
+        connectWebSocket(); // Start the connection
     });
 
 </script>

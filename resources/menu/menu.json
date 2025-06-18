@@ -31,6 +31,18 @@
             "link" : "/transactions"
         },
         {
+            "title" : "Flexy",
+            "icon" : "mdi mdi-swap-horizontal",
+            "name" : "flexy.index",
+            "link" : "/flexy"
+        },
+        {
+            "title" : "Cards",
+            "icon" : "mdi mdi-swap-horizontal",
+            "name" : "cards.index",
+            "link" : "/cards"
+        },
+        {
             "title" : "Languages",
             "icon" : "mdi mdi-translate",
             "name" : "languages",

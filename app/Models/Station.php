@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Station extends Model {
-    protected $fillable = [
-        'user_id',
-        'name',
-        'code',
-        'status'
-    ];
+    use HasFactory;
 
-    public function client() {
-        return $this->belongsTo(User::class, 'user_id');
+    protected $fillable = ['user_id', 'name', 'code', 'status'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
-    public function sims() {
+    public function sims()
+    {
         return $this->hasMany(Sim::class);
     }
 
