@@ -167,6 +167,8 @@
     </div>
 </div>
 
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
 <script type="text/javascript">
         var table;
         // Start of checkboxes
@@ -494,73 +496,55 @@
 
 
 
-        function connectWebSocket() {
-            // ==================  THE #1 FIX IS HERE ==================
-            // Use 127.0.0.1 (localhost) if the gateway is on the same machine.
-            // If the gateway is on a different server, use its IP address.
-            // const ws = new WebSocket("{{ config('app.gateway_url') }}" . ?clientType=dashboard);
-                        const gatewayIp = "{{ config('app.gateway_url') }}";
+        function connectSocketIO() {
+            const gatewayIp = "{{ config('app.gateway_url') }}"; // e.g. wss://127.0.0.1:8080
+            const socket = io(gatewayIp, {
+                query: { clientType: 'dashboard' },
+                transports: ['websocket'], // optional: force WS only
+            });
 
-            // ==================  THE FIX IS HERE ==================
-            // We identify this client as a 'dashboard' so the server doesn't disconnect it.
-            const ws = new WebSocket(`${gatewayIp}?clientType=dashboard`);
+            socket.on('connect', () => {
+                console.log('✅ Dashboard connected to Socket.IO Gateway.');
+            });
 
-            // =======================================================
-
-            ws.onopen = function() {
-                console.log('✅ Dashboard connected to WebSocket Gateway.');
-            };
-
-            ws.onmessage = function(event) {
-                const message = JSON.parse(event.data);
-                if (message.event !== 'sim.status.updated') return;
-
-                const sim = message.data;
+            socket.on('sim.status.updated', (sim) => {
                 if (!sim || !sim.id) return;
 
                 $(`#provider-${sim.id}`).text(sim.provider_name || 'N/A');
                 $(`#ip-${sim.id}`).text(sim.ip || 'N/A');
 
-                // --- Update Signal with SVG ---
                 const signalLevel = Math.min(5, Math.max(0, parseInt(sim.signal_strength, 10) || 0));
                 const signalImg = `/assets/res/signal-${signalLevel}.svg`;
                 $(`#signal-${sim.id} img`).attr('src', signalImg);
                 $(`#signal-${sim.id} span`).text(`${sim.rat}`);
-                // $(`#signal-${sim.id} span`).text(`${signalLevel}/5`);
 
-                // --- Update Network Type ---
                 const netElem = $(`#network-${sim.id}`);
                 netElem.text(sim.network_type || 'Offline');
                 const netColor = sim.network_type.includes('4G') || sim.network_type.includes('LTE') ? 'bg-label-success' : 'bg-label-primary';
                 netElem.removeClass('bg-label-secondary bg-label-primary bg-label-success').addClass(netColor);
 
-                // --- Update Connection Status ---
                 const connImg = sim.connection_status === 'Connected' ? '/res/wan_enable.png' : '/res/wan_disable.png';
                 $(`#connection-${sim.id} img`).attr('src', connImg);
 
-                // --- Update Unread Messages ---
                 const unreadElem = $(`#unread-${sim.id}`);
                 unreadElem.text(sim.unread_messages);
                 unreadElem.removeClass('bg-secondary bg-danger').addClass(sim.unread_messages > 0 ? 'bg-danger' : 'bg-secondary');
 
-                // --- Update Last Seen ---
                 $(`#last_seen-${sim.id}`).text(new Date(sim.last_seen_at).toLocaleString());
-            };
+            });
 
-            ws.onclose = function() {
-                console.warn('❌ WebSocket disconnected. Reconnecting in 5 seconds...');
-                setTimeout(connectWebSocket, 5000);
-            };
+            socket.on('disconnect', () => {
+                console.warn('❌ Socket.IO disconnected. Reconnecting in 5 seconds...');
+                setTimeout(connectSocketIO, 5000);
+            });
 
-            ws.onerror = function(err) {
-                console.error('WebSocket connection error. Is the gateway running and IP correct?', err);
-            };
-
+            socket.on('connect_error', (err) => {
+                console.error('Socket.IO connection error:', err);
+            });
         }
 
-        connectWebSocket(); // Start the connection
+        connectSocketIO();
     });
-
 </script>
 
 @endsection

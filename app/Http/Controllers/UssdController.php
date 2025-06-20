@@ -32,6 +32,9 @@ class UssdController extends Controller
         }
 
         try {
+            // $ussd = $this->ussdService->createUssdTransaction($request->validated());
+            // return $this->success(new UssdResource($ussd), __('Created Successfully.'));
+
             $ussd = $this->ussdService->createUssdTransaction($validator->validated());
             return response()->json([
                 'message' => 'Transaction sent to station.',
