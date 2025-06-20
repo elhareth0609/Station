@@ -494,57 +494,139 @@
                 });
             });
 
+            let webSocket = null;
+
+            function connectWebSocket() {
+                // 1. Build the correct URL with query parameters
+                // The Blade template variable is still perfect for this.
+                const gatewayUrl = "{{ config('app.gateway_url') }}";
+                const fullUrl = `${gatewayUrl}?clientType=dashboard`;
+
+                console.log(`Attempting to connect to WebSocket Gateway at ${fullUrl}`);
+
+                // 2. Instantiate a native WebSocket object
+                webSocket = new WebSocket(fullUrl);
+
+                // 3. Handle the 'open' event (equivalent to Socket.IO's 'connect')
+                webSocket.onopen = (event) => {
+                    console.log('✅ Dashboard connected to WebSocket Gateway.');
+                };
+
+                // 4. Handle the 'message' event (this receives ALL messages from the server)
+                webSocket.onmessage = (event) => {
+                    try {
+                        // The PHP server sends a JSON string: { "event": "...", "payload": {...} }
+                        const data = JSON.parse(event.data);
+
+                        console.log('Received message:', data);
+
+                        // We must check the event name to know what to do.
+                        // Your PHP server sends 'dashboard_event' for broadcasts.
+                        if (data.event === 'dashboard_event') {
+                            // The actual data we need is inside the 'payload' property.
+                            const sim = data.payload;
+
+                            // --- The rest of your UI update logic is EXACTLY THE SAME ---
+                            if (!sim || !sim.id) return;
+
+                            $(`#provider-${sim.id}`).text(sim.provider_name || 'N/A');
+                            $(`#ip-${sim.id}`).text(sim.ip || 'N/A');
+
+                            // Note: 'signal_strength' from your agent is now 'signalBars'. Adjust if needed.
+                            const signalLevel = Math.min(5, Math.max(0, parseInt(sim.signalBars, 10) || 0));
+                            const signalImg = `/assets/res/signal-${signalLevel}.svg`;
+                            $(`#signal-${sim.id} img`).attr('src', signalImg);
+                            $(`#signal-${sim.id} span`).text(`${sim.Rat}`); // 'rat' is now 'Rat'
+
+                            const netElem = $(`#network-${sim.id}`);
+                            netElem.text(sim.networkType || 'Offline');
+                            // Check for 4G/LTE in networkType string
+                            const netColor = sim.networkType.toLowerCase().includes('4g') || sim.networkType.toLowerCase().includes('lte') ? 'bg-label-success' : 'bg-label-primary';
+                            netElem.removeClass('bg-label-secondary bg-label-primary bg-label-success').addClass(netColor);
+
+                            const connImg = sim.connectionStatus === 'Connected' ? '/res/wan_enable.png' : '/res/wan_disable.png';
+                            $(`#connection-${sim.id} img`).attr('src', connImg);
+
+                            const unreadElem = $(`#unread-${sim.id}`);
+                            unreadElem.text(sim.unreadMessages);
+                            unreadElem.removeClass('bg-secondary bg-danger').addClass(sim.unreadMessages > 0 ? 'bg-danger' : 'bg-secondary');
+
+                            // The Laravel backend should send a properly formatted date string for 'last_seen_at'
+                            $(`#last_seen-${sim.id}`).text(new Date(sim.last_seen_at).toLocaleString());
+                        }
+
+                    } catch (e) {
+                        console.error('Error parsing message from WebSocket:', e, 'Raw data:', event.data);
+                    }
+                };
+
+                // 5. Handle the 'close' event (equivalent to Socket.IO's 'disconnect')
+                webSocket.onclose = (event) => {
+                    console.warn('❌ WebSocket disconnected. Reconnecting in 5 seconds...');
+                    // Simple reconnection logic
+                    setTimeout(connectWebSocket, 5000);
+                };
+
+                // 6. Handle the 'error' event (for logging connection issues)
+                webSocket.onerror = (error) => {
+                    console.error('WebSocket connection error:', error);
+                    // The 'onclose' event will usually be called immediately after an error,
+                    // which will trigger the reconnection logic.
+                };
+            }
+
+        connectWebSocket();
 
 
-        function connectSocketIO() {
-            const gatewayIp = "{{ config('app.gateway_url') }}"; // e.g. wss://127.0.0.1:8080
-            const socket = io(gatewayIp, {
-                query: { clientType: 'dashboard' },
-                transports: ['websocket'], // optional: force WS only
-            });
+        // function connectSocketIO() {
+        //     const gatewayIp = "{{ config('app.gateway_url') }}"; // e.g. wss://127.0.0.1:8080
+        //     const socket = io(gatewayIp, {
+        //         query: { clientType: 'dashboard' },
+        //         transports: ['websocket'], // optional: force WS only
+        //     });
 
-            socket.on('connect', () => {
-                console.log('✅ Dashboard connected to Socket.IO Gateway.');
-            });
+        //     socket.on('connect', () => {
+        //         console.log('✅ Dashboard connected to Socket.IO Gateway.');
+        //     });
 
-            socket.on('sim.status.updated', (sim) => {
-                console.log('sim.status.updated', sim);
-                if (!sim || !sim.id) return;
+        //     socket.on('sim.status.updated', (sim) => {
+        //         console.log('sim.status.updated', sim);
+        //         if (!sim || !sim.id) return;
 
-                $(`#provider-${sim.id}`).text(sim.provider_name || 'N/A');
-                $(`#ip-${sim.id}`).text(sim.ip || 'N/A');
+        //         $(`#provider-${sim.id}`).text(sim.provider_name || 'N/A');
+        //         $(`#ip-${sim.id}`).text(sim.ip || 'N/A');
 
-                const signalLevel = Math.min(5, Math.max(0, parseInt(sim.signal_strength, 10) || 0));
-                const signalImg = `/assets/res/signal-${signalLevel}.svg`;
-                $(`#signal-${sim.id} img`).attr('src', signalImg);
-                $(`#signal-${sim.id} span`).text(`${sim.rat}`);
+        //         const signalLevel = Math.min(5, Math.max(0, parseInt(sim.signal_strength, 10) || 0));
+        //         const signalImg = `/assets/res/signal-${signalLevel}.svg`;
+        //         $(`#signal-${sim.id} img`).attr('src', signalImg);
+        //         $(`#signal-${sim.id} span`).text(`${sim.rat}`);
 
-                const netElem = $(`#network-${sim.id}`);
-                netElem.text(sim.network_type || 'Offline');
-                const netColor = sim.network_type.includes('4G') || sim.network_type.includes('LTE') ? 'bg-label-success' : 'bg-label-primary';
-                netElem.removeClass('bg-label-secondary bg-label-primary bg-label-success').addClass(netColor);
+        //         const netElem = $(`#network-${sim.id}`);
+        //         netElem.text(sim.network_type || 'Offline');
+        //         const netColor = sim.network_type.includes('4G') || sim.network_type.includes('LTE') ? 'bg-label-success' : 'bg-label-primary';
+        //         netElem.removeClass('bg-label-secondary bg-label-primary bg-label-success').addClass(netColor);
 
-                const connImg = sim.connection_status === 'Connected' ? '/res/wan_enable.png' : '/res/wan_disable.png';
-                $(`#connection-${sim.id} img`).attr('src', connImg);
+        //         const connImg = sim.connection_status === 'Connected' ? '/res/wan_enable.png' : '/res/wan_disable.png';
+        //         $(`#connection-${sim.id} img`).attr('src', connImg);
 
-                const unreadElem = $(`#unread-${sim.id}`);
-                unreadElem.text(sim.unread_messages);
-                unreadElem.removeClass('bg-secondary bg-danger').addClass(sim.unread_messages > 0 ? 'bg-danger' : 'bg-secondary');
+        //         const unreadElem = $(`#unread-${sim.id}`);
+        //         unreadElem.text(sim.unread_messages);
+        //         unreadElem.removeClass('bg-secondary bg-danger').addClass(sim.unread_messages > 0 ? 'bg-danger' : 'bg-secondary');
 
-                $(`#last_seen-${sim.id}`).text(new Date(sim.last_seen_at).toLocaleString());
-            });
+        //         $(`#last_seen-${sim.id}`).text(new Date(sim.last_seen_at).toLocaleString());
+        //     });
 
-            socket.on('disconnect', () => {
-                console.warn('❌ Socket.IO disconnected. Reconnecting in 5 seconds...');
-                setTimeout(connectSocketIO, 5000);
-            });
+        //     socket.on('disconnect', () => {
+        //         console.warn('❌ Socket.IO disconnected. Reconnecting in 5 seconds...');
+        //         setTimeout(connectSocketIO, 5000);
+        //     });
 
-            socket.on('connect_error', (err) => {
-                console.error('Socket.IO connection error:', err);
-            });
-        }
+        //     socket.on('connect_error', (err) => {
+        //         console.error('Socket.IO connection error:', err);
+        //     });
+        // }
 
-        connectSocketIO();
+        // connectSocketIO();
     });
 </script>
 
