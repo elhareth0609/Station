@@ -508,6 +508,7 @@
             });
 
             socket.on('sim.status.updated', (sim) => {
+                console.log('sim.status.updated', sim);
                 if (!sim || !sim.id) return;
 
                 $(`#provider-${sim.id}`).text(sim.provider_name || 'N/A');
