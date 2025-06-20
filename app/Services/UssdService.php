@@ -82,7 +82,7 @@ class UssdService
     private function sendCommandToGateway(string $stationCode, array $payload): void
     {
         // ... (This method remains unchanged)
-        $gatewayUrl = 'http://127.0.0.1:8081/send-command';
+        $gatewayUrl = env('GATEWAY_URL_HTTP') . '/send-command';
         $secretKey = 'your-very-strong-and-secret-key';
         try {
             Http::withHeaders(['X-Secret-Key' => $secretKey])
