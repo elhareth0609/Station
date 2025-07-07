@@ -12,21 +12,21 @@ class Sim extends Model {
 
     ];
 
-    protected $hidden = [
-        'pin_code', // <-- ADD THIS to prevent it from ever being sent in API responses
-    ];
+    // protected $hidden = [
+    //     'pin_code', // <-- ADD THIS to prevent it from ever being sent in API responses
+    // ];
 
         /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        // This will automatically encrypt the PIN when saving to the DB
-        // and decrypt it when you access it in your code.
-        'pin_code' => 'encrypted', // <-- ADD THIS
-        'last_seen_at' => 'datetime',
-    ];
+    // protected $casts = [
+    //     // This will automatically encrypt the PIN when saving to the DB
+    //     // and decrypt it when you access it in your code.
+    //     'pin_code' => 'encrypted', // <-- ADD THIS
+    //     'last_seen_at' => 'datetime',
+    // ];
 
     public function station()
     {

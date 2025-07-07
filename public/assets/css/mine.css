@@ -1,3 +1,104 @@
+
+/* Bootstrap Primary Color Override using CSS Custom Properties */
+/* Add this CSS after Bootstrap CSS */
+
+/* Bootstrap Primary Color Override using CSS Custom Properties */
+/* Add this CSS after Bootstrap CSS */
+
+/* Bootstrap Primary Color Override using CSS Custom Properties */
+/* Add this CSS after Bootstrap CSS */
+
+:root {
+  /* Override Bootstrap's primary color - Deep Purple (AA Compliant) */
+  --bs-primary: #7c3aed;      /* Deep Purple */
+  --bs-primary-rgb: 124, 58, 237;
+
+  /* Primary color variations */
+  --bs-primary-bg-subtle: #f5f3ff;
+  --bs-primary-border-subtle: #ddd6fe;
+  --bs-primary-text-emphasis: #4c1d95;
+
+  /* Button states */
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #7c3aed;
+  --bs-btn-border-color: #7c3aed;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #6d28d9;
+  --bs-btn-hover-border-color: #6d28d9;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #5b21b6;
+  --bs-btn-active-border-color: #5b21b6;
+}
+
+/* Additional utility classes */
+.text-deep-purple {
+  color: #7c3aed !important;
+}
+
+.bg-deep-purple {
+  background-color: #7c3aed !important;
+}
+
+.border-deep-purple {
+  border-color: #7c3aed !important;
+}
+
+/* Custom button variant */
+.btn-deep-purple {
+  color: #fff;
+  background-color: #7c3aed;
+  border-color: #7c3aed;
+}
+
+.btn-deep-purple:hover {
+  background-color: #6d28d9;
+  border-color: #6d28d9;
+}
+
+.btn-deep-purple:focus,
+.btn-deep-purple.focus {
+  box-shadow: 0 0 0 0.2rem rgba(124, 58, 237, 0.5);
+}
+
+.btn-deep-purple:active,
+.btn-deep-purple.active {
+  background-color: #5b21b6;
+  border-color: #5b21b6;
+}
+
+/* Outline button variant */
+.btn-outline-deep-purple {
+  color: #7c3aed;
+  border-color: #7c3aed;
+  background-color: transparent;
+}
+
+.btn-outline-deep-purple:hover {
+  color: #fff;
+  background-color: #7c3aed;
+  border-color: #7c3aed;
+}
+
+.btn-outline-deep-purple:focus,
+.btn-outline-deep-purple.focus {
+  box-shadow: 0 0 0 0.2rem rgba(124, 58, 237, 0.5);
+}
+
+.btn-outline-deep-purple:active,
+.btn-outline-deep-purple.active,
+.btn-outline-deep-purple.dropdown-toggle.show {
+  color: #fff;
+  background-color: #7c3aed;
+  border-color: #7c3aed;
+}
+
+.btn-outline-deep-purple:disabled,
+.btn-outline-deep-purple.disabled {
+  color: #7c3aed;
+  background-color: transparent;
+  opacity: 0.65;
+}
+
 .my-w-fit-content {
     width: fit-content !important;
 }
@@ -141,8 +242,8 @@ table tbody tr:last-child td {
 .table>:not(:last-child)>:last-child>* {
     border-bottom-color: #dee2e6;
 }
-tr:has(td.dt-empty):hover { 
-    background: transparent; 
+tr:has(td.dt-empty):hover {
+    background: transparent;
 }
 
 /* TODO : REMOVE COMMENT WHEN CREATE DATATABLE */
@@ -492,7 +593,7 @@ span.ripple-effect {
 .form-floating:has(.form-control:focus) .form-control,
 .form-floating:has(.form-select:focus) .form-select {
     box-shadow : none!important;
-    border-color: var(--bs-primary)!important;
+    border: 2px solid var(--bs-primary)!important;
 }
 .input-group:has(.form-control:focus) span,
 .input-group:has(.form-control:focus) button,

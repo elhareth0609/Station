@@ -14,6 +14,17 @@ return [
     |
     */
 
+    /*
+    | Run the Commands
+    | Now you have a complete workflow:
+    | Extract strings from your code:
+
+    ||| php artisan translations:extract
+
+    | Translate the extracted strings to German:
+    ||| php artisan translations:translate de
+    */
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
@@ -37,6 +48,10 @@ return [
 
     'google_sheet' => [
         'credentials_path' => env('GOOGLE_SHEET_CREDENTIALS_PATH', 'sheet_credentials.json'),
+    ],
+
+    'openrouter' => [
+        'key' => env('OPENROUTER_API_KEY'),
     ],
 
 ];

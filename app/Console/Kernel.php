@@ -13,6 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        \App\Console\Commands\ExtractTranslations::class,
+        \App\Console\Commands\MakeSolidStructure::class,
         // \App\Console\Commands\WebSocketServer::class,
     ];
 

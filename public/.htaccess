@@ -5,34 +5,10 @@
 
     RewriteEngine On
 
-    # 1. Check if the request is for your websocket subdomain
-    RewriteCond %{HTTP_HOST} ^websocket\.sadeem-labs\.com$ [NC]
-
-    # 2. Check if the request is a WebSocket upgrade request
-    RewriteCond %{HTTP:Upgrade} websocket [NC]
-
-    # 3. If both are true, proxy it to your internal PHP script's port
-    #    The [P] flag is crucial. It means "Proxy".
-    RewriteRule .* ws://127.0.0.1:8080%{REQUEST_URI} [P,L]
-
-    # 4. Also proxy regular HTTP traffic to the gateway (for health checks, etc.)
-    RewriteCond %{HTTP_HOST} ^websocket\.sadeem-labs\.com$ [NC]
-    RewriteRule .* http://127.0.0.1:8080%{REQUEST_URI} [P,L]
-
-    # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
-
-    # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-
-
-
 </IfModule>

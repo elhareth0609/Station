@@ -6,13 +6,11 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class MakeSolidStructure extends Command
-{
+class MakeSolidStructure extends Command {
     protected $signature = 'make:solid {name}';
     protected $description = 'Generate full structure for a Client-like module';
 
-    public function handle()
-    {
+    public function handle() {
         $name = Str::studly($this->argument('name')); // Example: Client
         $lowerName = Str::lower($name);
         $pluralLower = Str::plural($lowerName);
@@ -49,8 +47,7 @@ class MakeSolidStructure extends Command
         $this->info("All files for {$name} have been created. Please add binding in RepositoryServiceProvider.");
     }
 
-    protected function getControllerContent($name)
-    {
+    protected function getControllerContent($name) {
         return <<<PHP
 <?php
 
@@ -94,8 +91,7 @@ class {$name}Controller extends Controller {
 PHP;
     }
 
-    protected function getResourceContent($name)
-    {
+    protected function getResourceContent($name) {
         return <<<PHP
 <?php
 
@@ -115,8 +111,7 @@ class {$name}Resource extends JsonResource {
 PHP;
     }
 
-    protected function getRequestContent($name)
-    {
+    protected function getRequestContent($name) {
         return <<<PHP
 <?php
 
@@ -135,8 +130,7 @@ class {$name}Request extends FormRequest {
 PHP;
     }
 
-    protected function getInterfaceContent($name)
-    {
+    protected function getInterfaceContent($name) {
         return <<<PHP
 <?php
 
@@ -153,8 +147,7 @@ interface {$name}RepositoryInterface {
 PHP;
     }
 
-    protected function getRepositoryContent($name)
-    {
+    protected function getRepositoryContent($name) {
         return <<<PHP
 <?php
 
@@ -199,8 +192,7 @@ class {$name}Repository implements {$name}RepositoryInterface {
 PHP;
     }
 
-    protected function getServiceContent($name)
-    {
+    protected function getServiceContent($name) {
         return <<<PHP
 <?php
 

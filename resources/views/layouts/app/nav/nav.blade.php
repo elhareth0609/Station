@@ -1,6 +1,6 @@
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white shadow rounded mx-4 mt-3 topbar mb-4" dir="{{ app()->isLocale("ar") ? 'rtl' : '' }}">
+        <nav class="navbar navbar-expand navbar-light bg-white border rounded mx-4 mt-3 topbar mb-4" dir="{{ app()->isLocale("ar") ? 'rtl' : '' }}">
 
             <!-- Sidebar Toggle (Topbar) -->
             <button id="sidebarToggleTop" class="btn btn-icon btn-light d-md-none border rounded me-3 ms-1">
